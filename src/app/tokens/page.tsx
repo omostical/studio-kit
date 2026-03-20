@@ -1,17 +1,30 @@
 import Link from "next/link";
 import { tokens } from "@/tokens";
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
 function ColorSwatch({ name, value }: { name: string; value: string }) {
   return (
     <div className="flex flex-col gap-1.5">
       <div
-        className="h-12 w-full rounded-lg border border-black/5 shadow-sm"
+        className="h-10 w-full rounded-md border border-black/5 shadow-sm"
         style={{ backgroundColor: value }}
       />
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-medium text-neutral-700">{name}</span>
-        <span className="text-xs text-neutral-400 font-mono">{value}</span>
+      <p className="text-xs font-medium text-neutral-700 truncate">{name}</p>
+      <p className="text-xs text-neutral-400 font-mono truncate">{value}</p>
+    </div>
+  );
+}
+
+function DualSwatch({ name, light, dark }: { name: string; light: string; dark: string }) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex h-10 w-full rounded-md overflow-hidden border border-black/5 shadow-sm">
+        <div className="flex-1" style={{ backgroundColor: light }} />
+        <div className="flex-1" style={{ backgroundColor: dark }} />
       </div>
+      <p className="text-xs font-medium text-neutral-700 truncate">{name}</p>
+      <p className="text-xs text-neutral-400 font-mono truncate">{light}</p>
     </div>
   );
 }
@@ -27,9 +40,13 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function TokenRow({ name, value, preview }: { name: string; value: string; preview?: React.ReactNode }) {
+function TokenRow({
+  name, value, preview,
+}: {
+  name: string; value: string; preview?: React.ReactNode;
+}) {
   return (
-    <div className="flex items-center gap-4 py-3 border-b border-neutral-50 last:border-0">
+    <div className="flex items-center gap-4 py-3 px-4 border-b border-neutral-50 last:border-0">
       {preview}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-neutral-700">{name}</p>
@@ -41,6 +58,8 @@ function TokenRow({ name, value, preview }: { name: string; value: string; previ
   );
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function TokensPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -49,7 +68,7 @@ export default function TokensPage() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <div className="size-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+              <div className="size-7 rounded-lg bg-blue-600 flex items-center justify-center">
                 <span className="text-white text-xs font-bold">SK</span>
               </div>
               <span className="text-sm font-semibold text-neutral-900">Studio Kit</span>
@@ -69,21 +88,61 @@ export default function TokensPage() {
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-neutral-900 mb-3">Design Tokens</h1>
           <p className="text-lg text-neutral-500">
-            The single source of truth for colors, typography, spacing, shadows, and motion.
+            The single source of truth for colours, typography, spacing, radius, and motion.
           </p>
         </div>
 
-        {/* Colors */}
-        <Section title="Colors">
-          {Object.entries(tokens.colors).map(([paletteName, shades]) => (
-            <div key={paletteName} className="mb-8">
-              <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">
-                {paletteName}
+        {/* Primitive Palette */}
+        <Section title="Colour Primitives">
+          {Object.entries(tokens.palette)
+            .filter(([, v]) => typeof v === "object")
+            .map(([paletteName, scale]) => (
+              <div key={paletteName} className="mb-8">
+                <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">
+                  {paletteName}
+                </h3>
+                <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                  {Object.entries(scale as Record<string, string>).map(([step, value]) => (
+                    <ColorSwatch key={step} name={step} value={value} />
+                  ))}
+                </div>
+              </div>
+            ))}
+        </Section>
+
+        {/* Semantic Colors */}
+        <Section title="Semantic Colours">
+          <p className="text-sm text-neutral-500 mb-6">
+            Left half = light mode · Right half = dark mode.
+          </p>
+          {Object.entries(tokens.semantic).map(([groupName, group]) => (
+            <div key={groupName} className="mb-10">
+              <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">
+                {groupName}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-                {Object.entries(shades).map(([shade, value]) => (
-                  <ColorSwatch key={shade} name={shade} value={value as string} />
-                ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                {Object.entries(group).flatMap(([subKey, sub]) => {
+                  if (typeof sub === "object" && "light" in sub) {
+                    return [
+                      <DualSwatch
+                        key={subKey}
+                        name={subKey}
+                        light={(sub as { light: string; dark: string }).light}
+                        dark={(sub as { light: string; dark: string }).dark}
+                      />,
+                    ];
+                  }
+                  return Object.entries(sub as Record<string, { light: string; dark: string }>).map(
+                    ([name, val]) => (
+                      <DualSwatch
+                        key={`${subKey}-${name}`}
+                        name={`${subKey}/${name}`}
+                        light={val.light}
+                        dark={val.dark}
+                      />
+                    )
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -98,7 +157,7 @@ export default function TokensPage() {
                 {Object.entries(tokens.typography.fontSize).map(([name, value]) => (
                   <TokenRow
                     key={name}
-                    name={name}
+                    name={`${name}px`}
                     value={value}
                     preview={
                       <span style={{ fontSize: value }} className="text-neutral-800 font-medium leading-none w-16 shrink-0">
@@ -116,7 +175,7 @@ export default function TokensPage() {
                   <TokenRow
                     key={name}
                     name={name}
-                    value={value}
+                    value={String(value)}
                     preview={
                       <span style={{ fontWeight: value }} className="text-neutral-800 text-sm w-16 shrink-0">
                         Studio
@@ -130,7 +189,7 @@ export default function TokensPage() {
               <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">Line Height</h3>
               <div className="rounded-xl border border-neutral-100 overflow-hidden">
                 {Object.entries(tokens.typography.lineHeight).map(([name, value]) => (
-                  <TokenRow key={name} name={name} value={value} />
+                  <TokenRow key={name} name={`${name}px`} value={value} />
                 ))}
               </div>
             </div>
@@ -155,17 +214,17 @@ export default function TokensPage() {
         </Section>
 
         {/* Spacing */}
-        <Section title="Spacing">
+        <Section title="Spacing (compact mode)">
           <div className="rounded-xl border border-neutral-100 overflow-hidden">
-            {Object.entries(tokens.spacing).map(([name, value]) => (
-              <div key={name} className="flex items-center gap-4 py-3 px-4 border-b border-neutral-50 last:border-0">
+            {Object.entries(tokens.spacing.compact).map(([step, px]) => (
+              <div key={step} className="flex items-center gap-4 py-3 px-4 border-b border-neutral-50 last:border-0">
                 <div
-                  className="bg-indigo-200 rounded shrink-0"
-                  style={{ width: value, height: "20px", minWidth: "4px" }}
+                  className="bg-blue-200 rounded shrink-0"
+                  style={{ width: `${px}px`, height: "20px", minWidth: "4px" }}
                 />
-                <span className="text-sm font-medium text-neutral-700 w-8">{name}</span>
+                <span className="text-sm font-medium text-neutral-700 w-8">space-{step}</span>
                 <code className="text-xs text-neutral-400 font-mono bg-neutral-50 px-2 py-1 rounded ml-auto">
-                  {value}
+                  {px}px
                 </code>
               </div>
             ))}
@@ -173,35 +232,18 @@ export default function TokensPage() {
         </Section>
 
         {/* Border Radius */}
-        <Section title="Border Radius">
+        <Section title="Border Radius (default mode)">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {Object.entries(tokens.borderRadius).map(([name, value]) => (
-              <div key={name} className="flex flex-col items-center gap-2">
+            {Object.entries(tokens.radius.default).map(([step, px]) => (
+              <div key={step} className="flex flex-col items-center gap-2">
                 <div
-                  className="size-16 bg-indigo-100 border-2 border-indigo-300"
-                  style={{ borderRadius: value }}
+                  className="size-16 bg-blue-100 border-2 border-blue-300"
+                  style={{ borderRadius: `${px}px` }}
                 />
-                <span className="text-xs font-medium text-neutral-700">{name}</span>
-                <code className="text-xs text-neutral-400 font-mono">{value}</code>
+                <span className="text-xs font-medium text-neutral-700">radius-{step}</span>
+                <code className="text-xs text-neutral-400 font-mono">{px}px</code>
               </div>
             ))}
-          </div>
-        </Section>
-
-        {/* Shadows */}
-        <Section title="Shadows">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {Object.entries(tokens.shadows)
-              .filter(([, v]) => v !== "none")
-              .map(([name, value]) => (
-                <div key={name} className="flex flex-col items-center gap-3">
-                  <div
-                    className="size-20 bg-white rounded-xl"
-                    style={{ boxShadow: value }}
-                  />
-                  <span className="text-xs font-medium text-neutral-700">{name}</span>
-                </div>
-              ))}
           </div>
         </Section>
 

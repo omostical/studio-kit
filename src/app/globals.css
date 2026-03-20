@@ -1,45 +1,217 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
-:root {
-  --background: #ffffff;
-  --foreground: #111827;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-}
+/* ─── Token files (source of truth, from Figma StudioKIT_v1) ─────────────── */
+@import "../styles/tokens.light.css";
+@import "../styles/tokens.dark.css";
 
+/* ─── Tailwind theme — maps CSS vars to utility classes ──────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --color-neutral-0: #ffffff;
-  --color-neutral-50: #f9fafb;
-  --color-neutral-100: #f3f4f6;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-500: #6b7280;
-  --color-neutral-600: #4b5563;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #1f2937;
-  --color-neutral-900: #111827;
-  --color-neutral-950: #030712;
-  --color-brand-50: #f0f4ff;
-  --color-brand-100: #e0eaff;
-  --color-brand-200: #c7d7fe;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-900: #312e81;
+
+  /* Fonts */
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-family-mono);
+
+  /* ── Surfaces → bg-surface, bg-surface-primary, etc. ───────────────────── */
+  --color-surface:           var(--bg-surface);
+  --color-surface-primary:   var(--bg-surface-primary);
+  --color-surface-secondary: var(--bg-surface-secondary);
+  --color-surface-tertiary:  var(--bg-surface-tertiary);
+  --color-surface-inverse:   var(--bg-surface-inverse);
+  --color-surface-disabled:  var(--bg-surface-disabled);
+
+  /* ── Fills → bg-fill-brand, bg-fill-success, etc. ──────────────────────── */
+  --color-fill-brand:           var(--bg-fill-brand);
+  --color-fill-brand-hover:     var(--bg-fill-brand-hover);
+  --color-fill-brand-active:    var(--bg-fill-brand-pressed);
+  --color-fill-brand-disabled:  var(--bg-fill-brand-disabled);
+
+  --color-fill-success:         var(--bg-fill-success);
+  --color-fill-success-hover:   var(--bg-fill-success-hover);
+  --color-fill-success-active:  var(--bg-fill-success-pressed);
+
+  --color-fill-danger:          var(--bg-fill-error);
+  --color-fill-danger-hover:    var(--bg-fill-error-hover);
+  --color-fill-danger-active:   var(--bg-fill-error-pressed);
+
+  --color-fill-warning:         var(--bg-fill-warning);
+  --color-fill-warning-hover:   var(--bg-fill-warning-hover);
+  --color-fill-warning-active:  var(--bg-fill-warning-pressed);
+
+  --color-fill-subtle:          var(--bg-fill-subtle);
+  --color-fill-ghost:           var(--bg-fill-ghost);
+
+  /* ── Text → text-text-primary, text-text-brand, etc. ───────────────────── */
+  --color-text-primary:          var(--text-primary);
+  --color-text-secondary:        var(--text-secondary);
+  --color-text-tertiary:         var(--text-tertiary);
+  --color-text-subtle:           var(--text-subtle);
+  --color-text-disabled:         var(--text-disabled);
+  --color-text-inverse:          var(--text-inverse);
+  --color-text-inverse-secondary:var(--text-inverse-secondary);
+  --color-text-on-fill:          var(--text-on-color);
+  --color-text-brand:            var(--text-brand);
+  --color-text-brand-hover:      var(--text-brand-hover);
+  --color-text-brand-disabled:   var(--text-brand-disabled);
+  --color-text-success:          var(--text-success);
+  --color-text-danger:           var(--text-error);
+  --color-text-warning:          var(--text-warning);
+
+  /* ── Icons → text-icon-primary, fill-icon-brand, etc. ──────────────────── */
+  --color-icon-primary:   var(--icon-primary);
+  --color-icon-secondary: var(--icon-secondary);
+  --color-icon-tertiary:  var(--icon-tertiary);
+  --color-icon-disabled:  var(--icon-disabled);
+  --color-icon-inverse:   var(--icon-inverse);
+  --color-icon-brand:     var(--icon-brand);
+  --color-icon-success:   var(--icon-success);
+  --color-icon-danger:    var(--icon-error);
+  --color-icon-warning:   var(--icon-warning);
+  --color-icon-on-fill:   var(--icon-on-fill);
+
+  /* ── Borders → border-border, border-border-brand, etc. ────────────────── */
+  --color-border:                var(--border-default);
+  --color-border-strong:         var(--border-strong);
+  --color-border-subtle:         var(--border-subtle);
+  --color-border-disabled:       var(--border-disabled);
+  --color-border-brand:          var(--border-brand);
+  --color-border-brand-subtle:   var(--border-brand-subtle);
+  --color-border-success:        var(--border-success);
+  --color-border-success-subtle: var(--border-success-subtle);
+  --color-border-danger:         var(--border-error);
+  --color-border-danger-subtle:  var(--border-error-subtle);
+  --color-border-warning:        var(--border-warning);
+  --color-border-warning-subtle: var(--border-warning-subtle);
+
+  /* ── Primitive palette → for arbitrary usage ────────────────────────────── */
+  --color-neutral-100:  var(--color-neutral-100);
+  --color-neutral-200:  var(--color-neutral-200);
+  --color-neutral-300:  var(--color-neutral-300);
+  --color-neutral-400:  var(--color-neutral-400);
+  --color-neutral-500:  var(--color-neutral-500);
+  --color-neutral-600:  var(--color-neutral-600);
+  --color-neutral-700:  var(--color-neutral-700);
+  --color-neutral-800:  var(--color-neutral-800);
+  --color-neutral-900:  var(--color-neutral-900);
+  --color-neutral-1000: var(--color-neutral-1000);
+
+  --color-blue-100:  var(--color-blue-100);
+  --color-blue-200:  var(--color-blue-200);
+  --color-blue-300:  var(--color-blue-300);
+  --color-blue-400:  var(--color-blue-400);
+  --color-blue-500:  var(--color-blue-500);
+  --color-blue-600:  var(--color-blue-600);
+  --color-blue-700:  var(--color-blue-700);
+  --color-blue-800:  var(--color-blue-800);
+  --color-blue-900:  var(--color-blue-900);
+  --color-blue-1000: var(--color-blue-1000);
+
+  --color-red-100:  var(--color-red-100);
+  --color-red-200:  var(--color-red-200);
+  --color-red-300:  var(--color-red-300);
+  --color-red-400:  var(--color-red-400);
+  --color-red-500:  var(--color-red-500);
+  --color-red-600:  var(--color-red-600);
+  --color-red-700:  var(--color-red-700);
+  --color-red-800:  var(--color-red-800);
+  --color-red-900:  var(--color-red-900);
+  --color-red-1000: var(--color-red-1000);
+
+  --color-green-100:  var(--color-green-100);
+  --color-green-200:  var(--color-green-200);
+  --color-green-300:  var(--color-green-300);
+  --color-green-400:  var(--color-green-400);
+  --color-green-500:  var(--color-green-500);
+  --color-green-600:  var(--color-green-600);
+  --color-green-700:  var(--color-green-700);
+  --color-green-800:  var(--color-green-800);
+  --color-green-900:  var(--color-green-900);
+  --color-green-1000: var(--color-green-1000);
+
+  --color-yellow-100:  var(--color-yellow-100);
+  --color-yellow-200:  var(--color-yellow-200);
+  --color-yellow-300:  var(--color-yellow-300);
+  --color-yellow-400:  var(--color-yellow-400);
+  --color-yellow-500:  var(--color-yellow-500);
+  --color-yellow-600:  var(--color-yellow-600);
+  --color-yellow-700:  var(--color-yellow-700);
+  --color-yellow-800:  var(--color-yellow-800);
+  --color-yellow-900:  var(--color-yellow-900);
+  --color-yellow-1000: var(--color-yellow-1000);
+
+  --color-pink-100:  var(--color-pink-100);
+  --color-pink-200:  var(--color-pink-200);
+  --color-pink-300:  var(--color-pink-300);
+  --color-pink-400:  var(--color-pink-400);
+  --color-pink-500:  var(--color-pink-500);
+  --color-pink-600:  var(--color-pink-600);
+  --color-pink-700:  var(--color-pink-700);
+  --color-pink-800:  var(--color-pink-800);
+  --color-pink-900:  var(--color-pink-900);
+  --color-pink-1000: var(--color-pink-1000);
+
+  --color-violet-100:  var(--color-violet-100);
+  --color-violet-200:  var(--color-violet-200);
+  --color-violet-300:  var(--color-violet-300);
+  --color-violet-400:  var(--color-violet-400);
+  --color-violet-500:  var(--color-violet-500);
+  --color-violet-600:  var(--color-violet-600);
+  --color-violet-700:  var(--color-violet-700);
+  --color-violet-800:  var(--color-violet-800);
+  --color-violet-900:  var(--color-violet-900);
+  --color-violet-1000: var(--color-violet-1000);
+
+  /* ── Font sizes → text-2xs … text-8xl ──────────────────────────────────── */
+  --text-2xs: var(--font-size-11);
+  --text-xs:  var(--font-size-12);
+  --text-2sm: var(--font-size-13);
+  --text-sm:  var(--font-size-14);
+  --text-base:var(--font-size-16);
+  --text-lg:  var(--font-size-18);
+  --text-xl:  var(--font-size-20);
+  --text-2xl: var(--font-size-24);
+  --text-3xl: var(--font-size-32);
+  --text-4xl: var(--font-size-40);
+  --text-5xl: var(--font-size-48);
+  --text-6xl: var(--font-size-56);
+  --text-7xl: var(--font-size-64);
+  --text-8xl: var(--font-size-72);
+
+  /* ── Border radius → rounded-1 … rounded-10 ────────────────────────────── */
+  --radius-1:  var(--radius-1);
+  --radius-2:  var(--radius-2);
+  --radius-3:  var(--radius-3);
+  --radius-4:  var(--radius-4);
+  --radius-5:  var(--radius-5);
+  --radius-6:  var(--radius-6);
+  --radius-7:  var(--radius-7);
+  --radius-full: var(--radius-10);
+
+  /* ── Spacing scale (compact mode) → p-1 … p-18 ─────────────────────────── */
+  --spacing-px:  1px;
+  --spacing-0:   var(--space-0);
+  --spacing-0-5: var(--space-2);
+  --spacing-1:   var(--space-3);
+  --spacing-1-5: var(--space-4);
+  --spacing-2:   var(--space-5);
+  --spacing-2-5: var(--space-6);
+  --spacing-3:   var(--space-7);
+  --spacing-4:   var(--space-8);
+  --spacing-5:   var(--space-9);
+  --spacing-6:   var(--space-10);
+  --spacing-7:   var(--space-11);
+  --spacing-8:   var(--space-12);
+  --spacing-9:   var(--space-13);
+  --spacing-10:  var(--space-14);
+  --spacing-11:  var(--space-15);
+  --spacing-16:  var(--space-18);
 }
 
+/* ─── Base ────────────────────────────────────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+  background:   var(--bg-surface-secondary);
+  color:        var(--text-primary);
+  font-family:  var(--font-family-sans);
+  -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 

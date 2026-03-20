@@ -1,22 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ArrowRight, Download, Plus, Trash2 } from "lucide-react";
-import { Button } from "./Button";
+import { Plus, ArrowRight, Trash2, Check, Download } from "lucide-react";
+import { Button } from "@/components/ui";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
+  parameters: { layout: "centered" },
+  args: { children: "Button", variant: "primary", size: "md" },
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "outline", "ghost", "danger", "link"],
+      options: ["primary", "secondary", "danger", "success", "ghost"],
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "md", "lg", "xl", "icon"],
+      options: ["lg", "md", "sm", "xs"],
     },
     loading: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -26,86 +25,69 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
-  args: { children: "Button", variant: "primary", size: "md" },
-};
+export const Playground: Story = {};
 
-export const Secondary: Story = {
-  args: { children: "Button", variant: "secondary", size: "md" },
-};
-
-export const Outline: Story = {
-  args: { children: "Button", variant: "outline", size: "md" },
-};
-
-export const Ghost: Story = {
-  args: { children: "Button", variant: "ghost", size: "md" },
-};
-
-export const Danger: Story = {
-  args: { children: "Delete", variant: "danger", size: "md" },
-};
-
-export const Link: Story = {
-  args: { children: "Learn more", variant: "link", size: "md" },
-};
-
-export const Loading: Story = {
-  args: { children: "Saving...", variant: "primary", size: "md", loading: true },
-};
-
-export const WithIconLeft: Story = {
-  args: {
-    children: "Download",
-    variant: "primary",
-    size: "md",
-    iconLeft: <Download />,
-  },
-};
-
-export const WithIconRight: Story = {
-  args: {
-    children: "Continue",
-    variant: "primary",
-    size: "md",
-    iconRight: <ArrowRight />,
-  },
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="ghost">Ghost</Button>
+    </div>
+  ),
 };
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex items-center gap-3 flex-wrap">
-      <Button size="xs">Extra Small</Button>
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
+    <div className="flex flex-wrap gap-3 items-center">
       <Button size="lg">Large</Button>
-      <Button size="xl">Extra Large</Button>
+      <Button size="md">Medium</Button>
+      <Button size="sm">Small</Button>
+      <Button size="xs">X-Small</Button>
     </div>
   ),
-};
-
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex items-center gap-3 flex-wrap">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="danger">Danger</Button>
-      <Button variant="link">Link</Button>
-    </div>
-  ),
-};
-
-export const IconOnly: Story = {
-  args: {
-    size: "icon",
-    variant: "outline",
-    children: <Plus />,
-    "aria-label": "Add item",
-  },
 };
 
 export const Disabled: Story = {
-  args: { children: "Disabled", variant: "primary", size: "md", disabled: true },
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary" disabled>Primary</Button>
+      <Button variant="secondary" disabled>Secondary</Button>
+      <Button variant="danger" disabled>Danger</Button>
+      <Button variant="success" disabled>Success</Button>
+      <Button variant="ghost" disabled>Ghost</Button>
+    </div>
+  ),
+};
+
+export const Loading: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary" loading>Saving…</Button>
+      <Button variant="secondary" loading>Loading…</Button>
+      <Button variant="danger" loading>Deleting…</Button>
+    </div>
+  ),
+};
+
+export const WithPrefixIcon: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary" prefixIcon={<Plus />}>New Item</Button>
+      <Button variant="secondary" prefixIcon={<Download />}>Export</Button>
+      <Button variant="danger" prefixIcon={<Trash2 />}>Delete</Button>
+      <Button variant="success" prefixIcon={<Check />}>Confirm</Button>
+    </div>
+  ),
+};
+
+export const WithSuffixIcon: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary" suffixIcon={<ArrowRight />}>Continue</Button>
+      <Button variant="ghost" suffixIcon={<ArrowRight />}>Learn More</Button>
+    </div>
+  ),
 };

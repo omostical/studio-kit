@@ -1,0 +1,92 @@
+/**
+ * StudioKIT Design Tokens — Dark Mode
+ * Auto-generated from Figma: StudioKIT_v1
+ *
+ * Usage: Primitives are shared. Only semantic tokens change per mode.
+ * Applied when [data-theme="dark"] is set on a parent element.
+ */
+
+[data-theme="dark"] {
+
+  /* ——— Semantic — Background / Surface ——— */
+
+  --bg-surface:          #2E2E2E;
+  --bg-surface-primary:  #444444;
+  --bg-surface-secondary:#5A5A5A;
+  --bg-surface-tertiary: #727272;
+  --bg-surface-inverse:  #F3F3F3;
+  --bg-surface-disabled: #2E2E2E;
+
+  /* ——— Semantic — Background / Fill ——— */
+
+  --bg-fill-brand:          #5B79E3;
+  --bg-fill-brand-hover:    #7E97EC;
+  --bg-fill-brand-pressed:  #ABBAF4;
+  --bg-fill-brand-disabled: #444444;
+
+  --bg-fill-success:         #1EA55C;
+  --bg-fill-success-hover:   #2EBC72;
+  --bg-fill-success-pressed: #5FD292;
+  --bg-fill-success-disabled:#444444;
+
+  --bg-fill-error:           #D45A67;
+  --bg-fill-error-hover:     #E3808B;
+  --bg-fill-error-pressed:   #EFAAB2;
+  --bg-fill-error-disabled:  #444444;
+
+  --bg-fill-warning:         #AFA048;
+  --bg-fill-warning-hover:   #C5BA6E;
+  --bg-fill-warning-pressed: #D8D098;
+  --bg-fill-warning-disabled:#444444;
+
+  --bg-fill-subtle: #444444;
+  --bg-fill-ghost:  #444444;
+
+  /* ——— Semantic — Text ——— */
+
+  --text-primary:          #F3F3F3;
+  --text-secondary:        #A3A3A3;
+  --text-tertiary:         #8A8A8A;
+  --text-subtle:           #727272;
+  --text-disabled:         #727272;
+  --text-inverse:          #2E2E2E;
+  --text-inverse-secondary:#5A5A5A;
+  --text-on-color:         #FFFFFF;
+  --text-on-color-disabled:#8A8A8A;
+  --text-brand:            #ABBAF4;
+  --text-brand-hover:      #D3DAFA;
+  --text-brand-disabled:   #293D87;
+  --text-success:          #96E4B4;
+  --text-error:            #EFAAB2;
+  --text-warning:          #D8D098;
+
+  /* ——— Semantic — Icon ——— */
+
+  --icon-primary:  #D8D8D8;
+  --icon-secondary:#8A8A8A;
+  --icon-tertiary: #727272;
+  --icon-disabled: #5A5A5A;
+  --icon-inverse:  #2E2E2E;
+  --icon-brand:    #7E97EC;
+  --icon-success:  #5FD292;
+  --icon-error:    #E3808B;
+  --icon-warning:  #C5BA6E;
+  --icon-on-fill:  #FFFFFF;
+
+  /* ——— Semantic — Border ——— */
+
+  --border-default:       rgba(255, 255, 255, 0.18);
+  --border-strong:        rgba(255, 255, 255, 0.24);
+  --border-subtle:        rgba(255, 255, 255, 0.06);
+  --border-disabled:      rgba(255, 255, 255, 0.06);
+  --border-inverse:       rgba(0, 0, 0, 0.12);
+  --border-brand:         #7E97EC;
+  --border-brand-subtle:  #293D87;
+  --border-brand-hh:      #D3DAFA;
+  --border-success:       #2EBC72;
+  --border-success-subtle:#106835;
+  --border-error:         #D45A67;
+  --border-error-subtle:  #7D1624;
+  --border-warning:       #AFA048;
+  --border-warning-subtle:#5E5212;
+}

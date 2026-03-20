@@ -9,16 +9,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 focus-visible:ring-indigo-500 shadow-sm",
+          "bg-fill-brand text-text-inverse hover:bg-fill-brand-hover active:bg-fill-brand-active focus-visible:ring-fill-brand shadow-sm",
         secondary:
-          "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300 focus-visible:ring-neutral-400 border border-neutral-200",
+          "bg-surface-primary text-text-primary hover:bg-surface-primary/80 active:bg-surface-primary/60 focus-visible:ring-border border border-border",
         outline:
-          "border border-neutral-300 bg-transparent text-neutral-700 hover:bg-neutral-50 active:bg-neutral-100 focus-visible:ring-neutral-400",
+          "border border-border bg-transparent text-text-primary hover:bg-surface active:bg-surface-primary/40 focus-visible:ring-border",
         ghost:
-          "bg-transparent text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 focus-visible:ring-neutral-400",
+          "bg-transparent text-text-primary hover:bg-surface active:bg-surface-primary/40 focus-visible:ring-border",
         danger:
-          "bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800 focus-visible:ring-rose-500 shadow-sm",
-        link: "text-indigo-600 underline-offset-4 hover:underline focus-visible:ring-indigo-500 p-0 h-auto",
+          "bg-fill-danger text-text-inverse hover:bg-fill-danger-hover active:bg-fill-danger-active focus-visible:ring-fill-danger shadow-sm",
+        link: "text-text-brand underline-offset-4 hover:underline hover:text-text-brand-hover focus-visible:ring-fill-brand p-0 h-auto",
       },
       size: {
         xs: "h-7 px-2.5 text-xs rounded-md",
