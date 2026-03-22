@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Button, IconButton, Checkbox } from "@/components/ui";
+import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
 import { Input } from "@/components/Input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/Card";
 import { Typography } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Select, SelectItem } from "@/components/Select";
+import { Tag } from "@/components/Tag";
 import {
-  Search, Mail, ArrowRight, Download, Plus, Trash2, Eye,
-  Settings, Bell, Check, Edit,
+  Search, Mail, ArrowRight, Plus, Eye,
 } from "lucide-react";
 
 // ─── Nav (shared layout) ──────────────────────────────────────────────────────
@@ -122,7 +122,6 @@ function SubLabel({ children }: { children: React.ReactNode }) {
 export default function ComponentsPage() {
   const [switchOn, setSwitchOn] = useState(false);
   const [selectVal, setSelectVal] = useState("");
-  const [checked, setChecked] = useState<boolean | "indeterminate">(false);
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg-surface-secondary)", fontFamily: "var(--font-family-sans)" }}>
@@ -141,8 +140,8 @@ export default function ComponentsPage() {
             Components
           </h1>
           <p style={{ fontSize: "var(--font-size-18)", color: "var(--text-secondary)", lineHeight: "var(--line-height-28)", maxWidth: "560px" }}>
-            Token-driven, accessible components built directly from Figma StudioKIT_v1.
-            Every colour is a CSS custom property.
+            Showing only components with dedicated source files under <code>src/components/*</code>.
+            Starter Storybook examples and generic UI scaffolding are intentionally excluded.
           </p>
         </div>
 
@@ -156,7 +155,7 @@ export default function ComponentsPage() {
                 <Button variant="primary">Primary</Button>
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="danger">Danger</Button>
-                <Button variant="success">Success</Button>
+                <Button variant="outline">Outline</Button>
                 <Button variant="ghost">Ghost</Button>
               </Preview>
             </div>
@@ -166,7 +165,7 @@ export default function ComponentsPage() {
                 <Button variant="primary">Primary</Button>
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="danger">Danger</Button>
-                <Button variant="success">Success</Button>
+                <Button variant="outline">Outline</Button>
                 <Button variant="ghost">Ghost</Button>
               </Preview>
             </div>
@@ -182,106 +181,61 @@ export default function ComponentsPage() {
             <div>
               <SubLabel>States &amp; icons</SubLabel>
               <Preview>
-                <Button variant="primary" prefixIcon={<Download />}>Download</Button>
-                <Button variant="secondary" suffixIcon={<ArrowRight />}>Continue</Button>
-                <Button variant="primary" loading>Saving…</Button>
+                <Button variant="primary" iconLeft={<Plus />}>Create</Button>
+                <Button variant="secondary" iconRight={<ArrowRight />}>Continue</Button>
+                <Button variant="primary" loading>Saving...</Button>
                 <Button variant="primary" disabled>Disabled</Button>
-                <Button variant="danger" prefixIcon={<Trash2 />}>Delete</Button>
+                <Button variant="danger" iconLeft={<Plus />}>Danger</Button>
               </Preview>
             </div>
           </div>
         </section>
 
-        {/* ── 02 Icon Button ────────────────────────────────────────────── */}
+        {/* ── 02 Tag ────────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="02" title="Icon Button" description="Square icon-only buttons. 5 variants × 4 sizes. aria-label required." />
+          <SectionHeader
+            index="02"
+            title="Tag"
+            description="A non-interactive labeling chip. 5 types × 2 styles × 3 sizes × 2 shapes, with an optional leading icon."
+          />
           <div className="space-y-3">
             <div>
-              <SubLabel>Variants</SubLabel>
-              <Preview>
-                <IconButton variant="primary"   aria-label="Add"      icon={<Plus />} />
-                <IconButton variant="secondary" aria-label="Settings" icon={<Settings />} />
-                <IconButton variant="danger"    aria-label="Delete"   icon={<Trash2 />} />
-                <IconButton variant="success"   aria-label="Confirm"  icon={<Check />} />
-                <IconButton variant="ghost"     aria-label="Search"   icon={<Search />} />
+              <SubLabel>Types and styles</SubLabel>
+              <Preview className="justify-start">
+                <Tag type="Primary" style="Solid" icon={<Plus />}>Primary</Tag>
+                <Tag type="Primary" style="Outline" icon={<Plus />}>Primary</Tag>
+                <Tag type="Danger" style="Solid" icon={<Plus />}>Danger</Tag>
+                <Tag type="Danger" style="Outline" icon={<Plus />}>Danger</Tag>
+                <Tag type="Success" style="Solid" icon={<Plus />}>Success</Tag>
+                <Tag type="Warning" style="Outline" icon={<Plus />}>Warning</Tag>
+                <Tag type="Subtle" style="Solid">Subtle</Tag>
               </Preview>
             </div>
             <div>
-              <SubLabel>Sizes</SubLabel>
-              <Preview className="items-end">
-                <IconButton size="lg" aria-label="Large"   icon={<Bell />} />
-                <IconButton size="md" aria-label="Medium"  icon={<Bell />} />
-                <IconButton size="sm" aria-label="Small"   icon={<Bell />} />
-                <IconButton size="xs" aria-label="X-Small" icon={<Bell />} />
+              <SubLabel>Sizes and shapes</SubLabel>
+              <Preview className="justify-start items-end">
+                <Tag size="lg" icon={<Plus />}>Large</Tag>
+                <Tag size="md" icon={<Plus />}>Medium</Tag>
+                <Tag size="sm" icon={<Plus />}>Small</Tag>
+                <Tag shape="Default" icon={<Plus />}>Default shape</Tag>
               </Preview>
             </div>
             <div>
-              <SubLabel>Toolbar example</SubLabel>
-              <Preview>
-                <div className="flex items-center gap-1" style={{ background: "var(--bg-surface-secondary)", padding: "4px", borderRadius: "var(--radius-4)", border: "1px solid var(--border-default)" }}>
-                  <IconButton variant="ghost" size="sm" aria-label="Edit"     icon={<Edit />} />
-                  <IconButton variant="ghost" size="sm" aria-label="Download" icon={<Download />} />
-                  <IconButton variant="ghost" size="sm" aria-label="Settings" icon={<Settings />} />
-                  <div style={{ width: "1px", height: "20px", background: "var(--border-default)", margin: "0 2px" }} />
-                  <IconButton variant="danger" size="sm" aria-label="Delete" icon={<Trash2 />} />
-                </div>
+              <SubLabel>Dark mode</SubLabel>
+              <Preview dark>
+                <Tag type="Primary" style="Solid" icon={<Plus />}>Primary</Tag>
+                <Tag type="Danger" style="Outline" icon={<Plus />}>Danger</Tag>
+                <Tag type="Success" style="Solid" icon={<Plus />}>Success</Tag>
+                <Tag type="Warning" style="Outline" icon={<Plus />}>Warning</Tag>
+                <Tag type="Subtle" style="Solid">Subtle</Tag>
               </Preview>
             </div>
           </div>
         </section>
 
-        {/* ── 03 Checkbox ───────────────────────────────────────────────── */}
+        {/* ── 03 Badge ──────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="03" title="Checkbox" description="Checked, unchecked, indeterminate. Primary and danger variants. Optional label + subtitle." />
-          <div className="space-y-3">
-            <div>
-              <SubLabel>Checked states</SubLabel>
-              <Preview className="items-start justify-start">
-                <Checkbox label="Unchecked" defaultChecked={false} />
-                <Checkbox label="Checked" defaultChecked={true} />
-                <Checkbox label="Indeterminate" defaultChecked="indeterminate" />
-              </Preview>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div>
-                <SubLabel>Primary variant</SubLabel>
-                <Preview className="flex-col items-start gap-3">
-                  <Checkbox variant="primary" label="Subscribe to newsletter" defaultChecked={true} />
-                  <Checkbox variant="primary" label="Enable two-factor auth" defaultChecked={false} />
-                  <Checkbox variant="primary" label="Manage by org (disabled)" disabled defaultChecked={false} />
-                </Preview>
-              </div>
-              <div>
-                <SubLabel>Danger variant</SubLabel>
-                <Preview className="flex-col items-start gap-3">
-                  <Checkbox variant="danger" label="Delete all workspace data" defaultChecked={true} />
-                  <Checkbox variant="danger" label="Revoke all API keys" defaultChecked={false} />
-                  <Checkbox variant="danger" label="Remove all members" defaultChecked="indeterminate" />
-                </Preview>
-              </div>
-            </div>
-            <div>
-              <SubLabel>With subtitle + controlled</SubLabel>
-              <Preview className="flex-col items-start gap-4">
-                <Checkbox
-                  label="Email notifications"
-                  subtitle="You'll receive updates about activity on your account."
-                  checked={checked}
-                  onCheckedChange={setChecked}
-                />
-                <Checkbox
-                  label="Marketing emails"
-                  subtitle="Tips, product updates, and inspiration from the team."
-                  defaultChecked={true}
-                />
-              </Preview>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 04 Badge ──────────────────────────────────────────────────── */}
-        <section className="mb-16">
-          <SectionHeader index="04" title="Badge" description="Status indicators and labels. Dot indicators and semantic variants." />
+          <SectionHeader index="03" title="Badge" description="Status indicators and labels. Dot indicators and semantic variants." />
           <div className="space-y-3">
             <Preview>
               <Badge variant="default">Default</Badge>
@@ -299,9 +253,9 @@ export default function ComponentsPage() {
           </div>
         </section>
 
-        {/* ── 05 Input ──────────────────────────────────────────────────── */}
+        {/* ── 04 Input ──────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="05" title="Input" description="Text input with label, hint, error state, and leading/trailing icons." />
+          <SectionHeader index="04" title="Input" description="Text input with label, hint, error state, and leading/trailing icons." />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="p-6 flex flex-col gap-4"
               style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-6)", border: "1px solid var(--border-default)" }}>
@@ -318,9 +272,9 @@ export default function ComponentsPage() {
           </div>
         </section>
 
-        {/* ── 06 Select ─────────────────────────────────────────────────── */}
+        {/* ── 05 Select ─────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="06" title="Select" description="Dropdown built on Radix UI with label, hint, and error states." />
+          <SectionHeader index="05" title="Select" description="Dropdown built on Radix UI with label, hint, and error states." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {[
               <div key="a" className="p-6" style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-6)", border: "1px solid var(--border-default)" }}>
@@ -348,9 +302,9 @@ export default function ComponentsPage() {
           </div>
         </section>
 
-        {/* ── 07 Switch ─────────────────────────────────────────────────── */}
+        {/* ── 06 Switch ─────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="07" title="Switch" description="Toggle control with label and description. Three sizes." />
+          <SectionHeader index="06" title="Switch" description="Toggle control with label and description. Three sizes." />
           <Preview className="flex-col items-start gap-5">
             <Switch size="md" label="Enable notifications" />
             <Switch size="md" label="Marketing emails"
@@ -365,9 +319,9 @@ export default function ComponentsPage() {
           </Preview>
         </section>
 
-        {/* ── 08 Card ───────────────────────────────────────────────────── */}
+        {/* ── 07 Card ───────────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="08" title="Card" description="Container with header, content, and footer subcomponents. Three variants." />
+          <SectionHeader index="07" title="Card" description="Container with header, content, and footer subcomponents. Three variants." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card variant="default">
               <CardHeader>
@@ -390,7 +344,7 @@ export default function ComponentsPage() {
               </CardHeader>
               <CardContent><p className="text-sm" style={{ color: "var(--text-secondary)" }}>Card content goes here.</p></CardContent>
               <CardFooter>
-                <Button size="sm" variant="primary" suffixIcon={<ArrowRight />}>Get started</Button>
+                <Button size="sm" variant="primary" iconRight={<ArrowRight />}>Get started</Button>
               </CardFooter>
             </Card>
             <Card variant="ghost">
@@ -406,9 +360,9 @@ export default function ComponentsPage() {
           </div>
         </section>
 
-        {/* ── 09 Typography ─────────────────────────────────────────────── */}
+        {/* ── 08 Typography ─────────────────────────────────────────────── */}
         <section className="mb-16">
-          <SectionHeader index="09" title="Typography" description="Full type scale built on Geist. 9 semantic variants." />
+          <SectionHeader index="08" title="Typography" description="Full type scale built on Geist. 9 semantic variants." />
           <div className="p-8 flex flex-col gap-5"
             style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-6)", border: "1px solid var(--border-default)" }}>
             <Typography variant="h1">Heading 1</Typography>

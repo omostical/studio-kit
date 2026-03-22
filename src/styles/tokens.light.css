@@ -160,21 +160,25 @@
   /* ——— Semantic — Background / Fill ——— */
 
   --bg-fill-brand:          #4763CF;
+  --bg-fill-brand-subtle:   #D3DAFA;
   --bg-fill-brand-hover:    #3750AD;
   --bg-fill-brand-pressed:  #293D87;
   --bg-fill-brand-disabled: #D3DAFA;
 
   --bg-fill-success:         #168748;
+  --bg-fill-success-subtle:  #C8F2D6;
   --bg-fill-success-hover:   #106835;
   --bg-fill-success-pressed: #0A4923;
   --bg-fill-success-disabled:#EEFBF2;
 
   --bg-fill-error:           #C53540;
+  --bg-fill-danger-subtle:   #F7D0D5;
   --bg-fill-error-hover:     #A22232;
   --bg-fill-error-pressed:   #A22232;
   --bg-fill-error-disabled:  #FCEEF0;
 
   --bg-fill-warning:         #958526;
+  --bg-fill-warning-subtle:  #E8E4C2;
   --bg-fill-warning-hover:   #7A6C1A;
   --bg-fill-warning-pressed: #7A6C1A;
   --bg-fill-warning-disabled:#F5F5E8;
@@ -312,4 +316,87 @@
   --radius-6:  12px;
   --radius-7:  16px;
   --radius-10: 1000px;
+
+  /* ——— Component — Tag ——— */
+
+  --tag-border-width: 1px;
+  --tag-icon-size: var(--icon-sm);
+  --tag-outline-padding-x: 6px;
+  --tag-outline-gap: 4px;
+  --tag-shape-pill: 9999px;
+  --tag-shape-default: 4px;
+  --tag-font-family: var(--font-family-sans);
+  --tag-font-weight: var(--font-weight-medium);
+
+  --tag-lg-height: 28px;
+  --tag-lg-padding-y: 4px;
+  --tag-lg-padding-x-start: 8px;
+  --tag-lg-padding-x-end: 10px;
+  --tag-lg-gap: 2px;
+  --tag-lg-font-size: var(--font-size-13);
+  --tag-lg-line-height: var(--line-height-20);
+  --tag-lg-tracking: var(--tracking-normal);
+
+  --tag-md-height: 24px;
+  --tag-md-padding-y: 2px;
+  --tag-md-padding-x-start: 8px;
+  --tag-md-padding-x-end: 10px;
+  --tag-md-gap: 2px;
+  --tag-md-font-size: var(--font-size-13);
+  --tag-md-line-height: var(--line-height-20);
+  --tag-md-tracking: var(--tracking-normal);
+
+  --tag-sm-height: 20px;
+  --tag-sm-padding-y: 2px;
+  --tag-sm-padding-x-start: 8px;
+  --tag-sm-padding-x-end: 10px;
+  --tag-sm-gap: 2px;
+  --tag-sm-font-size: var(--font-size-12);
+  --tag-sm-line-height: var(--line-height-16);
+  --tag-sm-tracking: var(--tracking-wide);
+
+  --tag-primary-solid-bg: var(--bg-fill-brand-subtle);
+  --tag-primary-solid-text: var(--text-brand);
+  --tag-primary-solid-icon: var(--icon-brand);
+  --tag-primary-solid-border: transparent;
+  --tag-primary-outline-bg: transparent;
+  --tag-primary-outline-text: var(--text-brand);
+  --tag-primary-outline-icon: var(--icon-brand);
+  --tag-primary-outline-border: var(--border-brand-hh);
+
+  --tag-danger-solid-bg: var(--bg-fill-danger-subtle);
+  --tag-danger-solid-text: var(--text-primary);
+  --tag-danger-solid-icon: var(--icon-primary);
+  --tag-danger-solid-border: transparent;
+  --tag-danger-outline-bg: transparent;
+  --tag-danger-outline-text: var(--text-primary);
+  --tag-danger-outline-icon: var(--icon-primary);
+  --tag-danger-outline-border: var(--border-error-subtle);
+
+  --tag-success-solid-bg: var(--bg-fill-success-subtle);
+  --tag-success-solid-text: var(--text-primary);
+  --tag-success-solid-icon: var(--icon-primary);
+  --tag-success-solid-border: transparent;
+  --tag-success-outline-bg: transparent;
+  --tag-success-outline-text: var(--text-primary);
+  --tag-success-outline-icon: var(--icon-primary);
+  --tag-success-outline-border: var(--border-success-subtle);
+
+  --tag-warning-solid-bg: var(--bg-fill-warning-subtle);
+  --tag-warning-solid-text: var(--text-primary);
+  --tag-warning-solid-icon: var(--icon-primary);
+  --tag-warning-solid-border: transparent;
+  --tag-warning-outline-bg: transparent;
+  --tag-warning-outline-text: var(--text-primary);
+  --tag-warning-outline-icon: var(--icon-primary);
+  --tag-warning-outline-border: var(--border-warning-subtle);
+
+  --tag-subtle-solid-bg: var(--bg-fill-subtle);
+  --tag-subtle-solid-text: var(--text-secondary);
+  --tag-subtle-solid-icon: var(--icon-primary);
+  --tag-subtle-solid-border: transparent;
+  --tag-subtle-outline-bg: transparent;
+  --tag-subtle-outline-text: var(--text-secondary);
+  --tag-subtle-outline-icon: var(--icon-primary);
+  --tag-subtle-outline-border: var(--border-default);
 }

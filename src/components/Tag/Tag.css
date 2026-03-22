@@ -1,0 +1,186 @@
+/*
+ * Tag component styles
+ * Depends on the global token entry point in src/app/globals.css.
+ * No hard-coded values — every visual value references a CSS custom property.
+ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  box-sizing: border-box;
+  white-space: nowrap;
+  border-style: solid;
+  border-width: var(--tag-border-width);
+  font-family: var(--tag-font-family);
+  font-weight: var(--tag-font-weight);
+  text-decoration: none;
+  cursor: default;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.tag__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--tag-icon-size);
+  height: var(--tag-icon-size);
+  color: inherit;
+}
+
+.tag__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tag--lg {
+  height: var(--tag-lg-height);
+  padding-top: var(--tag-lg-padding-y);
+  padding-bottom: var(--tag-lg-padding-y);
+  padding-left: var(--tag-lg-padding-x-start);
+  padding-right: var(--tag-lg-padding-x-end);
+  gap: var(--tag-lg-gap);
+  font-size: var(--tag-lg-font-size);
+  line-height: var(--tag-lg-line-height);
+  letter-spacing: var(--tag-lg-tracking);
+}
+
+.tag--md {
+  height: var(--tag-md-height);
+  padding-top: var(--tag-md-padding-y);
+  padding-bottom: var(--tag-md-padding-y);
+  padding-left: var(--tag-md-padding-x-start);
+  padding-right: var(--tag-md-padding-x-end);
+  gap: var(--tag-md-gap);
+  font-size: var(--tag-md-font-size);
+  line-height: var(--tag-md-line-height);
+  letter-spacing: var(--tag-md-tracking);
+}
+
+.tag--sm {
+  height: var(--tag-sm-height);
+  padding-top: var(--tag-sm-padding-y);
+  padding-bottom: var(--tag-sm-padding-y);
+  padding-left: var(--tag-sm-padding-x-start);
+  padding-right: var(--tag-sm-padding-x-end);
+  gap: var(--tag-sm-gap);
+  font-size: var(--tag-sm-font-size);
+  line-height: var(--tag-sm-line-height);
+  letter-spacing: var(--tag-sm-tracking);
+}
+
+.tag--pill {
+  border-radius: var(--tag-shape-pill);
+}
+
+.tag--default {
+  border-radius: var(--tag-shape-default);
+}
+
+.tag--outline {
+  padding-left: var(--tag-outline-padding-x);
+  padding-right: var(--tag-outline-padding-x);
+  gap: var(--tag-outline-gap);
+}
+
+.tag--primary.tag--solid {
+  background-color: var(--tag-primary-solid-bg);
+  color: var(--tag-primary-solid-text);
+  border-color: var(--tag-primary-solid-border);
+}
+
+.tag--primary.tag--solid .tag__icon {
+  color: var(--tag-primary-solid-icon);
+}
+
+.tag--primary.tag--outline {
+  background-color: var(--tag-primary-outline-bg);
+  color: var(--tag-primary-outline-text);
+  border-color: var(--tag-primary-outline-border);
+}
+
+.tag--primary.tag--outline .tag__icon {
+  color: var(--tag-primary-outline-icon);
+}
+
+.tag--danger.tag--solid {
+  background-color: var(--tag-danger-solid-bg);
+  color: var(--tag-danger-solid-text);
+  border-color: var(--tag-danger-solid-border);
+}
+
+.tag--danger.tag--solid .tag__icon {
+  color: var(--tag-danger-solid-icon);
+}
+
+.tag--danger.tag--outline {
+  background-color: var(--tag-danger-outline-bg);
+  color: var(--tag-danger-outline-text);
+  border-color: var(--tag-danger-outline-border);
+}
+
+.tag--danger.tag--outline .tag__icon {
+  color: var(--tag-danger-outline-icon);
+}
+
+.tag--success.tag--solid {
+  background-color: var(--tag-success-solid-bg);
+  color: var(--tag-success-solid-text);
+  border-color: var(--tag-success-solid-border);
+}
+
+.tag--success.tag--solid .tag__icon {
+  color: var(--tag-success-solid-icon);
+}
+
+.tag--success.tag--outline {
+  background-color: var(--tag-success-outline-bg);
+  color: var(--tag-success-outline-text);
+  border-color: var(--tag-success-outline-border);
+}
+
+.tag--success.tag--outline .tag__icon {
+  color: var(--tag-success-outline-icon);
+}
+
+.tag--warning.tag--solid {
+  background-color: var(--tag-warning-solid-bg);
+  color: var(--tag-warning-solid-text);
+  border-color: var(--tag-warning-solid-border);
+}
+
+.tag--warning.tag--solid .tag__icon {
+  color: var(--tag-warning-solid-icon);
+}
+
+.tag--warning.tag--outline {
+  background-color: var(--tag-warning-outline-bg);
+  color: var(--tag-warning-outline-text);
+  border-color: var(--tag-warning-outline-border);
+}
+
+.tag--warning.tag--outline .tag__icon {
+  color: var(--tag-warning-outline-icon);
+}
+
+.tag--subtle.tag--solid {
+  background-color: var(--tag-subtle-solid-bg);
+  color: var(--tag-subtle-solid-text);
+  border-color: var(--tag-subtle-solid-border);
+}
+
+.tag--subtle.tag--solid .tag__icon {
+  color: var(--tag-subtle-solid-icon);
+}
+
+.tag--subtle.tag--outline {
+  background-color: var(--tag-subtle-outline-bg);
+  color: var(--tag-subtle-outline-text);
+  border-color: var(--tag-subtle-outline-border);
+}
+
+.tag--subtle.tag--outline .tag__icon {
+  color: var(--tag-subtle-outline-icon);
+}

@@ -20,21 +20,25 @@
   /* ——— Semantic — Background / Fill ——— */
 
   --bg-fill-brand:          #5B79E3;
+  --bg-fill-brand-subtle:   #3750AD;
   --bg-fill-brand-hover:    #7E97EC;
   --bg-fill-brand-pressed:  #ABBAF4;
   --bg-fill-brand-disabled: #444444;
 
   --bg-fill-success:         #1EA55C;
+  --bg-fill-success-subtle:  #106835;
   --bg-fill-success-hover:   #2EBC72;
   --bg-fill-success-pressed: #5FD292;
   --bg-fill-success-disabled:#444444;
 
   --bg-fill-error:           #D45A67;
+  --bg-fill-danger-subtle:   #7D1624;
   --bg-fill-error-hover:     #E3808B;
   --bg-fill-error-pressed:   #EFAAB2;
   --bg-fill-error-disabled:  #444444;
 
   --bg-fill-warning:         #AFA048;
+  --bg-fill-warning-subtle:  #5E5212;
   --bg-fill-warning-hover:   #C5BA6E;
   --bg-fill-warning-pressed: #D8D098;
   --bg-fill-warning-disabled:#444444;
@@ -89,4 +93,31 @@
   --border-error-subtle:  #7D1624;
   --border-warning:       #AFA048;
   --border-warning-subtle:#5E5212;
+
+  /* ——— Component — Tag (color overrides only) ——— */
+
+  --tag-primary-solid-bg: var(--bg-fill-brand-subtle);
+  --tag-primary-solid-text: var(--text-brand);
+  --tag-primary-solid-icon: var(--icon-brand);
+  --tag-primary-outline-border: var(--border-brand-hh);
+
+  --tag-danger-solid-bg: var(--bg-fill-danger-subtle);
+  --tag-danger-solid-text: var(--text-primary);
+  --tag-danger-solid-icon: var(--icon-primary);
+  --tag-danger-outline-border: var(--border-error-subtle);
+
+  --tag-success-solid-bg: var(--bg-fill-success-subtle);
+  --tag-success-solid-text: var(--text-primary);
+  --tag-success-solid-icon: var(--icon-primary);
+  --tag-success-outline-border: var(--border-success-subtle);
+
+  --tag-warning-solid-bg: var(--bg-fill-warning-subtle);
+  --tag-warning-solid-text: var(--text-primary);
+  --tag-warning-solid-icon: var(--icon-primary);
+  --tag-warning-outline-border: var(--border-warning-subtle);
+
+  --tag-subtle-solid-bg: var(--bg-fill-subtle);
+  --tag-subtle-solid-text: var(--text-secondary);
+  --tag-subtle-solid-icon: var(--icon-primary);
+  --tag-subtle-outline-border: var(--border-default);
 }

@@ -3,6 +3,7 @@
 /* ─── Token files (source of truth, from Figma StudioKIT_v1) ─────────────── */
 @import "../styles/tokens.light.css";
 @import "../styles/tokens.dark.css";
+@import "../components/Tag/Tag.css";
 
 /* ─── Tailwind theme — maps CSS vars to utility classes ──────────────────── */
 @theme inline {
