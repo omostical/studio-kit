@@ -199,17 +199,16 @@ function BadgePlayground() {
 
 // ── Input Playground ──────────────────────────────────────────────────────────
 function InputPlayground() {
-  const [variant, setVariant] = useState<"default" | "error" | "success">("default");
-  const [size, setSize] = useState<"sm" | "md" | "lg" | "xl">("md");
+  const [size, setSize] = useState<"sm" | "md" | "lg">("md");
   const [label, setLabel] = useState("Email address");
   const [placeholder, setPlaceholder] = useState("you@example.com");
   const [hint, setHint] = useState("");
   const [error, setError] = useState("");
+  const [optional, setOptional] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const code = `<Input
-  variant="${variant}"
-  size="${size}"${label ? `\n  label="${label}"` : ""}${placeholder ? `\n  placeholder="${placeholder}"` : ""}${hint ? `\n  hint="${hint}"` : ""}${error ? `\n  error="${error}"` : ""}${disabled ? "\n  disabled" : ""}
+  size="${size}"${label ? `\n  label="${label}"` : ""}${optional ? "\n  optional" : ""}${placeholder ? `\n  placeholder="${placeholder}"` : ""}${hint ? `\n  hint="${hint}"` : ""}${error ? `\n  error="${error}"` : ""}${disabled ? "\n  disabled" : ""}
 />`;
 
   return (
@@ -217,9 +216,9 @@ function InputPlayground() {
       <div className="lg:col-span-2 bg-neutral-50 flex items-center justify-center p-12 min-h-48">
         <div className="w-72">
           <Input
-            variant={variant}
             size={size}
             label={label || undefined}
+            optional={optional}
             placeholder={placeholder}
             hint={hint || undefined}
             error={error || undefined}
@@ -229,15 +228,8 @@ function InputPlayground() {
       </div>
       <div className="bg-white border-l border-neutral-200 p-5">
         <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-3">Controls</p>
-        <ControlRow label="Variant">
-          <ToggleGroup
-            options={["default", "error", "success"] as const}
-            value={variant}
-            onChange={setVariant}
-          />
-        </ControlRow>
         <ControlRow label="Size">
-          <ToggleGroup options={["sm", "md", "lg", "xl"] as const} value={size} onChange={setSize} />
+          <ToggleGroup options={["sm", "md", "lg"] as const} value={size} onChange={setSize} />
         </ControlRow>
         <ControlRow label="Label">
           <input
@@ -268,6 +260,9 @@ function InputPlayground() {
             placeholder="Optional error"
             onChange={(e) => setError(e.target.value)}
           />
+        </ControlRow>
+        <ControlRow label="Optional">
+          <Switch size="sm" checked={optional} onCheckedChange={setOptional} />
         </ControlRow>
         <ControlRow label="Disabled">
           <Switch size="sm" checked={disabled} onCheckedChange={setDisabled} />

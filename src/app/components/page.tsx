@@ -265,9 +265,9 @@ export default function ComponentsPage() {
             </div>
             <div className="p-6 flex flex-col gap-4"
               style={{ background: "var(--bg-surface)", borderRadius: "var(--radius-6)", border: "1px solid var(--border-default)" }}>
-              <Input placeholder="Search…" iconLeft={<Search />} />
-              <Input label="Password" type="password" placeholder="Enter password" iconRight={<Eye />} />
-              <Input placeholder="With both icons" iconLeft={<Mail />} iconRight={<Search />} />
+              <Input placeholder="Search…" prefix={<Search />} />
+              <Input label="Password" type="password" placeholder="Enter password" suffix={<Eye />} />
+              <Input placeholder="With both icons" prefix={<Mail />} suffix={<Search />} />
             </div>
           </div>
         </section>

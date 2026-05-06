@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Search, Mail, Eye } from "lucide-react";
+import { Search, Mail, Eye, AlertCircle, Info } from "lucide-react";
 import { Input } from "./Input";
 
 const meta: Meta<typeof Input> = {
@@ -15,11 +15,9 @@ const meta: Meta<typeof Input> = {
     ),
   ],
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "error", "success"],
-    },
-    size: { control: "select", options: ["sm", "md", "lg", "xl"] },
+    size: { control: "select", options: ["sm", "md", "lg"] },
+    state: { control: "select", options: ["default", "error"] },
+    optional: { control: "boolean" },
     disabled: { control: "boolean" },
   },
 };
@@ -28,74 +26,128 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  args: { placeholder: "Enter text...", variant: "default", size: "md" },
+  args: { label: "Label", placeholder: "Input field", hint: "Hint Text" },
 };
 
-export const WithLabel: Story = {
+export const Filled: Story = {
   args: {
-    label: "Email address",
-    placeholder: "you@example.com",
-    type: "email",
+    label: "Label",
+    placeholder: "Input field",
+    defaultValue: "Filled value",
+    hint: "Hint Text",
   },
 };
 
-export const WithHint: Story = {
+export const Focused: Story = {
   args: {
-    label: "Username",
-    placeholder: "johndoe",
-    hint: "Must be 3–20 characters, letters and numbers only.",
+    label: "Label",
+    placeholder: "Input field",
+    autoFocus: true,
+    hint: "Hint Text",
   },
 };
 
-export const WithError: Story = {
+export const Error: Story = {
   args: {
-    label: "Email address",
-    placeholder: "you@example.com",
-    error: "This email is already taken.",
-    defaultValue: "john@",
-  },
-};
-
-export const WithIconLeft: Story = {
-  args: {
-    placeholder: "Search...",
-    iconLeft: <Search />,
-  },
-};
-
-export const WithIconRight: Story = {
-  args: {
-    label: "Password",
-    placeholder: "Enter password",
-    type: "password",
-    iconRight: <Eye />,
-  },
-};
-
-export const WithBothIcons: Story = {
-  args: {
-    placeholder: "Search users...",
-    iconLeft: <Search />,
-    iconRight: <Mail />,
+    label: "Label",
+    placeholder: "Input field",
+    defaultValue: "wrong@",
+    error: "Please enter a valid email",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: "Disabled input",
-    placeholder: "Not editable",
+    label: "Label",
+    placeholder: "Input field",
+    hint: "Hint Text",
     disabled: true,
-    defaultValue: "Locked value",
+  },
+};
+
+export const Optional: Story = {
+  args: {
+    label: "Label",
+    optional: true,
+    placeholder: "Input field",
+    hint: "Hint Text",
+  },
+};
+
+export const WithPrefix: Story = {
+  args: {
+    label: "Search",
+    placeholder: "Search…",
+    prefix: <Search />,
+    hint: "Type to filter results",
+  },
+};
+
+export const WithSuffix: Story = {
+  args: {
+    label: "Password",
+    placeholder: "Enter password",
+    type: "password",
+    suffix: <Eye />,
+  },
+};
+
+export const WithBothAffixes: Story = {
+  args: {
+    label: "Email",
+    placeholder: "you@example.com",
+    prefix: <Mail />,
+    suffix: <AlertCircle />,
+  },
+};
+
+export const CustomHintIcon: Story = {
+  args: {
+    label: "Username",
+    placeholder: "johndoe",
+    hint: "Must be 3–20 characters",
+    hintIcon: <Info />,
   },
 };
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-3 w-80">
-      <Input size="sm" placeholder="Small" />
-      <Input size="md" placeholder="Medium" />
-      <Input size="lg" placeholder="Large" />
-      <Input size="xl" placeholder="Extra Large" />
+    <div className="flex flex-col gap-4 w-80">
+      <Input size="sm" label="Small" placeholder="32px height" hint="sm" />
+      <Input size="md" label="Medium" placeholder="40px height" hint="md" />
+      <Input size="lg" label="Large" placeholder="48px height" hint="lg" />
+    </div>
+  ),
+};
+
+export const AllStates: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 w-80">
+      <Input label="Default" placeholder="Input field" hint="Hint Text" />
+      <Input
+        label="Filled"
+        placeholder="Input field"
+        defaultValue="Filled value"
+        hint="Hint Text"
+      />
+      <Input
+        label="Focused"
+        placeholder="Input field"
+        autoFocus
+        hint="Hint Text"
+      />
+      <Input
+        label="Error"
+        placeholder="Input field"
+        defaultValue="wrong@"
+        error="Please enter a valid email"
+      />
+      <Input
+        label="Disabled"
+        placeholder="Input field"
+        hint="Hint Text"
+        disabled
+      />
     </div>
   ),
 };

@@ -1,103 +1,123 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Ban } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const inputVariants = cva(
-  "flex w-full rounded-lg border bg-white text-neutral-900 text-sm transition-colors placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+const inputWrapperVariants = cva(
+  "flex w-full items-center rounded-lg border bg-white text-text-primary transition-colors focus-within:ring-2 focus-within:ring-border-brand-subtle focus-within:border-border-brand has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-surface-disabled has-[:disabled]:border-border-disabled has-[:disabled]:text-text-disabled",
   {
     variants: {
-      variant: {
-        default:
-          "border-neutral-300 focus-visible:border-indigo-500 focus-visible:ring-indigo-200",
-        error:
-          "border-rose-400 focus-visible:border-rose-500 focus-visible:ring-rose-200",
-        success:
-          "border-green-400 focus-visible:border-green-500 focus-visible:ring-green-200",
-      },
       size: {
-        sm: "h-8 px-3 py-1.5 text-xs",
-        md: "h-9 px-3 py-2 text-sm",
-        lg: "h-10 px-4 py-2.5 text-sm",
-        xl: "h-12 px-4 py-3 text-base",
+        sm: "h-8 px-3 gap-2 text-xs",
+        md: "h-10 px-3 gap-2 text-sm",
+        lg: "h-12 px-4 gap-2 text-base",
+      },
+      state: {
+        default: "border-border hover:border-border-strong hover:bg-surface-secondary",
+        error: "border-border-danger focus-within:border-border-danger focus-within:ring-border-danger-subtle",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-    },
+    defaultVariants: { size: "md", state: "default" },
   }
 );
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
-    VariantProps<typeof inputVariants> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix">,
+    VariantProps<typeof inputWrapperVariants> {
   label?: string;
+  optional?: boolean;
+  optionalLabel?: string;
   hint?: string;
   error?: string;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
+  hintIcon?: React.ReactNode;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      variant,
       size,
+      state,
       label,
+      optional = false,
+      optionalLabel = "Optional",
       hint,
       error,
-      iconLeft,
-      iconRight,
+      prefix,
+      suffix,
+      hintIcon,
       id,
+      disabled,
       ...props
     },
     ref
   ) => {
-    const inputId = id ?? React.useId();
-    const resolvedVariant = error ? "error" : variant;
+    const generatedId = React.useId();
+    const inputId = id ?? generatedId;
+    const resolvedState = error ? "error" : state;
+    const message = error ?? hint;
+    const showHint = Boolean(message);
 
     return (
-      <div className="flex flex-col gap-1.5">
+      <div className="flex w-full flex-col gap-1.5">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-neutral-700"
-          >
-            {label}
-          </label>
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor={inputId}
+              className={cn(
+                "text-sm font-medium",
+                disabled ? "text-text-disabled" : "text-text-primary"
+              )}
+            >
+              {label}
+            </label>
+            {optional && (
+              <span className="text-xs text-text-subtle">{optionalLabel}</span>
+            )}
+          </div>
         )}
-        <div className="relative flex items-center">
-          {iconLeft && (
-            <span className="absolute left-3 flex items-center text-neutral-400 [&_svg]:size-4">
-              {iconLeft}
+        <div
+          className={cn(
+            inputWrapperVariants({ size, state: resolvedState }),
+            className
+          )}
+        >
+          {prefix && (
+            <span className="flex shrink-0 items-center text-text-tertiary [&_svg]:size-4">
+              {prefix}
             </span>
           )}
           <input
             id={inputId}
             ref={ref}
-            className={cn(
-              inputVariants({ variant: resolvedVariant, size, className }),
-              iconLeft && "pl-9",
-              iconRight && "pr-9"
-            )}
+            disabled={disabled}
+            className="flex-1 min-w-0 bg-transparent outline-none placeholder:text-text-subtle disabled:cursor-not-allowed disabled:text-text-disabled disabled:placeholder:text-text-disabled"
             {...props}
           />
-          {iconRight && (
-            <span className="absolute right-3 flex items-center text-neutral-400 [&_svg]:size-4">
-              {iconRight}
+          {suffix && (
+            <span className="flex shrink-0 items-center text-text-tertiary [&_svg]:size-4">
+              {suffix}
             </span>
           )}
         </div>
-        {(hint || error) && (
-          <p
+        {showHint && (
+          <div
             className={cn(
-              "text-xs",
-              error ? "text-rose-600" : "text-neutral-500"
+              "flex items-center gap-1 text-xs",
+              error
+                ? "text-text-danger"
+                : disabled
+                ? "text-text-disabled"
+                : "text-text-tertiary"
             )}
           >
-            {error ?? hint}
-          </p>
+            <span className="flex shrink-0 items-center [&_svg]:size-4">
+              {hintIcon ?? <Ban />}
+            </span>
+            <span>{message}</span>
+          </div>
         )}
       </div>
     );
@@ -106,4 +126,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = "Input";
 
-export { Input, inputVariants };
+export { Input, inputWrapperVariants };
