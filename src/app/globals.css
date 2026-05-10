@@ -12,13 +12,19 @@
   --font-sans: var(--font-family-sans);
   --font-mono: var(--font-family-mono);
 
-  /* ── Surfaces → bg-surface, bg-surface-primary, etc. ───────────────────── */
+  /* ── Surfaces (v2 — direction-consistent) ──────────────────────────────── */
+  --color-canvas:            var(--bg-canvas);
   --color-surface:           var(--bg-surface);
-  --color-surface-primary:   var(--bg-surface-primary);
-  --color-surface-secondary: var(--bg-surface-secondary);
-  --color-surface-tertiary:  var(--bg-surface-tertiary);
-  --color-surface-inverse:   var(--bg-surface-inverse);
+  --color-surface-raised:    var(--bg-surface-raised);
+  --color-surface-overlay:   var(--bg-surface-overlay);
+  --color-surface-muted:     var(--bg-surface-muted);
   --color-surface-disabled:  var(--bg-surface-disabled);
+  --color-surface-inverse:   var(--bg-surface-inverse);
+  --color-scrim:             var(--bg-scrim);
+  /* Legacy surface mappings — kept so old class names compile during migration */
+  --color-surface-primary:   var(--bg-surface-muted);
+  --color-surface-secondary: var(--bg-surface);
+  --color-surface-tertiary:  var(--bg-surface-overlay);
 
   /* ── Fills → bg-fill-brand, bg-fill-success, etc. ──────────────────────── */
   --color-fill-brand:           var(--bg-fill-brand);
@@ -50,6 +56,11 @@
   --color-text-inverse:          var(--text-inverse);
   --color-text-inverse-secondary:var(--text-inverse-secondary);
   --color-text-on-fill:          var(--text-on-color);
+  --color-text-on-brand:         var(--text-on-brand);
+  --color-text-on-success:       var(--text-on-success);
+  --color-text-on-error:         var(--text-on-error);
+  --color-text-on-warning:       var(--text-on-warning);
+  --color-text-on-info:          var(--text-on-info);
   --color-text-brand:            var(--text-brand);
   --color-text-brand-hover:      var(--text-brand-hover);
   --color-text-brand-disabled:   var(--text-brand-disabled);
@@ -72,8 +83,11 @@
   /* ── Borders → border-border, border-border-brand, etc. ────────────────── */
   --color-border:                var(--border-default);
   --color-border-strong:         var(--border-strong);
+  --color-border-stronger:       var(--border-stronger);
   --color-border-subtle:         var(--border-subtle);
   --color-border-disabled:       var(--border-disabled);
+  --color-border-inverse:        var(--border-inverse);
+  --color-ring-focus:            var(--ring-focus);
   --color-border-brand:          var(--border-brand);
   --color-border-brand-subtle:   var(--border-brand-subtle);
   --color-border-success:        var(--border-success);

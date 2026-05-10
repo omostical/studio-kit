@@ -33,10 +33,10 @@ const buttonVariants = cva(
           "disabled:bg-[var(--bg-fill-brand-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
         ].join(" "),
         secondary: [
-          "bg-[var(--bg-surface-secondary)] text-[var(--text-primary)]",
+          "bg-[var(--bg-surface)] text-[var(--text-primary)]",
           "border border-[var(--border-default)]",
-          "hover:bg-[var(--bg-surface-primary)] hover:border-[var(--border-strong)]",
-          "active:bg-[var(--bg-surface)] active:border-[var(--border-strong)]",
+          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-strong)]",
+          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
           "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--text-disabled)] disabled:border-[var(--border-disabled)]",
         ].join(" "),
         danger: [
@@ -56,8 +56,8 @@ const buttonVariants = cva(
         ghost: [
           "bg-[var(--bg-fill-subtle)] text-[var(--text-primary)]",
           "border border-[var(--border-subtle)]",
-          "hover:bg-[var(--bg-surface-primary)] hover:border-[var(--border-default)]",
-          "active:bg-[var(--bg-surface)] active:border-[var(--border-strong)]",
+          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-default)]",
+          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
           "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--text-disabled)] disabled:border-transparent",
         ].join(" "),
       },
