@@ -143,10 +143,10 @@
   --alpha-yellow-4: rgba(149, 133, 38, 0.24);
 
   /* Alpha — Amber (for warning overlays) */
-  --alpha-amber-1: rgba(245, 158, 11, 0.08);
-  --alpha-amber-2: rgba(245, 158, 11, 0.16);
-  --alpha-amber-3: rgba(245, 158, 11, 0.24);
-  --alpha-amber-4: rgba(245, 158, 11, 0.32);
+  --alpha-amber-1: rgba(245, 158, 11, 0.06);
+  --alpha-amber-2: rgba(245, 158, 11, 0.12);
+  --alpha-amber-3: rgba(245, 158, 11, 0.18);
+  --alpha-amber-4: rgba(245, 158, 11, 0.24);
 
   /* Alpha — Green */
   --alpha-green-1: rgba(30, 165, 92, 0.06);
