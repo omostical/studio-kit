@@ -31,7 +31,7 @@ export const Default: Story = {
         <CardDescription>A short description of what this card is about.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-neutral-600">This is the card body content. Add anything here.</p>
+        <p className="text-sm text-text-secondary">This is the card body content. Add anything here.</p>
       </CardContent>
       <CardFooter>
         <Button variant="primary" size="sm">Action</Button>
@@ -50,7 +50,7 @@ export const Elevated: Story = {
         <CardDescription>This card has a stronger shadow.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-neutral-600">Content goes here.</p>
+        <p className="text-sm text-text-secondary">Content goes here.</p>
       </CardContent>
     </Card>
   ),
@@ -64,7 +64,7 @@ export const Outline: Story = {
         <CardDescription>A card with a more visible border and no shadow.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-neutral-600">Content goes here.</p>
+        <p className="text-sm text-text-secondary">Content goes here.</p>
       </CardContent>
     </Card>
   ),
@@ -81,7 +81,7 @@ export const WithBadge: Story = {
         <CardDescription>This card showcases a feature with a badge.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-neutral-600">Feature details go here.</p>
+        <p className="text-sm text-text-secondary">Feature details go here.</p>
       </CardContent>
       <CardFooter>
         <Button variant="primary" size="sm">Get started</Button>

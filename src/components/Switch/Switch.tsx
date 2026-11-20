@@ -28,7 +28,8 @@ const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitive.Root>,
   SwitchProps
 >(({ className, label, description, size = "md", id, ...props }, ref) => {
-  const switchId = id ?? React.useId();
+  const generatedId = React.useId(); // always called — hooks must run in the same order every render
+  const switchId = id ?? generatedId;
   const s = sizeMap[size];
 
   return (
@@ -38,9 +39,9 @@ const Switch = React.forwardRef<
         ref={ref}
         className={cn(
           "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-brand focus-visible:ring-offset-2",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          "data-[state=checked]:bg-indigo-600 data-[state=unchecked]:bg-neutral-200",
+          "data-[state=checked]:bg-fill-brand data-[state=unchecked]:bg-border-strong",
           s.root,
           className
         )}
@@ -48,7 +49,7 @@ const Switch = React.forwardRef<
       >
         <SwitchPrimitive.Thumb
           className={cn(
-            "pointer-events-none block rounded-full bg-white shadow-sm ring-0 transition-transform data-[state=unchecked]:translate-x-0",
+            "pointer-events-none block rounded-full bg-text-on-color shadow-sm ring-0 transition-transform data-[state=unchecked]:translate-x-0",
             s.thumb
           )}
         />
@@ -58,13 +59,13 @@ const Switch = React.forwardRef<
           {label && (
             <label
               htmlFor={switchId}
-              className="text-sm font-medium text-neutral-700 cursor-pointer"
+              className="text-sm font-medium text-text-primary cursor-pointer"
             >
               {label}
             </label>
           )}
           {description && (
-            <p className="text-xs text-neutral-500">{description}</p>
+            <p className="text-xs text-text-tertiary">{description}</p>
           )}
         </div>
       )}

@@ -4,7 +4,7 @@ import { Ban } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const inputWrapperVariants = cva(
-  "flex w-full items-center rounded-lg border bg-white text-text-primary transition-colors focus-within:ring-2 focus-within:ring-border-brand-subtle focus-within:border-border-brand has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-surface-disabled has-[:disabled]:border-border-disabled has-[:disabled]:text-text-disabled",
+  "flex w-full items-center rounded-lg border bg-surface text-text-primary transition-colors focus-within:ring-2 focus-within:ring-border-brand-subtle focus-within:border-border-brand has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-surface-disabled has-[:disabled]:border-border-disabled has-[:disabled]:text-text-disabled",
   {
     variants: {
       size: {
@@ -13,8 +13,8 @@ const inputWrapperVariants = cva(
         lg: "h-12 px-4 gap-2 text-base",
       },
       state: {
-        default: "border-border hover:border-border-strong hover:bg-surface-secondary",
-        error: "border-border-danger focus-within:border-border-danger focus-within:ring-border-danger-subtle",
+        default: "border-border hover:border-border-strong hover:bg-surface",
+        error: "border-border-error focus-within:border-border-error focus-within:ring-border-error-subtle",
       },
     },
     defaultVariants: { size: "md", state: "default" },
@@ -107,7 +107,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               "flex items-center gap-1 text-xs",
               error
-                ? "text-text-danger"
+                ? "text-text-error"
                 : disabled
                 ? "text-text-disabled"
                 : "text-text-tertiary"

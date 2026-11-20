@@ -6,7 +6,7 @@ import {
   Search,
   Mail,
 } from "lucide-react";
-import { Button, IconButton } from "@/components/ui";
+import { Button, IconButton } from "@/components";
 import { Badge } from "@/components/Badge";
 import { Tag } from "@/components/Tag";
 import { Input } from "@/components/Input";
@@ -305,7 +305,7 @@ export default function Home() {
                   letterSpacing: "0.04em",
                 }}
               >
-                What's inside
+                What&apos;s inside
               </p>
               <h2
                 className="sk-h2"

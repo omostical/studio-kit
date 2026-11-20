@@ -7,12 +7,12 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-neutral-100 text-neutral-700",
-        brand: "bg-indigo-100 text-indigo-700",
-        success: "bg-green-100 text-green-700",
-        warning: "bg-amber-100 text-amber-700",
-        danger: "bg-rose-100 text-rose-700",
-        outline: "border border-neutral-300 text-neutral-600 bg-transparent",
+        default: "bg-surface-muted text-text-secondary",
+        brand: "bg-fill-brand-subtle text-text-brand",
+        success: "bg-fill-success-subtle text-text-success",
+        warning: "bg-fill-warning-subtle text-text-warning",
+        danger: "bg-fill-error-subtle text-text-error",
+        outline: "border border-border-strong text-text-secondary bg-transparent",
       },
       size: {
         sm: "text-xs px-2 py-0.5",
@@ -36,12 +36,12 @@ export interface BadgeProps
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant, size, dot, children, ...props }, ref) => {
     const dotColors: Record<string, string> = {
-      default: "bg-neutral-400",
-      brand: "bg-indigo-500",
-      success: "bg-green-500",
-      warning: "bg-amber-500",
-      danger: "bg-rose-500",
-      outline: "bg-neutral-400",
+      default: "bg-icon-tertiary",
+      brand: "bg-icon-brand",
+      success: "bg-icon-success",
+      warning: "bg-icon-warning",
+      danger: "bg-icon-error",
+      outline: "bg-icon-tertiary",
     };
 
     return (
