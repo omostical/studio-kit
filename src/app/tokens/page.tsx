@@ -108,7 +108,7 @@ function Nav() {
 
 export default function TokensPage() {
   return (
-    <div className="min-h-screen" style={{ background: "var(--bg-surface-secondary)", fontFamily: "var(--font-family-sans)" }}>
+    <div className="min-h-screen" style={{ background: "var(--bg-surface)", fontFamily: "var(--font-family-sans)" }}>
       <Nav />
 
       <div className="max-w-6xl mx-auto px-6 py-14">

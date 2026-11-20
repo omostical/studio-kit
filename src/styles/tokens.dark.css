@@ -32,10 +32,6 @@
   --bg-scrim:            var(--alpha-black-6);
   --ring-focus:          var(--alpha-blue-3);
 
-  /* Legacy aliases — deprecated */
-  --bg-surface-primary:   var(--bg-surface-muted);
-  --bg-surface-secondary: var(--bg-surface);
-  --bg-surface-tertiary:  var(--bg-surface-overlay);
 
   /* ——— Semantic — Background / Fill ——— */
 
@@ -52,7 +48,7 @@
   --bg-fill-success-disabled:#161A20;
 
   --bg-fill-error:           #D45A67;
-  --bg-fill-danger-subtle:   var(--alpha-red-4);
+  --bg-fill-error-subtle:   var(--alpha-red-4);
   --bg-fill-error-hover:     #E3808B;
   --bg-fill-error-pressed:   #EFAAB2;
   --bg-fill-error-disabled:  #161A20;
@@ -128,7 +124,7 @@
   --tag-primary-solid-icon: var(--icon-brand);
   --tag-primary-outline-border: var(--border-brand-hh);
 
-  --tag-danger-solid-bg: var(--bg-fill-danger-subtle);
+  --tag-danger-solid-bg: var(--bg-fill-error-subtle);
   --tag-danger-solid-text: var(--text-primary);
   --tag-danger-solid-icon: var(--icon-primary);
   --tag-danger-outline-border: var(--border-error-subtle);

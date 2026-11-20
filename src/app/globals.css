@@ -21,28 +21,31 @@
   --color-surface-disabled:  var(--bg-surface-disabled);
   --color-surface-inverse:   var(--bg-surface-inverse);
   --color-scrim:             var(--bg-scrim);
-  /* Legacy surface mappings — kept so old class names compile during migration */
-  --color-surface-primary:   var(--bg-surface-muted);
-  --color-surface-secondary: var(--bg-surface);
-  --color-surface-tertiary:  var(--bg-surface-overlay);
 
   /* ── Fills → bg-fill-brand, bg-fill-success, etc. ──────────────────────── */
-  --color-fill-brand:           var(--bg-fill-brand);
-  --color-fill-brand-hover:     var(--bg-fill-brand-hover);
-  --color-fill-brand-active:    var(--bg-fill-brand-pressed);
-  --color-fill-brand-disabled:  var(--bg-fill-brand-disabled);
+  --color-fill-brand:            var(--bg-fill-brand);
+  --color-fill-brand-subtle:     var(--bg-fill-brand-subtle);
+  --color-fill-brand-hover:      var(--bg-fill-brand-hover);
+  --color-fill-brand-pressed:    var(--bg-fill-brand-pressed);
+  --color-fill-brand-disabled:   var(--bg-fill-brand-disabled);
 
-  --color-fill-success:         var(--bg-fill-success);
-  --color-fill-success-hover:   var(--bg-fill-success-hover);
-  --color-fill-success-active:  var(--bg-fill-success-pressed);
+  --color-fill-success:          var(--bg-fill-success);
+  --color-fill-success-subtle:   var(--bg-fill-success-subtle);
+  --color-fill-success-hover:    var(--bg-fill-success-hover);
+  --color-fill-success-pressed:  var(--bg-fill-success-pressed);
+  --color-fill-success-disabled: var(--bg-fill-success-disabled);
 
-  --color-fill-danger:          var(--bg-fill-error);
-  --color-fill-danger-hover:    var(--bg-fill-error-hover);
-  --color-fill-danger-active:   var(--bg-fill-error-pressed);
+  --color-fill-error:            var(--bg-fill-error);
+  --color-fill-error-subtle:     var(--bg-fill-error-subtle);
+  --color-fill-error-hover:      var(--bg-fill-error-hover);
+  --color-fill-error-pressed:    var(--bg-fill-error-pressed);
+  --color-fill-error-disabled:   var(--bg-fill-error-disabled);
 
-  --color-fill-warning:         var(--bg-fill-warning);
-  --color-fill-warning-hover:   var(--bg-fill-warning-hover);
-  --color-fill-warning-active:  var(--bg-fill-warning-pressed);
+  --color-fill-warning:          var(--bg-fill-warning);
+  --color-fill-warning-subtle:   var(--bg-fill-warning-subtle);
+  --color-fill-warning-hover:    var(--bg-fill-warning-hover);
+  --color-fill-warning-pressed:  var(--bg-fill-warning-pressed);
+  --color-fill-warning-disabled: var(--bg-fill-warning-disabled);
 
   --color-fill-subtle:          var(--bg-fill-subtle);
   --color-fill-ghost:           var(--bg-fill-ghost);
@@ -55,7 +58,7 @@
   --color-text-disabled:         var(--text-disabled);
   --color-text-inverse:          var(--text-inverse);
   --color-text-inverse-secondary:var(--text-inverse-secondary);
-  --color-text-on-fill:          var(--text-on-color);
+  --color-text-on-color:          var(--text-on-color);
   --color-text-on-brand:         var(--text-on-brand);
   --color-text-on-success:       var(--text-on-success);
   --color-text-on-error:         var(--text-on-error);
@@ -65,7 +68,7 @@
   --color-text-brand-hover:      var(--text-brand-hover);
   --color-text-brand-disabled:   var(--text-brand-disabled);
   --color-text-success:          var(--text-success);
-  --color-text-danger:           var(--text-error);
+  --color-text-error:            var(--text-error);
   --color-text-warning:          var(--text-warning);
 
   /* ── Icons → text-icon-primary, fill-icon-brand, etc. ──────────────────── */
@@ -76,7 +79,7 @@
   --color-icon-inverse:   var(--icon-inverse);
   --color-icon-brand:     var(--icon-brand);
   --color-icon-success:   var(--icon-success);
-  --color-icon-danger:    var(--icon-error);
+  --color-icon-error:     var(--icon-error);
   --color-icon-warning:   var(--icon-warning);
   --color-icon-on-fill:   var(--icon-on-fill);
 
@@ -92,8 +95,8 @@
   --color-border-brand-subtle:   var(--border-brand-subtle);
   --color-border-success:        var(--border-success);
   --color-border-success-subtle: var(--border-success-subtle);
-  --color-border-danger:         var(--border-error);
-  --color-border-danger-subtle:  var(--border-error-subtle);
+  --color-border-error:         var(--border-error);
+  --color-border-error-subtle:  var(--border-error-subtle);
   --color-border-warning:        var(--border-warning);
   --color-border-warning-subtle: var(--border-warning-subtle);
 
@@ -223,7 +226,7 @@
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
 body {
-  background:   var(--bg-surface-secondary);
+  background:   var(--bg-surface);
   color:        var(--text-primary);
   font-family:  var(--font-family-sans);
   -webkit-font-smoothing:  antialiased;

@@ -189,7 +189,7 @@
 
   /* ——— Semantic — Background / Surface ———
      Direction-consistent: each step is "more elevated".
-     bg-surface-* legacy names are aliased below for back-compat. */
+     (Legacy surface-primary/secondary/tertiary aliases removed in Phase 0.) */
 
   --bg-canvas:           #F3F3F3;  /* page background */
   --bg-surface:          #FFFFFF;  /* default component surface */
@@ -205,10 +205,6 @@
   /* Focus ring — brand at alpha so it reads on any surface */
   --ring-focus:          var(--alpha-blue-3);
 
-  /* Legacy aliases (deprecated — migrate consumers) */
-  --bg-surface-primary:   var(--bg-surface-muted);
-  --bg-surface-secondary: var(--bg-surface);
-  --bg-surface-tertiary:  var(--bg-surface-overlay);
 
   /* ——— Semantic — Background / Fill ——— */
 
@@ -225,7 +221,7 @@
   --bg-fill-success-disabled:#EEFBF2;
 
   --bg-fill-error:           #C53540;
-  --bg-fill-danger-subtle:   #F7D0D5;
+  --bg-fill-error-subtle:   #F7D0D5;
   --bg-fill-error-hover:     #A22232;
   --bg-fill-error-pressed:   #A22232;
   --bg-fill-error-disabled:  #FCEEF0;
@@ -427,7 +423,7 @@
   --tag-primary-outline-icon: var(--icon-brand);
   --tag-primary-outline-border: var(--border-brand-hh);
 
-  --tag-danger-solid-bg: var(--bg-fill-danger-subtle);
+  --tag-danger-solid-bg: var(--bg-fill-error-subtle);
   --tag-danger-solid-text: var(--text-primary);
   --tag-danger-solid-icon: var(--icon-primary);
   --tag-danger-solid-border: transparent;
