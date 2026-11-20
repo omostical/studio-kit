@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import {
   Plus, Trash2, Settings, Bell, Search,
   Download, Edit, X, Check, ArrowRight,
 } from "lucide-react";
-import { IconButton } from "@/components/ui";
+import { IconButton } from "./IconButton";
 
 const meta: Meta<typeof IconButton> = {
-  title: "UI/IconButton",
+  title: "Components/IconButton",
   component: IconButton,
   tags: ["autodocs"],
   args: {
@@ -78,7 +78,7 @@ export const VariantMatrix: Story = {
       {(["primary", "secondary", "danger", "success", "ghost"] as const).map(
         (variant) => (
           <div key={variant} className="flex flex-wrap gap-3 items-center">
-            <span className="w-20 text-xs text-neutral-400 capitalize">{variant}</span>
+            <span className="w-20 text-xs text-text-subtle capitalize">{variant}</span>
             {(["lg", "md", "sm", "xs"] as const).map((size) => (
               <IconButton
                 key={size}
@@ -115,7 +115,7 @@ export const CommonUseCases: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-xs text-neutral-400 mb-3">Toolbar actions</p>
+        <p className="text-xs text-text-subtle mb-3">Toolbar actions</p>
         <div className="flex gap-1">
           <IconButton variant="ghost" size="sm" aria-label="Edit" icon={<Edit />} />
           <IconButton variant="ghost" size="sm" aria-label="Download" icon={<Download />} />
@@ -124,14 +124,14 @@ export const CommonUseCases: Story = {
         </div>
       </div>
       <div>
-        <p className="text-xs text-neutral-400 mb-3">Dismiss / close</p>
+        <p className="text-xs text-text-subtle mb-3">Dismiss / close</p>
         <div className="flex gap-2">
           <IconButton variant="ghost" size="md" aria-label="Close" icon={<X />} />
           <IconButton variant="secondary" size="md" aria-label="Close" icon={<X />} />
         </div>
       </div>
       <div>
-        <p className="text-xs text-neutral-400 mb-3">Navigation</p>
+        <p className="text-xs text-text-subtle mb-3">Navigation</p>
         <div className="flex gap-2">
           <IconButton variant="primary" size="lg" aria-label="Next" icon={<ArrowRight />} />
           <IconButton variant="secondary" size="lg" aria-label="Next" icon={<ArrowRight />} />

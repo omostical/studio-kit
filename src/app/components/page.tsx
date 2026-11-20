@@ -17,8 +17,8 @@ import { Switch } from "@/components/Switch";
 import { Select, SelectItem } from "@/components/Select";
 import { Tag } from "@/components/Tag";
 import { Search, Mail, ArrowRight, Plus, Eye } from "lucide-react";
-import { PreviewFrame, PreviewLabel } from "@/components/docs/PreviewFrame";
-import { W } from "@/components/docs/wideset";
+import { PreviewFrame, PreviewLabel } from "@/site/PreviewFrame";
+import { W } from "@/site/wideset";
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
 function ComponentSection({
@@ -162,7 +162,7 @@ export default function ComponentsPage() {
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="danger">Danger</Button>
-            <Button variant="outline">Outline</Button>
+            <Button variant="success">Success</Button>
             <Button variant="ghost">Ghost</Button>
           </PreviewFrame>
         </SubBlock>
@@ -172,7 +172,7 @@ export default function ComponentsPage() {
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="danger">Danger</Button>
-            <Button variant="outline">Outline</Button>
+            <Button variant="success">Success</Button>
             <Button variant="ghost">Ghost</Button>
           </PreviewFrame>
         </SubBlock>
@@ -188,10 +188,10 @@ export default function ComponentsPage() {
 
         <SubBlock id="button-icons" title="States and icons">
           <PreviewFrame>
-            <Button variant="primary" iconLeft={<Plus />}>
+            <Button variant="primary" prefixIcon={<Plus />}>
               Create
             </Button>
-            <Button variant="secondary" iconRight={<ArrowRight />}>
+            <Button variant="secondary" suffixIcon={<ArrowRight />}>
               Continue
             </Button>
             <Button variant="primary" loading>
@@ -515,7 +515,7 @@ export default function ComponentsPage() {
                   <Button
                     size="sm"
                     variant="primary"
-                    iconRight={<ArrowRight />}
+                    suffixIcon={<ArrowRight />}
                   >
                     Get started
                   </Button>

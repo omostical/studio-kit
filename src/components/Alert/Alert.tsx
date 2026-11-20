@@ -2,7 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Info, CheckCircle2, AlertTriangle, XCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "@/components/Button";
 
 /**
  * Alert
@@ -34,7 +34,7 @@ const alertVariants = cva(
         info: "bg-[var(--bg-fill-brand-subtle)] border-[var(--border-brand-hh)]",
         success: "bg-[var(--bg-fill-success-subtle)] border-[var(--border-success-subtle)]",
         warning: "bg-[var(--bg-fill-warning-subtle)] border-[var(--border-warning-subtle)]",
-        error: "bg-[var(--bg-fill-danger-subtle)] border-[var(--border-error-subtle)]",
+        error: "bg-[var(--bg-fill-error-subtle)] border-[var(--border-error-subtle)]",
       },
       layout: {
         vertical: "gap-4",

@@ -1,13 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Plus, ArrowRight, Trash2, Check, Download } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
-  parameters: { layout: "centered" },
-  args: { children: "Button", variant: "primary", size: "md" },
+  args: {
+    children: "Button",
+    variant: "primary",
+    size: "md",
+  },
   argTypes: {
     variant: {
       control: "select",
@@ -25,7 +28,11 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
+// ─── Playground ───────────────────────────────────────────────────────────────
+
 export const Playground: Story = {};
+
+// ─── All Variants ─────────────────────────────────────────────────────────────
 
 export const AllVariants: Story = {
   render: () => (
@@ -39,7 +46,9 @@ export const AllVariants: Story = {
   ),
 };
 
-export const Sizes: Story = {
+// ─── All Sizes ────────────────────────────────────────────────────────────────
+
+export const AllSizes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
       <Button size="lg">Large</Button>
@@ -50,7 +59,30 @@ export const Sizes: Story = {
   ),
 };
 
-export const Disabled: Story = {
+// ─── Variants × Sizes matrix ──────────────────────────────────────────────────
+
+export const VariantMatrix: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      {(["primary", "secondary", "danger", "success", "ghost"] as const).map(
+        (variant) => (
+          <div key={variant} className="flex flex-wrap gap-3 items-center">
+            <span className="w-20 text-xs text-text-subtle capitalize">{variant}</span>
+            {(["lg", "md", "sm", "xs"] as const).map((size) => (
+              <Button key={size} variant={variant} size={size}>
+                {size.toUpperCase()}
+              </Button>
+            ))}
+          </div>
+        )
+      )}
+    </div>
+  ),
+};
+
+// ─── Disabled States ──────────────────────────────────────────────────────────
+
+export const DisabledStates: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
       <Button variant="primary" disabled>Primary</Button>
@@ -62,32 +94,56 @@ export const Disabled: Story = {
   ),
 };
 
-export const Loading: Story = {
+// ─── Loading State ────────────────────────────────────────────────────────────
+
+export const LoadingStates: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
       <Button variant="primary" loading>Saving…</Button>
       <Button variant="secondary" loading>Loading…</Button>
       <Button variant="danger" loading>Deleting…</Button>
+      <Button variant="success" loading>Submitting…</Button>
+      <Button variant="ghost" loading>Working…</Button>
     </div>
   ),
 };
+
+// ─── With Prefix Icon ─────────────────────────────────────────────────────────
 
 export const WithPrefixIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
-      <Button variant="primary" prefixIcon={<Plus />}>New Item</Button>
-      <Button variant="secondary" prefixIcon={<Download />}>Export</Button>
-      <Button variant="danger" prefixIcon={<Trash2 />}>Delete</Button>
-      <Button variant="success" prefixIcon={<Check />}>Confirm</Button>
+      <Button variant="primary" size="lg" prefixIcon={<Plus />}>New Item</Button>
+      <Button variant="secondary" size="md" prefixIcon={<Download />}>Export</Button>
+      <Button variant="success" size="sm" prefixIcon={<Check />}>Confirm</Button>
+      <Button variant="danger" size="xs" prefixIcon={<Trash2 />}>Delete</Button>
     </div>
   ),
 };
 
+// ─── With Suffix Icon ─────────────────────────────────────────────────────────
+
 export const WithSuffixIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
-      <Button variant="primary" suffixIcon={<ArrowRight />}>Continue</Button>
-      <Button variant="ghost" suffixIcon={<ArrowRight />}>Learn More</Button>
+      <Button variant="primary" size="lg" suffixIcon={<ArrowRight />}>Continue</Button>
+      <Button variant="secondary" size="md" suffixIcon={<ArrowRight />}>Next Step</Button>
+      <Button variant="ghost" size="sm" suffixIcon={<ArrowRight />}>Learn More</Button>
+    </div>
+  ),
+};
+
+// ─── With Both Icons ──────────────────────────────────────────────────────────
+
+export const WithBothIcons: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button variant="primary" prefixIcon={<Download />} suffixIcon={<ArrowRight />}>
+        Download Report
+      </Button>
+      <Button variant="secondary" prefixIcon={<Plus />} suffixIcon={<ArrowRight />}>
+        Add and Continue
+      </Button>
     </div>
   ),
 };

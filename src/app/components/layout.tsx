@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, Github } from "lucide-react";
-import { Sidebar } from "@/components/docs/Sidebar";
-import { TOC } from "@/components/docs/TOC";
-import { W } from "@/components/docs/wideset";
+import { Sidebar } from "@/site/Sidebar";
+import { TOC } from "@/site/TOC";
+import { W } from "@/site/wideset";
 
 export default function ComponentsLayout({
   children,

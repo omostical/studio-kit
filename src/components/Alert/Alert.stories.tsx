@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Alert } from "@/components/ui";
+import { Alert } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
-  title: "UI/Alert",
+  title: "Components/Alert",
   component: Alert,
   tags: ["autodocs"],
   args: {
@@ -40,7 +40,7 @@ export const VerticalVsHorizontal: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-xs text-neutral-400 mb-2">Vertical</p>
+        <p className="text-xs text-text-subtle mb-2">Vertical</p>
         <Alert
           intent="info"
           layout="vertical"
@@ -51,7 +51,7 @@ export const VerticalVsHorizontal: Story = {
         />
       </div>
       <div>
-        <p className="text-xs text-neutral-400 mb-2">Horizontal</p>
+        <p className="text-xs text-text-subtle mb-2">Horizontal</p>
         <Alert
           intent="info"
           layout="horizontal"

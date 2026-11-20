@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import { Checkbox } from "@/components/ui";
+import { Checkbox } from "./Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "UI/Checkbox",
+  title: "Components/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   args: {
@@ -54,7 +54,7 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div>
-        <p className="text-xs text-neutral-400 mb-3">Primary</p>
+        <p className="text-xs text-text-subtle mb-3">Primary</p>
         <div className="flex flex-col gap-3">
           <Checkbox variant="primary" label="Unchecked" defaultChecked={false} />
           <Checkbox variant="primary" label="Checked" defaultChecked={true} />
@@ -62,7 +62,7 @@ export const Variants: Story = {
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-xs text-neutral-400 mb-3">Danger</p>
+        <p className="text-xs text-text-subtle mb-3">Danger</p>
         <div className="flex flex-col gap-3">
           <Checkbox variant="danger" label="Unchecked" defaultChecked={false} />
           <Checkbox variant="danger" label="Checked" defaultChecked={true} />
@@ -133,7 +133,7 @@ export const Standalone: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div>
-        <p className="text-xs text-neutral-400 mb-3">For table row selection</p>
+        <p className="text-xs text-text-subtle mb-3">For table row selection</p>
         <div className="flex gap-3 items-center">
           <Checkbox hideLabel label="Select row 1" aria-label="Select row 1" defaultChecked={false} />
           <Checkbox hideLabel label="Select row 2" aria-label="Select row 2" defaultChecked={true} />
@@ -157,7 +157,7 @@ export const Controlled: Story = {
           label="I agree to the Terms of Service"
           subtitle="By checking this box you accept our terms."
         />
-        <p className="text-xs text-neutral-400">
+        <p className="text-xs text-text-subtle">
           State: <code className="font-mono">{String(checked)}</code>
         </p>
       </div>
@@ -172,13 +172,13 @@ export const FullMatrix: Story = {
     <div className="flex flex-col gap-6">
       {(["primary", "danger"] as const).map((variant) => (
         <div key={variant}>
-          <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">
+          <p className="text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-3">
             {variant}
           </p>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3">
             {(["lg", "sm"] as const).map((size) => (
               <div key={size} className="flex flex-col gap-3">
-                <p className="text-xs text-neutral-400">{size === "lg" ? "Large" : "Small"}</p>
+                <p className="text-xs text-text-subtle">{size === "lg" ? "Large" : "Small"}</p>
                 <Checkbox variant={variant} size={size} label="Unchecked" defaultChecked={false} />
                 <Checkbox variant={variant} size={size} label="Checked" defaultChecked={true} />
                 <Checkbox variant={variant} size={size} label="Indeterminate" defaultChecked="indeterminate" />
