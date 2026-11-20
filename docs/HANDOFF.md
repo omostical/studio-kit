@@ -1,5 +1,7 @@
 # Studio Kit — handoff notes
 
+> Full plan, research references and runbooks: see [PLAN.md](./PLAN.md).
+
 Context for any session (human or Claude) picking up this project. Branch: `claude/relaxed-pascal-s33fzv`.
 
 ## Goal
