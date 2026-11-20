@@ -25,3 +25,15 @@ Turns a **duplicate** of Wideset Core 1.0 into **Studio Kit 2.0**:
 
 Undo: everything is reversible with **Cmd/Ctrl+Z** right after applying, and the version
 history keeps the pre-apply state.
+
+## Run with Figma Console MCP instead
+
+On your own computer, with Figma desktop open:
+
+1. `bash scripts/setup-figma-console-mcp.sh` registers the server with Claude Code (asks for your Figma token, hidden).
+2. Install the Desktop Bridge plugin from the figma-console-mcp README and run it in **Studio Kit 2.0**.
+3. Start `claude` in this repo and paste:
+
+> Using figma-console MCP on the open file "Studio Kit 2.0": run the logic in
+> `figma-plugins/studio-kit-rebrand/code.js` as a dry run first (figma.command = "dry-run")
+> and show me the before → after report. Only apply after I confirm.
