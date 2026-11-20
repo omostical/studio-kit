@@ -1,0 +1,12 @@
+{
+  "name": "Studio Kit Rebrand",
+  "id": "studio-kit-rebrand-local",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "menu": [
+    { "name": "1. Dry run (report only, changes nothing)", "command": "dry-run" },
+    { "name": "2. Apply changes", "command": "apply" }
+  ]
+}
