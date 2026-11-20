@@ -237,7 +237,40 @@ npm run build          # production build
 claude mcp list        # confirm figma-console is connected
 ```
 
-## 10. Key files
+## 10. All references
+
+**How teams build design playgrounds**
+- Notion, prototype playground with Claude Code: https://www.chatprd.ai/how-i-ai/how-notion-designs-with-ai-brian-lovins-prototype-playground-and-claude-code-workflows
+- Coinbase, design systems in the AI prototyping era: https://www.coinbase.com/blog/how-coinbase-design-systems-are-powering-the-ai-prototyping-era
+- Codrops, building digital products with design systems and agents (Nov 2026): https://tympanus.net/codrops/2026/11/01/design-systems-agents/
+- Headway, making a design system agent-ready: https://www.headway.io/blog/design-systems-for-ai-agents
+- Supernova, AI prototyping with code components (Jan 2026): https://www.supernova.io/blog/january-2026-product-updates
+
+**AI-ready component docs**
+- Storybook AI manifests: https://storybook.js.org/docs/ai/manifests
+- Storybook MCP overview: https://storybook.js.org/docs/ai/mcp/overview
+- Storybook 10.3 release: https://storybook.js.org/blog/storybook-10-3/
+- Chromatic, hosted Storybook MCP: https://www.chromatic.com/docs/mcp
+
+**Design tokens**
+- W3C design tokens, stable 2025.10 announcement: https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/
+- W3C design tokens format, 2025.10 final report: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/
+- zeroheight on Style Dictionary v5 and the 2025.10 format: https://help.zeroheight.com/hc/en-us/articles/48049028236187
+
+**Prototyping tools that use your design system**
+- v0 Design Systems: https://v0.app/docs/design-systems
+- v0 legacy (shadcn registry) route: https://v0.app/docs/design-systems-legacy
+
+**Figma tooling**
+- Figma Console MCP (Desktop Bridge setup): https://github.com/southleft/figma-console-mcp
+- Figma MCP rate limits and access: https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/
+
+**Systems referenced as patterns (no single page)**
+Shopify Polaris (lint rules against raw values, surface scale), GitHub Primer (component naming,
+variant model), Atlassian (appearance + spacing props, elevation tokens), Radix Colors (separate
+light/dark palettes), Material and Apple HIG (dark-mode elevation).
+
+## 11. Key files
 
 - `docs/PLAN.md`: this plan · `docs/HANDOFF.md`: short status
 - `figma-plugins/studio-kit-rebrand/`: rebrand plugin (`code.js`, `manifest.json`, `README.md`)
