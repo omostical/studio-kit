@@ -57,8 +57,31 @@ adopting; non-standard ones are not copied.** Kept Wideset, on purpose: side pad
 with size; StudioKIT's flat 12 doesn't), icons 20/20/16/16 (StudioKIT's 24px next to 14px text is
 oversized), the focus ring (StudioKIT's 24% halo is too faint).
 
-**Button still to do:** copy StudioKIT's Button description (fix its "lg = 48px" claim); decide the
-disabled style (tinted vs grey); Split Button gap was left as Wideset's. StudioKIT "Ghost" ≈ Wideset
+- **Button description (2026-11-21):** written to the Button set from
+  [figma-descriptions/button.md](./figma-descriptions/button.md) — StudioKIT's format, rewritten for
+  Wideset's API (Variant/Style/Size/State), corrected touch-target rule (WCAG 2.5.8 = 24×24), real known
+  issues. Keep that file as the source; edit it and re-write to Figma.
+
+- **Input (2026-11-21):** compared with StudioKIT_v1 Text Input — Wideset matches or beats it on every
+  point (placeholder/helper contrast, 16px Large text, flat hover/focus, grey disabled), so no visual
+  changes were copied. Fixed two rebrand leftovers: the `Forms/Active` focus-glow effect style (142 layers)
+  was hard-coded Wideset purple `#4734F7` → now bound to `Colors/Light/Brand/Opacity/600-16%`; 8 Danger
+  Input variants used a remote library variable (`Dynamic/Border/Danger/Elevated/*`) → now local
+  `Dynamic/Stroke/Danger/Strong/*`. Description written from
+  [figma-descriptions/input.md](./figma-descriptions/input.md). Restore point: "Before input fixes".
+- **Library re-link (2026-11-21):** a scan of all component pages (65,339 layers) found ~4,800 bindings to
+  variables from the original Wideset library (26 variables: `space/*`, `Radius/Control/100%`,
+  `Button/XSmall`, `Interactive/…/OnPrimary`, `Static/Background/*`, Turquoise/Scarlet/Gold tags,
+  Visualization blues, an unresolvable 0px Calendar spacing) plus 96 Avatar circles hard-coded in old purple
+  `#4A3AE0`. All re-linked to local tokens with matching values (e.g. `space/4`→`Gap/9`,
+  `Radius/Control/100%`→`Corner Radius/Control/full`, Turquoise→Teal, Scarlet→Red, Gold→Yellow); circles →
+  `Non-Semantic/Fill/Brand/Strong`. Restore point: "Before library re-link".
+  **Left on purpose:** 26 effect bindings on Dropdown Menu items (`Static/Background/Base` and
+  `…/Inverse/Base` used as shadow/ring colours; mode behaviour unconfirmed). 8 mixed-colour Mention Text
+  instances still *report* a remote node-level fill, but every character range is local (stale Figma record).
+
+**Button still to do:** decide the disabled style (tinted vs grey; recommend Wideset's grey); Split
+Button gap was left as Wideset's. StudioKIT "Ghost" ≈ Wideset
 Secondary/Filled.
 
 **Left as Wideset (by choice, for now):** the **Mobile** mode of fonts (Inter Display / Inter /
