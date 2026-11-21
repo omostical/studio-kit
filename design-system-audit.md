@@ -1,0 +1,257 @@
+# Design system audit
+
+Repository: studio-kit (github.com/omostical/studio-kit) at b8e6e39, 2026-11-21
+Scope: app holding its own design system (not published; `package.json` has no `files`/`exports`); agents served: both contributor agents (editing `src/components`, tokens) and consumer agents (building `src/app/prototypes`), in this repository; agent files live in: root `AGENTS.md`, `CLAUDE.md` (`@AGENTS.md`), `.claude/skills/`. Working assumption — see question 1.
+Stack: Next 16.1.6 + React 19.2.3, Tailwind v4 (`@theme` in `src/styles/generated/theme.css`), Radix primitives, Storybook 10.6.8 (16 stories), tokens from Figma DTCG JSON (`tokens/figma/`) built by `scripts/build-tokens.mjs`
+Levels: silent 7, guesses 7, obeys 1, tells you 0. Using: obeys 1, guesses 1, silent 4. Not allowed: guesses 6, silent 2. Doesn't exist: silent 1
+
+## Top gaps
+
+The rank is a judgment on two scales (frequency × cost, from `references/doctrine.md`); reorder it if the team weighs them differently.
+
+| Rank | Gap | Class | Question | Frequency x cost | Evidence | Closed by |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Semantic colour tokens have no usage text | missing | Using | 3 x 3 | `src/styles/generated/theme.css` defines 202 `--color-{static,dynamic,semantic}-*` tokens; `tokens/figma/wds-color-tokens.{light,dark}.tokens.json` hold 268 `$value` each and 0 `$description`; usage exists for about 16 tokens in `AGENTS.md:66-71`; no `DESIGN.md` | team decision (questions 3), then `setup week1` |
+| 2 | No gap instruction or gap log; the skill tells agents to build around gaps | missing | Doesn't exist | 3 x 3 | `.claude/skills/prototype/SKILL.md:14` "say so and compose it from tokens"; no `GAPS.md`, no gap label (`gh label list`: GitHub defaults only); both acceptance tests built workarounds (initials avatar, two buttons per row instead of a menu — re-test report on branch `claude/phase3-retest-team-members-2934b4`) | team decision (questions 4, 5), then `setup week3` |
+| 3 | The design-system CI check does not block merges | violated | Not allowed | 3 x 2 | `.github/workflows/tokens.yml:3-23` runs `tokens:check`, `lint:tokens`, `tsc`, `build` on pull requests; `gh api repos/omostical/studio-kit/branches/main/protection` → `404 Branch not protected` | team decision (question 6), then `setup week2` |
+| 4 | Catalog has no status: 72 component descriptions, 16 components in code, nothing says which exist | missing | Using | 2 x 2 | `docs/figma-descriptions/index.json` 72 entries with keys `id,name,file` only; `src/components/` holds 16; `AGENTS.md:33` sends agents to `docs/figma-descriptions/<component>.md`, where e.g. `dropdown-menu.md` and `avatar.md` describe components with no code | team decision (question 7), then `setup week1` |
+| 5 | One intent, three words: danger / error / negative, and success / positive | missing | Using | 2 x 2 | `"danger"` in `Input.tsx`, `Select.tsx`, `Checkbox.tsx`, `_shared/field.tsx`, Button `variant`; `"error"` in `Alert.tsx`, `Toast.tsx`; `"negative"` in `Badge.tsx`; `"success"` in `Alert.tsx` vs `"positive"` in `Badge.tsx`, `Toast.tsx`; `docs/PLAN.md:240` lists it as open decision 1 | team decision (question 2), then `setup week1`, enforced in `setup week2` |
+
+## Areas
+
+| # | Area | Score | Level | Evidence |
+| --- | --- | --- | --- | --- |
+| 1 | Agent entry point | answered | guesses | `AGENTS.md` (128 lines) is the vendor-neutral source; `CLAUDE.md:1` is `@AGENTS.md`. No consumer outside this repository is in scope (question 1) |
+| 2 | Rule scoping | missing | silent | No `.agents/rules`, `.claude/rules` or `.cursor/rules` (`ls` → no such directory); every UI rule loads from root `AGENTS.md` |
+| 3 | Rule wording | answered | guesses | Banned-word check on `AGENTS.md CLAUDE.md .claude` → `no hits`. Rules are lists, numbers and patterns (`AGENTS.md:9-24`); one is not checkable as written: "errors say how to fix the problem" (`AGENTS.md:21`) |
+| 4 | Design language | missing | silent | See top gap 1. Values exist per theme (`src/styles/generated/tokens.css:757` light, `:1028` dark); usage does not. Rendered contrast: not determined (needs a render) |
+| 5 | Token layer | answered | obeys | One source, `tokens/figma/*.tokens.json` → `npm run tokens:build`; `count-hardcoded.sh`: `src/components` hex 0, colorfn 0, palette 0; `tokens.yml:19,21` run `tokens:check` and `lint:tokens` in CI (not merge-blocking, area 13) |
+| 6 | Hardcoded values | violated | guesses | `src/components`: 8 arbitrary values with no exception marker — `Toast.tsx:84,85,155` (`max-w-[400px]`, `max-w-[460px]`, `z-[60]`), `Modal.tsx:29` (`max-w-[400px\|600px\|800px]`), `Switch.tsx:39` (`p-[2px]`); `lint:tokens` rejects arbitrary values only in `src/app/prototypes` (`scripts/check-tokens.mjs`, `STRICT_SCOPES`). `src/app/page.tsx`: 104 matches (11 hex), outside every lint scope (question 8) |
+| 7 | Catalog | missing | silent | See top gap 4. Storybook gives name and props (`.storybook/main.ts` components manifest, autodocs `tags` in each story, e.g. `Button.stories.tsx:12`); no `parameters.meta`, no status, no `registry.json` (`detect-stack.sh`: `metadata sidecars 0, registry none`) |
+| 8 | Registry in CI | violated | guesses | Token output is regen-checked: `tokens.yml:19` `npm run tokens:check`. Generated descriptions are not: `docs/figma-descriptions/*.md` come from `scripts/build-descriptions.mjs`, and no CI step rebuilds and diffs them |
+| 9 | Lint and types for agents | violated | guesses | `AGENTS.md:9` "Use the components… don't hand-build a button…" is prose only: `eslint.config.mjs:8-20` has no `no-restricted-syntax` or `no-restricted-imports`; raw `<button>` at `src/app/playground/page.tsx:23,254`; `@radix-ui/react-*` importable anywhere. Closed union props exist (`Badge.tsx` `BadgeStatus`). `lint:tokens` messages say what to use instead, never where to log a gap |
+| 10 | Exceptions | missing | silent | Marker `token-lint-ignore` exists (`scripts/check-tokens.mjs:99,122`) with 0 uses; 0 `eslint-disable`; no allowlist test with reasons (the 8 values in area 6 are unrecorded exceptions) |
+| 11 | Agent hooks | violated | guesses | `AGENTS.md:16` "Never edit generated files" is prose only: no `.claude/settings.json` hook, no versioned git hooks (`detect-stack.sh`: `hooks: claude PreToolUse no; git hooks none`). `tokens:check` in CI catches edited token output after the fact |
+| 12 | Gap logging | missing | silent | See top gap 2 |
+| 13 | CI gate | violated | guesses | See top gap 3. Last run on `main`: `Design tokens` success, 2026-11-21 (`gh run list`) |
+| 14 | Change discipline | missing | silent | No `.github/PULL_REQUEST_TEMPLATE*`, no change-type labels (`gh label list`), no changelog |
+| 15 | Consistency | missing | silent | See top gap 5. Also: raw `<a>` 9 in 3 files with no link component (`src/app/components/layout.tsx:76`, `src/app/page.tsx:200,462`); repeated class string `"flex min-w-0 flex-col gap-gap-3"` in 3 files (`component-usage.sh`) |
+
+## Questions only the team can answer
+
+1. Scope: this report treats Studio Kit as an app that holds its own system, with contributor and consumer agents working in this repository. `docs/PLAN.md` Phase 6 plans a GitHub template / `create-studio-kit` CLI — will client repositories install Studio Kit as a package (consumer guidance must then ship with it) or copy the whole repository (root `AGENTS.md` travels with it)?
+2. Which word names the destructive/failure intent across components — `danger`, `error` or `negative` — and which names success — `success` or `positive`? Or are they deliberately different per component (Button/fields vs Alert/Toast vs Badge), and if so, what is the rule? (`docs/PLAN.md:240`)
+3. Where should usage text for the 202 semantic colour tokens live: Figma variable descriptions (exported to `$description`, 0 today) feeding a generated `DESIGN.md`, or `DESIGN.md` written in the repository? Who writes it?
+4. Where is the gap index: a `GAPS.md` in the repository, GitHub issues with a gap label, or both? What is the label called?
+5. When no component fits, should `/prototype` keep "compose it from tokens" (`.claude/skills/prototype/SKILL.md:14`), or should agents flag the gap and stop, or flag it and build a clearly marked stand-in?
+6. Should `main` require the `Design tokens` check (branch protection), and do changes go through pull requests? Today commits land on `main` directly.
+7. Which status words does the catalog use (for example `stable`, `beta`, `planned`, `deprecated`), and do the 56 Figma-only descriptions get a status that says "not in code"?
+8. Is the docs site (`src/app/page.tsx`, `src/app/components`, `src/site`) held to the token rules? `scripts/check-tokens.mjs` excludes `src/site` on purpose; `src/app/page.tsx` has 104 matches.
+9. Are the 8 arbitrary values in `Toast.tsx`, `Modal.tsx` and `Switch.tsx` accepted exceptions? If yes, what is the reason for each; if no, which tokens replace them? Is `token-lint-ignore` the exception marker?
+10. Should Claude Code hook files (`.claude/settings.json`, `.claude/hooks/`) be committed to the repository?
+11. Which agents besides Claude Code work here (Cursor, Codex…)? The answer decides whether rules go in `.agents/` with symlinks.
+
+## Deferred
+
+- 2 Rule scoping — `AGENTS.md` is 128 lines; path-scoped rules pay off once it grows or a second agent tool joins (question 11).
+- 9 Lint and types — a `no-restricted-syntax` rule for raw `<button>`/`<input>` and a `no-restricted-imports` rule for `@radix-ui/*` outside `src/components`; cheap, but lands best with the gap label from question 4 in its message.
+- 11 Agent hooks — CI already catches edited token output; a hook only moves the failure earlier (question 10).
+- 6, 10 Hardcoded values and exceptions — 8 values in 3 components; waits on question 9.
+- 8 Registry in CI — add a rebuild-and-diff for `docs/figma-descriptions/*.md` when the catalog work (top gap 4) changes that pipeline.
+- 14 Change discipline — matters once pull requests and protection exist (question 6).
+
+## Appendix: inventory
+
+Scripts run from `~/.claude/skills/grounded-design-system` (v0.3.0) against this checkout.
+
+### detect-stack.sh
+
+```text
+root: /Users/emmanuel-lg/studio-kit/.claude/worktrees/elated-kirch-6ce69e
+git: yes (branch claude/elated-kirch-6ce69e, origin github.com/omostical/studio-kit)
+gh-cli: installed, authenticated; repo omostical/studio-kit: permission ADMIN, archived false, default branch main protected false
+archived-notice: none
+package-manager: npm
+monorepo: none
+package-files: 1 (package.json)
+repo-kind: app (consumes a design system, in this repository or from a package)
+package: package.json: not published; app framework next
+framework: next 16.1.6, react 19.2.3
+styling: tailwind v4 (^4; entry src/app/globals.css; config none); css 3, scss/sass 0, less 0, stylus 0, css-modules 0
+css-in-js: none by import; dependencies none
+primitives: @radix-ui/react-*
+shadcn: no
+docs: storybook yes (^10.6.8), stories 16, mdx files 0 (read them: docs or app content), docs frameworks none
+generated: none detected; 0 files carry a generated marker; 0 files excluded from every count
+token-source: src/app/globals.css src/styles/generated/theme.css src/styles/generated/tokens.css src/tokens/generated.ts tokens/figma/wds-color-tokens.dark.tokens.json tokens/figma/wds-color-tokens.light.tokens.json tokens/figma/wds-measurements.desktop.tokens.json tokens/figma/wds-measurements.mobile.tokens.json (and 3 more)
+tokens-css: src/app/globals.css (@theme, 9 custom properties) src/styles/generated/theme.css (@theme, 405 custom properties) src/styles/generated/tokens.css (1011 names, 1301 declarations)
+tokens-js: src/tokens/generated.ts (exports color,typography, 1371 literals)
+tokens-dtcg: tokens/figma/wds-color-tokens.dark.tokens.json ($value entries) tokens/figma/wds-color-tokens.light.tokens.json ($value entries) tokens/figma/wds-measurements.desktop.tokens.json ($value entries) tokens/figma/wds-measurements.mobile.tokens.json ($value entries) tokens/figma/wds-primitives.values.tokens.json ($value entries) (and 2 more)
+tokens-pipeline: none; tokens-studio none
+themes: :root (4), [data-theme="light"] (1), [data-theme="dark"] (1); JS, config or JSON token sources: read them for the theme set
+catalog: metadata sidecars 0, registry none, stories 16
+lint: eslint eslint.config.mjs; biome none; stylelint none; restricted-import/syntax rules 0
+lint-extends: none (a shared config is readable only with node_modules installed)
+lint-plugins: eslint-config-next eslint-plugin-storybook
+lint-design-rules: none
+format: postcss postcss.config.mjs
+tests: @chromatic-com/storybook @storybook/addon-a11y vitest; files with screenshot or snapshot assertions 0; typecheck scripts none
+ci: .github/workflows/tokens.yml
+ci-design-gates: none; a gate blocks merge only under branch protection (see gh-cli)
+agent-files: AGENTS.md (128 lines); CLAUDE.md (imports @AGENTS.md, 1 lines); .claude/skills (2 entries, 0 symlinks)
+design-files: DESIGN.md no, GAPS.md no, gap sections tokens/README.md
+hooks: claude PreToolUse no; git hooks none
+ui-code: components 20 (stories, tests and route files excluded), route files 7, stories 16, html 0, css 3, scss/sass 0, less 0
+ui-dirs: src/components(17), src/app(8), src/site(3), src/styles(2)
+stack-refs: tailwind-shadcn radix storybook css-in-js figma-variables style-dictionary
+```
+
+### count-hardcoded.sh
+
+```text
+# count-hardcoded: pattern matches, not violations
+root: /Users/emmanuel-lg/studio-kit/.claude/worktrees/elated-kirch-6ce69e
+engine: grep
+files-scanned: 79 source files; excluded: 0 generated files (detect-stack.sh generated:), vendored trees, minified files
+tailwind: v4 detected; palette and arbitrary-value columns shown
+token-sources: src/app/globals.css src/styles/generated/theme.css src/styles/generated/tokens.css src/tokens/generated.ts tokens/figma/wds-color-tokens.dark.tokens.json tokens/figma/wds-color-tokens.light.tokens.json (and 5 more)
+legend: hex = #rgb to #rrggbbaa; colorfn = rgb() hsl() oklch() lab() lch() hwb() with a literal first argument (rgba($token, .5) and hsl(var(--x)) are not counted); named = CSS named colors in color properties; px, rem = non-zero literals; hex, px and rem also count values inside Tailwind arbitrary values; palette = raw Tailwind palette steps and white/black (text-gray-500, bg-white); arbcolor/arbvar/arblen/arbother = Tailwind arbitrary values holding a color, a var(), a length, anything else. Comments, Markdown code fences and lines defining a variable ($x:, --x:, @x:) are excluded from usage.
+
+## totals
+category      usage in-token-sources on-local-definitions
+hex              32             1684                  0
+colorfn           6                0                  0
+named             0                0                  0
+px               99              465                  0
+rem              33                0                  0
+palette           2                0                  0
+arbcolor          0                0                  0
+arbvar            0                0                  0
+arblen           20                0                  0
+arbother         16                0                  0
+
+## by directory (usage only, first two path segments)
+dir                                   hex  colorfn    named       px      rem  palette arbcolor   arbvar   arblen arbother
+src/app                                11        4        0       82       28        2        0        0        7        0
+src/components                          0        0        0        9        0        0        0        0       13       15
+src/site                               11        2        0        8        5        0        0        0        0        0
+figma-plugins/studio-kit-rebrand       10        0        0        0        0        0        0        0        0        0
+scripts                                 0        0        0        0        0        0        0        0        0        1
+
+## palettes used (usage)
+white 2
+
+## repeated values (usage, 2 or more uses, top 15): a repeated literal is a candidate missing token
+    16  px        1px                          in 3 files: src/app/components/layout.tsx, src/app/page.tsx, ...
+    12  px        11px                         in 5 files: src/app/components/page.tsx, src/app/page.tsx, ...
+    10  arbother  group-data-[container=true]  in 1 file: src/components/Card/Card.tsx
+     9  rem       0.05em                       in 5 files: src/app/components/page.tsx, src/app/page.tsx, ...
+     7  px        15px                         in 2 files: src/app/components/page.tsx, src/app/page.tsx
+     7  rem       61.5rem                      in 1 file: src/app/page.tsx
+     6  px        12px                         in 2 files: src/app/page.tsx, src/site/TOC.tsx
+     6  px        13px                         in 2 files: src/app/page.tsx, src/site/TOC.tsx
+     6  rem       0.5rem                       in 2 files: src/app/components/layout.tsx, src/app/page.tsx
+     4  px        16px                         in 2 files: src/app/components/page.tsx, src/app/page.tsx
+     4  px        24px                         in 1 file: src/app/page.tsx
+     4  px        48px                         in 1 file: src/app/page.tsx
+     4  px        56px                         in 2 files: src/app/components/page.tsx, src/app/page.tsx
+     4  rem       0.75rem                      in 2 files: src/app/page.tsx, src/site/PreviewFrame.tsx
+     3  arblen    max-w-[400px]                in 3 files: src/components/Card/Card.stories.tsx, src/components/Modal/Modal.tsx, ...
+
+## top 15 files (usage, all categories)
+   104 src/app/page.tsx
+    15 src/app/components/layout.tsx
+    13 src/site/wideset.ts
+    12 src/app/components/page.tsx
+    10 figma-plugins/studio-kit-rebrand/code.js
+    10 src/components/Card/Card.tsx
+     8 src/components/Modal/Modal.tsx
+     8 src/components/Toast/Toast.tsx
+     5 src/site/TOC.tsx
+     4 src/site/PreviewFrame.tsx
+     4 src/site/Sidebar.tsx
+     3 src/app/tokens/page.tsx
+     2 src/components/Alert/Alert.stories.tsx
+     2 src/components/Card/Card.stories.tsx
+     2 src/components/Switch/Switch.tsx
+
+## token sources (matches here are definitions)
+  1361 src/tokens/generated.ts (js: exports color,typography, 1371 literals)
+   674 src/styles/generated/tokens.css (css: 1011 names, 1301 declarations)
+   107 src/styles/generated/theme.css (css: @theme, 405 custom properties)
+     7 src/app/globals.css (css: @theme, 9 custom properties)
+     0 tokens/figma/wds-color-tokens.dark.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-color-tokens.light.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-measurements.desktop.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-measurements.mobile.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-primitives.values.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-typography.desktop.tokens.json (dtcg: $value entries)
+     0 tokens/figma/wds-typography.mobile.tokens.json (dtcg: $value entries)
+
+## notes
+arbitrary values reading runtime variables (--radix-*, --base-ui-*, --tw-*), not counted: 1 (radix 1)
+arbitrary values holding a CSS keyword (inherit, auto, none...), not counted: 0
+files rendered outside the DOM (CSS variables unavailable, literals may be required): none
+not counted by design: unitless numbers in JS style objects (fontSize: 13), spacing keys in JS size maps, values built at runtime
+```
+
+### component-usage.sh
+
+```text
+# component-usage: counts, not verdicts
+root: /Users/emmanuel-lg/studio-kit/.claude/worktrees/elated-kirch-6ce69e
+ui-dir: src/components (first conventional directory with 3 or more component files)
+
+## importers per component (distinct files, stories and tests excluded; inside = from src/components itself)
+ outside   inside  component
+       3        2  src/components/Badge/Badge.tsx
+       3        2  src/components/Input/Input.tsx
+       2        4  src/components/Button/Button.tsx
+       2        2  src/components/Switch/Switch.tsx
+       2        2  src/components/Tag/Tag.tsx
+       1        5  src/components/IconButton/IconButton.tsx
+       1        2  src/components/Alert/Alert.tsx
+       1        2  src/components/Card/Card.tsx
+       1        2  src/components/Checkbox/Checkbox.tsx
+       1        2  src/components/Modal/Modal.tsx
+       1        2  src/components/Select/Select.tsx
+       1        2  src/components/Table/Table.tsx
+       1        2  src/components/Tabs/Tabs.tsx
+       1        2  src/components/Toast/Toast.tsx
+       1        2  src/components/Tooltip/Tooltip.tsx
+       1        2  src/components/Typography/Typography.tsx
+       0        2  src/components/_shared/field.tsx
+components: 17; imported nowhere: 0; files importing src/components as a barrel: 2 (named imports through a barrel are not attributed to a component)
+
+## raw elements outside src/components (component of the same name in src/components: yes or no)
+<button> 2 in 1 files; component: yes; first: src/app/playground/page.tsx:23 src/app/playground/page.tsx:254
+<a> 9 in 3 files; component: no; first: src/app/components/layout.tsx:76 src/app/page.tsx:200 src/app/page.tsx:462
+
+## class strings with 4 or more classes repeated in 2 or more places (top 15): a repeated string is a candidate component
+   4  "flex items-start justify-between mb-6"  in 1 file: src/app/page.tsx
+   4  "flex min-w-0 flex-col gap-gap-3"  in 3 files: src/app/prototypes/billing-settings/page.tsx, src/app/tokens/page.tsx, ...
+   3  "flex flex-wrap items-center gap-gap-7"  in 2 files: src/app/components/page.tsx, src/components/Button/Button.stories.tsx
+   3  "grid w-full max-w-sm gap-gap-11"  in 1 file: src/app/components/page.tsx
+   2  "block py-1.5 px-2 rounded-md transition-colors"  in 1 file: src/site/Sidebar.tsx
+   2  "flex flex-1 flex-col gap-gap-11"  in 1 file: src/app/prototypes/billing-settings/page.tsx
+   2  "flex size-7 items-center justify-center rounded-control-lg bg-dynamic-fill-primary-default"  in 2 files: src/app/playground/page.tsx, src/app/tokens/page.tsx
+   2  "hidden md:flex items-center gap-7"  in 2 files: src/app/components/layout.tsx, src/app/page.tsx
+   2  "hidden md:inline-flex items-center gap-1.5 text-sm font-medium"  in 2 files: src/app/components/layout.tsx, src/app/page.tsx
+   2  "inline-flex items-center gap-1.5 text-sm font-medium"  in 1 file: src/app/page.tsx
+   2  "m-0 truncate type-label-strong-medium text-static-text-strong"  in 1 file: src/app/prototypes/billing-settings/page.tsx
+   2  "mx-auto flex h-14 max-w-6xl items-center justify-between px-gap-12"  in 2 files: src/app/playground/page.tsx, src/app/tokens/page.tsx
+   2  "mx-auto max-w-6xl px-gap-12 py-gap-18"  in 2 files: src/app/playground/page.tsx, src/app/tokens/page.tsx
+   2  "size-7 flex items-center justify-center text-white text-xs font-bold shrink-0"  in 2 files: src/app/components/layout.tsx, src/app/page.tsx
+   2  "sk-card group block p-8 md:col-span-2"  in 1 file: src/app/page.tsx
+
+## files mixing semantic color utilities with raw palette steps (top 15)
+none
+semantic names read from: src/app/globals.css src/styles/generated/theme.css src/styles/generated/tokens.css
+```
+
+### Verified corrections
+
+- `detect-stack.sh: generated: none detected; 0 files carry a generated marker` — the files say otherwise: `AGENTS.md:16` names `src/styles/generated/*` and `src/tokens/generated.ts` as generated, and `scripts/build-descriptions.mjs` generates `docs/figma-descriptions/*.md` (all but `button.md`, `input.md`). Counts are unaffected: `count-hardcoded.sh` already reports the token files as token sources, not usage.
+- `detect-stack.sh: stack-refs: … css-in-js …` while `css-in-js: none by import` — the reference was triggered by `tokens-js: src/tokens/generated.ts`, a generated token export; no styling runs through CSS-in-JS.
+- `count-hardcoded.sh: arbother 10 group-data-[container=true] (src/components/Card/Card.tsx)` — a Tailwind variant selector, not a design value; excluded from area 6.
+- Banned-word check: the documented command misfired here because `grep` is aliased to `ugrep` and the file list was newline-joined; re-run as `command grep -rniwE … AGENTS.md CLAUDE.md .claude` → `no hits`.
