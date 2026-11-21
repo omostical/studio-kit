@@ -200,7 +200,25 @@ Every component uses only Figma tokens. Each file's header comment links its Fig
 - **Client components:** Table and Checkbox are now marked `"use client"`. Table crashed the server-rendered
   home page without it; the browser check caught that.
 
+## Done (2026-11-21) — Phase 3: agent-ready
+
+- **`AGENTS.md`** (imported by `CLAUDE.md`): rules (components only, tokens only, never edit generated files,
+  Figma prop names, accessibility, the checks to run), a component catalog with when-to-use, a token
+  cheat-sheet, screen-composition recipes and the workflows.
+- **Storybook 10.6.8** (all `@storybook/*` packages):
+  - `features.componentsManifest` and `react-docgen-typescript` →
+    `/manifests/components.json`, also in the static build;
+  - `@storybook/addon-mcp` → `http://localhost:6006/mcp` (8 tools: `docs-list`, `docs-show`,
+    `stories-preview`, `test-run` …), registered for Claude Code in `.mcp.json`. It only works while
+    `npm run storybook` runs. Both features are "preview" in Storybook.
+- **JSDoc:** all 16 components have a summary and every own prop has a description (checked in the manifest).
+- **Skills:** `.claude/skills/prototype` (`/prototype "<screen>"` → `src/app/prototypes/<slug>`) and
+  `.claude/skills/new-client` (`/new-client <name> <hex>` → Figma rebrand, export, build, contrast check).
+- **npm cache:** installs failed with `EACCES` in `~/.npm/_cacache` (a root-owned file). The upgrade used a
+  temporary cache (`npm install --cache <dir>`); fixing it for good needs
+  `sudo chown -R $(whoami) ~/.npm`.
+
 ## Next
-- **Phase 3:** AGENTS.md rules, Storybook manifest/MCP, `/new-client` and `/prototype` skills.
-- Then build Modal, Tabs, Tooltip, Toast and Table from Wideset, each with a description in the
-  StudioKIT format.
+
+- **Fresh-agent test (Phase 3 done-when):** a new session with only `/prototype <screen>` builds it correctly.
+- **Phase 4:** prototype index page, page templates (dashboard, settings, auth, list/detail), preview deploys.
