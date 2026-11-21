@@ -51,6 +51,24 @@ The rank is a judgment on two scales (frequency × cost, from `references/doctri
 10. Should Claude Code hook files (`.claude/settings.json`, `.claude/hooks/`) be committed to the repository?
 11. Which agents besides Claude Code work here (Cursor, Codex…)? The answer decides whether rules go in `.agents/` with symlinks.
 
+## Team decisions (2026-11-21)
+
+Answers from the team to the questions above. `setup` reads these instead of asking again.
+
+| Q | Decision | Phase it feeds |
+| --- | --- | --- |
+| 1 | Not decided yet: whether clients copy the repository or install a package is revisited at Phase 6. Keep the current root-file setup. | — |
+| 2 | **Unify on `danger` (failure) and `success` (success)** across every component. Design changes start in Figma (`AGENTS.md:16`), so Figma property values are renamed first, then code, stories and descriptions. Until then the current words stay. | week1 (record canonical form), week2 (enforce) |
+| 3 | **`DESIGN.md` in the repository.** Token values per theme are generated from the token source; the agent drafts the usage column, the team reviews it before commit. | week1 |
+| 4 | **`GAPS.md` in the repository** is the gap index. No GitHub gap label for now. | week3 |
+| 5 | **At a gap: build a minimal stand-in from tokens, mark it in code as a stand-in, and log the gap in `GAPS.md`.** Replaces "compose it from tokens" in `.claude/skills/prototype/SKILL.md:14`. | week3 |
+| 6 | **Protect `main`; require the `Design tokens` check; changes land through pull requests.** | week2 |
+| 7 | **Catalog status words: `stable`, `beta`, `planned`.** `planned` = Figma description only, no code. `deprecated` is added when first needed. | week1 |
+| 8 | **The docs site is held to the token rules too** (`src/app/page.tsx`, `src/app/components`, `src/site`). | week2 |
+| 9 | **Record the 8 arbitrary values in `Toast.tsx`, `Modal.tsx`, `Switch.tsx` as exceptions**, with `token-lint-ignore` as the exception marker and a reason per entry (reasons drafted by the agent, reviewed by the team). | week2 |
+| 10 | **Commit a Claude Code hook** that refuses edits to generated files. | week2 |
+| 11 | **Serve Claude Code and other agents (Cursor, Codex):** rules move to a tool-neutral `.agents/` folder, linked into each tool's folder. | week1 |
+
 ## Deferred
 
 - 2 Rule scoping — `AGENTS.md` is 128 lines; path-scoped rules pay off once it grows or a second agent tool joins (question 11).
