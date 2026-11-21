@@ -1,0 +1,234 @@
+#!/usr/bin/env node
+/**
+ * Token build — `npm run tokens:build` (check only: `npm run tokens:check`)
+ *
+ * Figma (StudioKIT 2.0) ──figma_export_tokens──▶ tokens/figma/*.tokens.json  (W3C DTCG, one file per collection × mode)
+ *                       ──this script────────────▶ src/styles/generated/tokens.css   CSS custom properties (light/dark, desktop/mobile)
+ *                                                  src/styles/generated/theme.css    Tailwind v4 @theme inline mapping
+ *                                                  src/tokens/generated.ts           resolved values for TypeScript
+ *
+ * Generated files are committed but never edited by hand: change Figma, re-export, rebuild.
+ * `--check` rebuilds in memory and fails if the committed files are out of date (use in CI).
+ *
+ * Naming: the Figma path, lower-cased, "/" and spaces → "-", "%" → "pct", "," → "-".
+ *   Dynamic/Fill/Primary/Default → --dynamic-fill-primary-default → Tailwind bg-dynamic-fill-primary-default
+ *   Corner Radius/Control/lg     → --corner-radius-control-lg     → Tailwind rounded-control-lg
+ */
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+
+const ROOT = new URL("..", import.meta.url).pathname;
+const CHECK = process.argv.includes("--check");
+const cfg = JSON.parse(readFileSync(join(ROOT, "tokens/build.config.json"), "utf8"));
+const load = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
+
+// ─── Read DTCG ───────────────────────────────────────────────────────────────
+/** Flatten a DTCG document to [{ path: ["Dynamic","Fill",…], type, value }] (collection root dropped). */
+function flatten(doc) {
+  const out = [];
+  const walk = (node, path) => {
+    if (node && typeof node === "object") {
+      if ("$value" in node) return out.push({ path, type: node.$type, value: node.$value });
+      for (const [k, v] of Object.entries(node)) if (!k.startsWith("$")) walk(v, [...path, k]);
+    }
+  };
+  for (const [k, v] of Object.entries(doc)) if (!k.startsWith("$")) walk(v, []);
+  return out.filter((t) => t.type !== "string"); // the "Color: Light" mode-name marker
+}
+
+const slug = (path) =>
+  path.join("-").toLowerCase().replace(/%/g, "pct").replace(/[ ,.]+/g, "-").replace(/[()]/g, "").replace(/-+/g, "-");
+const name = (path) => path.join("/");
+
+const prim = flatten(load(cfg.sources.primitives));
+const primByRef = new Map(prim.map((t) => [`wds-primitives.${t.path.join(".")}`, t]));
+
+const sets = {
+  colorLight: flatten(load(cfg.sources.color.light)),
+  colorDark: flatten(load(cfg.sources.color.dark)),
+  measDesktop: flatten(load(cfg.sources.measurements.desktop)),
+  measMobile: flatten(load(cfg.sources.measurements.mobile)),
+  typoDesktop: flatten(load(cfg.sources.typography.desktop)),
+  typoMobile: flatten(load(cfg.sources.typography.mobile)),
+};
+
+// ─── Resolve references ──────────────────────────────────────────────────────
+const problems = [];
+function refTarget(value, where) {
+  if (typeof value !== "string" || !value.startsWith("{")) return null;
+  let ref = value.slice(1, -1);
+  const lib = ref.match(/^__library:(.+)$/);
+  if (lib) {
+    ref = cfg.libraryFallbacks[lib[1]];
+    if (!ref) { problems.push(`${where}: points at deleted variable ${lib[1]} with no fallback in build.config.json`); return null; }
+  }
+  const t = primByRef.get(ref);
+  if (!t) problems.push(`${where}: unknown reference ${value}`);
+  return t ?? null;
+}
+const px = (n) => (n === 0 ? "0" : `${+n.toFixed(4)}px`);
+function literal(t) {
+  switch (t.type) {
+    case "color": return String(t.value).toUpperCase();
+    case "dimension": return px(t.value);
+    case "fontWeight": return String(t.value);
+    case "fontFamily": return `"${t.value}"`;
+    default: return String(t.value);
+  }
+}
+/** CSS value: primitives are literals; everything else points at the primitive's custom property. */
+function cssValue(t, where) {
+  const target = refTarget(t.value, where);
+  if (target) return `var(--${slug(target.path)})`;
+  if (typeof t.value === "string" && t.value.startsWith("{")) return "unset";
+  return literal(t);
+}
+function resolved(t, where) {
+  const target = refTarget(t.value, where);
+  return target ? literal(target) : literal(t);
+}
+
+// ─── Mobile overrides ────────────────────────────────────────────────────────
+const ignored = (path) =>
+  cfg.ignoreMobile.some((pat) => (pat.endsWith("/*") ? name(path).startsWith(pat.slice(0, -1)) : name(path) === pat));
+function mobileDiffs(desktop, mobile, label) {
+  const byName = new Map(desktop.map((t) => [name(t.path), t]));
+  return mobile.filter((t) => {
+    const d = byName.get(name(t.path));
+    return d && !ignored(t.path) && cssValue(d, label) !== cssValue(t, label);
+  });
+}
+
+// ─── tokens.css ──────────────────────────────────────────────────────────────
+const decl = (list, where) => list.map((t) => `  --${slug(t.path)}: ${cssValue(t, `${where} ${name(t.path)}`)};`).join("\n");
+const header = (what) =>
+  `/* ${what}\n * GENERATED by scripts/build-tokens.mjs from tokens/figma/ (Figma: StudioKIT 2.0). Do not edit by hand. */\n`;
+
+const measMobile = mobileDiffs(sets.measDesktop, sets.measMobile, "mobile");
+const typoMobile = mobileDiffs(sets.typoDesktop, sets.typoMobile, "mobile");
+
+const css = `${header("Design tokens — CSS custom properties")}
+/* Primitives (WDS Primitives) */
+:root {
+${decl(prim, "primitives")}
+}
+
+/* Measurements + typography (Desktop) */
+:root {
+${decl(sets.measDesktop, "measurements")}
+${decl(sets.typoDesktop, "typography")}
+}
+
+/* Colour tokens — Light */
+${cfg.themeSelectors.light} {
+${decl(sets.colorLight, "light")}
+}
+
+/* Colour tokens — Dark */
+${cfg.themeSelectors.dark} {
+${decl(sets.colorDark, "dark")}
+}
+
+/* Mobile (≤ ${cfg.mobileMaxWidth}px): only values that differ from Desktop */
+@media (max-width: ${cfg.mobileMaxWidth}px) {
+  :root {
+${decl([...measMobile, ...typoMobile], "mobile").replace(/^/gm, "  ")}
+  }
+}
+`;
+
+// ─── theme.css (Tailwind v4) ─────────────────────────────────────────────────
+const twColor = sets.colorLight.map((t) => `  --color-${slug(t.path)}: var(--${slug(t.path)});`);
+const twRadius = sets.measDesktop
+  .filter((t) => t.path[0] === "Corner Radius")
+  .map((t) => `  --radius-${slug(t.path.slice(1))}: var(--${slug(t.path)});`);
+const twSpacing = sets.measDesktop
+  .filter((t) => t.path[0] === "Gap" || t.path[0] === "Components")
+  .map((t) => `  --spacing-${slug(t.path[0] === "Gap" ? t.path : t.path.slice(1))}: var(--${slug(t.path)});`);
+const fam = (k) => sets.typoDesktop.find((t) => name(t.path) === `Font/Family/${k}`);
+const twFont = [
+  ["body", "Body"], ["display", "Display"], ["code", "Monospace"],
+].filter(([, k]) => fam(k)).map(([tw, k]) => `  --font-${tw}: var(--font-family-${k.toLowerCase()}), ui-sans-serif, system-ui, sans-serif;`);
+// Size and line height are separate scales in Figma (text styles pair them), so they stay separate:
+// text-350 = 14px size, leading-500 = 20px line height.
+const twText = sets.typoDesktop.filter((t) => t.path[1] === "Size").map((t) => `  --text-${t.path[2]}: var(--${slug(t.path)});`);
+const twLeading = sets.typoDesktop
+  .filter((t) => t.path[1] === "Lineheight")
+  .map((t) => `  --leading-${t.path[2]}: var(--${slug(t.path)});`);
+// Font weights need no mapping: the token --font-weight-medium has the same name as Tailwind's theme
+// variable, so it already drives font-medium (520) etc.
+const twTracking = sets.typoDesktop
+  .filter((t) => t.path[1] === "Spacing")
+  .map((t) => `  --tracking-${slug([t.path[2]])}: var(--${slug(t.path)});`);
+
+const theme = `${header("Tailwind v4 theme — maps design tokens to utility classes")}
+@theme inline {
+  /* Colour: bg-/text-/border-<token>, e.g. bg-dynamic-fill-primary-default, text-static-text-subtle */
+${twColor.join("\n")}
+
+  /* Corner radius: rounded-control-lg, rounded-container-md */
+${twRadius.join("\n")}
+
+  /* Spacing: p-gap-9 / gap-gap-5 (Gap scale), h-forms-medium / h-control-large (component heights) */
+${twSpacing.join("\n")}
+
+  /* Type: font-body / font-display / font-code; text-350 (size), leading-500 (line height), tracking-tight-25.
+     Weights come straight from the tokens: font-medium = 520, font-semibold = 545 … */
+${twFont.join("\n")}
+${twText.join("\n")}
+${twLeading.join("\n")}
+${twTracking.join("\n")}
+}
+`;
+
+// ─── generated.ts ────────────────────────────────────────────────────────────
+const obj = (list, where) =>
+  Object.fromEntries(list.map((t) => [name(t.path), resolved(t, `${where} ${name(t.path)}`)]));
+const ts = `/* Design tokens — resolved values
+ * GENERATED by scripts/build-tokens.mjs from tokens/figma/ (Figma: StudioKIT 2.0). Do not edit by hand.
+ * At runtime use the CSS custom properties (var(--dynamic-fill-primary-default)); this module is for
+ * TypeScript consumers: documentation, tests, code generation, agents. */
+
+export const color = ${JSON.stringify({ light: obj(sets.colorLight, "light"), dark: obj(sets.colorDark, "dark") }, null, 2)} as const;
+
+export const measurements = ${JSON.stringify({ desktop: obj(sets.measDesktop, "measurements"), mobile: { ...obj(sets.measDesktop, "measurements"), ...obj(measMobile, "mobile") } }, null, 2)} as const;
+
+export const typography = ${JSON.stringify({ desktop: obj(sets.typoDesktop, "typography"), mobile: { ...obj(sets.typoDesktop, "typography"), ...obj(typoMobile, "mobile") } }, null, 2)} as const;
+
+export const primitives = ${JSON.stringify(obj(prim, "primitives"), null, 2)} as const;
+
+/** CSS custom property name for a Figma token path, e.g. cssVar("Dynamic/Fill/Primary/Default"). */
+export const cssVar = (figmaPath: string) =>
+  \`var(--\${figmaPath.split("/").join("-").toLowerCase().replace(/%/g, "pct").replace(/[ ,.]+/g, "-").replace(/[()]/g, "").replace(/-+/g, "-")})\`;
+`;
+
+// ─── Write / check ───────────────────────────────────────────────────────────
+// Unique names across everything we emit in :root (a clash would silently override).
+const seen = new Map();
+for (const t of [...prim, ...sets.measDesktop, ...sets.typoDesktop, ...sets.colorLight]) {
+  const s = slug(t.path);
+  if (seen.has(s) && seen.get(s) !== name(t.path)) problems.push(`name clash: --${s} (${seen.get(s)} vs ${name(t.path)})`);
+  seen.set(s, name(t.path));
+}
+if (problems.length) {
+  console.error(`✗ ${problems.length} token problem(s):\n  ` + [...new Set(problems)].join("\n  "));
+  process.exit(1);
+}
+
+const outputs = [[cfg.outputs.css, css], [cfg.outputs.theme, theme], [cfg.outputs.ts, ts]];
+let stale = 0;
+for (const [rel, content] of outputs) {
+  const file = join(ROOT, rel);
+  let current = null;
+  try { current = readFileSync(file, "utf8"); } catch {}
+  if (current === content) continue;
+  if (CHECK) { console.error(`✗ ${rel} is out of date — run npm run tokens:build`); stale++; continue; }
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, content);
+  console.log(`✓ wrote ${rel}`);
+}
+if (CHECK && stale) process.exit(1);
+console.log(
+  `${CHECK ? "✓ generated token files are up to date" : "done"} — ${prim.length} primitives, ${sets.colorLight.length} colour tokens (light/dark), ` +
+    `${sets.measDesktop.length} measurements, ${sets.typoDesktop.length} typography; mobile overrides: ${measMobile.length + typoMobile.length}`
+);

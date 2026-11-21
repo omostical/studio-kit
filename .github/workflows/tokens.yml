@@ -1,0 +1,23 @@
+name: Design tokens
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  tokens:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Generated token files must match the Figma export in tokens/figma/ (run `npm run tokens:build` to fix).
+      - run: npm run tokens:check
+      # Components may only use semantic tokens, never raw colours.
+      - run: npm run lint:tokens
+      - run: npx tsc --noEmit
+      - run: npm run build

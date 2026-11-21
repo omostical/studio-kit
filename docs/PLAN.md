@@ -136,7 +136,15 @@ lets the API edit the first mode of a collection. Details and what's unverified:
 Put a few rebranded components (Button first) next to StudioKIT_v1 and list what still feels like
 Wideset. That list feeds open decision 5 (signature components) and Phase 2.
 
-### Phase 1: one-way token pipeline (Figma → code)
+### ✅ Phase 1: one-way token pipeline (Figma → code) — done 2026-11-21
+Built without Style Dictionary: `figma_export_tokens` writes W3C DTCG to `tokens/figma/`, and
+`scripts/build-tokens.mjs` (no dependencies) generates CSS variables, a Tailwind v4 theme and `tokens.ts`.
+`npm run tokens:check` plus a GitHub Actions workflow catch drift. The rename (step 4) is done through
+`src/styles/legacy-aliases.css`: the old names now point at the Figma tokens, and Phase 2 moves components
+onto the Figma names and deletes the file. Verified: a changed token in the export shows up in the running
+site with no code change. Guide: [tokens/README.md](../tokens/README.md).
+
+Original plan:
 1. Export the Studio Kit 2.0 variables as W3C-format JSON into `tokens/` (Figma Console MCP, the
    variables REST API on Enterprise, or an export plugin).
 2. Token build (Style Dictionary v5 or Terrazzo) → `tokens.css` (light/dark), Tailwind `@theme`, `tokens.ts`.

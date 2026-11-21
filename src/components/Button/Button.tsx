@@ -40,14 +40,14 @@ const buttonVariants = cva(
           "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--text-disabled)] disabled:border-[var(--border-disabled)]",
         ].join(" "),
         danger: [
-          "bg-[var(--bg-fill-error)] text-[var(--text-on-color)]",
+          "bg-[var(--bg-fill-error)] text-[var(--text-on-error)]",
           "border border-[var(--border-error)]",
           "hover:bg-[var(--bg-fill-error-hover)]",
           "active:bg-[var(--bg-fill-error-pressed)]",
           "disabled:bg-[var(--bg-fill-error-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
         ].join(" "),
         success: [
-          "bg-[var(--bg-fill-success)] text-[var(--text-on-color)]",
+          "bg-[var(--bg-fill-success)] text-[var(--text-on-success)]",
           "border border-[var(--border-success)]",
           "hover:bg-[var(--bg-fill-success-hover)]",
           "active:bg-[var(--bg-fill-success-pressed)]",

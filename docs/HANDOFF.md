@@ -134,9 +134,24 @@ or the Desktop Bridge times out.
 - Dark `error-disabled`: `#444444` (tokens.json) vs `#161A20` (CSS).
 - Check the Wideset licence allows use across multiple clients and a derived library.
 
+## Done (2026-11-21) — Phase 1: token pipeline
+
+- `tokens/figma/` holds the W3C DTCG export: 7 files, 1,012 tokens. `npm run tokens:build` generates
+  `src/styles/generated/{tokens,theme}.css` and `src/tokens/generated.ts`. `npm run tokens:check` and
+  `.github/workflows/tokens.yml` catch drift. How to sync: [tokens/README.md](../tokens/README.md).
+- The site and Storybook now take every semantic colour from Figma, through `src/styles/legacy-aliases.css`
+  (old v1 names → Figma tokens). Light and Dark were both checked in the browser. Changing brand 600 in the
+  export and rebuilding turned the live Primary button that colour.
+- Button and IconButton Danger/Success now use `text-on-error` / `text-on-success`. Wideset's dark fills
+  for those are light, so white text was unreadable there.
+- Known gaps: 5 Dark tokens point at deleted variables (mapped in `tokens/build.config.json`); effect styles
+  and text styles aren't exported yet; the tokens page (`src/app/tokens`) still shows the old v1 values
+  from `src/tokens/index.ts`.
+
 ## Next
 
-- **Phase 1:** export the Studio Kit 2.0 variables (W3C token format) → generate CSS and the Tailwind
-  theme → migrate the 11 code components to Wideset's API (Variant × Style × Size × State).
+- **Phase 2:** migrate the 11 code components to Wideset's API (Variant × Style × Size × State) and to the
+  Figma token names (`bg-dynamic-fill-primary-default`…), then delete `legacy-aliases.css` and the v1 parts
+  of `tokens.light.css` / `tokens.dark.css`. Point the tokens page at `src/tokens/generated.ts`.
 - Then build Modal, Tabs, Tooltip, Toast and Table from Wideset, each with a description in the
   StudioKIT format.

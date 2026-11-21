@@ -1,0 +1,1892 @@
+{
+  "$extensions": {
+    "figma-console-mcp": {
+      "exportedAt": "2026-11-21T02:23:40.998Z",
+      "figmaFileKey": "4Rian5XWvky57QI46fqqRd",
+      "fileMode": "Mobile",
+      "mcpVersion": "1.46.0"
+    }
+  },
+  "wds-measurements": {
+    "$extensions": {
+      "figma-console-mcp": {
+        "figmaCollectionId": "VariableCollectionId:548:64",
+        "originalName": "WDS Measurements"
+      }
+    },
+    "Border Width": {
+      "lg": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Border.75}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Border.75}"
+              }
+            },
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "variableId": "VariableID:1584:22192"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Border.75}"
+      },
+      "md": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Border.50}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Border.50}"
+              }
+            },
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "variableId": "VariableID:1584:21826"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Border.50}"
+      },
+      "none": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Border.0}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Border.0}"
+              }
+            },
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "variableId": "VariableID:1584:4269"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Border.0}"
+      },
+      "sm": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Border.25}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Border.25}"
+              }
+            },
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "variableId": "VariableID:1584:24698"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Border.25}"
+      },
+      "xs": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Border.12,5}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Border.12,5}"
+              }
+            },
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "variableId": "VariableID:7320:6887"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Border.12,5}"
+      }
+    },
+    "Components": {
+      "Control": {
+        "Large": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 24
+                },
+                "Mobile": {
+                  "literal": 32
+                }
+              },
+              "variableId": "VariableID:7418:42369"
+            }
+          },
+          "$type": "dimension",
+          "$value": 32
+        },
+        "Medium": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 20
+                },
+                "Mobile": {
+                  "literal": 24
+                }
+              },
+              "variableId": "VariableID:7418:42368"
+            }
+          },
+          "$type": "dimension",
+          "$value": 24
+        },
+        "Small": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 16
+                },
+                "Mobile": {
+                  "literal": 20
+                }
+              },
+              "variableId": "VariableID:7418:42367"
+            }
+          },
+          "$type": "dimension",
+          "$value": 20
+        },
+        "XLarge": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 28
+                },
+                "Mobile": {
+                  "literal": 32
+                }
+              },
+              "variableId": "VariableID:7800:131159"
+            }
+          },
+          "$type": "dimension",
+          "$value": 32
+        },
+        "XSmall": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 12
+                },
+                "Mobile": {
+                  "literal": 16
+                }
+              },
+              "variableId": "VariableID:7418:42366"
+            }
+          },
+          "$type": "dimension",
+          "$value": 16
+        },
+        "XXLarge": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 32
+                },
+                "Mobile": {
+                  "literal": 40
+                }
+              },
+              "variableId": "VariableID:7798:1192"
+            }
+          },
+          "$type": "dimension",
+          "$value": 40
+        }
+      },
+      "Forms": {
+        "Large": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 48
+                },
+                "Mobile": {
+                  "literal": 52
+                }
+              },
+              "variableId": "VariableID:7327:209933"
+            }
+          },
+          "$type": "dimension",
+          "$value": 52
+        },
+        "Medium": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 40
+                },
+                "Mobile": {
+                  "literal": 44
+                }
+              },
+              "variableId": "VariableID:7327:209932"
+            }
+          },
+          "$type": "dimension",
+          "$value": 44
+        },
+        "Small": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 32
+                },
+                "Mobile": {
+                  "literal": 36
+                }
+              },
+              "variableId": "VariableID:7327:209931"
+            }
+          },
+          "$type": "dimension",
+          "$value": 36
+        },
+        "XSmall": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "literal": 24
+                },
+                "Mobile": {
+                  "literal": 32
+                }
+              },
+              "variableId": "VariableID:7327:209930"
+            }
+          },
+          "$type": "dimension",
+          "$value": 32
+        }
+      }
+    },
+    "Corner Radius": {
+      "Container": {
+        "lg": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.400}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.400}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:71"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.400}"
+        },
+        "md": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.300}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.300}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:70"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.300}"
+        },
+        "none": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.0}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.0}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:77"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.0}"
+        },
+        "sm": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.200}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.200}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:66"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.200}"
+        },
+        "xl": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.500}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.500}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:6720:76247"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.500}"
+        }
+      },
+      "Control": {
+        "full": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.Full}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.Full}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:75"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.Full}"
+        },
+        "lg": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.200}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.200}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:74"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.200}"
+        },
+        "md": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.150}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.150}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:73"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.150}"
+        },
+        "none": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.0}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.0}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:76"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.0}"
+        },
+        "sm": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.100}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.100}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:548:72"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.100}"
+        },
+        "xl": {
+          "$extensions": {
+            "figma-console-mcp": {
+              "collectionId": "VariableCollectionId:548:64",
+              "figmaResolvedType": "FLOAT",
+              "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+              "lastSyncedValue": {
+                "Desktop": {
+                  "reference": "{wds-primitives.Radius.300}"
+                },
+                "Mobile": {
+                  "reference": "{wds-primitives.Radius.250}"
+                }
+              },
+              "scopes": [
+                "CORNER_RADIUS"
+              ],
+              "variableId": "VariableID:4390:25107"
+            }
+          },
+          "$type": "dimension",
+          "$value": "{wds-primitives.Radius.250}"
+        }
+      }
+    },
+    "Gap": {
+      "0": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.0}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.0}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:174"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.0}"
+      },
+      "1": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.25}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.25}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:7314:118588"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.25}"
+      },
+      "2": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.50}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.50}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:175"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.50}"
+      },
+      "3": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.100}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.100}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:144"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.100}"
+      },
+      "4": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.150}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.150}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:145"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.150}"
+      },
+      "5": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.200}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:146"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.200}"
+      },
+      "6": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.250}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.250}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:147"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.250}"
+      },
+      "7": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.300}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.300}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:148"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.300}"
+      },
+      "8": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.350}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.350}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:149"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.350}"
+      },
+      "9": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.400}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:150"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.400}"
+      },
+      "10": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.450}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.450}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:151"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.450}"
+      },
+      "11": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.500}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.500}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:152"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.500}"
+      },
+      "12": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.600}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.600}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:153"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.600}"
+      },
+      "13": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.700}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.700}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:154"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.700}"
+      },
+      "14": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.800}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:155"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.800}"
+      },
+      "15": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.900}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.900}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:156"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.900}"
+      },
+      "16": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1000}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1000}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:157"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1000}"
+      },
+      "17": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1100}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1100}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:158"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1100}"
+      },
+      "18": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1200}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:159"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1200}"
+      },
+      "19": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1400}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:160"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1400}"
+      },
+      "20": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1600}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1600}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:548:161"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1600}"
+      },
+      "21": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1800}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157460"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1800}"
+      },
+      "22": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2000}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2000}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157461"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2000}"
+      },
+      "23": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2200}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157462"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2200}"
+      },
+      "24": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2400}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157463"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2400}"
+      },
+      "25": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2800}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157464"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2800}"
+      },
+      "26": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.3200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.3200}"
+              }
+            },
+            "scopes": [
+              "GAP"
+            ],
+            "variableId": "VariableID:4800:157465"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.3200}"
+      }
+    },
+    "Size": {
+      "0": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.0}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.0}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:98"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.0}"
+      },
+      "1": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.25}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.25}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:7315:119078"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.25}"
+      },
+      "2": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.997Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.50}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.50}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:94"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.50}"
+      },
+      "3": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.100}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.100}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:95"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.100}"
+      },
+      "4": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.150}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.150}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:96"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.150}"
+      },
+      "5": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.200}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:97"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.200}"
+      },
+      "6": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.250}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.250}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:99"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.250}"
+      },
+      "7": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.300}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.300}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:100"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.300}"
+      },
+      "8": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.350}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.350}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:119"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.350}"
+      },
+      "9": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.400}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:102"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.400}"
+      },
+      "10": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.450}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.450}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:120"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.450}"
+      },
+      "11": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.500}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.500}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:103"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.500}"
+      },
+      "12": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.600}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.600}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:104"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.600}"
+      },
+      "13": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.700}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.700}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:105"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.700}"
+      },
+      "14": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.800}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:106"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.800}"
+      },
+      "15": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.900}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.900}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:107"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.900}"
+      },
+      "16": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1000}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1000}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:108"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1000}"
+      },
+      "17": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1100}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1100}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:109"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1100}"
+      },
+      "18": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1200}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:110"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1200}"
+      },
+      "19": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1400}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:111"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1400}"
+      },
+      "20": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1600}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1600}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:112"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1600}"
+      },
+      "21": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.1800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.1800}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:122"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.1800}"
+      },
+      "22": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2000}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2000}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:113"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2000}"
+      },
+      "23": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2200}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:121"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2200}"
+      },
+      "24": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2400}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2400}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:114"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2400}"
+      },
+      "25": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.2800}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.2800}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:115"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.2800}"
+      },
+      "26": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.3200}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.3200}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:116"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.3200}"
+      },
+      "27": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.3600}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.3600}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:117"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.3600}"
+      },
+      "28": {
+        "$extensions": {
+          "figma-console-mcp": {
+            "collectionId": "VariableCollectionId:548:64",
+            "figmaResolvedType": "FLOAT",
+            "lastSyncedAt": "2026-11-21T02:23:40.998Z",
+            "lastSyncedValue": {
+              "Desktop": {
+                "reference": "{wds-primitives.Space.4000}"
+              },
+              "Mobile": {
+                "reference": "{wds-primitives.Space.4000}"
+              }
+            },
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "variableId": "VariableID:548:118"
+          }
+        },
+        "$type": "dimension",
+        "$value": "{wds-primitives.Space.4000}"
+      }
+    }
+  }
+}

@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
-/* ─── Token files (source of truth, from Figma StudioKIT_v1) ─────────────── */
+/* ─── Tokens ──────────────────────────────────────────────────────────────
+ * Source of truth: Figma "StudioKIT 2.0" → tokens/figma/*.json → `npm run tokens:build` → src/styles/generated/.
+ * Older files below hold what isn't in Figma yet (v1 palette, spacing/radius scale, Tag sizes) and the
+ * temporary v1-name aliases. Generated tokens load last so Figma values win where names overlap. */
 @import "../styles/tokens.light.css";
 @import "../styles/tokens.dark.css";
+@import "../styles/legacy-aliases.css";
+@import "../styles/generated/tokens.css";
+@import "../styles/generated/theme.css";
 @import "../components/Tag/Tag.css";
 
 /* ─── Tailwind theme — maps CSS vars to utility classes ──────────────────── */

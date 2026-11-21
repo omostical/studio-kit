@@ -1,0 +1,32 @@
+{
+  "_about": "Settings for scripts/build-tokens.mjs. Source tokens in tokens/figma/ are exported from Figma (StudioKIT 2.0) and never edited by hand.",
+
+  "sources": {
+    "primitives": "tokens/figma/wds-primitives.values.tokens.json",
+    "color": { "light": "tokens/figma/wds-color-tokens.light.tokens.json", "dark": "tokens/figma/wds-color-tokens.dark.tokens.json" },
+    "measurements": { "desktop": "tokens/figma/wds-measurements.desktop.tokens.json", "mobile": "tokens/figma/wds-measurements.mobile.tokens.json" },
+    "typography": { "desktop": "tokens/figma/wds-typography.desktop.tokens.json", "mobile": "tokens/figma/wds-typography.mobile.tokens.json" }
+  },
+
+  "outputs": {
+    "css": "src/styles/generated/tokens.css",
+    "theme": "src/styles/generated/theme.css",
+    "ts": "src/tokens/generated.ts"
+  },
+
+  "themeSelectors": {
+    "light": ":root, [data-theme=\"light\"]",
+    "dark": "[data-theme=\"dark\"]"
+  },
+
+  "mobileMaxWidth": 767,
+
+  "_libraryFallbacks": "Dark-mode values in Figma that point at deleted variables. Figma's Starter plan can't edit the Dark mode, so map them here until the file is on Professional and the links are fixed in Figma.",
+  "libraryFallbacks": {
+    "VariableID:157:311": "wds-primitives.Colors.Light.Neutral.1100",
+    "VariableID:157:313": "wds-primitives.Colors.Light.Neutral.1000"
+  },
+
+  "_ignoreMobile": "Mobile-mode values that are only Wideset leftovers (blocked by the Starter plan). They fall back to Desktop.",
+  "ignoreMobile": ["Font/Family/*", "Corner Radius/Control/xl"]
+}
