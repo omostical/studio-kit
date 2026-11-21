@@ -12,6 +12,11 @@ import { Checkbox } from "@/components/Checkbox";
 import { Alert } from "@/components/Alert";
 import { Select, SelectItem } from "@/components/Select";
 import { Tag, tagColors } from "@/components/Tag";
+import { Modal, ModalTrigger, ModalClose, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@/components/Modal";
+import { Tooltip } from "@/components/Tooltip";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
+import { Toast, ToastProvider, useToast } from "@/components/Toast";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 import { W } from "@/site/wideset";
@@ -26,6 +31,13 @@ const typeSamples: TypographyVariant[] = [
   "body-large", "body-medium", "body-small", "caption-medium", "number-medium",
 ];
 const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+function ToastDemo() {
+  const { show } = useToast();
+  return (
+    <Button onClick={() => show({ status: "positive", title: "Message sent", actionLabel: "Undo" })}>Send message</Button>
+  );
+}
 
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
@@ -456,6 +468,152 @@ export default function ComponentsPage() {
                 </div>
               ))}
             </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Tabs ───────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="tabs"
+        eyebrow="Navigation / 01"
+        title="Tabs"
+        description="Figma Tabs: Regular (neutral underline) or Pill, two sizes, optional full width. Arrow keys move between tabs."
+      >
+        <SubBlock id="tabs-variants" title="Regular and Pill">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-14">
+              {(["regular", "pill"] as const).map((variant) => (
+                <Tabs key={variant} variant={variant} defaultValue="overview">
+                  <TabsList>
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="activity">Activity</TabsTrigger>
+                    <TabsTrigger value="settings">Settings</TabsTrigger>
+                    <TabsTrigger value="billing" disabled>Billing</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="overview" className="type-body-medium text-static-text-subtle">Overview panel</TabsContent>
+                  <TabsContent value="activity" className="type-body-medium text-static-text-subtle">Activity panel</TabsContent>
+                  <TabsContent value="settings" className="type-body-medium text-static-text-subtle">Settings panel</TabsContent>
+                </Tabs>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Modal ──────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="modal"
+        eyebrow="Overlays / 01"
+        title="Modal"
+        description="Figma Modal with Header and Footer, on Radix Dialog: focus is trapped inside, Escape closes, focus returns to the trigger."
+      >
+        <SubBlock id="modal-examples" title="Form and confirmation">
+          <PreviewFrame>
+            <Modal>
+              <ModalTrigger asChild><Button>Edit project</Button></ModalTrigger>
+              <ModalContent>
+                <ModalHeader title="Edit project" description="Changes are visible to everyone on the team." />
+                <ModalBody className="grid gap-gap-11">
+                  <Input label="Project name" defaultValue="Studio Kit 2.0" />
+                  <Input label="Description" optional />
+                </ModalBody>
+                <ModalFooter>
+                  <ModalClose asChild><Button variant="secondary" appearance="border">Cancel</Button></ModalClose>
+                  <Button>Save changes</Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+            <Modal>
+              <ModalTrigger asChild><Button variant="danger" appearance="border">Delete project</Button></ModalTrigger>
+              <ModalContent size="small" role="alertdialog">
+                <ModalHeader title="Delete project?" description="This deletes 24 files and can't be undone." closeButton={false} />
+                <ModalFooter>
+                  <ModalClose asChild><Button variant="secondary" appearance="border">Cancel</Button></ModalClose>
+                  <Button variant="danger">Delete project</Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Tooltip ────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="tooltip"
+        eyebrow="Overlays / 02"
+        title="Tooltip"
+        description="Figma Tooltip: Default (dark) or Inverse (light), with optional description. Shows on hover and keyboard focus."
+      >
+        <SubBlock id="tooltip-variants" title="Variants (hover or tab to each button)">
+          <PreviewFrame>
+            <Tooltip content="Edit"><IconButton appearance="border" icon={<Pencil />} aria-label="Edit" /></Tooltip>
+            <Tooltip content="Edit" description="Rename or change the cover"><IconButton appearance="border" icon={<Pencil />} aria-label="Edit with description" /></Tooltip>
+            <Tooltip content="Close" variant="inverse" side="bottom"><IconButton appearance="border" icon={<X />} aria-label="Close" /></Tooltip>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Toast ──────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="toast"
+        eyebrow="Feedback / 02"
+        title="Toast"
+        description="Figma Toast: a short message after an action, with one action at most. Wrap the app in ToastProvider and call useToast().show()."
+      >
+        <SubBlock id="toast-variants" title="Emphasis and status">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-7">
+              <Toast status="positive" title="Changes saved" actionLabel="Undo" />
+              <Toast status="neutral" title="Message archived" />
+              <Toast status="error" title="Couldn't upload report.pdf" actionLabel="Retry" />
+              <Toast emphasis="low" status="info" title="New version available" description="Reload to get the latest changes." actionLabel="Reload" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="toast-live" title="Live">
+          <PreviewFrame>
+            <ToastProvider>
+              <ToastDemo />
+            </ToastProvider>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Table ──────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="table"
+        eyebrow="Data display / 04"
+        title="Table"
+        description="Figma Column + Table Cell as real table markup: sortable headers, selectable rows, right-aligned tabular numbers."
+      >
+        <SubBlock id="table-default" title="Medium">
+          <PreviewFrame align="start">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Customer</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead numeric sort="descending">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell description="adam@example.com">Adam Smith</TableCell>
+                  <TableCell><Badge status="positive" size="small">Paid</Badge></TableCell>
+                  <TableCell numeric>$4,320.10</TableCell>
+                </TableRow>
+                <TableRow selected>
+                  <TableCell description="bola@example.com">Bola Ade</TableCell>
+                  <TableCell><Badge status="notice" size="small">Pending</Badge></TableCell>
+                  <TableCell numeric>$990.59</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell description="chen@example.com">Chen Li</TableCell>
+                  <TableCell><Badge status="negative" size="small">Overdue</Badge></TableCell>
+                  <TableCell numeric>$120.00</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

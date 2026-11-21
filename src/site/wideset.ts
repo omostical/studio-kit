@@ -38,7 +38,21 @@ export const componentGroups: DocGroup[] = [
   },
   {
     name: "Feedback",
-    items: [{ slug: "alert", title: "Alert" }],
+    items: [
+      { slug: "alert", title: "Alert" },
+      { slug: "toast", title: "Toast" },
+    ],
+  },
+  {
+    name: "Navigation",
+    items: [{ slug: "tabs", title: "Tabs" }],
+  },
+  {
+    name: "Overlays",
+    items: [
+      { slug: "modal", title: "Modal" },
+      { slug: "tooltip", title: "Tooltip" },
+    ],
   },
   {
     name: "Data display",
@@ -46,6 +60,7 @@ export const componentGroups: DocGroup[] = [
       { slug: "badge", title: "Badge" },
       { slug: "tag", title: "Tag" },
       { slug: "typography", title: "Typography" },
+      { slug: "table", title: "Table" },
     ],
   },
   {

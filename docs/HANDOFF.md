@@ -179,10 +179,28 @@ Every component uses only Figma tokens. Each file's header comment links its Fig
 - **Verified in the browser:** sizes, padding, radius, type, colours, the focus ring and dark mode against the
   Figma spec.
 
-## Next
+## Done (2026-11-21) — Phase 2, part 2: five new components
 
-- **Phase 2, part 2:** build Modal, Tabs, Tooltip, Toast and Table from the Wideset components, each with its
-  Figma description.
+| Code | Figma | API |
+|---|---|---|
+| `Modal` (+ `ModalTrigger/Content/Header/Body/Footer/Close`) | Modal, Header, Footer | Radix Dialog; `ModalContent size` (small 400 · medium 600 · large 800); `ModalHeader title/description/closeButton` |
+| `Tooltip` | Tooltip | Radix Tooltip; `content`, `description`, Variant → `variant` (default·inverse), Size → `size`, Alignment → `side`, `arrow` |
+| `Tabs` (+ `TabsList/Trigger/Content`) | Tabs + Tab Items | Radix Tabs; Variant → `variant` (regular·pill) + `fullWidth`, Size → `size` (small·large), Show Divider → `TabsList divider` |
+| `Toast` + `ToastProvider` / `useToast()` | Toast | Status → `status` (neutral·info·positive·error), Emphasis → `emphasis` (high·low), `title/description/actionLabel/dismissible`; polite live region, ≥ 5 s, pauses on hover/focus |
+| `Table` (+ `TableHeader/Body/Row/Head/Cell`) | Column + Table Cell | real `<table>`; Size → `size` (40·48·64 rows), `TableRow selected`, `TableHead sort/onSort` (aria-sort), `TableCell numeric/description` |
+
+- **Checked in the browser:** sizes, colours and type against Figma. Also the Modal focus trap, Escape and
+  return of focus; the Tooltip on keyboard focus (`aria-describedby`); Tabs arrow keys; Toast announced and
+  auto-dismissed.
+- **Followed Figma:** Wideset's selected tab underline is neutral (`Dynamic/Stroke/Secondary/Strong`), not
+  brand, and the code matches. Wideset's green Toast binds its text to `OnInverse/Negative` by mistake; code
+  uses `OnInverse/Positive`, which is also white.
+- **New guardrail:** `npm run lint:tokens` now fails on token classes that don't exist (Tailwind drops them
+  silently), across `src/components`, `src/app` and `src/site`.
+- **Client components:** Table and Checkbox are now marked `"use client"`. Table crashed the server-rendered
+  home page without it; the browser check caught that.
+
+## Next
 - **Phase 3:** AGENTS.md rules, Storybook manifest/MCP, `/new-client` and `/prototype` skills.
 - Then build Modal, Tabs, Tooltip, Toast and Table from Wideset, each with a description in the
   StudioKIT format.

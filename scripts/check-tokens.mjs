@@ -42,7 +42,45 @@ function* walk(dir) {
   }
 }
 
+// ─── Unknown token classes ─────────────────────────────────────────────────
+// Tailwind silently drops classes it doesn't know, so a misspelt token renders nothing. Every class that
+// names a design token must match something in src/styles/generated/theme.css.
+const theme = readFileSync(join(ROOT, "src/styles/generated/theme.css"), "utf8");
+const themeVars = new Set([...theme.matchAll(/--([a-z0-9-]+):/g)].map((m) => m[1]));
+const typeUtils = new Set([...theme.matchAll(/@utility (type-[a-z0-9-]+)/g)].map((m) => m[1]));
+const TOKEN_CLASS = new RegExp(
+  "(?<![\\w-])(?:[a-z0-9-]+:|\\[[^\\]]+\\]:)*" +
+    "(?:(?<color>(?:bg|text|border(?:-[trblxy])?|fill|stroke|outline|ring|divide|placeholder|decoration|caret|accent)-(?:static|dynamic|semantic|non-semantic|colors)-[a-z0-9-]+)" +
+    "|(?<radius>rounded(?:-[trbl]{1,2})?-(?:control|container)-[a-z]+)" +
+    "|(?<space>-?(?:p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|h|w|size|min-[hw]|max-[hw]|top|bottom|left|right|inset(?:-[xy])?|translate-[xy])-(?:gap|size|forms|control)-[a-z0-9]+)" +
+    "|(?<type>type-[a-z0-9-]+)" +
+    "|(?<shadow>shadow-(?:elevation|focus|forms|controls)-[a-z0-9-]+))(?:\\/\\d+)?(?![\\w-])",
+  "g"
+);
+function unknownToken(m) {
+  const g = m.groups;
+  if (g.color) return !themeVars.has("color-" + g.color.replace(/^(?:bg|text|border(?:-[trblxy])?|fill|stroke|outline|ring|divide|placeholder|decoration|caret|accent)-/, ""));
+  if (g.radius) return !themeVars.has("radius-" + g.radius.replace(/^rounded(?:-[trbl]{1,2})?-/, ""));
+  if (g.space) return !themeVars.has("spacing-" + g.space.replace(/^-?(?:p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|h|w|size|min-[hw]|max-[hw]|top|bottom|left|right|inset(?:-[xy])?|translate-[xy])-/, ""));
+  if (g.type) return !typeUtils.has(g.type);
+  if (g.shadow) return !themeVars.has(g.shadow);
+  return false;
+}
+
 let problems = 0;
+for (const scope of [...SCOPES, "src/app", "src/site"]) {
+  for (const file of walk(join(ROOT, scope))) {
+    readFileSync(file, "utf8").split("\n").forEach((line, i) => {
+      for (const m of line.matchAll(TOKEN_CLASS)) {
+        if (/(?:id=["']|#)$/.test(line.slice(0, m.index))) continue; // anchor ids, not classes
+        if (!unknownToken(m)) continue;
+        problems++;
+        console.log(`${relative(ROOT, file)}:${i + 1}  unknown token class "${m[0]}" — no matching token in src/styles/generated/theme.css`);
+      }
+    });
+  }
+}
+
 for (const scope of SCOPES) {
   for (const file of walk(join(ROOT, scope))) {
     const lines = readFileSync(file, "utf8").split("\n");
@@ -64,7 +102,7 @@ for (const scope of SCOPES) {
 }
 
 if (problems) {
-  console.log(`\n✗ ${problems} hard-coded colour(s). Swap each for the semantic token that matches its role.`);
+  console.log(`\n✗ ${problems} token problem(s): hard-coded colours or class names that match no design token.`);
   process.exit(1);
 }
-console.log(`✓ No hard-coded colours in ${SCOPES.join(", ")}.`);
+console.log(`✓ No hard-coded colours in ${SCOPES.join(", ")}; every token class exists.`);

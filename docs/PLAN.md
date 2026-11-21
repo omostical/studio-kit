@@ -156,8 +156,12 @@ Original plan:
 All 11 code components were rebuilt on the Figma tokens and props. The v1 token layer is deleted
 (`legacy-aliases.css`, `tokens.light/dark.css`, `src/tokens/index.ts`, `tokens.json`, `Tag.css`). Text and
 effect styles are now generated too. Sizes, padding, radius, type and the focus ring were measured in the
-browser against the Figma spec. Prop map: [HANDOFF.md](./HANDOFF.md). **Still to do:** build Modal, Tabs,
-Tooltip, Toast and Table.
+browser against the Figma spec. Prop map: [HANDOFF.md](./HANDOFF.md).
+
+### ✅ Phase 2 (part 2): Modal, Tabs, Tooltip, Toast, Table — done 2026-11-21
+Built from the Wideset Figma specs on Radix (Dialog, Tabs, Tooltip). Toast has its own provider and Table uses
+real table markup. Behaviour was checked in the browser: focus trap, Escape, keyboard tooltips, arrow keys and
+live regions. 16 components in total; each links its Figma description. **Phase 2 is complete.**
 
 Original plan:
 - Migrate the 11 code components to Wideset's model (Variant × Style × Size × State).

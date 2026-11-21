@@ -11,3 +11,8 @@ export * from "./Select";
 export * from "./Switch";
 export * from "./Tag";
 export * from "./Typography";
+export * from "./Modal";
+export * from "./Tooltip";
+export * from "./Tabs";
+export * from "./Toast";
+export * from "./Table";
