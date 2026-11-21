@@ -12,13 +12,17 @@ import { cn } from "@/lib/utils";
  * Thumb: 16 / 12, Dynamic/Text/OnPrimary/Default with the Elevation/Medium shadow.
  */
 export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
+  /** Figma Size: `large` (32×20, default) or `small` (28×16). */
   size?: "small" | "large";
+  /** Name of the setting, not its state ("Email notifications"). */
   label?: React.ReactNode;
+  /** Helper text under the label. */
   description?: React.ReactNode;
   /** Where the label sits. Label the setting, not the state ("Email notifications", not "On"). */
   labelPosition?: "left" | "right";
 }
 
+/** Turns a setting on or off immediately (Figma Switch). Use Checkbox in forms that are submitted. */
 const Switch = React.forwardRef<React.ElementRef<typeof SwitchPrimitive.Root>, SwitchProps>(
   ({ className, size = "large", label, description, labelPosition = "right", id, disabled, ...props }, ref) => {
     const generatedId = React.useId();

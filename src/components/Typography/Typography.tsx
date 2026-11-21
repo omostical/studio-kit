@@ -70,13 +70,17 @@ const tagFor = (v: string): "h1" | "h2" | "h3" | "h4" | "p" | "span" => {
 const defaultTags = Object.fromEntries(Object.keys(variants).map((v) => [v, tagFor(v)])) as Record<TypographyVariant, ReturnType<typeof tagFor>>;
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
+  /** Figma text style, e.g. title-large, subtitle-small, label-strong-small, body-medium, caption-medium, number-small. */
   variant?: TypographyVariant;
+  /** Text colour: strong · base (default for body) · subtle · inherit. Titles default to strong. */
   tone?: "strong" | "base" | "subtle" | "inherit";
+  /** Text alignment. */
   align?: "left" | "center" | "right";
   /** Element to render. Defaults: title → h1/h2, subtitle → h3/h4, body → p, others → span. */
   as?: React.ElementType;
 }
 
+/** Text in one of the Figma text styles. variant = style name in kebab case ("Label/Strong/Small" → "label-strong-small"). */
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant = "body-medium", tone, align, as, ...props }, ref) => {
     const Tag = as ?? defaultTags[variant];

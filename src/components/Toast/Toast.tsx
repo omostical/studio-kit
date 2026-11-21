@@ -35,20 +35,31 @@ const lowIcon: Record<ToastStatus, string> = {
 const icons: Record<ToastStatus, React.ComponentType> = { neutral: Bell, info: Info, positive: CheckCircle2, error: XCircle };
 
 export interface ToastProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  /** Figma Status: neutral · info · positive · error. */
   status?: ToastStatus;
+  /** Figma Emphasis: `high` (solid, default) or `low` (light card with description). */
   emphasis?: "high" | "low";
+  /** The message itself, short and specific. */
   title: React.ReactNode;
+  /** Optional supporting sentence. */
   description?: React.ReactNode;
   /** Replace the status icon; `null` hides it. */
   icon?: React.ReactNode;
+  /** Custom action element; overrides actionLabel/onAction. */
   action?: React.ReactNode;
+  /** Label for a single action button (e.g. "Undo", "Retry"). */
   actionLabel?: string;
+  /** Called when the action button is pressed. */
   onAction?: () => void;
+  /** Show the dismiss (×) button. */
   dismissible?: boolean;
+  /** Accessible name of the dismiss button (default "Dismiss"). */
   dismissLabel?: string;
+  /** Called when dismissed. */
   onDismiss?: () => void;
 }
 
+/** Short temporary message after an action (Figma Toast). Show it with useToast().show() inside ToastProvider; one action at most. */
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ className, status = "neutral", emphasis = "high", title, description, icon, action, actionLabel, onAction, dismissible = true, dismissLabel = "Dismiss", onDismiss, ...props }, ref) => {
     const isHigh = emphasis === "high";

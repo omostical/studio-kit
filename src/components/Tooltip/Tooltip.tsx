@@ -14,17 +14,25 @@ import { cn } from "@/lib/utils";
  * Keep it to a few words; never put essential information or interactive content in a tooltip.
  */
 export interface TooltipProps {
+  /** The label (a few words). */
   content: React.ReactNode;
+  /** Optional second line. */
   description?: React.ReactNode;
+  /** Figma Variant: `default` (dark) or `inverse` (light). */
   variant?: "default" | "inverse";
+  /** Figma Size: medium (default) or small. */
   size?: "small" | "medium";
+  /** Figma Alignment: which side of the trigger it appears on. */
   side?: "top" | "right" | "bottom" | "left";
+  /** Show the arrow (Figma Arrow). */
   arrow?: boolean;
+  /** Hover delay in ms before it opens. */
   delayDuration?: number;
   /** The element the tooltip describes. Must be focusable (a button, link or input). */
   children: React.ReactElement;
 }
 
+/** Short hint on hover and keyboard focus (Figma Tooltip) for icon buttons and truncated text. Never put essential info or interactive content in it. */
 const Tooltip = ({ content, description, variant = "default", size = "medium", side = "top", arrow = true, delayDuration = 300, children }: TooltipProps) => {
   const isDefault = variant === "default";
   return (

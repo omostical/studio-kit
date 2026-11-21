@@ -13,22 +13,38 @@ import { FieldShell, fieldAriaProps, fieldBoxVariants, type FieldAppearance, typ
  * hover Dynamic/Fill/Secondary/Alpha/Hover, selected Dynamic/Fill/Primary/Alpha/Hover.
  */
 export interface SelectProps {
+  /** Figma Size: small · medium · large. */
   size?: FieldSize;
+  /** Figma Variant: `danger` marks the value invalid (passing `error` sets it for you). */
   variant?: FieldVariant;
+  /** Figma Style: `border` (default, in forms) or `ghost` (no outline until hover; only inside a container that already shows the field). */
   appearance?: FieldAppearance;
+  /** Visible label above the field. Every field needs one; a placeholder is not a label. */
   label?: React.ReactNode;
+  /** Show the "Optional" marker. Mark optional fields, not required ones. */
   optional?: boolean;
+  /** Hint under the field (format, constraints). Replaced by `error` when that is set. */
   helperText?: React.ReactNode;
+  /** Error message under the field; also sets the Danger variant and aria-invalid. Say how to fix the problem. */
   error?: React.ReactNode;
+  /** Shown when nothing is selected. Only when there's no sensible default. */
   placeholder?: string;
+  /** Selected value (controlled). */
   value?: string;
+  /** Initial value (uncontrolled). */
   defaultValue?: string;
+  /** Called with the new value. */
   onValueChange?: (value: string) => void;
+  /** Disable the field. */
   disabled?: boolean;
+  /** Form field name. */
   name?: string;
+  /** Id of the trigger; generated when omitted. */
   id?: string;
   children?: React.ReactNode;
+  /** Classes for the trigger (field box). */
   className?: string;
+  /** Classes for the outer Form Field wrapper. */
   wrapperClassName?: string;
 }
 
@@ -57,6 +73,7 @@ const SelectItem = React.forwardRef<
 ));
 SelectItem.displayName = "SelectItem";
 
+/** Choose one value from a list in a form (Figma Single Select). Compose with SelectItem children. Use a Combo Box for long searchable lists. */
 const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
   (
     {

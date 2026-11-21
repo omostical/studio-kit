@@ -19,9 +19,11 @@ const TableSizeContext = React.createContext<TableSize>("medium");
 const rowHeight: Record<TableSize, string> = { small: "h-size-16", medium: "h-size-18", large: "h-size-19" };
 
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+  /** Figma Size: row height small (40) · medium (48, default) · large (64). */
   size?: TableSize;
 }
 
+/** Data table with real <table> markup (Figma Column + Table Cell). Compose with TableHeader, TableBody, TableRow, TableHead and TableCell. */
 const Table = React.forwardRef<HTMLTableElement, TableProps>(({ className, size = "medium", ...props }, ref) => (
   <TableSizeContext.Provider value={size}>
     <div className="w-full overflow-x-auto">

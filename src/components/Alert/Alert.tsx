@@ -32,22 +32,33 @@ const alertVariants = cva("flex rounded-container-md px-gap-9 py-gap-7", {
 });
 
 export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  /** Figma Status: error · warning · success · info. Pick by meaning. */
   status?: AlertStatus;
+  /** Figma Position: `horizontal` (actions on the right) or `vertical` (actions below). */
   position?: "horizontal" | "vertical";
+  /** The message itself, short and specific. */
   title: React.ReactNode;
+  /** Optional supporting sentence. */
   description?: React.ReactNode;
   /** Heading level for the title, to fit the page outline. */
   titleAs?: "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   /** Replace the status icon; `null` hides it. */
   icon?: React.ReactNode;
+  /** Custom action element; overrides actionLabel/onAction. */
   action?: React.ReactNode;
+  /** Label for a single action button (e.g. "Undo", "Retry"). */
   actionLabel?: string;
+  /** Called when the action button is pressed. */
   onAction?: () => void;
+  /** Show the dismiss (×) button. */
   dismissible?: boolean;
+  /** Accessible name of the dismiss button (default "Dismiss"). */
   dismissLabel?: string;
+  /** Called when dismissed. */
   onDismiss?: () => void;
 }
 
+/** In-page message about the content next to it (Figma Inline Alert). Status drives colour, icon and live-region role; the text must say the status. */
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (
     {

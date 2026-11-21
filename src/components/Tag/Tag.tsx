@@ -25,14 +25,19 @@ const tagVariants = cva("inline-flex w-fit shrink-0 items-center whitespace-nowr
 });
 
 export interface TagProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color"> {
+  /** Figma Color: one of 13 category colours (brand, red, pink, violet, purple, indigo, blue, cyan, teal, green, lime, yellow, orange). */
   color?: TagColor;
+  /** Figma Emphasis: `filled` (tinted, default) or `border`. */
   emphasis?: "filled" | "border";
+  /** Figma Size: small (20) · medium (24) · large (28). */
   size?: "small" | "medium" | "large";
+  /** Figma Rounded: pill shape when true. */
   rounded?: boolean;
   /** Optional leading icon (Figma "Swap Icon"). */
   icon?: React.ReactNode;
 }
 
+/** Read-only label for categories and metadata (Figma Tag). Colours mean categories only, never status — use Badge for status. */
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
   ({ className, color = "brand", emphasis = "filled", size, rounded, icon, children, ...props }, ref) => (
     <span ref={ref} className={cn(tagVariants({ size, rounded }), tagColorClasses[color][emphasis], className)} {...props}>

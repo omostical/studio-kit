@@ -41,18 +41,25 @@ const boxVariants = cva(
 
 export interface CheckboxProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "defaultChecked"> {
+  /** Figma Size: `large` (20px box, default) or `small` (16px). */
   size?: "small" | "large";
   /** Danger only for high-risk choices ("Delete permanently"). */
   variant?: "primary" | "danger";
+  /** Figma Type: false (unselected) · true (selected) · "indeterminate" (parent with some children selected). Controlled. */
   checked?: CheckedState;
+  /** Initial state when uncontrolled. */
   defaultChecked?: CheckedState;
+  /** Called with the new state when toggled. */
   onCheckedChange?: (checked: CheckedState) => void;
+  /** Label next to the box; clicking it toggles. Without one, pass aria-label. */
   label?: React.ReactNode;
+  /** Helper text under the label. */
   description?: React.ReactNode;
   /** Name for checkboxes without a visible label ("Select row Adam Smith"). */
   "aria-label"?: string;
 }
 
+/** Turns one option on/off or picks several from a list (Figma Checkbox). Use Switch for settings that apply immediately. */
 const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
   (
     { className, size = "large", variant = "primary", checked: checkedProp, defaultChecked = false, onCheckedChange, label, description, disabled, id, ...props },

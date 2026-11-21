@@ -29,9 +29,11 @@ const ModalClose = DialogPrimitive.Close;
 const widths = { small: "max-w-[400px]", medium: "max-w-[600px]", large: "max-w-[800px]" } as const;
 
 export interface ModalContentProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  /** Width: small (400) · medium (600, default) · large (800). */
   size?: keyof typeof widths;
 }
 
+/** The dialog box of a Modal (Figma Modal): focus is trapped, Escape closes, focus returns to the trigger. Wrap in <Modal> with a <ModalTrigger>. */
 const ModalContent = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Content>, ModalContentProps>(
   ({ className, size = "medium", children, ...props }, ref) => (
     <DialogPrimitive.Portal>

@@ -38,14 +38,19 @@ const badgeVariants = cva("inline-flex w-fit shrink-0 items-center whitespace-no
 });
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Figma Status: negative · notice · positive · info · neutral. Use a small, consistent set across the product. */
   status?: BadgeStatus;
+  /** Figma Emphasis: `low` (tinted, default) or `high` (solid fill). */
   emphasis?: "low" | "high";
+  /** Figma Shape: `round` (pill, default) or `square`. */
   shape?: "round" | "square";
+  /** Figma Size: small · medium · large. */
   size?: "small" | "medium" | "large";
   /** Optional leading icon. Status must still be readable as text. */
   icon?: React.ReactNode;
 }
 
+/** Small read-only label for an item's status (Figma Status Badge). Use Tag for categories. */
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, status = "neutral", emphasis = "low", shape, size, icon, children, ...props }, ref) => (
     <span ref={ref} className={cn(badgeVariants({ size, shape, tone: `${status}-${emphasis}` }), className)} {...props}>

@@ -37,6 +37,7 @@ export interface IconButtonProps
   "aria-label": string;
 }
 
+/** Icon-only button for compact, well-known actions (Figma Icon Button). Always pass aria-label; pair with a Tooltip. */
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, variant = "secondary", appearance = "ghost", size, icon, ...props }, ref) => (
     <button

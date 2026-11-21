@@ -19,12 +19,15 @@ type TabsSize = "small" | "large";
 const TabsContext = React.createContext<{ variant: TabsVariant; size: TabsSize; fullWidth: boolean }>({ variant: "regular", size: "large", fullWidth: false });
 
 export interface TabsProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
+  /** Figma Variant: `regular` (underline, default) or `pill`. */
   variant?: TabsVariant;
+  /** Figma Size: `large` (48px, default) or `small` (40px). */
   size?: TabsSize;
   /** Tabs share the full width (Figma "Full width"). */
   fullWidth?: boolean;
 }
 
+/** Switch between sections of content on one page (Figma Tabs). Compose with TabsList, TabsTrigger and TabsContent. */
 const Tabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, TabsProps>(
   ({ variant = "regular", size = "large", fullWidth = false, className, ...props }, ref) => (
     <TabsContext.Provider value={{ variant, size, fullWidth }}>

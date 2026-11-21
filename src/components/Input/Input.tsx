@@ -19,21 +19,31 @@ import {
  * Sizes: small 32 · medium 40 · large 48 (16px text, which also stops iOS Safari zooming in).
  */
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
+  /** Figma Size: small · medium · large. Large uses 16px text (no iOS zoom). */
   size?: FieldSize;
   /** `danger` marks the value invalid; passing `error` does this for you. */
   variant?: FieldVariant;
+  /** Figma Style: `border` (default, in forms) or `ghost` (no outline until hover; only inside a container that already shows the field). */
   appearance?: FieldAppearance;
+  /** Visible label above the field. Every field needs one; a placeholder is not a label. */
   label?: React.ReactNode;
+  /** Show the "Optional" marker. Mark optional fields, not required ones. */
   optional?: boolean;
+  /** Text of the optional marker (default "Optional"). */
   optionalLabel?: string;
+  /** Hint under the field (format, constraints). Replaced by `error` when that is set. */
   helperText?: React.ReactNode;
+  /** Error message under the field; also sets the Danger variant and aria-invalid. Say how to fix the problem. */
   error?: React.ReactNode;
+  /** Content before the value: an icon or short text such as "$". */
   prefix?: React.ReactNode;
+  /** Content after the value: a unit, icon or small button. */
   suffix?: React.ReactNode;
   /** Class for the outer Form Field wrapper. `className` styles the field box. */
   wrapperClassName?: string;
 }
 
+/** Single-line text field with label, helper text and error (Figma Input inside Form Field). */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {

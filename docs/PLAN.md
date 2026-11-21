@@ -171,7 +171,14 @@ Original plan:
 - Then build: Modal, Tabs, Tooltip, Toast, Table, each with a description in the StudioKIT format.
 - **Done when:** every code component maps 1:1 to a Figma component, with matching prop names.
 
-### Phase 3: agent-ready
+### ✅ Phase 3: agent-ready — done 2026-11-21 (pending the fresh-agent test)
+`AGENTS.md` holds the rules, component catalog, token cheat-sheet and screen recipes; `CLAUDE.md` imports it.
+Storybook is on 10.6.8 with the components manifest (`/manifests/components.json`; all 16 components and every
+prop documented) and the MCP addon (`http://localhost:6006/mcp`, registered in `.mcp.json`). Skills:
+`/prototype` and `/new-client` in `.claude/skills/`. The Figma descriptions were done in Phase 2.
+**Test still to run:** a fresh agent given only "prototype a <screen>" builds it correctly.
+
+Original plan:
 - `AGENTS.md`/`CLAUDE.md` with the rules (tokens only, one folder per component, how to compose screens).
 - Turn on the Storybook manifest and MCP; add JSDoc to component props.
 - Skills: `/new-client <name>` and `/prototype "<screen>"`.

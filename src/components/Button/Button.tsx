@@ -57,6 +57,7 @@ const Spinner = () => (
   </svg>
 );
 
+/** Triggers an action (Figma Button). One Primary per section; Danger for destructive actions; Ghost for low-emphasis toolbar actions. */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {

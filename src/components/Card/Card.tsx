@@ -10,9 +10,11 @@ import { cn } from "@/lib/utils";
  * `container={false}` groups content without a box — use it on grey backgrounds instead of nesting boxes.
  */
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Figma Container: `true` draws the box (border, shadow, dividers); `false` groups content without a box — use it on grey backgrounds. */
   container?: boolean;
 }
 
+/** Groups related content and actions (Figma Default Card). Compose with CardHeader/CardTitle/CardDescription/CardContent/CardFooter. */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, container = true, ...props }, ref) => (
   <div
     ref={ref}
