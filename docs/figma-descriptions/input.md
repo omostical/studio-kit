@@ -46,4 +46,3 @@ Prefix (optional icon or text, e.g. a search icon or "$") · Value or placeholde
 
 **Known issues**
 - ⚠️ Mobile mode still uses Wideset's fonts (Inter) (Figma Starter plan limit).
-- ⚠️ The default suffix text reads "Sufix" (a typo in the sample text, not a property).

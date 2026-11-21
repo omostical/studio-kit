@@ -80,6 +80,35 @@ oversized), the focus ring (StudioKIT's 24% halo is too faint).
   `…/Inverse/Base` used as shadow/ring colours; mode behaviour unconfirmed). 8 mixed-colour Mention Text
   instances still *report* a remote node-level fill, but every character range is local (stale Figma record).
 
+- **All-components pass (2026-11-21).** Restore points: "Before component pass", "Before contrast fixes".
+  - **Card:** Default/Media/Chart boxed variants get `Shadow/default` (= StudioKIT's code card shadow)
+    and 24px side/content padding (`Gap/12`). `Container=False` replaces the code Card's invisible
+    "ghost" variant (resolves open decision 3 once the code follows in Phase 2).
+  - **Sample text:** 267 layers on component + Screens/Grab & Go pages: "Wideset" → "Studio Kit",
+    `*@wideset.co`/`wideset.co` → `example.com`. Doc pages (Getting Started, Guidelines…) left as
+    attribution. Logo artwork that spells Wideset is vector, not text — not changed.
+  - **Compared the other 13 StudioKIT_v1 components** (Icon Button, Alert, Checkbox, Toggle, Tag, Menu,
+    Radio, Divider, Breadcrumbs, Table cell, Avatar, Tabs, Toast): Wideset matches or beats v1 on every
+    point, so no visual changes copied. (v1 itself has stray purple `#5C37EB` on tabs/table text.)
+  - **Info colour:** `Semantic/Text/Info` and `Semantic/Fill/Inverse/Info` were Indigo (clashing with the
+    blue brand and with Inline Alert's blue info fill) → `Colors/Light/Blue/700` (white text 6.1:1).
+  - **Contrast audit** (5,040 text layers, Light): fixed `Dynamic/Text/Success/*` → Green 800/900/1000,
+    `Semantic/Fill/Inverse/Positive` → Green/800, `Semantic/Text/Notice` → Yellow/900, Notification
+    timestamps' 75% layer opacity → 100%. **Left:** 85 exempt (63 out-of-month calendar days, 22
+    decorative "/" separators) and 39 near-misses (3.9–4.45:1, `Static/Text/Subtle` `#6E6E6E` on
+    hover/selected tints) — the neutral ramp has no step between `#6E6E6E` and `#3B3B3B`, so this needs a
+    component-level decision (e.g. use `Static/Text/Base` on tinted rows).
+  - **Naming:** `Progres Tracker` → `Progress Tracker`; Breadcrumbs `Level=4rd` → `4th`; Switch
+    `Press/Focus` → `Pressed/Focused`; Radio `Enabled` → `Default`; Suffix text property and sample text
+    `Sufix` → `Suffix`.
+  - **Descriptions on every public component (74).** Source of truth: prose in
+    `docs/figma-descriptions/components.json` + properties exported to `figma-properties.json`, built by
+    `node scripts/build-descriptions.mjs` into one `.md` per component (Button/Input hand-written).
+    Edit those, rebuild, then re-write to Figma.
+  - **Known:** Split Button has Figma "existing errors" (conflicting variant names), so its description
+    has no property list; worth fixing the variant names by hand. The Desktop Bridge drops on long
+    font-loading loops over all pages — keep Figma edits to short batches.
+
 **Button still to do:** decide the disabled style (tinted vs grey; recommend Wideset's grey); Split
 Button gap was left as Wideset's. StudioKIT "Ghost" ≈ Wideset
 Secondary/Filled.
