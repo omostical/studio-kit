@@ -1,194 +1,55 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useState } from "react";
+import * as React from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Components/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
-  args: {
-    label: "Accept terms and conditions",
-    variant: "primary",
-    size: "lg",
-  },
+  args: { label: "Email me product updates", size: "large", variant: "primary" },
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "danger"],
-    },
-    size: {
-      control: "select",
-      options: ["lg", "sm"],
-    },
-    checked: {
-      control: "select",
-      options: [false, true, "indeterminate"],
-    },
+    size: { control: "inline-radio", options: ["small", "large"], description: "Figma: Size" },
+    variant: { control: "inline-radio", options: ["primary", "danger"], description: "Figma: Variant" },
+    checked: { control: "select", options: [false, true, "indeterminate"], description: "Figma: Type" },
     disabled: { control: "boolean" },
-    hideLabel: { control: "boolean" },
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-// ─── Playground ───────────────────────────────────────────────────────────────
-
 export const Playground: Story = {};
 
-// ─── Checked States ───────────────────────────────────────────────────────────
+export const WithDescription: Story = { args: { description: "About once a month. Unsubscribe any time." } };
 
-export const CheckedStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Checkbox label="Unchecked" defaultChecked={false} />
-      <Checkbox label="Checked" defaultChecked={true} />
-      <Checkbox label="Indeterminate" defaultChecked="indeterminate" />
+export const Matrix: Story = {
+  render: (args) => (
+    <div className="grid grid-cols-3 gap-gap-9">
+      {([false, true, "indeterminate"] as const).map((checked) =>
+        ([false, true] as const).map((disabled) => (
+          <Checkbox key={`${checked}-${disabled}`} {...args} checked={checked} disabled={disabled} label={`${String(checked)}${disabled ? ", disabled" : ""}`} />
+        ))
+      )}
     </div>
   ),
 };
 
-// ─── Primary vs Danger ────────────────────────────────────────────────────────
-
-export const Variants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div>
-        <p className="text-xs text-text-subtle mb-3">Primary</p>
-        <div className="flex flex-col gap-3">
-          <Checkbox variant="primary" label="Unchecked" defaultChecked={false} />
-          <Checkbox variant="primary" label="Checked" defaultChecked={true} />
-          <Checkbox variant="primary" label="Indeterminate" defaultChecked="indeterminate" />
-        </div>
-      </div>
-      <div className="mt-2">
-        <p className="text-xs text-text-subtle mb-3">Danger</p>
-        <div className="flex flex-col gap-3">
-          <Checkbox variant="danger" label="Unchecked" defaultChecked={false} />
-          <Checkbox variant="danger" label="Checked" defaultChecked={true} />
-          <Checkbox variant="danger" label="Indeterminate" defaultChecked="indeterminate" />
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-// ─── Sizes ────────────────────────────────────────────────────────────────────
-
-export const Sizes: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Checkbox size="lg" label="Large (20px)" defaultChecked={true} />
-      <Checkbox size="sm" label="Small (16px)" defaultChecked={true} />
-    </div>
-  ),
-};
-
-// ─── With Subtitle ────────────────────────────────────────────────────────────
-
-export const WithSubtitle: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Checkbox
-        label="Enable notifications"
-        subtitle="You'll receive email updates about your account activity."
-        defaultChecked={false}
-      />
-      <Checkbox
-        label="Marketing emails"
-        subtitle="Receive tips, product updates and inspiration."
-        defaultChecked={true}
-      />
-      <Checkbox
-        variant="danger"
-        label="Delete all data"
-        subtitle="This action cannot be undone. All your data will be permanently removed."
-        defaultChecked={false}
-      />
-    </div>
-  ),
-};
-
-// ─── Disabled States ──────────────────────────────────────────────────────────
-
-export const DisabledStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Checkbox label="Disabled unchecked" disabled defaultChecked={false} />
-      <Checkbox label="Disabled checked" disabled defaultChecked={true} />
-      <Checkbox label="Disabled indeterminate" disabled defaultChecked="indeterminate" />
-      <Checkbox
-        label="Disabled with subtitle"
-        subtitle="This option is not available in your plan."
-        disabled
-        defaultChecked={false}
-      />
-    </div>
-  ),
-};
-
-// ─── Standalone (hideLabel) ───────────────────────────────────────────────────
-
-export const Standalone: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div>
-        <p className="text-xs text-text-subtle mb-3">For table row selection</p>
-        <div className="flex gap-3 items-center">
-          <Checkbox hideLabel label="Select row 1" aria-label="Select row 1" defaultChecked={false} />
-          <Checkbox hideLabel label="Select row 2" aria-label="Select row 2" defaultChecked={true} />
-          <Checkbox hideLabel label="Select all" aria-label="Select all" defaultChecked="indeterminate" />
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-// ─── Controlled ───────────────────────────────────────────────────────────────
-
-export const Controlled: Story = {
+/** A parent checkbox shows Indeterminate when only some children are selected. */
+export const SelectAll: Story = {
   render: () => {
-    const [checked, setChecked] = useState<boolean | "indeterminate">(false);
-    return (
-      <div className="flex flex-col gap-4">
-        <Checkbox
-          checked={checked}
-          onCheckedChange={setChecked}
-          label="I agree to the Terms of Service"
-          subtitle="By checking this box you accept our terms."
-        />
-        <p className="text-xs text-text-subtle">
-          State: <code className="font-mono">{String(checked)}</code>
-        </p>
-      </div>
-    );
-  },
-};
-
-// ─── Full matrix ──────────────────────────────────────────────────────────────
-
-export const FullMatrix: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      {(["primary", "danger"] as const).map((variant) => (
-        <div key={variant}>
-          <p className="text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-3">
-            {variant}
-          </p>
-          <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-            {(["lg", "sm"] as const).map((size) => (
-              <div key={size} className="flex flex-col gap-3">
-                <p className="text-xs text-text-subtle">{size === "lg" ? "Large" : "Small"}</p>
-                <Checkbox variant={variant} size={size} label="Unchecked" defaultChecked={false} />
-                <Checkbox variant={variant} size={size} label="Checked" defaultChecked={true} />
-                <Checkbox variant={variant} size={size} label="Indeterminate" defaultChecked="indeterminate" />
-                <Checkbox variant={variant} size={size} label="Disabled" disabled defaultChecked={false} />
-                <Checkbox variant={variant} size={size} label="Disabled checked" disabled defaultChecked={true} />
-              </div>
+    const Demo = () => {
+      const [items, setItems] = React.useState([true, false, false]);
+      const all = items.every(Boolean) ? true : items.some(Boolean) ? "indeterminate" : false;
+      return (
+        <div className="grid gap-gap-5">
+          <Checkbox label="Select all" checked={all} onCheckedChange={(v) => setItems(items.map(() => v === true))} />
+          <div className="grid gap-gap-5 pl-gap-12">
+            {items.map((v, i) => (
+              <Checkbox key={i} label={`Row ${i + 1}`} checked={v} onCheckedChange={(n) => setItems(items.map((x, j) => (j === i ? n === true : x)))} />
             ))}
           </div>
         </div>
-      ))}
-    </div>
-  ),
+      );
+    };
+    return <Demo />;
+  },
 };

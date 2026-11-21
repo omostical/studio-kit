@@ -1,153 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Search, Mail, Eye, AlertCircle, Info } from "lucide-react";
+import { Search, Mail } from "lucide-react";
 import { Input } from "./Input";
 
 const meta: Meta<typeof Input> = {
   title: "Components/Input",
   component: Input,
   tags: ["autodocs"],
-  parameters: { layout: "centered" },
-  decorators: [
-    (Story) => (
-      <div className="w-80">
-        <Story />
-      </div>
-    ),
-  ],
+  args: { label: "Email address", placeholder: "e.g. hello@example.com", size: "medium", appearance: "border" },
   argTypes: {
-    size: { control: "select", options: ["sm", "md", "lg"] },
-    state: { control: "select", options: ["default", "error"] },
-    optional: { control: "boolean" },
+    size: { control: "inline-radio", options: ["small", "medium", "large"], description: "Figma: Size" },
+    variant: { control: "inline-radio", options: ["primary", "danger"], description: "Figma: Variant" },
+    appearance: { control: "inline-radio", options: ["border", "ghost"], description: "Figma: Style" },
     disabled: { control: "boolean" },
+    optional: { control: "boolean" },
   },
+  decorators: [(Story) => <div className="max-w-96"><Story /></div>],
 };
-
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const Default: Story = {
-  args: { label: "Label", placeholder: "Input field", hint: "Hint Text" },
-};
+export const Playground: Story = {};
 
-export const Filled: Story = {
-  args: {
-    label: "Label",
-    placeholder: "Input field",
-    defaultValue: "Filled value",
-    hint: "Hint Text",
-  },
-};
+export const WithHelperText: Story = { args: { helperText: "We'll only use this to send receipts.", prefix: <Mail /> } };
 
-export const Focused: Story = {
-  args: {
-    label: "Label",
-    placeholder: "Input field",
-    autoFocus: true,
-    hint: "Hint Text",
-  },
-};
+export const Error: Story = { args: { defaultValue: "hello@", error: "Enter an email address like name@example.com" } };
 
-export const Error: Story = {
-  args: {
-    label: "Label",
-    placeholder: "Input field",
-    defaultValue: "wrong@",
-    error: "Please enter a valid email",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: "Label",
-    placeholder: "Input field",
-    hint: "Hint Text",
-    disabled: true,
-  },
-};
-
-export const Optional: Story = {
-  args: {
-    label: "Label",
-    optional: true,
-    placeholder: "Input field",
-    hint: "Hint Text",
-  },
-};
-
-export const WithPrefix: Story = {
-  args: {
-    label: "Search",
-    placeholder: "Search…",
-    prefix: <Search />,
-    hint: "Type to filter results",
-  },
-};
-
-export const WithSuffix: Story = {
-  args: {
-    label: "Password",
-    placeholder: "Enter password",
-    type: "password",
-    suffix: <Eye />,
-  },
-};
-
-export const WithBothAffixes: Story = {
-  args: {
-    label: "Email",
-    placeholder: "you@example.com",
-    prefix: <Mail />,
-    suffix: <AlertCircle />,
-  },
-};
-
-export const CustomHintIcon: Story = {
-  args: {
-    label: "Username",
-    placeholder: "johndoe",
-    hint: "Must be 3–20 characters",
-    hintIcon: <Info />,
-  },
-};
+export const Optional: Story = { args: { label: "Company", placeholder: "", optional: true } };
 
 export const Sizes: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4 w-80">
-      <Input size="sm" label="Small" placeholder="32px height" hint="sm" />
-      <Input size="md" label="Medium" placeholder="40px height" hint="md" />
-      <Input size="lg" label="Large" placeholder="48px height" hint="lg" />
+  render: (args) => (
+    <div className="grid gap-gap-9">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Input key={size} {...args} size={size} label={size} prefix={<Search />} placeholder="Search projects" />
+      ))}
     </div>
   ),
 };
 
-export const AllStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4 w-80">
-      <Input label="Default" placeholder="Input field" hint="Hint Text" />
-      <Input
-        label="Filled"
-        placeholder="Input field"
-        defaultValue="Filled value"
-        hint="Hint Text"
-      />
-      <Input
-        label="Focused"
-        placeholder="Input field"
-        autoFocus
-        hint="Hint Text"
-      />
-      <Input
-        label="Error"
-        placeholder="Input field"
-        defaultValue="wrong@"
-        error="Please enter a valid email"
-      />
-      <Input
-        label="Disabled"
-        placeholder="Input field"
-        hint="Hint Text"
-        disabled
-      />
-    </div>
-  ),
-};
+export const Disabled: Story = { args: { disabled: true, defaultValue: "hello@example.com" } };

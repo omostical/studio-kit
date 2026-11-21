@@ -24,7 +24,7 @@ export const componentGroups: DocGroup[] = [
     name: "Actions",
     items: [
       { slug: "button", title: "Button" },
-      { slug: "switch", title: "Switch" },
+      { slug: "icon-button", title: "Icon Button" },
     ],
   },
   {
@@ -32,7 +32,13 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "input", title: "Input" },
       { slug: "select", title: "Select" },
+      { slug: "checkbox", title: "Checkbox" },
+      { slug: "switch", title: "Switch" },
     ],
+  },
+  {
+    name: "Feedback",
+    items: [{ slug: "alert", title: "Alert" }],
   },
   {
     name: "Data display",

@@ -1,67 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { CheckCircle2 } from "lucide-react";
 import { Badge } from "./Badge";
+
+const statuses = ["negative", "notice", "positive", "info", "neutral"] as const;
 
 const meta: Meta<typeof Badge> = {
   title: "Components/Badge",
   component: Badge,
   tags: ["autodocs"],
-  parameters: { layout: "centered" },
+  args: { children: "Active", status: "positive", emphasis: "low", shape: "round", size: "medium" },
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "brand", "success", "warning", "danger", "outline"],
-    },
-    size: { control: "select", options: ["sm", "md", "lg"] },
-    dot: { control: "boolean" },
+    status: { control: "select", options: statuses, description: "Figma: Status" },
+    emphasis: { control: "inline-radio", options: ["low", "high"], description: "Figma: Emphasis" },
+    shape: { control: "inline-radio", options: ["round", "square"], description: "Figma: Shape" },
+    size: { control: "inline-radio", options: ["small", "medium", "large"], description: "Figma: Size" },
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof Badge>;
 
-export const Default: Story = {
-  args: { children: "Badge", variant: "default" },
-};
+export const Playground: Story = {};
 
-export const Brand: Story = {
-  args: { children: "New", variant: "brand" },
-};
-
-export const Success: Story = {
-  args: { children: "Active", variant: "success", dot: true },
-};
-
-export const Warning: Story = {
-  args: { children: "Pending", variant: "warning", dot: true },
-};
-
-export const Danger: Story = {
-  args: { children: "Removed", variant: "danger" },
-};
-
-export const Outline: Story = {
-  args: { children: "Draft", variant: "outline" },
-};
-
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex items-center gap-2 flex-wrap">
-      <Badge variant="default">Default</Badge>
-      <Badge variant="brand">Brand</Badge>
-      <Badge variant="success" dot>Active</Badge>
-      <Badge variant="warning" dot>Pending</Badge>
-      <Badge variant="danger">Error</Badge>
-      <Badge variant="outline">Draft</Badge>
+export const Matrix: Story = {
+  render: (args) => (
+    <div className="grid gap-gap-7">
+      {(["low", "high"] as const).map((emphasis) => (
+        <div key={emphasis} className="flex items-center gap-gap-5">
+          {statuses.map((status) => (
+            <Badge key={status} {...args} status={status} emphasis={emphasis}>
+              {status}
+            </Badge>
+          ))}
+        </div>
+      ))}
     </div>
   ),
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <div className="flex items-center gap-2">
-      <Badge size="sm" variant="brand">Small</Badge>
-      <Badge size="md" variant="brand">Medium</Badge>
-      <Badge size="lg" variant="brand">Large</Badge>
-    </div>
-  ),
-};
+export const WithIcon: Story = { args: { icon: <CheckCircle2 />, children: "Paid" } };

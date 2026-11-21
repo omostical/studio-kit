@@ -1,91 +1,41 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./Card";
 import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 import { Badge } from "../Badge/Badge";
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
   component: Card,
   tags: ["autodocs"],
-  parameters: { layout: "centered" },
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "elevated", "outline", "ghost"],
-    },
-    padding: {
-      control: "select",
-      options: ["none", "sm", "md", "lg"],
-    },
-  },
+  args: { container: true },
+  argTypes: { container: { control: "boolean", description: "Figma: Container" } },
+  decorators: [(Story) => <div className="max-w-[400px] bg-static-fill-background p-gap-12"><Story /></div>],
 };
-
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-export const Default: Story = {
+export const Playground: Story = {
   render: (args) => (
-    <Card {...args} className="w-80">
+    <Card {...args}>
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>A short description of what this card is about.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-text-secondary">This is the card body content. Add anything here.</p>
-      </CardContent>
-      <CardFooter>
-        <Button variant="primary" size="sm">Action</Button>
-        <Button variant="ghost" size="sm">Cancel</Button>
-      </CardFooter>
-    </Card>
-  ),
-  args: { variant: "default" },
-};
-
-export const Elevated: Story = {
-  render: () => (
-    <Card variant="elevated" className="w-80">
-      <CardHeader>
-        <CardTitle>Elevated Card</CardTitle>
-        <CardDescription>This card has a stronger shadow.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-text-secondary">Content goes here.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const Outline: Story = {
-  render: () => (
-    <Card variant="outline" className="w-80">
-      <CardHeader>
-        <CardTitle>Outline Card</CardTitle>
-        <CardDescription>A card with a more visible border and no shadow.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-text-secondary">Content goes here.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const WithBadge: Story = {
-  render: () => (
-    <Card className="w-80">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle>Feature Card</CardTitle>
-          <Badge variant="brand">New</Badge>
+        <div>
+          <CardTitle>Sign in</CardTitle>
+          <CardDescription>Use your work email.</CardDescription>
         </div>
-        <CardDescription>This card showcases a feature with a badge.</CardDescription>
+        <Badge status="info">Beta</Badge>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm text-text-secondary">Feature details go here.</p>
+      <CardContent className="grid gap-gap-11">
+        <Input label="Email address" placeholder="e.g. hello@example.com" />
+        <Input label="Password" type="password" placeholder="Enter your password" />
       </CardContent>
       <CardFooter>
-        <Button variant="primary" size="sm">Get started</Button>
+        <Button variant="secondary" appearance="border">Cancel</Button>
+        <Button>Sign in</Button>
       </CardFooter>
     </Card>
   ),
 };
+
+/** No box: for grey backgrounds or inside other containers, instead of nesting boxes. */
+export const WithoutContainer: Story = { ...Playground, args: { container: false } };

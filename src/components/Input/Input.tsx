@@ -1,53 +1,54 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { Ban } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  FieldAffix,
+  FieldShell,
+  fieldAriaProps,
+  fieldBoxVariants,
+  type FieldAppearance,
+  type FieldSize,
+  type FieldVariant,
+} from "../_shared/field";
 
-const inputWrapperVariants = cva(
-  "flex w-full items-center rounded-lg border bg-surface text-text-primary transition-colors focus-within:ring-2 focus-within:ring-border-brand-subtle focus-within:border-border-brand has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-surface-disabled has-[:disabled]:border-border-disabled has-[:disabled]:text-text-disabled",
-  {
-    variants: {
-      size: {
-        sm: "h-8 px-3 gap-2 text-xs",
-        md: "h-10 px-3 gap-2 text-sm",
-        lg: "h-12 px-4 gap-2 text-base",
-      },
-      state: {
-        default: "border-border hover:border-border-strong hover:bg-surface",
-        error: "border-border-error focus-within:border-border-error focus-within:ring-border-error-subtle",
-      },
-    },
-    defaultVariants: { size: "md", state: "default" },
-  }
-);
-
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix">,
-    VariantProps<typeof inputWrapperVariants> {
-  label?: string;
+/**
+ * Input — Figma: StudioKIT 2.0 › Input (557:84966) inside Form Field (557:51656).
+ * Description: docs/figma-descriptions/input.md
+ *
+ * Figma property → prop:  Variant → variant (or set `error`) · Style → appearance · Size → size ·
+ * Filled → value/placeholder · State → interaction / disabled · Prefix/Suffix → prefix/suffix.
+ * Sizes: small 32 · medium 40 · large 48 (16px text, which also stops iOS Safari zooming in).
+ */
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
+  size?: FieldSize;
+  /** `danger` marks the value invalid; passing `error` does this for you. */
+  variant?: FieldVariant;
+  appearance?: FieldAppearance;
+  label?: React.ReactNode;
   optional?: boolean;
   optionalLabel?: string;
-  hint?: string;
-  error?: string;
+  helperText?: React.ReactNode;
+  error?: React.ReactNode;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  hintIcon?: React.ReactNode;
+  /** Class for the outer Form Field wrapper. `className` styles the field box. */
+  wrapperClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      size,
-      state,
+      wrapperClassName,
+      size = "medium",
+      variant,
+      appearance = "border",
       label,
-      optional = false,
-      optionalLabel = "Optional",
-      hint,
+      optional,
+      optionalLabel,
+      helperText,
       error,
       prefix,
       suffix,
-      hintIcon,
       id,
       disabled,
       ...props
@@ -56,74 +57,35 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const generatedId = React.useId();
     const inputId = id ?? generatedId;
-    const resolvedState = error ? "error" : state;
-    const message = error ?? hint;
-    const showHint = Boolean(message);
+    const resolvedVariant = error != null ? "danger" : (variant ?? "primary");
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
-        {label && (
-          <div className="flex items-center gap-2">
-            <label
-              htmlFor={inputId}
-              className={cn(
-                "text-sm font-medium",
-                disabled ? "text-text-disabled" : "text-text-primary"
-              )}
-            >
-              {label}
-            </label>
-            {optional && (
-              <span className="text-xs text-text-subtle">{optionalLabel}</span>
-            )}
-          </div>
-        )}
-        <div
-          className={cn(
-            inputWrapperVariants({ size, state: resolvedState }),
-            className
-          )}
-        >
-          {prefix && (
-            <span className="flex shrink-0 items-center text-text-tertiary [&_svg]:size-4">
-              {prefix}
-            </span>
-          )}
+      <FieldShell
+        id={inputId}
+        label={label}
+        optional={optional}
+        optionalLabel={optionalLabel}
+        helperText={helperText}
+        error={error}
+        disabled={disabled}
+        className={wrapperClassName}
+      >
+        <div className={cn(fieldBoxVariants({ size, appearance, variant: resolvedVariant, disabled: !!disabled }), className)}>
+          {prefix != null && <FieldAffix>{prefix}</FieldAffix>}
           <input
-            id={inputId}
             ref={ref}
+            id={inputId}
             disabled={disabled}
-            className="flex-1 min-w-0 bg-transparent outline-none placeholder:text-text-subtle disabled:cursor-not-allowed disabled:text-text-disabled disabled:placeholder:text-text-disabled"
+            className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-static-text-subtle disabled:cursor-not-allowed"
+            {...fieldAriaProps(inputId, { error, helperText })}
             {...props}
           />
-          {suffix && (
-            <span className="flex shrink-0 items-center text-text-tertiary [&_svg]:size-4">
-              {suffix}
-            </span>
-          )}
+          {suffix != null && <FieldAffix>{suffix}</FieldAffix>}
         </div>
-        {showHint && (
-          <div
-            className={cn(
-              "flex items-center gap-1 text-xs",
-              error
-                ? "text-text-error"
-                : disabled
-                ? "text-text-disabled"
-                : "text-text-tertiary"
-            )}
-          >
-            <span className="flex shrink-0 items-center [&_svg]:size-4">
-              {hintIcon ?? <Ban />}
-            </span>
-            <span>{message}</span>
-          </div>
-        )}
-      </div>
+      </FieldShell>
     );
   }
 );
-
 Input.displayName = "Input";
 
-export { Input, inputWrapperVariants };
+export { Input };

@@ -148,10 +148,41 @@ or the Desktop Bridge times out.
   and text styles aren't exported yet; the tokens page (`src/app/tokens`) still shows the old v1 values
   from `src/tokens/index.ts`.
 
+## Done (2026-11-21) — Phase 2, part 1: components on the Figma API
+
+Every component uses only Figma tokens. Each file's header comment links its Figma node and description.
+
+| Code | Figma component | Figma property → prop |
+|---|---|---|
+| `Button` | Button | Variant → `variant` (primary·secondary·danger·success·inverse), Style → `appearance` (filled·border·ghost), Size → `size` (xsmall·small·medium·large), Prefix/Suffix → `prefixIcon`/`suffixIcon` |
+| `IconButton` | Icon Button | same as Button, plus `icon`; `aria-label` required |
+| `Input` | Input + Form Field | Size → `size` (small·medium·large), Variant → `variant` (primary·danger, or pass `error`), Style → `appearance` (border·ghost), Prefix/Suffix, `label`/`optional`/`helperText`/`error` |
+| `Select` | Single Select + Dropdown Menu | same field props as Input |
+| `Checkbox` | Checkbox | Type → `checked` (false·true·"indeterminate"), Variant → `variant`, Size → `size` (small·large), `label`/`description` |
+| `Switch` | Switch | Size → `size` (small·large), Label → `labelPosition`, `label`/`description` |
+| `Alert` | Inline Alert | Status → `status` (error·warning·success·info), Position → `position`, Actions → `action`/`actionLabel`, Dismiss → `dismissible` |
+| `Badge` | Status Badge | Status → `status` (negative·notice·positive·info·neutral), Emphasis → `emphasis` (low·high), Shape → `shape`, Size → `size` |
+| `Tag` | Tag | Color → `color` (13 categories), Emphasis → `emphasis` (filled·border), Size → `size`, Rounded → `rounded` |
+| `Card` | Default Card | Container → `container`; Header/Footer/Description → `CardHeader`/`CardFooter`/`CardDescription` |
+| `Typography` | text styles | `variant` = text style in kebab case (`label-strong-small`), `tone` = Static/Text (strong·base·subtle) |
+
+- **Shared code:** `src/components/_shared/controlColors.ts` (Button/IconButton colour table) and
+  `src/components/Tag/tagColors.ts` are literal class tables, written once by a script that checked every
+  token exists. `src/components/_shared/field.tsx` holds the shared Form Field label/helper/box.
+- **Removed:** the v1 token layer (`legacy-aliases.css`, `tokens.light.css`, `tokens.dark.css`,
+  `src/tokens/index.ts`, `tokens.json`, `Tag.css`). `globals.css` now only imports the generated files, plus a
+  small docs-site text scale.
+- **Rebuilt:** the playground, the components docs page (adds Icon Button, Checkbox and Alert sections) and
+  the tokens page (now reads `src/tokens/generated.ts`).
+- **Fixed in Figma:** the `Forms/Active` focus glow lost its 2px spread when its colour was linked to a
+  variable (Figma resets spread on bind). The spread is restored.
+- **Verified in the browser:** sizes, padding, radius, type, colours, the focus ring and dark mode against the
+  Figma spec.
+
 ## Next
 
-- **Phase 2:** migrate the 11 code components to Wideset's API (Variant × Style × Size × State) and to the
-  Figma token names (`bg-dynamic-fill-primary-default`…), then delete `legacy-aliases.css` and the v1 parts
-  of `tokens.light.css` / `tokens.dark.css`. Point the tokens page at `src/tokens/generated.ts`.
+- **Phase 2, part 2:** build Modal, Tabs, Tooltip, Toast and Table from the Wideset components, each with its
+  Figma description.
+- **Phase 3:** AGENTS.md rules, Storybook manifest/MCP, `/new-client` and `/prototype` skills.
 - Then build Modal, Tabs, Tooltip, Toast and Table from Wideset, each with a description in the
   StudioKIT format.

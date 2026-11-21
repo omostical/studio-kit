@@ -3,7 +3,7 @@
  * Token guardrail — `npm run lint:tokens`
  *
  * Rule: design-system code may only use colours through semantic tokens
- * (bg-surface, text-text-primary, border-border-brand, var(--bg-fill-error) …).
+ * (bg-static-fill-foreground, text-static-text-strong, border-dynamic-stroke-primary-default, var(--dynamic-fill-danger-default) …).
  * Raw palette classes (bg-blue-500, text-neutral-700) and hex codes (#4763CF)
  * are "detached fills": they ignore the theme, so they break dark mode and
  * won't change when the kit is re-skinned for a new brand.
@@ -28,10 +28,10 @@ const RAW_CLASS = new RegExp(
 const HEX = /(?<![\w&-])#[0-9A-Fa-f]{3,8}\b/g;
 
 const HINTS = {
-  bg: "bg-surface · bg-surface-raised · bg-canvas · bg-fill-{brand|success|error|warning}[-subtle]",
-  text: "text-text-{primary|secondary|tertiary|subtle} · text-text-{brand|success|error|warning}",
-  border: "border-border · border-border-{subtle|strong} · border-border-{brand|error}",
-  ring: "ring-border-brand · ring-border-{brand|error}-subtle",
+  bg: "bg-static-fill-{background|foreground|container} · bg-dynamic-fill-{primary|secondary|danger|success}-{default|hover} · bg-semantic-fill-{positive|negative|notice|info}",
+  text: "text-static-text-{strong|base|subtle} · text-dynamic-text-{primary|danger|success}-default · text-semantic-text-{positive|negative|notice|info}",
+  border: "border-static-stroke-{base|subtle|strong} · border-dynamic-stroke-{primary|secondary|danger}-default",
+  ring: "use shadow-focus-base / shadow-focus-danger (the Figma Focus/* effect styles)",
 };
 
 function* walk(dir) {

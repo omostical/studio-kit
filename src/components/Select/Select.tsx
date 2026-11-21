@@ -2,17 +2,34 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FieldShell, fieldAriaProps, fieldBoxVariants, type FieldAppearance, type FieldSize, type FieldVariant } from "../_shared/field";
 
+/**
+ * Select — Figma: StudioKIT 2.0 › Single Select (1862:10385); list = Dropdown Menu (1490:38985) with
+ * Dropdown Menu / Menu Item rows. Description: docs/figma-descriptions/single-select.md
+ *
+ * Same field model as Input (size · variant · appearance · label · helperText · error).
+ * Menu: Static/Fill/Overlay, Corner Radius/Container/md, Elevation/Medium; items 32px, Label/Small,
+ * hover Dynamic/Fill/Secondary/Alpha/Hover, selected Dynamic/Fill/Primary/Alpha/Hover.
+ */
 export interface SelectProps {
-  label?: string;
-  hint?: string;
-  error?: string;
+  size?: FieldSize;
+  variant?: FieldVariant;
+  appearance?: FieldAppearance;
+  label?: React.ReactNode;
+  optional?: boolean;
+  helperText?: React.ReactNode;
+  error?: React.ReactNode;
   placeholder?: string;
   value?: string;
+  defaultValue?: string;
   onValueChange?: (value: string) => void;
   disabled?: boolean;
+  name?: string;
+  id?: string;
   children?: React.ReactNode;
   className?: string;
+  wrapperClassName?: string;
 }
 
 const SelectItem = React.forwardRef<
@@ -22,19 +39,20 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-3 text-sm text-text-primary outline-none",
-      "hover:bg-fill-brand-subtle hover:text-text-brand focus:bg-fill-brand-subtle focus:text-text-brand",
-      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex h-forms-small w-full cursor-pointer select-none items-center gap-gap-5 rounded-control-md pl-gap-5 pr-gap-12",
+      "type-label-small text-static-text-strong outline-none",
+      "data-[highlighted]:bg-dynamic-fill-secondary-alpha-hover data-[state=checked]:bg-dynamic-fill-primary-alpha-hover",
+      "data-[disabled]:pointer-events-none data-[disabled]:text-dynamic-text-secondary-disabled",
       className
     )}
     {...props}
   >
-    <span className="absolute left-2 flex size-4 items-center justify-center">
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <span className="absolute right-gap-5 flex items-center">
       <SelectPrimitive.ItemIndicator>
-        <Check className="size-3.5 text-icon-brand" />
+        <Check className="size-size-9 text-dynamic-text-primary-default" aria-hidden />
       </SelectPrimitive.ItemIndicator>
     </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ));
 SelectItem.displayName = "SelectItem";
@@ -42,76 +60,67 @@ SelectItem.displayName = "SelectItem";
 const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
   (
     {
+      size = "medium",
+      variant,
+      appearance = "border",
       label,
-      hint,
+      optional,
+      helperText,
       error,
       placeholder = "Select an option",
       value,
+      defaultValue,
       onValueChange,
       disabled,
+      name,
+      id,
       children,
       className,
+      wrapperClassName,
     },
     ref
   ) => {
-    const id = React.useId();
-
+    const generatedId = React.useId();
+    const triggerId = id ?? generatedId;
+    const resolvedVariant = error != null ? "danger" : (variant ?? "primary");
     return (
-      <div className="flex flex-col gap-1.5">
-        {label && (
-          <label htmlFor={id} className="text-sm font-medium text-text-primary">
-            {label}
-          </label>
-        )}
-        <SelectPrimitive.Root
-          value={value}
-          onValueChange={onValueChange}
-          disabled={disabled}
-        >
+      <FieldShell
+        id={triggerId}
+        label={label}
+        optional={optional}
+        helperText={helperText}
+        error={error}
+        disabled={disabled}
+        className={wrapperClassName}
+      >
+        <SelectPrimitive.Root value={value} defaultValue={defaultValue} onValueChange={onValueChange} disabled={disabled} name={name}>
           <SelectPrimitive.Trigger
-            id={id}
             ref={ref}
+            id={triggerId}
+            {...fieldAriaProps(triggerId, { error, helperText })}
             className={cn(
-              "flex h-9 w-full items-center justify-between rounded-lg border px-3 py-2 text-sm",
-              "bg-surface text-text-primary data-[placeholder]:text-text-subtle",
-              error
-                ? "border-border-error focus:border-border-error focus:ring-border-error-subtle"
-                : "border-border hover:border-border-strong focus:border-border-brand focus:ring-border-brand-subtle",
-              "focus:outline-none focus:ring-2 focus:ring-offset-0",
-              "disabled:cursor-not-allowed disabled:opacity-50",
-              "[&>span]:truncate",
+              fieldBoxVariants({ size, appearance, variant: resolvedVariant, disabled: !!disabled }),
+              "justify-between text-left outline-none focus-visible:border-dynamic-stroke-primary-strong-default focus-visible:shadow-forms-active",
+              "data-[placeholder]:text-static-text-subtle [&>span]:truncate",
               className
             )}
           >
             <SelectPrimitive.Value placeholder={placeholder} />
             <SelectPrimitive.Icon asChild>
-              <ChevronDown className="size-4 text-icon-tertiary shrink-0 transition-transform duration-200 data-[state=open]:rotate-180" />
+              <ChevronDown className="shrink-0 text-static-text-subtle" aria-hidden />
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content
-              className={cn(
-                "relative z-50 min-w-[8rem] overflow-hidden rounded-xl border border-border bg-surface-overlay shadow-lg",
-                "data-[state=open]:animate-in data-[state=closed]:animate-out",
-                "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-                "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-                "data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2"
-              )}
               position="popper"
               sideOffset={4}
+              className="relative z-50 max-h-80 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-container-md bg-static-fill-overlay shadow-elevation-medium"
             >
-              <SelectPrimitive.Viewport className="p-1.5">
-                {children}
-              </SelectPrimitive.Viewport>
+              <SelectPrimitive.Viewport className="p-gap-3">{children}</SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
-        {(hint || error) && (
-          <p className={cn("text-xs", error ? "text-text-error" : "text-text-tertiary")}>
-            {error ?? hint}
-          </p>
-        )}
-      </div>
+      </FieldShell>
     );
   }
 );

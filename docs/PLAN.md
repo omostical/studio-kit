@@ -152,7 +152,14 @@ Original plan:
 4. Rename code tokens to Wideset's names (`Static/…`, `Dynamic/Fill/Primary/Hover` → CSS variables).
 - **Done when:** changing one Figma variable and re-exporting updates the site and Storybook.
 
-### Phase 2: components on Wideset's API
+### ✅ Phase 2 (part 1): components on Wideset's API — done 2026-11-21
+All 11 code components were rebuilt on the Figma tokens and props. The v1 token layer is deleted
+(`legacy-aliases.css`, `tokens.light/dark.css`, `src/tokens/index.ts`, `tokens.json`, `Tag.css`). Text and
+effect styles are now generated too. Sizes, padding, radius, type and the focus ring were measured in the
+browser against the Figma spec. Prop map: [HANDOFF.md](./HANDOFF.md). **Still to do:** build Modal, Tabs,
+Tooltip, Toast and Table.
+
+Original plan:
 - Migrate the 11 code components to Wideset's model (Variant × Style × Size × State).
   Mapping: Button/IconButton → Button/Icon Button · Alert → Inline/System Alert · Badge → Status Badge ·
   Card → Cards/Tile · Checkbox, Switch, Select → same · Input → Text Input + Form Field ·

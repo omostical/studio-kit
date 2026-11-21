@@ -1,79 +1,89 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const textVariants = cva("", {
+/**
+ * Typography — the StudioKIT 2.0 Figma text styles as a component.
+ * `variant` is the text style name in kebab case ("Label/Strong/Small" → "label-strong-small");
+ * each maps to the generated `type-*` utility, so sizes, weights and line heights come from Figma variables
+ * (and switch to the Mobile values below 768px). `tone` picks the Static/Text colour.
+ */
+const variants = {
+  "title-large": "type-title-large",
+  "title-medium": "type-title-medium",
+  "title-small": "type-title-small",
+  "subtitle-large": "type-subtitle-large",
+  "subtitle-medium": "type-subtitle-medium",
+  "subtitle-small": "type-subtitle-small",
+  "subtitle-xsmall": "type-subtitle-xsmall",
+  "label-large": "type-label-large",
+  "label-medium": "type-label-medium",
+  "label-small": "type-label-small",
+  "label-strong-large": "type-label-strong-large",
+  "label-strong-medium": "type-label-strong-medium",
+  "label-strong-small": "type-label-strong-small",
+  "body-large": "type-body-large",
+  "body-medium": "type-body-medium",
+  "body-small": "type-body-small",
+  "body-strong-large": "type-body-strong-large",
+  "body-strong-medium": "type-body-strong-medium",
+  "body-strong-small": "type-body-strong-small",
+  "number-large": "type-number-large tabular-nums",
+  "number-medium": "type-number-medium tabular-nums",
+  "number-small": "type-number-small tabular-nums",
+  "number-xsmall": "type-number-xsmall tabular-nums",
+  "number-strong-large": "type-number-strong-large tabular-nums",
+  "number-strong-medium": "type-number-strong-medium tabular-nums",
+  "number-strong-small": "type-number-strong-small tabular-nums",
+  "number-strong-xsmall": "type-number-strong-xsmall tabular-nums",
+  "caption-medium": "type-caption-medium",
+  "caption-small": "type-caption-small",
+  "caption-strong-medium": "type-caption-strong-medium",
+  "caption-strong-small": "type-caption-strong-small",
+} as const;
+
+export type TypographyVariant = keyof typeof variants;
+
+const textVariants = cva("m-0", {
   variants: {
-    variant: {
-      h1: "text-5xl font-bold tracking-tight text-text-primary leading-tight",
-      h2: "text-4xl font-bold tracking-tight text-text-primary leading-tight",
-      h3: "text-3xl font-semibold tracking-tight text-text-primary leading-snug",
-      h4: "text-2xl font-semibold text-text-primary leading-snug",
-      h5: "text-xl font-semibold text-text-primary",
-      h6: "text-lg font-semibold text-text-primary",
-      lead: "text-xl text-text-secondary leading-relaxed",
-      body: "text-base text-text-secondary leading-relaxed",
-      small: "text-sm text-text-secondary leading-relaxed",
-      xs: "text-xs text-text-tertiary",
-      label: "text-sm font-medium text-text-secondary",
-      code: "font-mono text-sm bg-surface-muted text-text-primary rounded px-1.5 py-0.5",
-      muted: "text-sm text-text-subtle",
+    variant: variants,
+    tone: {
+      strong: "text-static-text-strong",
+      base: "text-static-text-base",
+      subtle: "text-static-text-subtle",
+      inherit: "",
     },
-    align: {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    },
+    align: { left: "text-left", center: "text-center", right: "text-right" },
   },
-  defaultVariants: {
-    variant: "body",
-  },
+  defaultVariants: { variant: "body-medium", tone: "base" },
 });
 
-type TextElement =
-  | HTMLHeadingElement
-  | HTMLParagraphElement
-  | HTMLSpanElement
-  | HTMLElement;
+const tagFor = (v: string): "h1" | "h2" | "h3" | "h4" | "p" | "span" => {
+  if (v === "title-large") return "h1";
+  if (v.startsWith("title")) return "h2";
+  if (v === "subtitle-large" || v === "subtitle-medium") return "h3";
+  if (v.startsWith("subtitle")) return "h4";
+  if (v.startsWith("body")) return "p";
+  return "span";
+};
+/** Default element per variant, computed once. */
+const defaultTags = Object.fromEntries(Object.keys(variants).map((v) => [v, tagFor(v)])) as Record<TypographyVariant, ReturnType<typeof tagFor>>;
 
-export interface TypographyProps
-  extends React.HTMLAttributes<TextElement>,
-    VariantProps<typeof textVariants> {
+export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
+  variant?: TypographyVariant;
+  tone?: "strong" | "base" | "subtle" | "inherit";
+  align?: "left" | "center" | "right";
+  /** Element to render. Defaults: title → h1/h2, subtitle → h3/h4, body → p, others → span. */
   as?: React.ElementType;
 }
 
-const variantTagMap: Record<string, React.ElementType> = {
-  h1: "h1",
-  h2: "h2",
-  h3: "h3",
-  h4: "h4",
-  h5: "h5",
-  h6: "h6",
-  lead: "p",
-  body: "p",
-  small: "p",
-  xs: "span",
-  label: "span",
-  code: "code",
-  muted: "p",
-};
-
-const Typography = React.forwardRef<TextElement, TypographyProps>(
-  ({ className, variant = "body", align, as, children, ...props }, ref) => {
-    const Tag = as ?? variantTagMap[variant ?? "body"] ?? "p";
-
-    return (
-      <Tag
-        ref={ref}
-        className={cn(textVariants({ variant, align, className }))}
-        {...props}
-      >
-        {children}
-      </Tag>
-    );
+const Typography = React.forwardRef<HTMLElement, TypographyProps>(
+  ({ className, variant = "body-medium", tone, align, as, ...props }, ref) => {
+    const Tag = as ?? defaultTags[variant];
+    const resolvedTone = tone ?? (variant.startsWith("title") || variant.startsWith("subtitle") ? "strong" : "base");
+    return <Tag ref={ref} className={cn(textVariants({ variant, tone: resolvedTone, align }), className)} {...props} />;
   }
 );
-
 Typography.displayName = "Typography";
 
 export { Typography, textVariants };

@@ -31,6 +31,8 @@ Figma variables ──(1) export──▶ tokens/figma/*.tokens.json ──(2) n
 | `Components/Forms/Medium` (40px) | `var(--components-forms-medium)` | `h-forms-medium` |
 | `Font/Size/350`, `Font/Lineheight/500` | `var(--font-size-350)` … | `text-350 leading-500` |
 | `Font/Weight/Medium` (520) | `var(--font-weight-medium)` | `font-medium` |
+| Text style `Label/Strong/Small` | — | `type-label-strong-small` |
+| Effect style `Focus/Base`, `Shadow/default` | — | `shadow-focus-base`, `shadow-default` |
 
 - **Light/Dark:** colour tokens switch under `[data-theme="dark"]`.
 - **Desktop/Mobile:** measurement and type values switch at `max-width: 767px`.
@@ -43,7 +45,7 @@ Figma variables ──(1) export──▶ tokens/figma/*.tokens.json ──(2) n
   `Neutral/1100` / `Neutral/1000` until the links are fixed in Figma. The Starter plan blocks editing Dark mode.
 - **Ignored Mobile values:** Mobile font families and `Corner Radius/Control/xl` are still Wideset's (same
   plan limit), so `ignoreMobile` keeps the Desktop values.
-- **Not exported:** effect styles (shadows, focus rings) and text styles aren't variables, so they aren't
-  exported yet.
-- **Legacy aliases:** `src/styles/legacy-aliases.css` maps the old v1 names the components still use onto
-  these tokens. Phase 2 removes it.
+- **Text and effect styles** aren't variables, so `figma_export_tokens` skips them. They live in
+  `tokens/figma/styles.json`, which the build turns into `type-*` utilities (one per text style) and `shadow-*`
+  utilities (one per effect style). Re-export by asking Claude to read the local text and effect styles of
+  StudioKIT 2.0 (names plus bound variable paths) into that file, in the same format.

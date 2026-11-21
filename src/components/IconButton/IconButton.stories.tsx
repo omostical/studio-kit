@@ -1,142 +1,52 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import {
-  Plus, Trash2, Settings, Bell, Search,
-  Download, Edit, X, Check, ArrowRight,
-} from "lucide-react";
+import { X, Pencil, Trash2, MoreHorizontal } from "lucide-react";
 import { IconButton } from "./IconButton";
+
+const variants = ["primary", "secondary", "danger", "success", "inverse"] as const;
+const appearances = ["filled", "border", "ghost"] as const;
+const sizes = ["xsmall", "small", "medium", "large"] as const;
 
 const meta: Meta<typeof IconButton> = {
   title: "Components/IconButton",
   component: IconButton,
   tags: ["autodocs"],
-  args: {
-    "aria-label": "Action",
-    icon: <Plus />,
-    variant: "primary",
-    size: "md",
-  },
+  args: { icon: <Pencil />, "aria-label": "Edit", variant: "secondary", appearance: "ghost", size: "medium" },
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "danger", "success", "ghost"],
-    },
-    size: {
-      control: "select",
-      options: ["lg", "md", "sm", "xs"],
-    },
+    variant: { control: "select", options: variants, description: "Figma: Variant" },
+    appearance: { control: "inline-radio", options: appearances, description: "Figma: Style" },
+    size: { control: "inline-radio", options: sizes, description: "Figma: Size" },
     disabled: { control: "boolean" },
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof IconButton>;
 
-// ─── Playground ───────────────────────────────────────────────────────────────
-
 export const Playground: Story = {};
 
-// ─── All Variants ─────────────────────────────────────────────────────────────
-
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-3 items-center">
-      <IconButton variant="primary" aria-label="Add" icon={<Plus />} />
-      <IconButton variant="secondary" aria-label="Settings" icon={<Settings />} />
-      <IconButton variant="danger" aria-label="Delete" icon={<Trash2 />} />
-      <IconButton variant="success" aria-label="Confirm" icon={<Check />} />
-      <IconButton variant="ghost" aria-label="Search" icon={<Search />} />
-    </div>
-  ),
-};
-
-// ─── All Sizes ────────────────────────────────────────────────────────────────
-
-export const AllSizes: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-3 items-center">
-      <IconButton size="lg" aria-label="Large" icon={<Bell />} />
-      <IconButton size="md" aria-label="Medium" icon={<Bell />} />
-      <IconButton size="sm" aria-label="Small" icon={<Bell />} />
-      <IconButton size="xs" aria-label="X-Small" icon={<Bell />} />
-    </div>
-  ),
-};
-
-// ─── Variants × Sizes matrix ──────────────────────────────────────────────────
-
-const variantIcons = {
-  primary: <Plus />,
-  secondary: <Settings />,
-  danger: <Trash2 />,
-  success: <Check />,
-  ghost: <Search />,
-} as const;
-
-export const VariantMatrix: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      {(["primary", "secondary", "danger", "success", "ghost"] as const).map(
-        (variant) => (
-          <div key={variant} className="flex flex-wrap gap-3 items-center">
-            <span className="w-20 text-xs text-text-subtle capitalize">{variant}</span>
-            {(["lg", "md", "sm", "xs"] as const).map((size) => (
-              <IconButton
-                key={size}
-                variant={variant}
-                size={size}
-                aria-label={`${variant} ${size}`}
-                icon={variantIcons[variant]}
-              />
-            ))}
-          </div>
-        )
-      )}
-    </div>
-  ),
-};
-
-// ─── Disabled States ──────────────────────────────────────────────────────────
-
-export const DisabledStates: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-3 items-center">
-      <IconButton variant="primary" aria-label="Add" icon={<Plus />} disabled />
-      <IconButton variant="secondary" aria-label="Edit" icon={<Edit />} disabled />
-      <IconButton variant="danger" aria-label="Delete" icon={<Trash2 />} disabled />
-      <IconButton variant="success" aria-label="Confirm" icon={<Check />} disabled />
-      <IconButton variant="ghost" aria-label="Search" icon={<Search />} disabled />
-    </div>
-  ),
-};
-
-// ─── Common Use Cases ─────────────────────────────────────────────────────────
-
-export const CommonUseCases: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <div>
-        <p className="text-xs text-text-subtle mb-3">Toolbar actions</p>
-        <div className="flex gap-1">
-          <IconButton variant="ghost" size="sm" aria-label="Edit" icon={<Edit />} />
-          <IconButton variant="ghost" size="sm" aria-label="Download" icon={<Download />} />
-          <IconButton variant="ghost" size="sm" aria-label="Settings" icon={<Settings />} />
-          <IconButton variant="danger" size="sm" aria-label="Delete" icon={<Trash2 />} />
+export const Matrix: Story = {
+  render: (args) => (
+    <div className="grid gap-gap-7">
+      {appearances.map((appearance) => (
+        <div key={appearance} className="flex items-center gap-gap-7">
+          <span className="w-20 type-caption-medium text-static-text-subtle">{appearance}</span>
+          {variants.map((variant) => (
+            <span key={variant} className={variant === "inverse" ? "rounded-control-lg bg-static-fill-inverse-background p-gap-3" : ""}>
+              <IconButton {...args} variant={variant} appearance={appearance} aria-label={`${variant} ${appearance}`} />
+            </span>
+          ))}
         </div>
-      </div>
-      <div>
-        <p className="text-xs text-text-subtle mb-3">Dismiss / close</p>
-        <div className="flex gap-2">
-          <IconButton variant="ghost" size="md" aria-label="Close" icon={<X />} />
-          <IconButton variant="secondary" size="md" aria-label="Close" icon={<X />} />
-        </div>
-      </div>
-      <div>
-        <p className="text-xs text-text-subtle mb-3">Navigation</p>
-        <div className="flex gap-2">
-          <IconButton variant="primary" size="lg" aria-label="Next" icon={<ArrowRight />} />
-          <IconButton variant="secondary" size="lg" aria-label="Next" icon={<ArrowRight />} />
-        </div>
-      </div>
+      ))}
+    </div>
+  ),
+};
+
+export const Toolbar: Story = {
+  render: () => (
+    <div className="flex gap-gap-3">
+      <IconButton icon={<Pencil />} aria-label="Edit" />
+      <IconButton icon={<Trash2 />} aria-label="Delete" variant="danger" />
+      <IconButton icon={<MoreHorizontal />} aria-label="More actions" />
+      <IconButton icon={<X />} aria-label="Close" />
     </div>
   ),
 };

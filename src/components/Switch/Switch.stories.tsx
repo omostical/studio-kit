@@ -5,56 +5,18 @@ const meta: Meta<typeof Switch> = {
   title: "Components/Switch",
   component: Switch,
   tags: ["autodocs"],
-  parameters: { layout: "centered" },
+  args: { label: "Email notifications", size: "large", labelPosition: "right" },
   argTypes: {
-    size: { control: "select", options: ["sm", "md", "lg"] },
+    size: { control: "inline-radio", options: ["small", "large"], description: "Figma: Size" },
+    labelPosition: { control: "inline-radio", options: ["left", "right"], description: "Figma: Label" },
     disabled: { control: "boolean" },
-    defaultChecked: { control: "boolean" },
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof Switch>;
 
-export const Default: Story = {
-  args: { size: "md" },
-};
-
-export const WithLabel: Story = {
-  args: { label: "Enable notifications", size: "md" },
-};
-
-export const WithDescription: Story = {
-  args: {
-    label: "Marketing emails",
-    description: "Receive emails about new products, features, and more.",
-    size: "md",
-  },
-};
-
-export const Checked: Story = {
-  args: {
-    label: "Dark mode",
-    defaultChecked: true,
-    size: "md",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: "Disabled option",
-    description: "This setting is managed by your organisation.",
-    disabled: true,
-    size: "md",
-  },
-};
-
-export const Sizes: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Switch size="sm" label="Small" />
-      <Switch size="md" label="Medium" />
-      <Switch size="lg" label="Large" />
-    </div>
-  ),
-};
+export const Playground: Story = {};
+export const On: Story = { args: { defaultChecked: true } };
+export const WithDescription: Story = { args: { description: "Get an email when someone mentions you." } };
+export const Small: Story = { args: { size: "small" } };
+export const Disabled: Story = { args: { disabled: true, defaultChecked: true } };

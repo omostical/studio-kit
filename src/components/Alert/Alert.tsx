@@ -1,84 +1,49 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { Info, CheckCircle2, AlertTriangle, XCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/Button";
+import { Button } from "../Button/Button";
+import { IconButton } from "../IconButton/IconButton";
 
 /**
- * Alert
+ * Alert — Figma: StudioKIT 2.0 › Inline Alert (4705:88320). Description: docs/figma-descriptions/inline-alert.md
  *
- * Source of truth: Figma StudioKIT_v1 — node 2654:14276
- * https://www.figma.com/design/yEvYgthP0qWo5EV4QUjZ8Z/StudioKIT_v1?node-id=2654-14276
- *
- * Transient, contextual feedback in-context. For page-level system banners use Banner;
- * for self-dismissing notifications use Toast.
- *
- * A11y contract:
- *   - info / success → role="status" (aria-live=polite)
- *   - warning / error → role="alert" (aria-live=assertive)
- *   - Dismiss control has 24×24 hit area and an accessible name (default "Dismiss")
- *   - Title renders as <h3> by default; override with `titleAs`
+ * A message inside the page, next to the content it's about. App-wide messages → System Alert;
+ * short confirmations → Toast.
+ * Figma property → prop:  Status → status · Position → position · Message → description ·
+ * Actions → action / actionLabel · Dismiss → dismissible.
+ * Box: Semantic/Fill/<Status>, Corner Radius/Container/md, padding Gap/7 × 16; title Label/Strong/Small and
+ * message Body/Medium in Semantic/Text/OnSubtle/<Status>; icon 20px in Semantic/Text/<Status>.
  */
+export type AlertStatus = "error" | "warning" | "success" | "info";
 
-type Intent = "info" | "success" | "warning" | "error";
-type Layout = "vertical" | "horizontal";
-
-const alertVariants = cva(
-  [
-    "flex items-start rounded-lg border p-4",
-    "font-[family-name:var(--font-family-sans)]",
-  ].join(" "),
-  {
-    variants: {
-      intent: {
-        info: "bg-[var(--bg-fill-brand-subtle)] border-[var(--border-brand-hh)]",
-        success: "bg-[var(--bg-fill-success-subtle)] border-[var(--border-success-subtle)]",
-        warning: "bg-[var(--bg-fill-warning-subtle)] border-[var(--border-warning-subtle)]",
-        error: "bg-[var(--bg-fill-error-subtle)] border-[var(--border-error-subtle)]",
-      },
-      layout: {
-        vertical: "gap-4",
-        horizontal: "gap-2.5",
-      },
-    },
-    defaultVariants: {
-      intent: "info",
-      layout: "vertical",
-    },
-  }
-);
-
-const intentIcon: Record<Intent, React.ComponentType<{ className?: string }>> = {
-  info: Info,
-  success: CheckCircle2,
-  warning: AlertTriangle,
-  error: XCircle,
+const statusStyle: Record<AlertStatus, { box: string; text: string; icon: string; Icon: React.ComponentType<{ className?: string }> }> = {
+  error: { box: "bg-semantic-fill-negative", text: "text-semantic-text-onsubtle-negative", icon: "text-semantic-text-negative", Icon: XCircle },
+  warning: { box: "bg-semantic-fill-notice", text: "text-semantic-text-onsubtle-notice", icon: "text-semantic-text-notice", Icon: AlertTriangle },
+  success: { box: "bg-semantic-fill-positive", text: "text-semantic-text-onsubtle-positive", icon: "text-semantic-text-positive", Icon: CheckCircle2 },
+  info: { box: "bg-semantic-fill-info", text: "text-semantic-text-onsubtle-info", icon: "text-semantic-text-info", Icon: Info },
 };
 
-const intentIconColor: Record<Intent, string> = {
-  info: "text-[var(--icon-brand)]",
-  success: "text-[var(--icon-success)]",
-  warning: "text-[var(--icon-warning)]",
-  error: "text-[var(--icon-error)]",
-};
+const alertVariants = cva("flex rounded-container-md px-gap-9 py-gap-7", {
+  variants: {
+    position: { horizontal: "items-start gap-gap-7", vertical: "flex-col gap-gap-7" },
+  },
+  defaultVariants: { position: "horizontal" },
+});
 
-export interface AlertProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
-    VariantProps<typeof alertVariants> {
+export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  status?: AlertStatus;
+  position?: "horizontal" | "vertical";
   title: React.ReactNode;
   description?: React.ReactNode;
-  /** Render the heading as a different element. Default `h3`. */
-  titleAs?: "h2" | "h3" | "h4" | "h5" | "h6" | "div";
-  /** Override the per-intent default icon. Pass `null` to hide the icon. */
+  /** Heading level for the title, to fit the page outline. */
+  titleAs?: "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+  /** Replace the status icon; `null` hides it. */
   icon?: React.ReactNode;
-  /** Custom action node — overrides actionLabel/onAction. */
   action?: React.ReactNode;
-  /** Convenience: render a Button with this label as the action. */
   actionLabel?: string;
   onAction?: () => void;
-  /** Show the dismiss (×) control. */
   dismissible?: boolean;
-  /** Accessible name for the dismiss button. */
   dismissLabel?: string;
   onDismiss?: () => void;
 }
@@ -87,8 +52,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       className,
-      intent = "info",
-      layout = "vertical",
+      status = "info",
+      position = "horizontal",
       title,
       titleAs: TitleTag = "h3",
       description,
@@ -104,93 +69,46 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     },
     ref
   ) => {
-    const computedIntent: Intent = intent ?? "info";
-    const computedLayout: Layout = layout ?? "vertical";
-
-    const IntentIcon = intentIcon[computedIntent];
-    const computedRole =
-      role ?? (computedIntent === "warning" || computedIntent === "error" ? "alert" : "status");
-    const ariaLive = computedRole === "alert" ? "assertive" : "polite";
-
-    const renderedIcon =
-      icon === null ? null : icon !== undefined ? (
-        <span className={cn("shrink-0", intentIconColor[computedIntent])} aria-hidden>
-          {icon}
+    const s = statusStyle[status];
+    const iconNode =
+      icon === null ? null : (
+        <span className={cn("flex size-size-11 shrink-0 items-center justify-center [&_svg]:size-size-11", s.icon)} aria-hidden>
+          {icon ?? <s.Icon />}
         </span>
-      ) : (
-        <IntentIcon className={cn("size-[18px] shrink-0", intentIconColor[computedIntent])} aria-hidden />
       );
-
-    const renderedAction =
-      action !== undefined
-        ? action
-        : actionLabel
-        ? (
-          <Button size="xs" variant="secondary" onClick={onAction}>
-            {actionLabel}
-          </Button>
-        )
-        : null;
-
-    const titleNode = (
-      <TitleTag className="text-sm font-medium leading-[18px] text-[var(--text-primary)] m-0">
-        {title}
-      </TitleTag>
-    );
-    const descriptionNode = description ? (
-      <p className="text-[13px] leading-4 text-[var(--text-secondary)] m-0">{description}</p>
+    const actionNode =
+      action ??
+      (actionLabel ? (
+        <Button size="small" variant="secondary" appearance="border" onClick={onAction}>
+          {actionLabel}
+        </Button>
+      ) : null);
+    const dismissNode = dismissible ? (
+      <IconButton size="small" variant="secondary" appearance="ghost" aria-label={dismissLabel} onClick={onDismiss} icon={<X />} className={s.text} />
     ) : null;
 
     return (
       <div
         ref={ref}
-        role={computedRole}
-        aria-live={ariaLive}
-        className={cn(alertVariants({ intent: computedIntent, layout: computedLayout }), className)}
+        role={role ?? (status === "error" || status === "warning" ? "alert" : "status")}
+        className={cn(alertVariants({ position }), s.box, className)}
         {...props}
       >
-        {computedLayout === "vertical" ? (
-          <>
-            {renderedIcon}
-            <div className="flex flex-1 flex-col gap-4 min-w-0">
-              <div className="flex flex-col gap-1 min-w-0">
-                {titleNode}
-                {descriptionNode}
-              </div>
-              {renderedAction ? <div className="flex items-center gap-4">{renderedAction}</div> : null}
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-1 flex-col gap-1 min-w-0">
-            <div className="flex items-center gap-2 min-w-0">
-              {renderedIcon}
-              {titleNode}
-            </div>
-            {descriptionNode}
+        <div className="flex min-w-0 flex-1 flex-col gap-gap-2">
+          <div className="flex items-start gap-gap-7">
+            {iconNode}
+            <TitleTag className={cn("m-0 type-label-strong-small", s.text)}>{title}</TitleTag>
+          </div>
+          {description != null && (
+            <p className={cn("m-0 type-body-medium", iconNode && "pl-gap-14", s.text)}>{description}</p>
+          )}
+        </div>
+        {(actionNode || dismissNode) && (
+          <div className={cn("flex shrink-0 items-center gap-gap-5", position === "vertical" && iconNode && "pl-gap-14")}>
+            {actionNode}
+            {dismissNode}
           </div>
         )}
-
-        {(renderedAction && computedLayout === "horizontal") || dismissible ? (
-          <div className="flex items-center gap-4 shrink-0">
-            {computedLayout === "horizontal" && renderedAction}
-            {dismissible ? (
-              <button
-                type="button"
-                aria-label={dismissLabel}
-                onClick={onDismiss}
-                className={cn(
-                  "inline-flex items-center justify-center size-6 rounded",
-                  "text-[var(--icon-secondary)]",
-                  "hover:bg-[var(--alpha-black-1)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--border-brand)]",
-                  "transition-colors"
-                )}
-              >
-                <X className="size-3.5" aria-hidden />
-              </button>
-            ) : null}
-          </div>
-        ) : null}
       </div>
     );
   }

@@ -1,70 +1,59 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors",
-  {
-    variants: {
-      variant: {
-        default: "bg-surface-muted text-text-secondary",
-        brand: "bg-fill-brand-subtle text-text-brand",
-        success: "bg-fill-success-subtle text-text-success",
-        warning: "bg-fill-warning-subtle text-text-warning",
-        danger: "bg-fill-error-subtle text-text-error",
-        outline: "border border-border-strong text-text-secondary bg-transparent",
-      },
-      size: {
-        sm: "text-xs px-2 py-0.5",
-        md: "text-xs px-2.5 py-0.5",
-        lg: "text-sm px-3 py-1",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-    },
-  }
-);
+/**
+ * Badge — Figma: StudioKIT 2.0 › Status Badge (557:10806). Description: docs/figma-descriptions/status-badge.md
+ *
+ * Shows the status of an item. For categories use Tag; for interactive filters use a Chip.
+ * Figma property → prop:  Status → status · Emphasis → emphasis · Shape → shape · Size → size ·
+ * Type (Label / Icon / Label + Icon) → children / icon.
+ * Low emphasis: Semantic/Fill/<Status> + Semantic/Text/OnSubtle/<Status>;
+ * high emphasis: Semantic/Fill/Inverse/<Status> + Semantic/Text/OnInverse/<Status>.
+ */
+export type BadgeStatus = "negative" | "notice" | "positive" | "info" | "neutral";
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {
-  dot?: boolean;
+const badgeVariants = cva("inline-flex w-fit shrink-0 items-center whitespace-nowrap", {
+  variants: {
+    size: {
+      small: "h-control-medium px-gap-4 gap-gap-3 type-caption-strong-medium [&_svg]:size-size-7",
+      medium: "h-control-large px-gap-5 gap-gap-3 type-label-strong-small [&_svg]:size-size-9",
+      large: "h-size-13 px-gap-7 gap-gap-4 type-label-strong-small [&_svg]:size-size-9",
+    },
+    shape: { round: "rounded-control-full", square: "rounded-control-md" },
+    tone: {
+      "negative-low": "bg-semantic-fill-negative text-semantic-text-onsubtle-negative",
+      "notice-low": "bg-semantic-fill-notice text-semantic-text-onsubtle-notice",
+      "positive-low": "bg-semantic-fill-positive text-semantic-text-onsubtle-positive",
+      "info-low": "bg-semantic-fill-info text-semantic-text-onsubtle-info",
+      "neutral-low": "bg-semantic-fill-neutral text-semantic-text-onsubtle-neutral",
+      "negative-high": "bg-semantic-fill-inverse-negative text-semantic-text-oninverse-negative",
+      "notice-high": "bg-semantic-fill-inverse-notice text-semantic-text-oninverse-notice",
+      "positive-high": "bg-semantic-fill-inverse-positive text-semantic-text-oninverse-positive",
+      "info-high": "bg-semantic-fill-inverse-info text-semantic-text-oninverse-info",
+      "neutral-high": "bg-semantic-fill-inverse-neutral text-semantic-text-oninverse-neutral",
+    },
+  },
+  defaultVariants: { size: "medium", shape: "round", tone: "neutral-low" },
+});
+
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  status?: BadgeStatus;
+  emphasis?: "low" | "high";
+  shape?: "round" | "square";
+  size?: "small" | "medium" | "large";
+  /** Optional leading icon. Status must still be readable as text. */
+  icon?: React.ReactNode;
 }
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant, size, dot, children, ...props }, ref) => {
-    const dotColors: Record<string, string> = {
-      default: "bg-icon-tertiary",
-      brand: "bg-icon-brand",
-      success: "bg-icon-success",
-      warning: "bg-icon-warning",
-      danger: "bg-icon-error",
-      outline: "bg-icon-tertiary",
-    };
-
-    return (
-      <span
-        ref={ref}
-        className={cn(badgeVariants({ variant, size, className }))}
-        {...props}
-      >
-        {dot && (
-          <span
-            className={cn(
-              "size-1.5 rounded-full",
-              dotColors[variant ?? "default"]
-            )}
-            aria-hidden="true"
-          />
-        )}
-        {children}
-      </span>
-    );
-  }
+  ({ className, status = "neutral", emphasis = "low", shape, size, icon, children, ...props }, ref) => (
+    <span ref={ref} className={cn(badgeVariants({ size, shape, tone: `${status}-${emphasis}` }), className)} {...props}>
+      {icon != null && <span aria-hidden="true" className="inline-flex">{icon}</span>}
+      {children}
+    </span>
+  )
 );
-
 Badge.displayName = "Badge";
 
 export { Badge, badgeVariants };

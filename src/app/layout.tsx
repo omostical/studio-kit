@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className="antialiased"
         style={{
-          fontFamily: "var(--font-family-sans)",
+          fontFamily: "var(--font-family-body)",
         }}
       >
         {children}

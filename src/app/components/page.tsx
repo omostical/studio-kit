@@ -2,23 +2,31 @@
 
 import { useState } from "react";
 import { Button } from "@/components/Button";
-import { Badge } from "@/components/Badge";
+import { IconButton } from "@/components/IconButton";
+import { Badge, type BadgeStatus } from "@/components/Badge";
 import { Input } from "@/components/Input";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/Card";
-import { Typography } from "@/components/Typography";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/Card";
+import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
+import { Checkbox } from "@/components/Checkbox";
+import { Alert } from "@/components/Alert";
 import { Select, SelectItem } from "@/components/Select";
-import { Tag } from "@/components/Tag";
-import { Search, Mail, ArrowRight, Plus, Eye } from "lucide-react";
-import { PreviewFrame, PreviewLabel } from "@/site/PreviewFrame";
+import { Tag, tagColors } from "@/components/Tag";
+import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X } from "lucide-react";
+import { PreviewFrame } from "@/site/PreviewFrame";
 import { W } from "@/site/wideset";
+
+const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
+const appearances = ["filled", "border", "ghost"] as const;
+const sizes4 = ["xsmall", "small", "medium", "large"] as const;
+const badgeStatuses: BadgeStatus[] = ["negative", "notice", "positive", "info", "neutral"];
+const typeSamples: TypographyVariant[] = [
+  "title-small", "subtitle-large", "subtitle-medium", "subtitle-small",
+  "label-strong-medium", "label-strong-small", "label-small",
+  "body-large", "body-medium", "body-small", "caption-medium", "number-medium",
+];
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
 function ComponentSection({
@@ -150,395 +158,336 @@ export default function ComponentsPage() {
       </section>
 
       {/* ── Button ───────────────────────────────────────────────────────── */}
+
+      {/* ─── Button ─────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="button"
         eyebrow="Actions / 01"
         title="Button"
-        description="5 variants × 4 sizes × 5 states. Supports prefix/suffix icons and a loading spinner."
+        description="Figma: Variant (5) × Style (filled · border · ghost) × Size (4) × State. Props mirror the Figma properties: variant, appearance, size."
       >
-        <SubBlock id="button-variants" title="Variants">
-          <PreviewLabel>Light</PreviewLabel>
-          <PreviewFrame>
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="danger">Danger</Button>
-            <Button variant="success">Success</Button>
-            <Button variant="ghost">Ghost</Button>
+        <SubBlock id="button-variants" title="Variant × Style">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {appearances.map((appearance) => (
+                <div key={appearance} className="flex flex-wrap items-center gap-gap-7">
+                  {controlVariants.filter((v) => v !== "inverse").map((variant) => (
+                    <Button key={variant} variant={variant} appearance={appearance}>
+                      {cap(variant)}
+                    </Button>
+                  ))}
+                </div>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
 
-        <SubBlock id="button-dark" title="Dark mode">
-          <PreviewFrame dark>
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="danger">Danger</Button>
-            <Button variant="success">Success</Button>
-            <Button variant="ghost">Ghost</Button>
+        <SubBlock id="button-dark" title="Dark mode and Inverse">
+          <PreviewFrame dark align="start">
+            <div className="grid gap-gap-7">
+              {appearances.map((appearance) => (
+                <div key={appearance} className="flex flex-wrap items-center gap-gap-7">
+                  {controlVariants.map((variant) =>
+                    variant === "inverse" ? (
+                      // Inverse is for the opposite surface, so it sits on an inverse background.
+                      <span key={variant} className="rounded-control-lg bg-static-fill-inverse-background p-gap-3">
+                        <Button variant={variant} appearance={appearance}>{cap(variant)}</Button>
+                      </span>
+                    ) : (
+                      <Button key={variant} variant={variant} appearance={appearance}>
+                        {cap(variant)}
+                      </Button>
+                    )
+                  )}
+                </div>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
 
         <SubBlock id="button-sizes" title="Sizes">
           <PreviewFrame>
-            <Button size="lg">Large</Button>
-            <Button size="md">Medium</Button>
-            <Button size="sm">Small</Button>
-            <Button size="xs">XS</Button>
+            {sizes4.map((size) => (
+              <Button key={size} size={size}>{cap(size)}</Button>
+            ))}
           </PreviewFrame>
         </SubBlock>
 
         <SubBlock id="button-icons" title="States and icons">
           <PreviewFrame>
-            <Button variant="primary" prefixIcon={<Plus />}>
-              Create
-            </Button>
-            <Button variant="secondary" suffixIcon={<ArrowRight />}>
-              Continue
-            </Button>
-            <Button variant="primary" loading>
-              Saving…
-            </Button>
-            <Button variant="primary" disabled>
-              Disabled
-            </Button>
+            <Button prefixIcon={<Plus />}>Create</Button>
+            <Button variant="secondary" appearance="border" suffixIcon={<ArrowRight />}>Continue</Button>
+            <Button variant="secondary" appearance="border" loading>Saving…</Button>
+            <Button disabled>Disabled</Button>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Switch ───────────────────────────────────────────────────────── */}
+      {/* ─── Icon Button ────────────────────────────────────────────────────── */}
       <ComponentSection
-        id="switch"
+        id="icon-button"
         eyebrow="Actions / 02"
-        title="Switch"
-        description="Toggle control with label and optional description. Three sizes."
+        title="Icon Button"
+        description="Same Variant × Style × Size model as Button, square. Every icon button needs an aria-label."
       >
-        <SubBlock id="switch-default" title="Default">
+        <SubBlock id="icon-button-variants" title="Variant × Style">
           <PreviewFrame align="start">
-            <div className="flex flex-col gap-5 w-full max-w-md">
-              <Switch size="md" label="Enable notifications" />
-              <Switch
-                size="md"
-                label="Marketing emails"
-                description="Receive emails about new products and features."
-                checked={switchOn}
-                onCheckedChange={setSwitchOn}
-              />
-              <Switch
-                size="md"
-                label="Disabled option"
-                description="Managed by your organisation."
-                disabled
-              />
+            <div className="grid gap-gap-7">
+              {appearances.map((appearance) => (
+                <div key={appearance} className="flex items-center gap-gap-7">
+                  {controlVariants.filter((v) => v !== "inverse").map((variant) => (
+                    <IconButton key={variant} variant={variant} appearance={appearance} icon={<Pencil />} aria-label={`Edit (${variant} ${appearance})`} />
+                  ))}
+                </div>
+              ))}
             </div>
           </PreviewFrame>
         </SubBlock>
-
-        <SubBlock id="switch-sizes" title="Sizes">
+        <SubBlock id="icon-button-sizes" title="Sizes">
           <PreviewFrame>
-            <Switch size="sm" label="Small" />
-            <Switch size="md" label="Medium" />
-            <Switch size="lg" label="Large" />
+            {sizes4.map((size) => (
+              <IconButton key={size} size={size} appearance="border" icon={<X />} aria-label={`Close (${size})`} />
+            ))}
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Input ────────────────────────────────────────────────────────── */}
+      {/* ─── Input ──────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="input"
-        eyebrow="Form / 03"
+        eyebrow="Form / 01"
         title="Input"
-        description="Text input with label, hint, error state, and prefix/suffix slots."
+        description="Figma Input inside Form Field: label, optional marker, helper text and error message. Large uses 16px text so iOS Safari doesn't zoom."
       >
-        <SubBlock id="input-default" title="Default">
+        <SubBlock id="input-default" title="States">
           <PreviewFrame align="start">
-            <div className="flex flex-col gap-4 w-full max-w-sm">
-              <Input label="Default" placeholder="Enter text…" />
-              <Input
-                label="With hint"
-                placeholder="johndoe"
-                hint="3–20 characters, letters only."
-              />
-              <Input
-                label="With error"
-                placeholder="you@example.com"
-                error="This email is already taken."
-                defaultValue="john@"
-              />
+            <div className="grid w-full max-w-sm gap-gap-11">
+              <Input label="Email address" placeholder="e.g. hello@example.com" helperText="We'll only use this for receipts." />
+              <Input label="Email address" defaultValue="hello@" error="Enter an email address like name@example.com" />
+              <Input label="Company" optional placeholder="" />
+              <Input label="Email address" defaultValue="hello@example.com" disabled />
             </div>
           </PreviewFrame>
         </SubBlock>
-
-        <SubBlock id="input-affixes" title="Prefix and suffix">
+        <SubBlock id="input-affixes" title="Sizes, prefix and suffix">
           <PreviewFrame align="start">
-            <div className="flex flex-col gap-4 w-full max-w-sm">
-              <Input placeholder="Search…" prefix={<Search />} />
-              <Input
-                label="Password"
-                type="password"
-                placeholder="Enter password"
-                suffix={<Eye />}
-              />
-              <Input
-                placeholder="With both icons"
-                prefix={<Mail />}
-                suffix={<Search />}
-              />
+            <div className="grid w-full max-w-sm gap-gap-11">
+              <Input size="small" placeholder="Search projects" prefix={<Search />} aria-label="Search projects" />
+              <Input size="medium" placeholder="you@example.com" prefix={<Mail />} aria-label="Email" />
+              <Input size="large" type="password" placeholder="Password" suffix={<Eye />} aria-label="Password" />
             </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Select ───────────────────────────────────────────────────────── */}
+      {/* ─── Select ─────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="select"
-        eyebrow="Form / 04"
+        eyebrow="Form / 02"
         title="Select"
-        description="Dropdown built on Radix UI with label, hint, and error states."
+        description="Figma Single Select with the Dropdown Menu list. Same field model as Input."
       >
         <SubBlock id="select-default" title="States">
           <PreviewFrame align="start">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-              <Select
-                label="Country"
-                placeholder="Select country"
-                value={selectVal}
-                onValueChange={setSelectVal}
-              >
-                <SelectItem value="us">United States</SelectItem>
+            <div className="grid w-full max-w-sm gap-gap-11">
+              <Select label="Country" placeholder="Select a country" value={selectVal} onValueChange={setSelectVal} helperText="Used for tax and currency.">
                 <SelectItem value="uk">United Kingdom</SelectItem>
-                <SelectItem value="ca">Canada</SelectItem>
-                <SelectItem value="au">Australia</SelectItem>
+                <SelectItem value="ng">Nigeria</SelectItem>
+                <SelectItem value="us">United States</SelectItem>
               </Select>
-              <Select
-                label="Role"
-                hint="Determines user permissions."
-                placeholder="Select role"
-              >
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="editor">Editor</SelectItem>
-                <SelectItem value="viewer">Viewer</SelectItem>
+              <Select label="Country" error="Choose the country you pay tax in.">
+                <SelectItem value="uk">United Kingdom</SelectItem>
               </Select>
-              <Select
-                label="Category"
-                error="Please select a category."
-                placeholder="Select category"
-              >
-                <SelectItem value="design">Design</SelectItem>
-                <SelectItem value="engineering">Engineering</SelectItem>
+              <Select label="Country" defaultValue="uk" disabled>
+                <SelectItem value="uk">United Kingdom</SelectItem>
               </Select>
             </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Badge ────────────────────────────────────────────────────────── */}
+      {/* ─── Checkbox ───────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="checkbox"
+        eyebrow="Form / 03"
+        title="Checkbox"
+        description="Figma Type → checked (false · true · indeterminate). Danger only for high-risk choices."
+      >
+        <SubBlock id="checkbox-states" title="Types and states">
+          <PreviewFrame align="start">
+            <div className="grid grid-cols-1 gap-gap-9 sm:grid-cols-3">
+              <Checkbox label="Unselected" description="Helper description" />
+              <Checkbox label="Selected" defaultChecked />
+              <Checkbox label="Indeterminate" checked="indeterminate" />
+              <Checkbox label="Disabled" disabled />
+              <Checkbox label="Disabled selected" disabled checked />
+              <Checkbox label="Delete permanently" variant="danger" defaultChecked />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Switch ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="switch"
+        eyebrow="Form / 04"
+        title="Switch"
+        description="Turns a setting on or off immediately. Label the setting, not the state."
+      >
+        <SubBlock id="switch-default" title="Default">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-9">
+              <Switch label="Enable notifications" checked={switchOn} onCheckedChange={setSwitchOn} />
+              <Switch label="Marketing emails" description="About new products and features." />
+              <Switch label="Disabled option" disabled defaultChecked />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="switch-sizes" title="Sizes">
+          <PreviewFrame>
+            <Switch size="small" aria-label="Small switch" defaultChecked />
+            <Switch size="large" aria-label="Large switch" defaultChecked />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Alert ──────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="alert"
+        eyebrow="Feedback / 01"
+        title="Alert"
+        description="Figma Inline Alert. A message next to the content it's about; the text says the status, colour only reinforces it."
+      >
+        <SubBlock id="alert-statuses" title="Statuses">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-7">
+              <Alert status="info" title="Your trial ends in 3 days" description="Add a payment method to keep your projects." actionLabel="Add payment" dismissible />
+              <Alert status="success" title="Invoice sent" description="We emailed the invoice to the client." />
+              <Alert status="warning" title="Storage almost full" description="You've used 92% of your storage." />
+              <Alert status="error" title="Payment failed" description="Check your card details and try again." actionLabel="Update card" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Badge ──────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="badge"
-        eyebrow="Data display / 05"
+        eyebrow="Data display / 01"
         title="Badge"
-        description="Status indicators and labels. Includes dot indicators and semantic variants."
+        description="Figma Status Badge: Status × Emphasis (low · high) × Shape × Size. For categories, use Tag."
       >
-        <SubBlock id="badge-variants" title="Variants">
-          <PreviewFrame>
-            <Badge variant="default">Default</Badge>
-            <Badge variant="brand">Brand</Badge>
-            <Badge variant="success" dot>
-              Active
-            </Badge>
-            <Badge variant="warning" dot>
-              Pending
-            </Badge>
-            <Badge variant="danger">Error</Badge>
-            <Badge variant="outline">Draft</Badge>
+        <SubBlock id="badge-variants" title="Status × Emphasis">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {(["low", "high"] as const).map((emphasis) => (
+                <div key={emphasis} className="flex flex-wrap gap-gap-5">
+                  {badgeStatuses.map((status) => (
+                    <Badge key={status} status={status} emphasis={emphasis}>{cap(status)}</Badge>
+                  ))}
+                </div>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
-
-        <SubBlock id="badge-sizes" title="Sizes">
+        <SubBlock id="badge-sizes" title="Sizes and shape">
           <PreviewFrame>
-            <Badge size="sm" variant="brand">
-              Small
-            </Badge>
-            <Badge size="md" variant="brand">
-              Medium
-            </Badge>
-            <Badge size="lg" variant="brand">
-              Large
-            </Badge>
+            <Badge size="small" status="info">Small</Badge>
+            <Badge size="medium" status="info">Medium</Badge>
+            <Badge size="large" status="info">Large</Badge>
+            <Badge size="medium" status="info" shape="square">Square</Badge>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Tag ──────────────────────────────────────────────────────────── */}
+      {/* ─── Tag ────────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="tag"
-        eyebrow="Data display / 06"
+        eyebrow="Data display / 02"
         title="Tag"
-        description="Non-interactive labelling chip. 5 types × 2 styles × 3 sizes × 2 shapes, with optional leading icon."
+        description="Figma Tag: 13 category colours × Emphasis (filled · border) × Size × Rounded. Colours mean categories, never status."
       >
-        <SubBlock id="tag-types" title="Types and styles">
+        <SubBlock id="tag-types" title="Colours">
           <PreviewFrame align="start">
-            <Tag type="Primary" style="Solid" icon={<Plus />}>
-              Primary
-            </Tag>
-            <Tag type="Primary" style="Outline" icon={<Plus />}>
-              Primary
-            </Tag>
-            <Tag type="Danger" style="Solid" icon={<Plus />}>
-              Danger
-            </Tag>
-            <Tag type="Danger" style="Outline" icon={<Plus />}>
-              Danger
-            </Tag>
-            <Tag type="Success" style="Solid" icon={<Plus />}>
-              Success
-            </Tag>
-            <Tag type="Warning" style="Outline" icon={<Plus />}>
-              Warning
-            </Tag>
-            <Tag type="Subtle" style="Solid">
-              Subtle
-            </Tag>
+            <div className="grid gap-gap-7">
+              {(["filled", "border"] as const).map((emphasis) => (
+                <div key={emphasis} className="flex flex-wrap gap-gap-5">
+                  {tagColors.map((color) => (
+                    <Tag key={color} color={color} emphasis={emphasis}>{cap(color)}</Tag>
+                  ))}
+                </div>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
-
         <SubBlock id="tag-sizes" title="Sizes">
           <PreviewFrame>
-            <Tag size="lg" icon={<Plus />}>
-              Large
-            </Tag>
-            <Tag size="md" icon={<Plus />}>
-              Medium
-            </Tag>
-            <Tag size="sm" icon={<Plus />}>
-              Small
-            </Tag>
+            <Tag size="small">Small</Tag>
+            <Tag size="medium">Medium</Tag>
+            <Tag size="large">Large</Tag>
+            <Tag size="medium" rounded>Rounded</Tag>
           </PreviewFrame>
         </SubBlock>
-
         <SubBlock id="tag-dark" title="Dark mode">
-          <PreviewFrame dark>
-            <Tag type="Primary" style="Solid" icon={<Plus />}>
-              Primary
-            </Tag>
-            <Tag type="Danger" style="Outline" icon={<Plus />}>
-              Danger
-            </Tag>
-            <Tag type="Success" style="Solid" icon={<Plus />}>
-              Success
-            </Tag>
-            <Tag type="Subtle" style="Solid">
-              Subtle
-            </Tag>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ── Typography ───────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="typography"
-        eyebrow="Data display / 07"
-        title="Typography"
-        description="Full type scale built on Geist. 9 semantic variants."
-      >
-        <SubBlock id="type-scale" title="Scale">
-          <PreviewFrame align="start">
-            <div className="flex flex-col gap-5 w-full">
-              <Typography variant="h1">Heading 1</Typography>
-              <Typography variant="h2">Heading 2</Typography>
-              <Typography variant="h3">Heading 3</Typography>
-              <Typography variant="h4">Heading 4</Typography>
-              <div style={{ height: 1, background: W.gray200 }} />
-              <Typography variant="lead">
-                Lead paragraph — introduces the main content of a section.
-              </Typography>
-              <Typography variant="body">
-                Body text for regular reading content at a comfortable size.
-              </Typography>
-              <Typography variant="small">
-                Small text for secondary information and captions.
-              </Typography>
-              <Typography variant="muted">
-                Muted text for metadata like timestamps and labels.
-              </Typography>
-              <Typography variant="code">
-                const token = colors.brand[500]
-              </Typography>
+          <PreviewFrame dark align="start">
+            <div className="flex flex-wrap gap-gap-5">
+              {tagColors.map((color) => (
+                <Tag key={color} color={color}>{cap(color)}</Tag>
+              ))}
             </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 
-      {/* ── Card ─────────────────────────────────────────────────────────── */}
+      {/* ─── Typography ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="typography"
+        eyebrow="Data display / 03"
+        title="Typography"
+        description="The Figma text styles, generated from the Typography variables. variant = style name in kebab case."
+      >
+        <SubBlock id="type-scale" title="Text styles">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-7">
+              {typeSamples.map((v) => (
+                <div key={v} className="grid grid-cols-[180px_1fr] items-baseline gap-gap-9">
+                  <Typography variant="caption-medium" tone="subtle">{v}</Typography>
+                  <Typography variant={v}>Design systems at scale</Typography>
+                </div>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Card ───────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="card"
-        eyebrow="Layout / 08"
+        eyebrow="Layout / 01"
         title="Card"
-        description="Container with header, content, and footer subcomponents. Three variants."
+        description="Figma Default Card. container={false} groups content without a box."
       >
-        <SubBlock id="card-variants" title="Variants">
+        <SubBlock id="card-variants" title="With and without container">
           <PreviewFrame align="start">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-              <Card variant="default">
-                <CardHeader>
-                  <CardTitle>Default</CardTitle>
-                  <CardDescription>
-                    A standard card with a subtle shadow and border.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm" style={{ color: W.gray600 }}>
-                    Card content goes here.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Button size="sm">Action</Button>
-                  <Button size="sm" variant="ghost">
-                    Cancel
-                  </Button>
-                </CardFooter>
-              </Card>
-              <Card variant="elevated">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <CardTitle>Elevated</CardTitle>
-                    <Badge variant="brand">New</Badge>
-                  </div>
-                  <CardDescription>
-                    A stronger shadow for more visual emphasis.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm" style={{ color: W.gray600 }}>
-                    Card content goes here.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    size="sm"
-                    variant="primary"
-                    suffixIcon={<ArrowRight />}
-                  >
-                    Get started
-                  </Button>
-                </CardFooter>
-              </Card>
-              <Card variant="ghost">
-                <CardHeader>
-                  <CardTitle>Ghost</CardTitle>
-                  <CardDescription>
-                    A low-contrast card for subtle grouping.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm" style={{ color: W.gray600 }}>
-                    Card content goes here.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Button size="sm" variant="secondary">
-                    Learn more
-                  </Button>
-                </CardFooter>
-              </Card>
+            <div className="grid w-full grid-cols-1 gap-gap-12 md:grid-cols-2">
+              {[true, false].map((container) => (
+                <Card key={String(container)} container={container}>
+                  <CardHeader>
+                    <div>
+                      <CardTitle>Sign in</CardTitle>
+                      <CardDescription>Use your work email.</CardDescription>
+                    </div>
+                    <Badge status="info">Beta</Badge>
+                  </CardHeader>
+                  <CardContent className="grid gap-gap-11">
+                    <Input label="Email address" placeholder="e.g. hello@example.com" />
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="secondary" appearance="border">Cancel</Button>
+                    <Button>Sign in</Button>
+                  </CardFooter>
+                </Card>
+              ))}
             </div>
           </PreviewFrame>
         </SubBlock>

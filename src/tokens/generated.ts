@@ -824,7 +824,65 @@ export const typography = {
   }
 } as const;
 
-export const primitives = {
+/** Figma text styles → the Tailwind utility that applies them. */
+export const textStyles = {
+  "Title/Large": "type-title-large",
+  "Title/Medium": "type-title-medium",
+  "Title/Small": "type-title-small",
+  "Subtitle/Large": "type-subtitle-large",
+  "Subtitle/Medium": "type-subtitle-medium",
+  "Subtitle/Small": "type-subtitle-small",
+  "Subtitle/XSmall": "type-subtitle-xsmall",
+  "Label/Large": "type-label-large",
+  "Label/Medium": "type-label-medium",
+  "Label/Small": "type-label-small",
+  "Label/Strong/Large": "type-label-strong-large",
+  "Label/Strong/Medium": "type-label-strong-medium",
+  "Label/Strong/Small": "type-label-strong-small",
+  "Body/Large": "type-body-large",
+  "Body/Medium": "type-body-medium",
+  "Body/Small": "type-body-small",
+  "Body/Strong/Large": "type-body-strong-large",
+  "Body/Strong/Medium": "type-body-strong-medium",
+  "Body/Strong/Small": "type-body-strong-small",
+  "Number/Large": "type-number-large",
+  "Number/Medium": "type-number-medium",
+  "Number/Small": "type-number-small",
+  "Number/XSmall": "type-number-xsmall",
+  "Number/Strong/Large": "type-number-strong-large",
+  "Number/Strong/Medium": "type-number-strong-medium",
+  "Number/Strong/Small": "type-number-strong-small",
+  "Number/Strong/XSmall": "type-number-strong-xsmall",
+  "Caption/Medium": "type-caption-medium",
+  "Caption/Small": "type-caption-small",
+  "Caption/Strong/Medium": "type-caption-strong-medium",
+  "Caption/Strong/Small": "type-caption-strong-small"
+} as const;
+
+/** Figma effect styles → the Tailwind shadow utility. */
+export const effectStyles = {
+  "Elevation/High": "shadow-elevation-high",
+  "Elevation/Medium": "shadow-elevation-medium",
+  "Elevation/Low": "shadow-elevation-low",
+  "Shadow/sm": "shadow-sm",
+  "Shadow/default": "shadow-default",
+  "Shadow/md": "shadow-md",
+  "Shadow/lg": "shadow-lg",
+  "Shadow/xl": "shadow-xl",
+  "Shadow/2xl": "shadow-2xl",
+  "Shadow/md-strong": "shadow-md-strong",
+  "Controls/Control": "shadow-controls-control",
+  "Controls/Tooltip": "shadow-controls-tooltip",
+  "Forms/Base": "shadow-forms-base",
+  "Forms/Active": "shadow-forms-active",
+  "Forms/Danger": "shadow-forms-danger",
+  "Focus/Base": "shadow-focus-base",
+  "Focus/Inversed": "shadow-focus-inversed",
+  "Focus/Danger": "shadow-focus-danger",
+  "Focus/Success": "shadow-focus-success"
+} as const;
+
+export const primitives ={
   "Border/0": "0",
   "Border/25": "1px",
   "Border/50": "2px",

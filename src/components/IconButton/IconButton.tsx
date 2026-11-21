@@ -1,100 +1,53 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { controlColors, controlFocus, type ControlAppearance, type ControlVariant } from "../_shared/controlColors";
 
 /**
- * IconButton
+ * IconButton — Figma: StudioKIT 2.0 › Icon Button (557:13737). Description: docs/figma-descriptions/icon-button.md
  *
- * Source of truth: Figma StudioKIT_v1 — node 2443:830
- * https://www.figma.com/design/yEvYgthP0qWo5EV4QUjZ8Z/StudioKIT_v1?node-id=2443-830
- *
- * Icon-only button for compact, universally understood actions.
- * Always requires an aria-label for screen reader access.
+ * Same Variant × Style × Size model and colours as Button, square: width = height = Components/Forms/<Size>.
+ * Icons are 16px (xsmall, small) and 20px (medium, large).
  */
-
 const iconButtonVariants = cva(
-  [
-    "inline-flex items-center justify-center shrink-0",
-    "transition-colors duration-150",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--border-brand)]",
-    "disabled:pointer-events-none",
-  ].join(" "),
+  "inline-flex shrink-0 items-center justify-center transition-[background-color,border-color,color,box-shadow] duration-150 focus-visible:outline-none disabled:pointer-events-none",
   {
     variants: {
-      variant: {
-        primary: [
-          "bg-[var(--bg-fill-brand)] text-[var(--text-on-color)]",
-          "border border-[var(--border-brand)]",
-          "hover:bg-[var(--bg-fill-brand-hover)]",
-          "active:bg-[var(--bg-fill-brand-pressed)]",
-          "disabled:bg-[var(--bg-fill-brand-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        secondary: [
-          "bg-[var(--bg-surface)] text-[var(--icon-primary)]",
-          "border border-[var(--border-default)]",
-          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-strong)]",
-          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
-          "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--icon-disabled)] disabled:border-[var(--border-disabled)]",
-        ].join(" "),
-        danger: [
-          "bg-[var(--bg-fill-error)] text-[var(--text-on-error)]",
-          "border border-[var(--border-error)]",
-          "hover:bg-[var(--bg-fill-error-hover)]",
-          "active:bg-[var(--bg-fill-error-pressed)]",
-          "disabled:bg-[var(--bg-fill-error-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        success: [
-          "bg-[var(--bg-fill-success)] text-[var(--text-on-success)]",
-          "border border-[var(--border-success)]",
-          "hover:bg-[var(--bg-fill-success-hover)]",
-          "active:bg-[var(--bg-fill-success-pressed)]",
-          "disabled:bg-[var(--bg-fill-success-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        ghost: [
-          "bg-[var(--bg-fill-subtle)] text-[var(--icon-primary)]",
-          "border border-[var(--border-subtle)]",
-          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-default)]",
-          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
-          "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--icon-disabled)] disabled:border-transparent",
-        ].join(" "),
-      },
       size: {
-        lg: "min-h-12 min-w-12 p-3 rounded-xl [&>svg]:size-6",         // 48px, p-12, radius-12, icon 24px
-        md: "min-h-10 min-w-10 p-2 rounded-lg [&>svg]:size-5",          // 40px, p-8, radius-8, icon 20px
-        sm: "min-h-8 min-w-8 p-1.5 rounded-lg [&>svg]:size-5",          // 32px, p-6, radius-8, icon 20px
-        xs: "min-h-6 min-w-6 p-1 rounded-md [&>svg]:size-4",            // 24px, p-4, radius-6, icon 16px
+        xsmall: "size-forms-xsmall rounded-control-md [&_svg]:size-size-9",
+        small: "size-forms-small rounded-control-lg [&_svg]:size-size-9",
+        medium: "size-forms-medium rounded-control-lg [&_svg]:size-size-11",
+        large: "size-forms-large rounded-control-xl [&_svg]:size-size-11",
       },
     },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-    },
+    defaultVariants: { size: "medium" },
   }
 );
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof iconButtonVariants> {
-  /** The icon to render — pass an SVG component */
+  /** Figma Variant — intent. */
+  variant?: ControlVariant;
+  /** Figma Style — filled · border · ghost. Toolbars usually use secondary + ghost. */
+  appearance?: ControlAppearance;
+  /** The icon (Figma "Icon" swap). */
   icon: React.ReactNode;
-  /** Required — describes the action for screen readers */
+  /** Required: names the action for screen readers ("Close dialog"). */
   "aria-label": string;
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, variant, size, icon, disabled, ...props }, ref) => {
-    return (
-      <button
-        className={cn(iconButtonVariants({ variant, size, className }))}
-        ref={ref}
-        disabled={disabled}
-        aria-disabled={disabled || undefined}
-        {...props}
-      >
-        {icon}
-      </button>
-    );
-  }
+  ({ className, variant = "secondary", appearance = "ghost", size, icon, ...props }, ref) => (
+    <button
+      ref={ref}
+      type="button"
+      className={cn(iconButtonVariants({ size }), controlColors[variant][appearance], controlFocus[variant], className)}
+      {...props}
+    >
+      {icon}
+    </button>
+  )
 );
 IconButton.displayName = "IconButton";
 

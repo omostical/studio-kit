@@ -552,14 +552,14 @@ export default function Home() {
                 {
                   title: "Button",
                   meta: "6 variants",
-                  preview: <Button variant="primary" size="sm">Button</Button>,
+                  preview: <Button size="small">Button</Button>,
                 },
                 {
                   title: "Input",
                   meta: "3 sizes · 6 states",
                   preview: (
                     <div className="w-full max-w-[180px]">
-                      <Input size="sm" placeholder="Search…" prefix={<Search />} />
+                      <Input size="small" placeholder="Search…" prefix={<Search />} />
                     </div>
                   ),
                 },
@@ -568,8 +568,8 @@ export default function Home() {
                   meta: "5 variants",
                   preview: (
                     <div className="flex gap-2">
-                      <Badge variant="brand" size="sm">New</Badge>
-                      <Badge variant="success" size="sm">Live</Badge>
+                      <Badge status="info" size="small">New</Badge>
+                      <Badge status="positive" size="small">Live</Badge>
                     </div>
                   ),
                 },
@@ -588,8 +588,8 @@ export default function Home() {
                   meta: "Cancel + Save",
                   preview: (
                     <div className="flex gap-2">
-                      <Button variant="secondary" size="sm">Cancel</Button>
-                      <Button variant="primary" size="sm">Save</Button>
+                      <Button variant="secondary" appearance="border" size="small">Cancel</Button>
+                      <Button size="small">Save</Button>
                     </div>
                   ),
                 },
@@ -599,7 +599,8 @@ export default function Home() {
                   preview: (
                     <IconButton
                       variant="secondary"
-                      size="md"
+                      appearance="border"
+                      size="medium"
                       icon={<Mail />}
                       aria-label="Mail"
                     />
@@ -611,7 +612,7 @@ export default function Home() {
                   preview: (
                     <div className="w-full max-w-[180px]">
                       <Input
-                        size="sm"
+                        size="small"
                         placeholder="email"
                         defaultValue="wrong@"
                         error="Invalid"

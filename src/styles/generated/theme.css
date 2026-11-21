@@ -322,6 +322,35 @@
   --spacing-gap-24: var(--gap-24);
   --spacing-gap-25: var(--gap-25);
   --spacing-gap-26: var(--gap-26);
+  --spacing-size-0: var(--size-0);
+  --spacing-size-1: var(--size-1);
+  --spacing-size-2: var(--size-2);
+  --spacing-size-3: var(--size-3);
+  --spacing-size-4: var(--size-4);
+  --spacing-size-5: var(--size-5);
+  --spacing-size-6: var(--size-6);
+  --spacing-size-7: var(--size-7);
+  --spacing-size-8: var(--size-8);
+  --spacing-size-9: var(--size-9);
+  --spacing-size-10: var(--size-10);
+  --spacing-size-11: var(--size-11);
+  --spacing-size-12: var(--size-12);
+  --spacing-size-13: var(--size-13);
+  --spacing-size-14: var(--size-14);
+  --spacing-size-15: var(--size-15);
+  --spacing-size-16: var(--size-16);
+  --spacing-size-17: var(--size-17);
+  --spacing-size-18: var(--size-18);
+  --spacing-size-19: var(--size-19);
+  --spacing-size-20: var(--size-20);
+  --spacing-size-21: var(--size-21);
+  --spacing-size-22: var(--size-22);
+  --spacing-size-23: var(--size-23);
+  --spacing-size-24: var(--size-24);
+  --spacing-size-25: var(--size-25);
+  --spacing-size-26: var(--size-26);
+  --spacing-size-27: var(--size-27);
+  --spacing-size-28: var(--size-28);
 
   /* Type: font-body / font-display / font-code; text-350 (size), leading-500 (line height), tracking-tight-25.
      Weights come straight from the tokens: font-medium = 520, font-semibold = 545 … */
@@ -367,4 +396,274 @@
   --tracking-wide-25: var(--font-spacing-wide-25);
   --tracking-wide-300: var(--font-spacing-wide-300);
   --tracking-wide-50: var(--font-spacing-wide-50);
+
+  /* Effect styles: shadow-focus-base, shadow-forms-active, shadow-elevation-low, shadow-default … */
+  --shadow-elevation-high: 0 1px 2px 0 #00000008, 0 2px 3px 0 #0000000B, 0 5px 7px 0 #0000000F, 0 20px 26px 0 #00000017, 0 0 0 1px #00000014, 0 1px 0 0 #00000014;
+  --shadow-elevation-medium: 0 1px 0 0 #00000014, 0 8px 24px 0 #00000012, 0 4px 4px 0 #0000000D, 0 2px 2px 0 #0000000A, 0 1px 1px 0 #00000008, 0 0 0 1px var(--static-shadow-outline);
+  --shadow-elevation-low: 0 2px 6px 0 #0000000A, 0 2px 2px 0 #0000000D, 0 1px 1px 0 #0000001A, 0 0 0 1px #00000014;
+  --shadow-sm: 0 1px 1px 0 #0000001A;
+  --shadow-default: 0 1px 2px -1px #0000001A, 0 1px 3px 0 #0000001A;
+  --shadow-md: 0 2px 4px -2px #0000000D, 0 4px 6px -1px #0000001A;
+  --shadow-lg: 0 4px 6px 0 #0000000D, 0 10px 15px -3px #0000001A;
+  --shadow-xl: 0 10px 10px 0 #0000000A, 0 20px 25px -5px #0000001A;
+  --shadow-2xl: 0 25px 50px -12px #00000040;
+  --shadow-md-strong: 0 1px 4px 0 #00000014, 0 2px 4px 0 #00000012, 0 2px 2px 0 #0000000D, 0 1px 1px 0 #0000001A;
+  --shadow-controls-control: 0 1px 1px 0 #14151A08;
+  --shadow-controls-tooltip: 0 3px 10px -2px #14151A0A, 0 2px 4px -3px #14151A1F;
+  --shadow-forms-base: 0 1px 1px 0 #1A1A1A08;
+  --shadow-forms-active: 0 0 0 2px var(--colors-light-brand-opacity-600-16pct);
+  --shadow-forms-danger: 0 0 0 2px #DA252D33;
+  --shadow-focus-base: 0 0 0 2px var(--dynamic-fill-inverse-default), 0 0 0 4px var(--dynamic-fill-primary-default);
+  --shadow-focus-inversed: 0 0 0 2px var(--dynamic-fill-primary-default), 0 0 0 4px var(--dynamic-fill-inverse-default);
+  --shadow-focus-danger: 0 0 0 2px var(--dynamic-fill-inverse-default), 0 0 0 4px var(--dynamic-fill-danger-default);
+  --shadow-focus-success: 0 0 0 2px var(--dynamic-fill-inverse-default), 0 0 0 4px var(--dynamic-fill-success-default);
+}
+
+/* Text styles: one utility per Figma text style, e.g. type-label-strong-small, type-body-medium, type-title-large */
+@utility type-title-large {
+  font-family: var(--font-family-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-1800);
+  line-height: var(--font-lineheight-1800);
+  letter-spacing: var(--font-spacing-tight-300);
+}
+
+@utility type-title-medium {
+  font-family: var(--font-family-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-1400);
+  line-height: var(--font-lineheight-1400);
+  letter-spacing: var(--font-spacing-tight-200);
+}
+
+@utility type-title-small {
+  font-family: var(--font-family-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-1200);
+  line-height: var(--font-lineheight-1200);
+  letter-spacing: var(--font-spacing-tight-200);
+}
+
+@utility type-subtitle-large {
+  font-family: var(--font-family-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-800);
+  line-height: var(--font-lineheight-1000);
+  letter-spacing: var(--font-spacing-tight-200);
+}
+
+@utility type-subtitle-medium {
+  font-family: var(--font-family-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-600);
+  line-height: var(--font-lineheight-800);
+  letter-spacing: var(--font-spacing-tight-100);
+}
+
+@utility type-subtitle-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-500);
+  line-height: var(--font-lineheight-700);
+  letter-spacing: var(--font-spacing-tight-100);
+}
+
+@utility type-subtitle-xsmall {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-450);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-50);
+}
+
+@utility type-label-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-450);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-50);
+}
+
+@utility type-label-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-400);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-label-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-label-strong-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-450);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-50);
+}
+
+@utility type-label-strong-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-400);
+  line-height: var(--components-control-medium);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-label-strong-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-body-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-400);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-body-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-body-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-body-strong-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-400);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-body-strong-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-body-strong-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-number-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-450);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-50);
+}
+
+@utility type-number-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-400);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-number-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-number-xsmall {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-number-strong-large {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-450);
+  line-height: var(--font-lineheight-600);
+  letter-spacing: var(--font-spacing-tight-50);
+}
+
+@utility type-number-strong-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-400);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-number-strong-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-350);
+  line-height: var(--font-lineheight-500);
+  letter-spacing: var(--font-spacing-tight-25);
+}
+
+@utility type-number-strong-xsmall {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-caption-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-caption-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-250);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-wide-25);
+}
+
+@utility type-caption-strong-medium {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-300);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-normal);
+}
+
+@utility type-caption-strong-small {
+  font-family: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-250);
+  line-height: var(--font-lineheight-400);
+  letter-spacing: var(--font-spacing-wide-25);
 }

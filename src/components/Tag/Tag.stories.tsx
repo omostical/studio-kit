@@ -1,190 +1,48 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Hash } from "lucide-react";
 import { Tag } from "./Tag";
-
-const PlusIcon = () => (
-  <svg
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M8 5v6M5 8h6"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-  </svg>
-);
+import { tagColors } from "./tagColors";
 
 const meta: Meta<typeof Tag> = {
   title: "Components/Tag",
   component: Tag,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
+  args: { children: "Design", color: "brand", emphasis: "filled", size: "medium", rounded: false },
   argTypes: {
-    type: {
-      control: "select",
-      options: ["Primary", "Danger", "Success", "Warning", "Subtle"],
-    },
-    style: {
-      control: "radio",
-      options: ["Solid", "Outline"],
-    },
-    size: {
-      control: "radio",
-      options: ["lg", "md", "sm"],
-    },
-    shape: {
-      control: "radio",
-      options: ["Pill", "Default"],
-    },
-    icon: {
-      control: false,
-    },
-  },
-  args: {
-    children: "Label",
-    type: "Primary",
-    style: "Solid",
-    size: "md",
-    shape: "Pill",
+    color: { control: "select", options: tagColors, description: "Figma: Color (categories only)" },
+    emphasis: { control: "inline-radio", options: ["filled", "border"], description: "Figma: Emphasis" },
+    size: { control: "inline-radio", options: ["small", "medium", "large"], description: "Figma: Size" },
+    rounded: { control: "boolean", description: "Figma: Rounded" },
   },
 };
-
 export default meta;
 type Story = StoryObj<typeof Tag>;
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
-export const WithIcon: Story = {
-  args: { icon: <PlusIcon /> },
-};
-
-export const PrimaryOutline: Story = {
-  args: { type: "Primary", style: "Outline", icon: <PlusIcon /> },
-};
-
-export const DangerSolid: Story = {
-  args: { type: "Danger", style: "Solid", icon: <PlusIcon /> },
-};
-
-export const DangerOutline: Story = {
-  args: { type: "Danger", style: "Outline", icon: <PlusIcon /> },
-};
-
-export const SuccessSolid: Story = {
-  args: { type: "Success", style: "Solid", icon: <PlusIcon /> },
-};
-
-export const SuccessOutline: Story = {
-  args: { type: "Success", style: "Outline", icon: <PlusIcon /> },
-};
-
-export const WarningSolid: Story = {
-  args: { type: "Warning", style: "Solid", icon: <PlusIcon /> },
-};
-
-export const WarningOutline: Story = {
-  args: { type: "Warning", style: "Outline", icon: <PlusIcon /> },
-};
-
-export const SubtleSolid: Story = {
-  args: { type: "Subtle", style: "Solid", icon: <PlusIcon /> },
-};
-
-export const SubtleOutline: Story = {
-  args: { type: "Subtle", style: "Outline", icon: <PlusIcon /> },
-};
-
-export const SmallPill: Story = {
-  args: { size: "sm", icon: <PlusIcon /> },
-};
-
-export const LargePill: Story = {
-  args: { size: "lg", icon: <PlusIcon /> },
-};
-
-export const DefaultShape: Story = {
-  args: { shape: "Default", icon: <PlusIcon /> },
-};
-
-export const AllTypesSolid: Story = {
-  name: "All types - Solid",
-  render: () => (
-    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
-      {(["Primary", "Danger", "Success", "Warning", "Subtle"] as const).map((type) => (
-        <Tag key={type} type={type} style="Solid" icon={<PlusIcon />}>
-          {type}
-        </Tag>
+export const AllColors: Story = {
+  render: (args) => (
+    <div className="grid gap-gap-7">
+      {(["filled", "border"] as const).map((emphasis) => (
+        <div key={emphasis} className="flex flex-wrap gap-gap-5">
+          {tagColors.map((color) => (
+            <Tag key={color} {...args} color={color} emphasis={emphasis}>
+              {color}
+            </Tag>
+          ))}
+        </div>
       ))}
     </div>
   ),
 };
 
-export const AllTypesOutline: Story = {
-  name: "All types - Outline",
-  render: () => (
-    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
-      {(["Primary", "Danger", "Success", "Warning", "Subtle"] as const).map((type) => (
-        <Tag key={type} type={type} style="Outline" icon={<PlusIcon />}>
-          {type}
-        </Tag>
-      ))}
-    </div>
-  ),
-};
-
-export const AllSizes: Story = {
-  render: () => (
-    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-      {(["lg", "md", "sm"] as const).map((size) => (
-        <Tag key={size} size={size} icon={<PlusIcon />}>
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-gap-5">
+      {(["small", "medium", "large"] as const).map((size) => (
+        <Tag key={size} {...args} size={size} icon={<Hash />}>
           {size}
         </Tag>
-      ))}
-    </div>
-  ),
-};
-
-export const BothShapes: Story = {
-  render: () => (
-    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-      <Tag shape="Pill" icon={<PlusIcon />}>
-        Pill
-      </Tag>
-      <Tag shape="Default" icon={<PlusIcon />}>
-        Default
-      </Tag>
-    </div>
-  ),
-};
-
-export const FullMatrix: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      {(["Primary", "Danger", "Success", "Warning", "Subtle"] as const).map((type) => (
-        <div
-          key={type}
-          style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}
-        >
-          {(["Solid", "Outline"] as const).flatMap((style) =>
-            (["lg", "md", "sm"] as const).map((size) => (
-              <Tag
-                key={`${type}-${style}-${size}`}
-                type={type}
-                style={style}
-                size={size}
-                icon={<PlusIcon />}
-              >
-                {type}
-              </Tag>
-            ))
-          )}
-        </div>
       ))}
     </div>
   ),

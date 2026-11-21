@@ -2,106 +2,67 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { controlColors, controlFocus, type ControlAppearance, type ControlVariant } from "../_shared/controlColors";
 
 /**
- * Button
+ * Button — Figma: StudioKIT 2.0 › Button (557:14433). Description: docs/figma-descriptions/button.md
  *
- * Source of truth: Figma StudioKIT_v1 — node 73:290
- * https://www.figma.com/design/yEvYgthP0qWo5EV4QUjZ8Z/StudioKIT_v1?node-id=73-290
- *
- * Variant matrix: 4 sizes × 5 types × 5 states = 100 variants
- * Tokens: All colors reference CSS custom properties from tokens.light.css / tokens.dark.css
+ * Figma property → prop:  Variant → variant · Style → appearance · Size → size · State → (interaction / disabled)
+ * Sizes (height · radius · padding · gap · text style · icon):
+ *   xsmall 24 · Control/md · Gap/5 · Gap/3 · Caption/Strong/Medium · 16
+ *   small  32 · Control/lg · Gap/6 · Gap/3 · Label/Strong/Small    · 16
+ *   medium 40 · Control/lg · Gap/7 · Gap/4 · Label/Strong/Small    · 20
+ *   large  48 · Control/xl · Gap/9 · Gap/4 · Label/Strong/Medium   · 20
+ * Heights use Components/Forms/*, so they grow on mobile (touch targets) like the Figma Mobile mode.
  */
-
 const buttonVariants = cva(
-  [
-    "inline-flex items-center justify-center gap-1.5",
-    "font-medium whitespace-nowrap",
-    "transition-colors duration-150",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--border-brand)]",
-    "disabled:pointer-events-none",
-    "font-[family-name:var(--font-family-sans)]",
-  ].join(" "),
+  "inline-flex items-center justify-center whitespace-nowrap transition-[background-color,border-color,color,box-shadow] duration-150 focus-visible:outline-none disabled:pointer-events-none",
   {
     variants: {
-      variant: {
-        primary: [
-          "bg-[var(--bg-fill-brand)] text-[var(--text-on-color)]",
-          "border border-[var(--border-brand)]",
-          "hover:bg-[var(--bg-fill-brand-hover)]",
-          "active:bg-[var(--bg-fill-brand-pressed)]",
-          "disabled:bg-[var(--bg-fill-brand-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        secondary: [
-          "bg-[var(--bg-surface)] text-[var(--text-primary)]",
-          "border border-[var(--border-default)]",
-          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-strong)]",
-          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
-          "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--text-disabled)] disabled:border-[var(--border-disabled)]",
-        ].join(" "),
-        danger: [
-          "bg-[var(--bg-fill-error)] text-[var(--text-on-error)]",
-          "border border-[var(--border-error)]",
-          "hover:bg-[var(--bg-fill-error-hover)]",
-          "active:bg-[var(--bg-fill-error-pressed)]",
-          "disabled:bg-[var(--bg-fill-error-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        success: [
-          "bg-[var(--bg-fill-success)] text-[var(--text-on-success)]",
-          "border border-[var(--border-success)]",
-          "hover:bg-[var(--bg-fill-success-hover)]",
-          "active:bg-[var(--bg-fill-success-pressed)]",
-          "disabled:bg-[var(--bg-fill-success-disabled)] disabled:text-[var(--text-on-color-disabled)] disabled:border-transparent",
-        ].join(" "),
-        ghost: [
-          "bg-[var(--bg-fill-subtle)] text-[var(--text-primary)]",
-          "border border-[var(--border-subtle)]",
-          "hover:bg-[var(--bg-surface-muted)] hover:border-[var(--border-default)]",
-          "active:bg-[var(--bg-canvas)] active:border-[var(--border-strong)]",
-          "disabled:bg-[var(--bg-surface-disabled)] disabled:text-[var(--text-disabled)] disabled:border-transparent",
-        ].join(" "),
-      },
       size: {
-        lg: "min-h-12 px-3 py-3 text-base leading-6 rounded-xl",      // 48px, p-12, radius-12, 16px/24px
-        md: "min-h-10 px-3 py-2 text-sm leading-5 rounded-lg",         // 40px, px-12 py-8, radius-8, 14px/20px
-        sm: "min-h-8 px-3 py-1 text-sm leading-5 rounded-lg",          // 32px, px-12 py-4, radius-8, 14px/20px
-        xs: "min-h-6 px-3 py-0.5 text-xs leading-[18px] rounded-md",   // 24px, px-12 py-3, radius-6, 12px/18px
+        xsmall: "h-forms-xsmall px-gap-5 gap-gap-3 rounded-control-md type-caption-strong-medium [&_svg]:size-size-9",
+        small: "h-forms-small px-gap-6 gap-gap-3 rounded-control-lg type-label-strong-small [&_svg]:size-size-9",
+        medium: "h-forms-medium px-gap-7 gap-gap-4 rounded-control-lg type-label-strong-small [&_svg]:size-size-11",
+        large: "h-forms-large px-gap-9 gap-gap-4 rounded-control-xl type-label-strong-medium [&_svg]:size-size-11",
       },
     },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-    },
+    defaultVariants: { size: "medium" },
   }
 );
 
-/* ─── Icon size mapping per button size (matches Figma) ─── */
-const iconSizeMap = {
-  lg: 24,
-  md: 20,
-  sm: 20,
-  xs: 16,
-} as const;
+export type ButtonVariant = ControlVariant;
+export type ButtonAppearance = ControlAppearance;
 
-/* ─── Types ─── */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  /** Render as a child component (e.g. Next.js Link) */
+  /** Figma Variant — intent. */
+  variant?: ButtonVariant;
+  /** Figma Style — emphasis: filled (highest) · border · ghost (lowest). */
+  appearance?: ButtonAppearance;
+  /** Render as the child element (e.g. a Next.js Link) with button styles. */
   asChild?: boolean;
-  /** Icon element rendered before the label */
+  /** Icon before the label (Figma Prefix). */
   prefixIcon?: React.ReactNode;
-  /** Icon element rendered after the label */
+  /** Icon after the label (Figma Suffix). */
   suffixIcon?: React.ReactNode;
-  /** Show loading spinner and disable interaction */
+  /** Show a spinner and block interaction. */
   loading?: boolean;
 }
+
+const Spinner = () => (
+  <svg className="animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+  </svg>
+);
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      variant,
+      variant = "primary",
+      appearance = "filled",
       size,
       asChild = false,
       prefixIcon,
@@ -115,57 +76,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
-    const iconSize = iconSizeMap[size ?? "md"];
+    const classes = cn(buttonVariants({ size }), controlColors[variant][appearance], controlFocus[variant], className);
 
+    if (asChild) {
+      return (
+        <Comp ref={ref} className={classes} aria-disabled={isDisabled || undefined} {...props}>
+          {children}
+        </Comp>
+      );
+    }
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        className={classes}
         disabled={isDisabled}
-        aria-disabled={isDisabled || undefined}
+        aria-busy={loading || undefined}
         {...props}
       >
-        {loading && (
-          <svg
-            className="animate-spin"
-            width={iconSize}
-            height={iconSize}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-        )}
-        {!loading && prefixIcon && (
-          <span
-            className="shrink-0 [&>svg]:size-[--icon-size]"
-            style={{ "--icon-size": `${iconSize}px` } as React.CSSProperties}
-          >
-            {prefixIcon}
-          </span>
-        )}
-        {children && <span>{children}</span>}
-        {!loading && suffixIcon && (
-          <span
-            className="shrink-0 [&>svg]:size-[--icon-size]"
-            style={{ "--icon-size": `${iconSize}px` } as React.CSSProperties}
-          >
-            {suffixIcon}
-          </span>
-        )}
+        {loading ? <Spinner /> : prefixIcon}
+        {children != null && <span>{children}</span>}
+        {!loading && suffixIcon}
       </Comp>
     );
   }

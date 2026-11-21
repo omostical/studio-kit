@@ -6,102 +6,31 @@ const meta: Meta<typeof Alert> = {
   component: Alert,
   tags: ["autodocs"],
   args: {
-    intent: "info",
-    layout: "vertical",
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-    dismissible: true,
-    actionLabel: "Label",
+    status: "info",
+    position: "horizontal",
+    title: "Your trial ends in 3 days",
+    description: "Add a payment method to keep your projects and team.",
   },
   argTypes: {
-    intent: { control: "select", options: ["info", "success", "warning", "error"] },
-    layout: { control: "radio", options: ["vertical", "horizontal"] },
-    dismissible: { control: "boolean" },
+    status: { control: "select", options: ["error", "warning", "success", "info"], description: "Figma: Status" },
+    position: { control: "inline-radio", options: ["horizontal", "vertical"], description: "Figma: Position" },
+    dismissible: { control: "boolean", description: "Figma: Dismiss" },
   },
+  decorators: [(Story) => <div className="max-w-[688px]"><Story /></div>],
 };
-
 export default meta;
 type Story = StoryObj<typeof Alert>;
 
 export const Playground: Story = {};
 
-export const Intents: Story = {
-  render: () => (
-    <div className="flex flex-col gap-3 max-w-[508px]">
-      <Alert intent="info" title="Heads up" description="A new version is available." dismissible />
-      <Alert intent="success" title="Saved" description="Your changes have been published." dismissible />
-      <Alert intent="warning" title="Approaching limit" description="You've used 80% of your monthly quota." dismissible />
-      <Alert intent="error" title="Couldn't save" description="Check your connection and try again." dismissible />
-    </div>
-  ),
-};
-
-export const VerticalVsHorizontal: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <div>
-        <p className="text-xs text-text-subtle mb-2">Vertical</p>
-        <Alert
-          intent="info"
-          layout="vertical"
-          title="Title"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing."
-          actionLabel="Label"
-          dismissible
-        />
-      </div>
-      <div>
-        <p className="text-xs text-text-subtle mb-2">Horizontal</p>
-        <Alert
-          intent="info"
-          layout="horizontal"
-          title="Title"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing."
-          actionLabel="Label"
-          dismissible
-        />
-      </div>
-    </div>
-  ),
-};
-
-export const TitleOnly: Story = {
-  args: { description: undefined, actionLabel: undefined, dismissible: false },
-};
-
-export const WithoutAction: Story = {
-  args: { actionLabel: undefined },
-};
-
-export const NotDismissible: Story = {
-  args: { dismissible: false },
-};
-
-export const HorizontalAll: Story = {
-  render: () => (
-    <div className="flex flex-col gap-3 max-w-[570px]">
-      {(["info", "success", "warning", "error"] as const).map((intent) => (
-        <Alert
-          key={intent}
-          intent={intent}
-          layout="horizontal"
-          title="Title"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing."
-          actionLabel="Label"
-          dismissible
-        />
+export const AllStatuses: Story = {
+  render: (args) => (
+    <div className="grid gap-gap-7">
+      {(["error", "warning", "success", "info"] as const).map((status) => (
+        <Alert key={status} {...args} status={status} title={`${status[0].toUpperCase()}${status.slice(1)} title`} actionLabel="Action" dismissible />
       ))}
     </div>
   ),
 };
 
-export const CustomAction: Story = {
-  args: {
-    actionLabel: undefined,
-    action: (
-      <a href="#" className="text-sm font-medium underline text-[var(--text-primary)]">
-        Learn more →
-      </a>
-    ),
-  },
-};
+export const Vertical: Story = { args: { position: "vertical", actionLabel: "Add payment method", dismissible: true } };

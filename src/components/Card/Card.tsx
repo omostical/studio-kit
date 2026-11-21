@@ -1,97 +1,73 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const cardVariants = cva("rounded-xl border bg-surface text-text-primary", {
-  variants: {
-    variant: {
-      default: "border-border shadow-sm",
-      elevated: "border-border bg-surface-raised shadow-md",
-      outline: "border-border-strong shadow-none",
-      ghost: "border-transparent shadow-none bg-surface-muted",
-    },
-    padding: {
-      none: "",
-      sm: "p-4",
-      md: "p-6",
-      lg: "p-8",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    padding: "md",
-  },
-});
+/**
+ * Card — Figma: StudioKIT 2.0 › Default Card (15489:870). Description: docs/figma-descriptions/default-card.md
+ *
+ * Figma property → prop:  Container (True/False) → container · Header / Footer / Description → the sub-components.
+ * Boxed (container): Static/Fill/Container, 1px Static/Stroke/Base, Corner Radius/Container/lg, Shadow/default.
+ * Header 16 × 24 padding with a bottom divider; Content 24; Footer 16 × 24 with a top divider.
+ * `container={false}` groups content without a box — use it on grey backgrounds instead of nesting boxes.
+ */
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  container?: boolean;
+}
 
-export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
-
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, padding, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardVariants({ variant, padding, className }))}
-      {...props}
-    />
-  )
-);
-Card.displayName = "Card";
-
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, container = true, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col gap-1.5 pb-4", className)}
+    data-container={container}
+    className={cn(
+      "group/card flex flex-col text-static-text-strong",
+      container
+        ? "overflow-hidden rounded-container-lg border border-static-stroke-base bg-static-fill-container shadow-default"
+        : "gap-gap-9",
+      className
+    )}
+    {...props}
+  />
+));
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex items-start justify-between gap-gap-5",
+      "group-data-[container=true]/card:border-b group-data-[container=true]/card:border-static-stroke-base group-data-[container=true]/card:px-gap-12 group-data-[container=true]/card:pb-gap-8 group-data-[container=true]/card:pt-gap-9",
+      className
+    )}
     {...props}
   />
 ));
 CardHeader.displayName = "CardHeader";
 
-const CardTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn("text-lg font-semibold text-text-primary leading-tight", className)}
-    {...props}
-  />
+const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(({ className, ...props }, ref) => (
+  <h3 ref={ref} className={cn("m-0 type-subtitle-small text-static-text-strong", className)} {...props} />
 ));
 CardTitle.displayName = "CardTitle";
 
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-text-tertiary leading-relaxed", className)}
-    {...props}
-  />
+const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn("m-0 mt-gap-5 type-body-medium text-static-text-subtle", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("group-data-[container=true]/card:p-gap-12", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center gap-3 pt-4 border-t border-border-subtle", className)}
+    className={cn(
+      "flex items-center justify-end gap-gap-5",
+      "group-data-[container=true]/card:border-t group-data-[container=true]/card:border-static-stroke-base group-data-[container=true]/card:px-gap-12 group-data-[container=true]/card:py-gap-9",
+      className
+    )}
     {...props}
   />
 ));
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants };
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };

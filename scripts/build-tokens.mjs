@@ -143,8 +143,8 @@ const twRadius = sets.measDesktop
   .filter((t) => t.path[0] === "Corner Radius")
   .map((t) => `  --radius-${slug(t.path.slice(1))}: var(--${slug(t.path)});`);
 const twSpacing = sets.measDesktop
-  .filter((t) => t.path[0] === "Gap" || t.path[0] === "Components")
-  .map((t) => `  --spacing-${slug(t.path[0] === "Gap" ? t.path : t.path.slice(1))}: var(--${slug(t.path)});`);
+  .filter((t) => t.path[0] === "Gap" || t.path[0] === "Size" || t.path[0] === "Components")
+  .map((t) => `  --spacing-${slug(t.path[0] === "Components" ? t.path.slice(1) : t.path)}: var(--${slug(t.path)});`);
 const fam = (k) => sets.typoDesktop.find((t) => name(t.path) === `Font/Family/${k}`);
 const twFont = [
   ["body", "Body"], ["display", "Display"], ["code", "Monospace"],
@@ -160,6 +160,33 @@ const twLeading = sets.typoDesktop
 const twTracking = sets.typoDesktop
   .filter((t) => t.path[1] === "Spacing")
   .map((t) => `  --tracking-${slug([t.path[2]])}: var(--${slug(t.path)});`);
+
+// ─── Figma styles (text + effect) ────────────────────────────────────────────
+const styles = cfg.sources.styles ? load(cfg.sources.styles) : { text: [], effects: [] };
+const allTokens = new Map(
+  [...prim, ...sets.colorLight, ...sets.measDesktop, ...sets.typoDesktop].map((t) => [name(t.path), t])
+);
+const tokenVar = (figmaPath, where) => {
+  if (!allTokens.has(figmaPath)) { problems.push(`${where}: unknown variable ${figmaPath}`); return "unset"; }
+  return `var(--${slug(figmaPath.split("/"))})`;
+};
+const shadowValue = (s) =>
+  s.effects
+    .map(([x, y, blur, spread, color]) =>
+      `${px(x)} ${px(y)} ${px(blur)} ${px(spread)} ${color.startsWith("#") ? color : tokenVar(color, `effect ${s.name}`)}`)
+    .join(", ");
+const shadowName = (n) => slug(n.replace(/^Shadow\//, "").split("/"));
+const twShadow = styles.effects.map((s) => `  --shadow-${shadowName(s.name)}: ${shadowValue(s)};`);
+const typeUtilities = styles.text.map((s) => {
+  const v = (k) => tokenVar(s[k], `text style ${s.name}`);
+  return `@utility type-${slug(s.name.split("/"))} {
+  font-family: ${v("fontFamily")}, ui-sans-serif, system-ui, sans-serif;
+  font-weight: ${v("fontWeight")};
+  font-size: ${v("fontSize")};
+  line-height: ${v("lineHeight")};
+  letter-spacing: ${v("letterSpacing")};
+}`;
+});
 
 const theme = `${header("Tailwind v4 theme — maps design tokens to utility classes")}
 @theme inline {
@@ -178,7 +205,13 @@ ${twFont.join("\n")}
 ${twText.join("\n")}
 ${twLeading.join("\n")}
 ${twTracking.join("\n")}
+
+  /* Effect styles: shadow-focus-base, shadow-forms-active, shadow-elevation-low, shadow-default … */
+${twShadow.join("\n")}
 }
+
+/* Text styles: one utility per Figma text style, e.g. type-label-strong-small, type-body-medium, type-title-large */
+${typeUtilities.join("\n\n")}
 `;
 
 // ─── generated.ts ────────────────────────────────────────────────────────────
@@ -195,7 +228,13 @@ export const measurements = ${JSON.stringify({ desktop: obj(sets.measDesktop, "m
 
 export const typography = ${JSON.stringify({ desktop: obj(sets.typoDesktop, "typography"), mobile: { ...obj(sets.typoDesktop, "typography"), ...obj(typoMobile, "mobile") } }, null, 2)} as const;
 
-export const primitives = ${JSON.stringify(obj(prim, "primitives"), null, 2)} as const;
+/** Figma text styles → the Tailwind utility that applies them. */
+export const textStyles = ${JSON.stringify(Object.fromEntries(styles.text.map((s) => [s.name, `type-${slug(s.name.split("/"))}`])), null, 2)} as const;
+
+/** Figma effect styles → the Tailwind shadow utility. */
+export const effectStyles = ${JSON.stringify(Object.fromEntries(styles.effects.map((s) => [s.name, `shadow-${shadowName(s.name)}`])), null, 2)} as const;
+
+export const primitives =${JSON.stringify(obj(prim, "primitives"), null, 2)} as const;
 
 /** CSS custom property name for a Figma token path, e.g. cssVar("Dynamic/Fill/Primary/Default"). */
 export const cssVar = (figmaPath: string) =>

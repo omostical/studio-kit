@@ -5,7 +5,8 @@
     "primitives": "tokens/figma/wds-primitives.values.tokens.json",
     "color": { "light": "tokens/figma/wds-color-tokens.light.tokens.json", "dark": "tokens/figma/wds-color-tokens.dark.tokens.json" },
     "measurements": { "desktop": "tokens/figma/wds-measurements.desktop.tokens.json", "mobile": "tokens/figma/wds-measurements.mobile.tokens.json" },
-    "typography": { "desktop": "tokens/figma/wds-typography.desktop.tokens.json", "mobile": "tokens/figma/wds-typography.mobile.tokens.json" }
+    "typography": { "desktop": "tokens/figma/wds-typography.desktop.tokens.json", "mobile": "tokens/figma/wds-typography.mobile.tokens.json" },
+    "styles": "tokens/figma/styles.json"
   },
 
   "outputs": {
