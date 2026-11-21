@@ -28,22 +28,56 @@ tokens generated into code → components → a prototyping playground, re-brand
 - **Decision:** Wideset Core is the foundation. StudioKIT contributes the brand values (blue ramp
   `#4763CF`, Geist / Geist Mono, radius feel) and the component-description style.
 
-## In progress — Step 1: rebrand Wideset → "Studio Kit 2.0"
+## Done (2026-11-20) — Step 1: rebrand Wideset → "StudioKIT 2.0"
 
-1. In Figma: **File → Duplicate** Wideset Core and rename the copy **Studio Kit 2.0**.
-2. Apply `figma-plugins/studio-kit-rebrand/code.js`: dry run first, then apply after review.
-   It does the brand ramp (OKLCH: keeps Wideset's lightness, takes StudioKIT hue/chroma; exact hex for
-   light steps 100–1000), sets Geist fonts, sets the configurable radius, and fixes three bugs
-   (`Size=Xsmall`→`XSmall`, the CSS-named danger variable → `Dynamic/Fill/Danger/Default`,
-   `Mutli Select`→`Multi Select`).
-   - Either via the Figma Console MCP (`scripts/setup-figma-console-mcp.sh` registers it) with the
-     Desktop Bridge plugin running in the file,
-   - or by importing the plugin in Figma desktop (Plugins → Development → Import plugin from manifest).
+The working copy `4Rian5XWvky57QI46fqqRd` is named **StudioKIT 2.0**. Applied via Figma Console MCP:
+
+- **Brand ramp (48 values):** light 100–1000 exact StudioKIT hex (600 = `#4763CF`); light 1100, the
+  dark ramp and the opacity tints keep Wideset's OKLCH lightness/alpha with the StudioKIT hue
+  (dark 500, the dark primary fill, = `#465FB6`).
+- **Fonts, Desktop mode:** Display + Body → Geist, Monospace → Geist Mono.
+- **Radius, Desktop mode:** `Corner Radius/Control/xl` → alias `Radius/300` (12). Button sizes are now
+  XSmall 6 (`Control/md`) · Small/Medium 8 (`Control/lg`) · Large 12 (`Control/xl`), matching the plan.
+  `Control/xl` is also used by the large sizes of Icon/Split Button, Selects, Input, Search, Segmented Control.
+- **Renames:** 75 Button variants `Size=Xsmall` → `XSmall`; `Mutli Select` → `Multi Select`.
+  The CSS-named danger variable was already `Dynamic/Fill/Danger/Default`.
+
+- **Button colour states, Light mode (2026-11-21, after comparing with StudioKIT_v1):**
+  Danger Default/Hover/Pressed → Red 700/800/900 (was 600/700/800; white text 4.29 → 5.8:1),
+  Success → Green 800/900/1000 (was 600/700/800; 2.6 → 5.4:1), Primary Hover/Pressed → Brand 700/800
+  (was 800/900, StudioKIT's gentler step). These tokens are shared, so every component using them changed.
+  Restore point: version "Before button colour states".
+
+- **Button spacing (2026-11-21), Button set only, rebinding not token values:** icon–label gap
+  XSmall/Small 2 → 4 (`Gap/3`), Medium 4 → 6 (`Gap/4`), Large stays 6; XSmall side padding 6 → 8 (`Gap/5`).
+  Restore point: version "Before button spacing".
+
+**Rule: StudioKIT_v1 values are checked against top systems (Radix, Primer, Material, Polaris…) before
+adopting; non-standard ones are not copied.** Kept Wideset, on purpose: side padding 16/12/10/8 (scales
+with size; StudioKIT's flat 12 doesn't), icons 20/20/16/16 (StudioKIT's 24px next to 14px text is
+oversized), the focus ring (StudioKIT's 24% halo is too faint).
+
+**Button still to do:** copy StudioKIT's Button description (fix its "lg = 48px" claim); decide the
+disabled style (tinted vs grey); Split Button gap was left as Wideset's. StudioKIT "Ghost" ≈ Wideset
+Secondary/Filled.
+
+**Left as Wideset (by choice, for now):** the **Mobile** mode of fonts (Inter Display / Inter /
+IBM Plex Mono) and `Control/xl` (10). The file's team is on Figma **Starter**, which only allows editing
+the **first mode** of a collection (`setValueForMode: cannot modify modes beyond limit of 1`). This also
+blocks edits to the Dark mode of WDS Color Tokens. Upgrade/move to Professional before Phase 1 work that
+touches modes, then re-run the Mobile values.
+
+**Not yet verified:** the "Before Studio Kit rebrand" version-history restore point (the call that saved
+it timed out); dark mode on canvas; Screens pages.
+
+**Gotcha:** changing a font-family variable re-lays out every text layer — do one variable per call
+or the Desktop Bridge times out.
 
 ## Open decisions (owner: designer)
 
 - `danger` or `error` as the single intent word (code currently uses `error`).
-- Corner radius values (the dry-run report lists the current values).
+- Container radius values (currently sm 8 · md 12 · lg 16 · xl 20; the plan's scale stops at 16).
+- Whether dark Brand/500 (`#465FB6`) should be pinned closer to StudioKIT 500 (`#5B79E3`).
 - Ghost card / Default badge are invisible on canvas (`surface-muted` == `canvas` in light mode).
 - Dark `error-disabled`: `#444444` (tokens.json) vs `#161A20` (CSS).
 - Check the Wideset licence allows use across multiple clients and a derived library.

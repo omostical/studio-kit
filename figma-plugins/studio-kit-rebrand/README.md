@@ -6,7 +6,11 @@ Turns a **duplicate** of Wideset Core 1.0 into **Studio Kit 2.0**:
    Light steps 100–1000 get the exact StudioKIT hex. Every other step keeps Wideset's
    lightness (its contrast tuning) and takes the StudioKIT hue and saturation.
 2. **Typeface:** font-family variables become Geist / Geist Mono. Text styles follow.
-3. **Radius:** sets any `Corner Radius/*` values listed in `CONFIG.radius`.
+3. **Radius:** re-points the `Corner Radius/*` tokens listed in `CONFIG.radius` to a `Radius/*`
+   primitive (keeps the alias). Default: `Control/xl` → `Radius/300` (12), so Button Large = 12.
+
+> **Figma Starter:** the plugin API can only edit the **first mode** of a collection (Desktop, not
+> Mobile; Light, not Dark). Changes to other modes are logged as `✗ … not changed` and skipped.
 4. **Bug fixes:** `Size=Xsmall` → `Size=XSmall` (Button), CSS-named danger variable →
    `Dynamic/Fill/Danger/Default`, `Mutli Select` → `Multi Select`.
 

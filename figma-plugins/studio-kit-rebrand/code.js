@@ -23,10 +23,12 @@ const CONFIG = {
 
   fonts: { body: "Geist", mono: "Geist Mono" },
 
-  // Corner radius: "Variable name": value (applies to every mode).
-  // Leave empty on the first dry run — the report lists current values so you
-  // can decide. Example: { "Corner Radius/Control/xl": 12 }
-  radius: {},
+  // Corner radius: "Corner Radius/…" token → "Radius/…" primitive it should alias
+  // (applies to every mode). Re-pointing the alias keeps tokens linked to the
+  // primitive scale instead of hard-coding numbers. The dry run lists the current
+  // alias and value of every token. Button sizes: XSmall=Control/md,
+  // Small/Medium=Control/lg, Large=Control/xl → plan wants 6 · 8 · 8 · 12.
+  radius: { "Corner Radius/Control/xl": "Radius/300" },
 };
 
 // ─── Colour maths (sRGB ⇄ OKLCH) ─────────────────────────────────────────────
@@ -73,6 +75,12 @@ const fmt = (c) => rgbToHex(c) + (c.a !== undefined && c.a < 1 ? ` @${Math.round
 const report = [];
 const log = (s) => report.push(s);
 async function allVars() { return figma.variables.getLocalVariablesAsync(); }
+// Figma Starter only allows editing the first mode of a collection
+// ("cannot modify modes beyond limit of 1"). Log and carry on instead of aborting the step.
+function setMode(v, mode, value) {
+  try { v.setValueForMode(mode.modeId, value); return true; }
+  catch (e) { log(`  ✗ ${v.name} [${mode.name}] not changed: ${e && e.message}`); return false; }
+}
 async function collectionByName(name) {
   return (await figma.variables.getLocalVariableCollectionsAsync()).find((c) => c.name === name);
 }
@@ -106,7 +114,7 @@ async function rebrand(apply) {
       }
       const next = { ...rgb, a: val.a === undefined ? 1 : val.a };
       log(`  ${v.name}: ${fmt(val)} → ${fmt(next)}`);
-      if (apply) v.setValueForMode(mode.modeId, next);
+      if (apply) setMode(v, mode, next);
       changed++;
     }
   }
@@ -134,7 +142,7 @@ async function fonts(apply) {
       if (apply) {
         const curStyles = stylesOf(cur);
         for (const style of curStyles) await figma.loadFontAsync({ family: cur, style }).catch(() => {});
-        v.setValueForMode(mode.modeId, nextFam);
+        setMode(v, mode, nextFam);
       }
       log(`  ${v.name} [${mode.name}]: "${cur}" → "${nextFam}"`);
     }
@@ -146,17 +154,23 @@ async function fonts(apply) {
 // ─── 3. Radius ───────────────────────────────────────────────────────────────
 async function radius(apply) {
   log("━━ 3. Corner radius ━━");
-  const vars = (await allVars()).filter((v) => v.resolvedType === "FLOAT" && /^Corner Radius\//.test(v.name));
+  const all = await allVars();
+  const byId = Object.fromEntries(all.map((v) => [v.id, v]));
+  const vars = all.filter((v) => v.resolvedType === "FLOAT" && /^Corner Radius\//.test(v.name));
+  const describe = (x) => {
+    if (!(x && x.type === "VARIABLE_ALIAS")) return String(x);
+    const t = byId[x.id];
+    return t ? `${t.name} (${Object.values(t.valuesByMode)[0]})` : "alias";
+  };
   for (const v of vars) {
     const col = await figma.variables.getVariableCollectionByIdAsync(v.variableCollectionId);
-    const cur = col.modes.map((m) => {
-      const x = v.valuesByMode[m.modeId];
-      return `${m.name}=${x && x.type === "VARIABLE_ALIAS" ? "alias" : x}`;
-    }).join(", ");
-    const want = CONFIG.radius[v.name];
-    if (want === undefined) { log(`  ${v.name}: ${cur}`); continue; }
-    log(`  ${v.name}: ${cur} → all modes=${want}`);
-    if (apply) for (const m of col.modes) v.setValueForMode(m.modeId, want);
+    const cur = col.modes.map((m) => `${m.name}=${describe(v.valuesByMode[m.modeId])}`).join(", ");
+    const wantName = CONFIG.radius[v.name];
+    if (wantName === undefined) { log(`  ${v.name}: ${cur}`); continue; }
+    const prim = all.find((p) => p.name === wantName);
+    if (!prim) { log(`  ✗ ${v.name}: primitive "${wantName}" not found.`); continue; }
+    log(`  ${v.name}: ${cur} → all modes=${wantName} (${Object.values(prim.valuesByMode)[0]})`);
+    if (apply) for (const m of col.modes) setMode(v, m, figma.variables.createVariableAlias(prim));
   }
   const unknown = Object.keys(CONFIG.radius).filter((k) => !vars.some((v) => v.name === k));
   for (const k of unknown) log(`  ✗ CONFIG.radius has "${k}" but no such variable exists.`);

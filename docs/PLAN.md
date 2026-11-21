@@ -124,8 +124,17 @@ and redesigns of 3–4 signature components (Button, Input, Card).
 - ⚠️ Renamed `--bg-fill-danger-subtle` → `--bg-fill-error-subtle`. Figma uses `danger` for fills;
   revisit once the danger-vs-error decision is made.
 
-### ▶ Step 1 (now): rebrand Wideset → "Studio Kit 2.0" in Figma
-See the runbook in section 6.
+### ✅ Step 1: rebrand Wideset → "StudioKIT 2.0" in Figma (done 2026-11-20, Desktop mode only)
+Brand ramp, Geist fonts, Button radius (XSmall 6 · Small/Medium 8 · Large 12) and the renames are applied.
+The **Mobile** mode keeps Wideset's fonts and `Control/xl` = 10: the team is on Figma **Starter**, which only
+lets the API edit the first mode of a collection. Details and what's unverified: [HANDOFF.md](./HANDOFF.md).
+
+> ⚠️ **Before Phase 1:** the Starter mode limit also blocks edits to the Dark mode of WDS Color Tokens.
+> Move StudioKIT 2.0 to a Professional team (or upgrade) before work that edits modes.
+
+### ▶ Next: compare against StudioKIT_v1
+Put a few rebranded components (Button first) next to StudioKIT_v1 and list what still feels like
+Wideset. That list feeds open decision 5 (signature components) and Phase 2.
 
 ### Phase 1: one-way token pipeline (Figma → code)
 1. Export the Studio Kit 2.0 variables as W3C-format JSON into `tokens/` (Figma Console MCP, the
@@ -191,7 +200,7 @@ Figma desktop → Plugins → Development → **Import plugin from manifest** �
 |---|---|
 | Brand ramp | `Colors/Light/Brand/*`, `Colors/Dark/Brand/*`: light steps 100–1000 get the exact StudioKIT hex; all other steps keep Wideset's OKLCH lightness and alpha, and take the StudioKIT hue and chroma |
 | Typeface | Font-family variables → Geist / Geist Mono (text styles follow). Check weight 520 still looks right |
-| Radius | Whatever you set in `CONFIG.radius` (the report lists the current values first) |
+| Radius | Re-points `Corner Radius/*` tokens to `Radius/*` primitives listed in `CONFIG.radius` (keeps the alias; never writes raw numbers) |
 | Bug fixes | Button `Size=Xsmall` → `XSmall` · CSS-named variable → `Dynamic/Fill/Danger/Default` · `Mutli Select` → `Multi Select` |
 
 ### After applying, check
@@ -203,7 +212,8 @@ Then publish Studio Kit 2.0 as a library.
 ## 7. Open decisions (yours)
 
 1. **danger or error:** one word for the destructive/failure intent (Wideset: `Danger` variant; code: `error`).
-2. **Radius values:** Control (buttons, inputs) and Container (cards, modals).
+2. **Container radius values** (cards, modals): currently sm 8 · md 12 · lg 16 · xl 20; the plan's scale
+   stops at 16. Control radius is settled (matches the Button spec).
 3. **Ghost card / Default badge** are invisible on the grey canvas (`surface-muted` = `canvas` = `#F3F3F3`).
 4. **Dark `error-disabled`:** `#444444` (tokens.json) vs `#161A20` (CSS). Likely moot after Phase 1.
 5. **Signature components** to redesign for your craft: Button, Input, Card, and maybe navigation?
