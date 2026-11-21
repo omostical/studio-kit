@@ -475,7 +475,9 @@ function InvoicesCard({ invoices }: { invoices: Invoice[] }) {
             <TableRow>
               <TableHead>Invoice</TableHead>
               <TableHead className="hidden sm:table-cell">Date</TableHead>
-              <TableHead numeric>Amount</TableHead>
+              <TableHead numeric className="hidden sm:table-cell">
+                Amount
+              </TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="w-0">
                 <span className="sr-only">Actions</span>
@@ -485,11 +487,22 @@ function InvoicesCard({ invoices }: { invoices: Invoice[] }) {
           <TableBody>
             {rows.map((inv) => (
               <TableRow key={inv.id}>
-                <TableCell description={inv.period} className="whitespace-nowrap">
+                <TableCell
+                  className="whitespace-nowrap"
+                  description={
+                    <>
+                      {/* The Amount column is hidden below sm, so the amount takes the period's place there. */}
+                      <span className="sm:hidden">{usd(inv.amount)}</span>
+                      <span className="hidden sm:inline">{inv.period}</span>
+                    </>
+                  }
+                >
                   {inv.id}
                 </TableCell>
                 <TableCell className="hidden whitespace-nowrap sm:table-cell">{inv.date}</TableCell>
-                <TableCell numeric>{usd(inv.amount)}</TableCell>
+                <TableCell numeric className="hidden sm:table-cell">
+                  {usd(inv.amount)}
+                </TableCell>
                 <TableCell>
                   <Badge status={STATUS[inv.status].badge} size="small">
                     {STATUS[inv.status].label}

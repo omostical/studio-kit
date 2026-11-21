@@ -17,5 +17,5 @@ A box that groups related content and actions â€” a form, a summary, a setting â
 ---
 
 **Accessibility**
-- Give the card a real heading (`<h2>`/`<h3>`) when it has a title.
+- Give the card a real heading when it has a title, one level below the section it sits in. In code, `CardTitle` is an `h2` by default; set `as="h3"` for cards inside a titled section.
 - If the whole card is clickable, use one link or button inside it and stretch its hit area; don't nest several interactive elements in a clickable card.

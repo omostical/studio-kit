@@ -17,7 +17,15 @@ const ROOT = new URL("..", import.meta.url).pathname;
 
 // Folders held to the rule. The docs-site chrome (src/site) has its own look
 // and is deliberately excluded.
-const SCOPES = ["src/components", "src/app/playground"];
+const SCOPES = ["src/components", "src/app/playground", "src/app/prototypes"];
+
+// Screens built from the kit (agents' and designers' prototypes) are held to a stricter rule: no arbitrary
+// values either. Components may need one-off widths the token scale doesn't cover; screens shouldn't.
+const STRICT_SCOPES = ["src/app/prototypes"];
+const ARBITRARY = new RegExp(
+  "(?<![\\w-])(?:[a-z0-9-]+:)*-?(?:p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|w|h|size|min-[hw]|max-[hw]|top|bottom|left|right|inset(?:-[xy])?|translate-[xy]|rounded(?:-[trbl]{1,2})?|text|bg|border(?:-[trblxy])?|fill|stroke|leading|tracking|shadow|z)-\\[[^\\]]+\\]",
+  "g"
+);
 
 const PALETTE =
   "neutral|gray|slate|zinc|stone|indigo|blue|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|red|rose|pink|fuchsia|purple|violet|white|black";
@@ -68,7 +76,8 @@ function unknownToken(m) {
 }
 
 let problems = 0;
-for (const scope of [...SCOPES, "src/app", "src/site"]) {
+// src/app covers the playground and prototypes, so only add the folders outside it.
+for (const scope of ["src/components", "src/app", "src/site"]) {
   for (const file of walk(join(ROOT, scope))) {
     readFileSync(file, "utf8").split("\n").forEach((line, i) => {
       for (const m of line.matchAll(TOKEN_CLASS)) {
@@ -101,8 +110,28 @@ for (const scope of SCOPES) {
   }
 }
 
+for (const scope of STRICT_SCOPES) {
+  let files;
+  try {
+    files = [...walk(join(ROOT, scope))];
+  } catch {
+    continue; // folder doesn't exist yet
+  }
+  for (const file of files) {
+    readFileSync(file, "utf8").split("\n").forEach((line, i) => {
+      if (/token-lint-ignore/.test(line)) return;
+      for (const m of line.matchAll(ARBITRARY)) {
+        problems++;
+        console.log(`${relative(ROOT, file)}:${i + 1}  arbitrary value "${m[0]}"  →  use a token class (gap-*, size-*, forms-*, rounded-*, type-*) — see AGENTS.md`);
+      }
+    });
+  }
+}
+
 if (problems) {
   console.log(`\n✗ ${problems} token problem(s): hard-coded colours or class names that match no design token.`);
   process.exit(1);
 }
-console.log(`✓ No hard-coded colours in ${SCOPES.join(", ")}; every token class exists.`);
+console.log(
+  `✓ No hard-coded colours in ${SCOPES.join(", ")}; no arbitrary values in ${STRICT_SCOPES.join(", ")}; every token class in src/app, src/site and src/components exists.`
+);

@@ -218,7 +218,22 @@ Every component uses only Figma tokens. Each file's header comment links its Fig
   temporary cache (`npm install --cache <dir>`); fixing it for good needs
   `sudo chown -R $(whoami) ~/.npm`.
 
+## Done (2026-11-21) — Phase 3 acceptance test, first run, and fixes
+
+`/prototype "billing settings …"` built `src/app/prototypes/billing-settings` correctly (all checks, light/dark,
+375px, keyboard), but only partly unaided, so the test is **not passed yet**. What it found and what changed:
+- **Phase 3 wasn't on `main`**, so worktrees cut from `main` had no AGENTS.md or skills. Still to do: merge.
+- `.claude/launch.json` (the skill's `site` preview) was never committed — now it is.
+- `lint:tokens` now also scans `src/app/prototypes` for raw colours and rejects arbitrary values there.
+- `CardTitle` takes `as` and defaults to `h2` (was a fixed `h3`, which made pages skip h2).
+- AGENTS.md: how to start Storybook for the MCP, the Size scale in px, the props agents needed but couldn't find
+  (`Alert position`/`titleAs`, `wrapperClassName`, `CardTitle as`, `Typography as`), and recipes for headings,
+  modals (focus return) and tables at 375px. The page-shell recipe now sets `as="h1"`.
+- `/prototype` skill: sets up `npm ci` + Storybook, adds `npm run build`, and checks modals, form errors and heading
+  order in the browser.
+
 ## Next
 
-- **Fresh-agent test (Phase 3 done-when):** a new session with only `/prototype <screen>` builds it correctly.
+- **Merge Phase 3 to `main`**, then re-run the fresh-agent test from a new worktree with a different screen
+  (Phase 3 done-when): a new session with only `/prototype <screen>` builds it correctly.
 - **Phase 4:** prototype index page, page templates (dashboard, settings, auth, list/detail), preview deploys.

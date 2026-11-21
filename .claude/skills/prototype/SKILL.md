@@ -15,10 +15,14 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
 - Decide realistic content: real-sounding names, amounts, dates; no "Lorem ipsum", no "Label".
 - Ask only if the screen's purpose is genuinely unclear; otherwise choose sensible defaults and state them.
 
-## 2. Look up the components
-- If `npm run storybook` is running, use the `storybook` MCP: `docs-list`, then `docs-show` for each component
-  you'll use (props, values, examples).
-- Otherwise use `AGENTS.md` and `docs/figma-descriptions/<component>.md`.
+## 2. Set up and look up the components
+- If `AGENTS.md` or `src/components/index.ts` is missing, this checkout predates the design system: stop and say
+  so rather than building from scratch.
+- If `node_modules` is missing, run `npm ci`.
+- Start Storybook in the background (`npm run storybook`) if port 6006 isn't already serving, wait for it, then
+  use the `storybook` MCP: `docs-list`, then `docs-show` for each component you'll use (props, values, examples).
+- If the MCP still won't connect, use the table in `AGENTS.md`, the JSDoc in `src/components/<Name>/<Name>.tsx` and
+  `docs/figma-descriptions/<component>.md` — and mention it in the report.
 
 ## 3. Build
 - Create `src/app/prototypes/<slug>/page.tsx`. Add `"use client";` if it has state or handlers.
@@ -29,16 +33,24 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
   in `ToastProvider` if you use it).
 - Make the main interactions work with local state (tabs switch, modal opens, toggle toggles, form validates and
   shows the error state). Include an empty or error state when the screen has one.
-- Responsive: one column at 375px, wider layout from `sm:`/`lg:`.
+- Responsive: one column at 375px, wider layout from `sm:`/`lg:`. Tables follow "Tables at 375px" in `AGENTS.md`.
+- Headings: page title `as="h1"`, sections `h2` (`CardTitle` already is); styled values that aren't headings get
+  `as="p"`. Modals: open them through `ModalTrigger` (see "Modals" in `AGENTS.md`).
 
 ## 4. Check
-- `npx tsc --noEmit && npx eslint src && npm run lint:tokens` — fix everything.
+- `npx tsc --noEmit && npx eslint src && npm run lint:tokens && npm run build` — fix everything. `lint:tokens`
+  also rejects arbitrary values (`w-[160px]`) in prototypes; use the Size scale in `AGENTS.md`.
 - Start the site (preview the `site` config in `.claude/launch.json`, or `npm run dev`), open
   `http://localhost:3000/prototypes/<slug>`, and look at it:
-  - light, dark (set `data-theme="dark"` on `<html>`), and 375px wide;
-  - tab through it: every control reachable, focus ring visible.
+  - light, dark (set `data-theme="dark"` on `<html>`; the theme animates, so wait a moment before a screenshot),
+    and 375px wide — the page must not scroll sideways, and tables shouldn't either;
+  - tab through it: every control reachable, focus ring visible; open each modal with Enter, close it with
+    Escape, and check focus returns to the button that opened it;
+  - submit each form empty: errors show, and focus lands on the first invalid field;
+  - list the headings (`document.querySelectorAll("h1,h2,h3,h4")`): h1 → h2 → h3 with no skips.
 - Fix what you see before reporting.
 
 ## 5. Report
-- The URL (`/prototypes/<slug>`), the components used, any gap where no component fitted (a candidate for the
-  design system), and anything you assumed.
+- The URL (`/prototypes/<slug>`), the components used, the check results, any gap where no component fitted (a
+  candidate for the design system), anything you assumed, and anything in `AGENTS.md` or this skill that was
+  missing or wrong.

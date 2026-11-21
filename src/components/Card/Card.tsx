@@ -44,8 +44,13 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 ));
 CardHeader.displayName = "CardHeader";
 
-const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(({ className, ...props }, ref) => (
-  <h3 ref={ref} className={cn("m-0 type-subtitle-small text-static-text-strong", className)} {...props} />
+export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  /** Heading level. Defaults to `h2` (a card directly under the page's `h1`); use `h3` for cards inside a titled section. */
+  as?: "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+}
+
+const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(({ className, as: Tag = "h2", ...props }, ref) => (
+  <Tag ref={ref} className={cn("m-0 type-subtitle-small text-static-text-strong", className)} {...props} />
 ));
 CardTitle.displayName = "CardTitle";
 
