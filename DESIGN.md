@@ -20,7 +20,6 @@ each theme and when to use it. A value without a usage is a palette; a value wit
   for a status, or the reverse.
 - When no token fits the usage, don't write a literal and don't fall back to the nearest value: stop and name the
   usage that has no token in your output.
-- Rows marked _draft from the name_ describe tokens no component uses yet. Prefer a token with a confirmed usage.
 
 Themes: Light (`:root`, `[data-theme="light"]`) and Dark (`[data-theme="dark"]`). Spacing, size, radius and type
 values are the Desktop values; below 768px some control sizes are smaller (`src/styles/generated/tokens.css`).
@@ -31,22 +30,22 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 
 | Token | Light | Dark | Usage |
 | --- | --- | --- | --- |
-| `static-fill-alpha-base` | `#00000014` | `#FFFFFF1F` | Neutral tint one step stronger than `static-fill-alpha-subtle`: hover on neutral rows and list items. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-fill-alpha-strong` | `#0000001F` | `#FFFFFF29` | Strongest neutral tint: pressed or selected neutral rows and list items. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-fill-alpha-base` | `#00000014` | `#FFFFFF1F` | Neutral tint one step stronger than `static-fill-alpha-subtle`: hover on neutral rows and list items. |
+| `static-fill-alpha-strong` | `#0000001F` | `#FFFFFF29` | Strongest neutral tint: pressed or selected neutral rows and list items. |
 | `static-fill-alpha-subtle` | `#0000000A` | `#FFFFFF14` | Quiet neutral fill on any surface: icon tiles, skeleton blocks, the unchecked Switch track. |
 | `static-fill-background` | `#F5F5F5` | `#0A0A0A` | Page canvas behind all content (grey in light). Never for cards or panels: use `static-fill-container`. |
 | `static-fill-container` | `#FFFFFF` | `#292929` | Cards and boxed panels (`Card`). Never for the page canvas. |
-| `static-fill-foreground` | `#FFFFFF` | `#141414` | Full-width content sections placed directly on the page canvas. Cards use `static-fill-container`. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-fill-foreground` | `#FFFFFF` | `#141414` | Full-width content sections placed directly on the page canvas. Cards use `static-fill-container`. |
 | `static-fill-highlight-base` | `#FFFFFF` | `#FFFFFF1F` | Background of form fields and checkboxes (`Input`, `Select`, `Checkbox`). |
-| `static-fill-highlight-inverse` | `#FFFFFF1F` | `#FFFFFF14` | Field or bordered-control background on an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-fill-highlight-inverse` | `#FFFFFF1F` | `#FFFFFF14` | Field or bordered-control background on an inverse surface. |
 | `static-fill-highlight-subtle` | `#FFFFFF` | `#FFFFFF00` | Background of bordered buttons and bordered tags. |
-| `static-fill-inverse-alpha-base` | `#FFFFFF14` | `#00000014` | The `static-fill-alpha-base` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-fill-inverse-alpha-strong` | `#FFFFFF1F` | `#0000001F` | The `static-fill-alpha-strong` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-fill-inverse-alpha-subtle` | `#FFFFFF0A` | `#0000000A` | The `static-fill-alpha-subtle` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-fill-inverse-alpha-base` | `#FFFFFF14` | `#00000014` | The `static-fill-alpha-base` role inside an inverse surface. |
+| `static-fill-inverse-alpha-strong` | `#FFFFFF1F` | `#0000001F` | The `static-fill-alpha-strong` role inside an inverse surface. |
+| `static-fill-inverse-alpha-subtle` | `#FFFFFF0A` | `#0000000A` | The `static-fill-alpha-subtle` role inside an inverse surface. |
 | `static-fill-inverse-background` | `#0F0F0F` | `#FFFFFF` | Inverse surface (dark in the light theme): tooltips, code blocks. |
-| `static-fill-inverse-container` | `#2E2E2E` | `#FFFFFF` | The `static-fill-container` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-fill-inverse-foreground` | `#1A1A1A` | `#DBDBDB` | The `static-fill-foreground` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-fill-inverse-overlay` | `#3B3B3B` | `#FFFFFF` | The `static-fill-overlay` role inside an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-fill-inverse-container` | `#2E2E2E` | `#FFFFFF` | The `static-fill-container` role inside an inverse surface. |
+| `static-fill-inverse-foreground` | `#1A1A1A` | `#DBDBDB` | The `static-fill-foreground` role inside an inverse surface. |
+| `static-fill-inverse-overlay` | `#3B3B3B` | `#FFFFFF` | The `static-fill-overlay` role inside an inverse surface. |
 | `static-fill-overlay` | `#FFFFFF` | `#333333` | Floating layers: modals, menus, select lists, popovers. Never for in-page cards. |
 
 ### Static text
@@ -65,10 +64,10 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | Token | Light | Dark | Usage |
 | --- | --- | --- | --- |
 | `static-stroke-base` | `#0000001F` | `#FFFFFF1F` | Default border and divider: cards, table rows, section separators. |
-| `static-stroke-inverse-base` | `#FFFFFF1F` | `#0000001F` | The `static-stroke-base` role on an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-stroke-inverse-strong` | `#FFFFFF3D` | `#00000029` | The `static-stroke-strong` role on an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-stroke-inverse-subtle` | `#FFFFFF14` | `#00000014` | The `static-stroke-subtle` role on an inverse surface. _(draft from the name — not yet used in code; team to confirm)_ |
-| `static-stroke-strong` | `#00000029` | `#FFFFFF1F` | Emphasised neutral border, stronger than `static-stroke-base`. _(draft from the name — not yet used in code; team to confirm)_ |
+| `static-stroke-inverse-base` | `#FFFFFF1F` | `#0000001F` | The `static-stroke-base` role on an inverse surface. |
+| `static-stroke-inverse-strong` | `#FFFFFF3D` | `#00000029` | The `static-stroke-strong` role on an inverse surface. |
+| `static-stroke-inverse-subtle` | `#FFFFFF14` | `#00000014` | The `static-stroke-subtle` role on an inverse surface. |
+| `static-stroke-strong` | `#00000029` | `#FFFFFF1F` | Emphasised neutral border, stronger than `static-stroke-base`. |
 | `static-stroke-subtle` | `#00000014` | `#FFFFFF14` | Lighter divider inside a section, between items that already share a container. |
 
 ### Static scrim
@@ -91,9 +90,9 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `dynamic-fill-danger-alpha-default` | `#DD404500` | `#EB9C9E00` | Background of a ghost danger (destructive or failure actions) button or control, at rest (transparent at rest). Text: `dynamic-text-danger-*`. |
 | `dynamic-fill-danger-alpha-hover` | `#DD40450A` | `#EB9C9E0A` | Background of a ghost danger (destructive or failure actions) button or control, on hover (transparent at rest). Text: `dynamic-text-danger-*`. |
 | `dynamic-fill-danger-alpha-pressed` | `#DD404514` | `#EB9C9E14` | Background of a ghost danger (destructive or failure actions) button or control, while pressed (transparent at rest). Text: `dynamic-text-danger-*`. |
-| `dynamic-fill-danger-alpha-strong-default` | `#DD40450A` | `#EB9C9E0A` | Tinted background of a selected or checked danger (destructive or failure actions) control at rest. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-danger-alpha-strong-hover` | `#DD404514` | `#EB9C9E14` | Tinted background of a selected or checked danger (destructive or failure actions) control on hover. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-danger-alpha-strong-pressed` | `#DD40451F` | `#EB9C9E1F` | Tinted background of a selected or checked danger (destructive or failure actions) control while pressed. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-fill-danger-alpha-strong-default` | `#DD40450A` | `#EB9C9E0A` | Selected or toggled-on state of a ghost danger (destructive or failure actions) control, at rest. Today it has the same value as `dynamic-fill-danger-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-danger-alpha-strong-hover` | `#DD404514` | `#EB9C9E14` | Selected or toggled-on state of a ghost danger (destructive or failure actions) control, on hover. Today it has the same value as `dynamic-fill-danger-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-danger-alpha-strong-pressed` | `#DD40451F` | `#EB9C9E1F` | Selected or toggled-on state of a ghost danger (destructive or failure actions) control, while pressed. Today it has the same value as `dynamic-fill-danger-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
 | `dynamic-fill-danger-default` | `#C81829` | `#EB9C9E` | Background of a filled danger (destructive or failure actions) button or control, at rest. Text on it: `dynamic-text-ondanger-default`. |
 | `dynamic-fill-danger-disabled` | `#DBDBDB` | `#0F0F0F` | Background of a filled danger (destructive or failure actions) button or control, when disabled. Text on it: `dynamic-text-ondanger-disabled`. |
 | `dynamic-fill-danger-hover` | `#A11C2A` | `#F5CBCD` | Background of a filled danger (destructive or failure actions) button or control, on hover. Text on it: `dynamic-text-ondanger-hover`. |
@@ -101,9 +100,9 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `dynamic-fill-inverse-alpha-default` | `#FFFFFF00` | `#00000000` | Background of a ghost inverse (actions on an inverse surface) button or control, at rest (transparent at rest). Text: `dynamic-text-inverse-*`. |
 | `dynamic-fill-inverse-alpha-hover` | `#FFFFFF0A` | `#0000000A` | Background of a ghost inverse (actions on an inverse surface) button or control, on hover (transparent at rest). Text: `dynamic-text-inverse-*`. |
 | `dynamic-fill-inverse-alpha-pressed` | `#FFFFFF14` | `#00000014` | Background of a ghost inverse (actions on an inverse surface) button or control, while pressed (transparent at rest). Text: `dynamic-text-inverse-*`. |
-| `dynamic-fill-inverse-alpha-strong-default` | `#FFFFFF0A` | `#0000000A` | Tinted background of a selected or checked inverse (actions on an inverse surface) control at rest. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-inverse-alpha-strong-hover` | `#FFFFFF14` | `#00000014` | Tinted background of a selected or checked inverse (actions on an inverse surface) control on hover. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-inverse-alpha-strong-pressed` | `#FFFFFF1F` | `#0000001F` | Tinted background of a selected or checked inverse (actions on an inverse surface) control while pressed. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-fill-inverse-alpha-strong-default` | `#FFFFFF0A` | `#0000000A` | Selected or toggled-on state of a ghost inverse (actions on an inverse surface) control, at rest. Today it has the same value as `dynamic-fill-inverse-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-inverse-alpha-strong-hover` | `#FFFFFF14` | `#00000014` | Selected or toggled-on state of a ghost inverse (actions on an inverse surface) control, on hover. Today it has the same value as `dynamic-fill-inverse-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-inverse-alpha-strong-pressed` | `#FFFFFF1F` | `#0000001F` | Selected or toggled-on state of a ghost inverse (actions on an inverse surface) control, while pressed. Today it has the same value as `dynamic-fill-inverse-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
 | `dynamic-fill-inverse-default` | `#FFFFFF` | `#0F0F0F` | Background of a filled inverse (actions on an inverse surface) button or control, at rest. Text on it: `dynamic-text-oninverse-default`. |
 | `dynamic-fill-inverse-disabled` | `#3B3B3B` | `#DBDBDB` | Background of a filled inverse (actions on an inverse surface) button or control, when disabled. Text on it: `dynamic-text-oninverse-disabled`. |
 | `dynamic-fill-inverse-hover` | `#EDEDED` | `#1A1A1A` | Background of a filled inverse (actions on an inverse surface) button or control, on hover. Text on it: `dynamic-text-oninverse-hover`. |
@@ -131,23 +130,23 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `dynamic-fill-success-alpha-default` | `#1EB86100` | `#9BDEB700` | Background of a ghost success (confirming actions) button or control, at rest (transparent at rest). Text: `dynamic-text-success-*`. |
 | `dynamic-fill-success-alpha-hover` | `#1EB8610A` | `#9BDEB70A` | Background of a ghost success (confirming actions) button or control, on hover (transparent at rest). Text: `dynamic-text-success-*`. |
 | `dynamic-fill-success-alpha-pressed` | `#1EB86114` | `#9BDEB714` | Background of a ghost success (confirming actions) button or control, while pressed (transparent at rest). Text: `dynamic-text-success-*`. |
-| `dynamic-fill-success-alpha-strong-default` | `#1EB8610A` | `#9BDEB70A` | Tinted background of a selected or checked success (confirming actions) control at rest. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-success-alpha-strong-hover` | `#1EB86114` | `#9BDEB714` | Tinted background of a selected or checked success (confirming actions) control on hover. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-success-alpha-strong-pressed` | `#1EB8611F` | `#9BDEB71F` | Tinted background of a selected or checked success (confirming actions) control while pressed. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-fill-success-alpha-strong-default` | `#1EB8610A` | `#9BDEB70A` | Selected or toggled-on state of a ghost success (confirming actions) control, at rest. Today it has the same value as `dynamic-fill-success-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-success-alpha-strong-hover` | `#1EB86114` | `#9BDEB714` | Selected or toggled-on state of a ghost success (confirming actions) control, on hover. Today it has the same value as `dynamic-fill-success-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
+| `dynamic-fill-success-alpha-strong-pressed` | `#1EB8611F` | `#9BDEB71F` | Selected or toggled-on state of a ghost success (confirming actions) control, while pressed. Today it has the same value as `dynamic-fill-success-alpha-hover`, so selected and hover look identical: always pair it with a non-colour signal (a check icon, `aria-pressed`, `aria-selected`). |
 | `dynamic-fill-success-default` | `#087B3D` | `#7BD5A1` | Background of a filled success (confirming actions) button or control, at rest. Text on it: `dynamic-text-onsuccess-default`. |
 | `dynamic-fill-success-disabled` | `#DBDBDB` | `#0F0F0F` | Background of a filled success (confirming actions) button or control, when disabled. Text on it: `dynamic-text-onsuccess-disabled`. |
 | `dynamic-fill-success-hover` | `#086734` | `#9BDEB7` | Background of a filled success (confirming actions) button or control, on hover. Text on it: `dynamic-text-onsuccess-hover`. |
 | `dynamic-fill-success-pressed` | `#074F29` | `#C3EBD4` | Background of a filled success (confirming actions) button or control, while pressed. Text on it: `dynamic-text-onsuccess-pressed`. |
-| `dynamic-fill-tertiary-alpha-default` | `#00000000` | `#FFFFFF00` | Ghost or selected background of a tertiary control at rest. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-alpha-hover` | `#0000000A` | `#FFFFFF14` | Ghost or selected background of a tertiary control on hover. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-alpha-pressed` | `#00000014` | `#FFFFFF1F` | Ghost or selected background of a tertiary control while pressed. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-alpha-strong-default` | `#0000000A` | `#FFFFFF1F` | Ghost or selected background of a tertiary control at rest. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-alpha-strong-hover` | `#00000014` | `#FFFFFF29` | Ghost or selected background of a tertiary control on hover. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-alpha-strong-pressed` | `#0000001F` | `#FFFFFF3D` | Ghost or selected background of a tertiary control while pressed. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-default` | `#C2C2C2` | `#0A0A0A` | Background of a filled tertiary control at rest. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-disabled` | `#DBDBDB` | `#333333` | Background of a filled tertiary control when disabled. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-hover` | `#ADADAD` | `#141414` | Background of a filled tertiary control on hover. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-fill-tertiary-pressed` | `#999999` | `#292929` | Background of a filled tertiary control while pressed. No component uses tertiary yet. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-fill-tertiary-alpha-default` | `#00000000` | `#FFFFFF00` | Ghost or selected background of a tertiary control at rest; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-alpha-hover` | `#0000000A` | `#FFFFFF14` | Ghost or selected background of a tertiary control on hover; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-alpha-pressed` | `#00000014` | `#FFFFFF1F` | Ghost or selected background of a tertiary control while pressed; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-alpha-strong-default` | `#0000000A` | `#FFFFFF1F` | Ghost or selected background of a tertiary control at rest; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-alpha-strong-hover` | `#00000014` | `#FFFFFF29` | Ghost or selected background of a tertiary control on hover; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-alpha-strong-pressed` | `#0000001F` | `#FFFFFF3D` | Ghost or selected background of a tertiary control while pressed; same values as the secondary alpha tints. No component has a tertiary variant, so don't use it in screens. |
+| `dynamic-fill-tertiary-default` | `#C2C2C2` | `#0A0A0A` | Solid neutral grey fill for a tertiary control at rest, one step stronger than secondary (light `#C2C2C2`). No component has a tertiary variant (Button: primary · secondary · danger · success · inverse), so don't use it in screens. Open question: its dark value equals the dark page canvas (`static-fill-background`), so it is invisible on the page in dark mode. |
+| `dynamic-fill-tertiary-disabled` | `#DBDBDB` | `#333333` | Solid neutral grey fill for a tertiary control when disabled, one step stronger than secondary (light `#C2C2C2`). No component has a tertiary variant (Button: primary · secondary · danger · success · inverse), so don't use it in screens. Open question: its dark value equals the dark page canvas (`static-fill-background`), so it is invisible on the page in dark mode. |
+| `dynamic-fill-tertiary-hover` | `#ADADAD` | `#141414` | Solid neutral grey fill for a tertiary control on hover, one step stronger than secondary (light `#C2C2C2`). No component has a tertiary variant (Button: primary · secondary · danger · success · inverse), so don't use it in screens. Open question: its dark value equals the dark page canvas (`static-fill-background`), so it is invisible on the page in dark mode. |
+| `dynamic-fill-tertiary-pressed` | `#999999` | `#292929` | Solid neutral grey fill for a tertiary control while pressed, one step stronger than secondary (light `#C2C2C2`). No component has a tertiary variant (Button: primary · secondary · danger · success · inverse), so don't use it in screens. Open question: its dark value equals the dark page canvas (`static-fill-background`), so it is invisible on the page in dark mode. |
 
 ### Dynamic strokes — control borders
 
@@ -165,10 +164,10 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `dynamic-stroke-inverse-disabled` | `#FFFFFF14` | `#DBDBDB` | Border of a bordered (`appearance="border"`) inverse (actions on an inverse surface) button when disabled. |
 | `dynamic-stroke-inverse-hover` | `#FFFFFF66` | `#ADADAD` | Border of a bordered (`appearance="border"`) inverse (actions on an inverse surface) button on hover. |
 | `dynamic-stroke-inverse-pressed` | `#FFFFFF8F` | `#999999` | Border of a bordered (`appearance="border"`) inverse (actions on an inverse surface) button while pressed. |
-| `dynamic-stroke-inverse-strong-default` | `#ADADAD` | `#ADADAD` | Emphasised inverse (actions on an inverse surface) border of form fields at rest. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-inverse-strong-disabled` | `#FFFFFF14` | `#DBDBDB` | Emphasised inverse (actions on an inverse surface) border of form fields when disabled. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-inverse-strong-hover` | `#C2C2C2` | `#999999` | Emphasised inverse (actions on an inverse surface) border of form fields on hover. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-inverse-strong-pressed` | `#DBDBDB` | `#6E6E6E` | Emphasised inverse (actions on an inverse surface) border of form fields while pressed. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-stroke-inverse-strong-default` | `#ADADAD` | `#ADADAD` | Emphasised inverse (actions on an inverse surface) border of a form field at rest: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-inverse-strong-disabled` | `#FFFFFF14` | `#DBDBDB` | Emphasised inverse (actions on an inverse surface) border of a form field when disabled: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-inverse-strong-hover` | `#C2C2C2` | `#999999` | Emphasised inverse (actions on an inverse surface) border of a form field on hover: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-inverse-strong-pressed` | `#DBDBDB` | `#6E6E6E` | Emphasised inverse (actions on an inverse surface) border of a form field while pressed: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
 | `dynamic-stroke-primary-default` | `#7E97EC` | `#5B79E3` | Border of a bordered (`appearance="border"`) primary (the main action, brand colour) button at rest. |
 | `dynamic-stroke-primary-disabled` | `#00000014` | `#0F0F0F` | Border of a bordered (`appearance="border"`) primary (the main action, brand colour) button when disabled. |
 | `dynamic-stroke-primary-hover` | `#5B79E3` | `#7E97EC` | Border of a bordered (`appearance="border"`) primary (the main action, brand colour) button on hover. |
@@ -189,10 +188,10 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `dynamic-stroke-success-disabled` | `#DBDBDB` | `#0F0F0F` | Border of a bordered (`appearance="border"`) success (confirming actions) button when disabled. |
 | `dynamic-stroke-success-hover` | `#9BDEB7` | `#C3EBD4` | Border of a bordered (`appearance="border"`) success (confirming actions) button on hover. |
 | `dynamic-stroke-success-pressed` | `#7BD5A1` | `#DCF2E5` | Border of a bordered (`appearance="border"`) success (confirming actions) button while pressed. |
-| `dynamic-stroke-success-strong-default` | `#1EB861` | `#7BD5A1` | Emphasised success (confirming actions) border of form fields at rest. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-success-strong-disabled` | `#DBDBDB` | `#0F0F0F` | Emphasised success (confirming actions) border of form fields when disabled. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-success-strong-hover` | `#087B3D` | `#9BDEB7` | Emphasised success (confirming actions) border of form fields on hover. _(draft from the name — not yet used in code; team to confirm)_ |
-| `dynamic-stroke-success-strong-pressed` | `#074F29` | `#C3EBD4` | Emphasised success (confirming actions) border of form fields while pressed. _(draft from the name — not yet used in code; team to confirm)_ |
+| `dynamic-stroke-success-strong-default` | `#1EB861` | `#7BD5A1` | Emphasised success (confirming actions) border of a form field at rest: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-success-strong-disabled` | `#DBDBDB` | `#0F0F0F` | Emphasised success (confirming actions) border of a form field when disabled: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-success-strong-hover` | `#087B3D` | `#9BDEB7` | Emphasised success (confirming actions) border of a form field on hover: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
+| `dynamic-stroke-success-strong-pressed` | `#074F29` | `#C3EBD4` | Emphasised success (confirming actions) border of a form field while pressed: a validated field (success) or a field on an inverse surface (inverse). Input and Select only have `variant` primary · danger today, so no component uses it yet. |
 
 ### Dynamic text — control labels
 
@@ -369,65 +368,65 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | Token | Class example | Value | Usage |
 | --- | --- | --- | --- |
 | `gap-0` | `p-gap-0`, `gap-gap-0` | `0` | No space. |
-| `gap-1` | `p-gap-1`, `gap-gap-1` | `1px` | Gap scale step 1. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-2` | `p-gap-2`, `gap-gap-2` | `2px` | Gap scale step 2. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-1` | `p-gap-1`, `gap-gap-1` | `1px` | In-between step 1, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-2` | `p-gap-2`, `gap-gap-2` | `2px` | In-between step 2, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-3` | `p-gap-3`, `gap-gap-3` | `4px` | Icon to label inside a control; label to value in a stacked pair. |
-| `gap-4` | `p-gap-4`, `gap-gap-4` | `6px` | Gap scale step 4. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-4` | `p-gap-4`, `gap-gap-4` | `6px` | In-between step 4, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-5` | `p-gap-5`, `gap-gap-5` | `8px` | Between controls in a group or toolbar; title to description. |
-| `gap-6` | `p-gap-6`, `gap-gap-6` | `10px` | Gap scale step 6. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-6` | `p-gap-6`, `gap-gap-6` | `10px` | In-between step 6, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-7` | `p-gap-7`, `gap-gap-7` | `12px` | Tight vertical stacks: icon row to text block, list item internals. |
-| `gap-8` | `p-gap-8`, `gap-gap-8` | `14px` | Gap scale step 8. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-8` | `p-gap-8`, `gap-gap-8` | `14px` | In-between step 8, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-9` | `p-gap-9`, `gap-gap-9` | `16px` | Card header padding; between a row's text and its control; mobile page gutter. |
-| `gap-10` | `p-gap-10`, `gap-gap-10` | `18px` | Gap scale step 10. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-10` | `p-gap-10`, `gap-gap-10` | `18px` | In-between step 10, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-11` | `p-gap-11`, `gap-gap-11` | `20px` | Between form fields; between blocks inside a card. |
 | `gap-12` | `p-gap-12`, `gap-gap-12` | `24px` | Card content padding; page side padding from `sm`; grid gap between cards. |
-| `gap-13` | `p-gap-13`, `gap-gap-13` | `28px` | Gap scale step 13. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-13` | `p-gap-13`, `gap-gap-13` | `28px` | In-between step 13, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-14` | `p-gap-14`, `gap-gap-14` | `32px` | Between page sections. |
-| `gap-15` | `p-gap-15`, `gap-gap-15` | `36px` | Gap scale step 15. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-15` | `p-gap-15`, `gap-gap-15` | `36px` | In-between step 15, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 | `gap-16` | `p-gap-16`, `gap-gap-16` | `40px` | Page top and bottom padding; empty-state padding. |
-| `gap-17` | `p-gap-17`, `gap-gap-17` | `44px` | Gap scale step 17. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-18` | `p-gap-18`, `gap-gap-18` | `48px` | Gap scale step 18. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-19` | `p-gap-19`, `gap-gap-19` | `56px` | Gap scale step 19. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-20` | `p-gap-20`, `gap-gap-20` | `64px` | Gap scale step 20. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-21` | `p-gap-21`, `gap-gap-21` | `72px` | Gap scale step 21. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-22` | `p-gap-22`, `gap-gap-22` | `80px` | Gap scale step 22. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-23` | `p-gap-23`, `gap-gap-23` | `88px` | Gap scale step 23. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-24` | `p-gap-24`, `gap-gap-24` | `96px` | Gap scale step 24. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-25` | `p-gap-25`, `gap-gap-25` | `112px` | Gap scale step 25. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
-| `gap-26` | `p-gap-26`, `gap-gap-26` | `128px` | Gap scale step 26. Use it only to match a Figma spacing value; the steps with a usage above cover layouts. _(draft from the name — not yet used in code; team to confirm)_ |
+| `gap-17` | `p-gap-17`, `gap-gap-17` | `44px` | In-between step 17, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-18` | `p-gap-18`, `gap-gap-18` | `48px` | In-between step 18, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-19` | `p-gap-19`, `gap-gap-19` | `56px` | In-between step 19, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-20` | `p-gap-20`, `gap-gap-20` | `64px` | In-between step 20, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-21` | `p-gap-21`, `gap-gap-21` | `72px` | In-between step 21, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-22` | `p-gap-22`, `gap-gap-22` | `80px` | In-between step 22, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-23` | `p-gap-23`, `gap-gap-23` | `88px` | In-between step 23, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-24` | `p-gap-24`, `gap-gap-24` | `96px` | In-between step 24, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-25` | `p-gap-25`, `gap-gap-25` | `112px` | In-between step 25, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
+| `gap-26` | `p-gap-26`, `gap-gap-26` | `128px` | In-between step 26, used inside components (e.g. `px-gap-6` small Button padding, `gap-gap-4` icon gap in medium Buttons) and for exact Figma values. Screen layouts use gap-3, 5, 7, 9, 11, 12, 14 and 16. |
 
 ## Size scale
 
 | Token | Class example | Value | Usage |
 | --- | --- | --- | --- |
-| `size-0` | `size-size-0`, `w-size-0` | `0` | Size scale step 0 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-1` | `size-size-1`, `w-size-1` | `1px` | Size scale step 1 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-2` | `size-size-2`, `w-size-2` | `2px` | Size scale step 2 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-3` | `size-size-3`, `w-size-3` | `4px` | Size scale step 3 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-4` | `size-size-4`, `w-size-4` | `6px` | Size scale step 4 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-5` | `size-size-5`, `w-size-5` | `8px` | Size scale step 5 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-6` | `size-size-6`, `w-size-6` | `10px` | Size scale step 6 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
+| `size-0` | `size-size-0`, `w-size-0` | `0` | Size scale step 0 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-1` | `size-size-1`, `w-size-1` | `1px` | Size scale step 1 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-2` | `size-size-2`, `w-size-2` | `2px` | Size scale step 2 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-3` | `size-size-3`, `w-size-3` | `4px` | Size scale step 3 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-4` | `size-size-4`, `w-size-4` | `6px` | Size scale step 4 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-5` | `size-size-5`, `w-size-5` | `8px` | Size scale step 5 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-6` | `size-size-6`, `w-size-6` | `10px` | Size scale step 6 for icons, avatars and fixed widths. Match the Figma size. |
 | `size-7` | `size-size-7`, `w-size-7` | `12px` | Small icons inside small badges. |
-| `size-8` | `size-size-8`, `w-size-8` | `14px` | Size scale step 8 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
+| `size-8` | `size-size-8`, `w-size-8` | `14px` | Size scale step 8 for icons, avatars and fixed widths. Match the Figma size. |
 | `size-9` | `size-size-9`, `w-size-9` | `16px` | Icons inside small and medium controls and badges. |
-| `size-10` | `size-size-10`, `w-size-10` | `18px` | Size scale step 10 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
+| `size-10` | `size-size-10`, `w-size-10` | `18px` | Size scale step 10 for icons, avatars and fixed widths. Match the Figma size. |
 | `size-11` | `size-size-11`, `w-size-11` | `20px` | Icons inside medium and large buttons; alert icons. |
-| `size-12` | `size-size-12`, `w-size-12` | `24px` | Size scale step 12 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-13` | `size-size-13`, `w-size-13` | `28px` | Size scale step 13 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-14` | `size-size-14`, `w-size-14` | `32px` | Size scale step 14 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-15` | `size-size-15`, `w-size-15` | `36px` | Size scale step 15 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
+| `size-12` | `size-size-12`, `w-size-12` | `24px` | Size scale step 12 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-13` | `size-size-13`, `w-size-13` | `28px` | Size scale step 13 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-14` | `size-size-14`, `w-size-14` | `32px` | Size scale step 14 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-15` | `size-size-15`, `w-size-15` | `36px` | Size scale step 15 for icons, avatars and fixed widths. Match the Figma size. |
 | `size-16` | `size-size-16`, `w-size-16` | `40px` | Icon tiles and avatars in lists (40px). |
-| `size-17` | `size-size-17`, `w-size-17` | `44px` | Size scale step 17 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-18` | `size-size-18`, `w-size-18` | `48px` | Size scale step 18 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-19` | `size-size-19`, `w-size-19` | `56px` | Size scale step 19 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-20` | `size-size-20`, `w-size-20` | `64px` | Size scale step 20 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-21` | `size-size-21`, `w-size-21` | `72px` | Size scale step 21 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-22` | `size-size-22`, `w-size-22` | `80px` | Size scale step 22 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-23` | `size-size-23`, `w-size-23` | `88px` | Size scale step 23 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-24` | `size-size-24`, `w-size-24` | `96px` | Size scale step 24 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-25` | `size-size-25`, `w-size-25` | `112px` | Size scale step 25 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-26` | `size-size-26`, `w-size-26` | `128px` | Size scale step 26 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
-| `size-27` | `size-size-27`, `w-size-27` | `144px` | Size scale step 27 for icons, avatars and fixed widths. Match the Figma size. _(draft from the name — not yet used in code; team to confirm)_ |
+| `size-17` | `size-size-17`, `w-size-17` | `44px` | Size scale step 17 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-18` | `size-size-18`, `w-size-18` | `48px` | Size scale step 18 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-19` | `size-size-19`, `w-size-19` | `56px` | Size scale step 19 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-20` | `size-size-20`, `w-size-20` | `64px` | Size scale step 20 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-21` | `size-size-21`, `w-size-21` | `72px` | Size scale step 21 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-22` | `size-size-22`, `w-size-22` | `80px` | Size scale step 22 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-23` | `size-size-23`, `w-size-23` | `88px` | Size scale step 23 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-24` | `size-size-24`, `w-size-24` | `96px` | Size scale step 24 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-25` | `size-size-25`, `w-size-25` | `112px` | Size scale step 25 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-26` | `size-size-26`, `w-size-26` | `128px` | Size scale step 26 for icons, avatars and fixed widths. Match the Figma size. |
+| `size-27` | `size-size-27`, `w-size-27` | `144px` | Size scale step 27 for icons, avatars and fixed widths. Match the Figma size. |
 | `size-28` | `size-size-28`, `w-size-28` | `160px` | Largest fixed width (160px), e.g. a select's minimum width. Wider: use `max-w-*` or a grid. |
 
 ## Control heights
@@ -451,13 +450,13 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | --- | --- | --- | --- |
 | `container-lg` | `rounded-container-lg` | `16px` | Cards and modals. |
 | `container-md` | `rounded-container-md` | `12px` | Alerts, toasts, select menus. |
-| `container-none` | `rounded-container-none` | `0` | Square corners on a container. _(draft from the name — not yet used in code; team to confirm)_ |
-| `container-sm` | `rounded-container-sm` | `8px` | Small containers: icon tiles, inline panels. _(draft from the name — not yet used in code; team to confirm)_ |
-| `container-xl` | `rounded-container-xl` | `20px` | Large containers: full-page sheets and hero panels. _(draft from the name — not yet used in code; team to confirm)_ |
+| `container-none` | `rounded-container-none` | `0` | Square corners on a container. |
+| `container-sm` | `rounded-container-sm` | `8px` | Small containers: icon tiles, inline panels. |
+| `container-xl` | `rounded-container-xl` | `20px` | Large containers: full-page sheets and hero panels. |
 | `control-full` | `rounded-control-full` | `9999px` | Pills: round badges and tags, switch, pill tabs. |
 | `control-lg` | `rounded-control-lg` | `8px` | small and medium buttons, form fields. |
 | `control-md` | `rounded-control-md` | `6px` | xsmall buttons, badges (square), tags, tooltips, select items. |
-| `control-none` | `rounded-control-none` | `0` | Square corners on a control. _(draft from the name — not yet used in code; team to confirm)_ |
+| `control-none` | `rounded-control-none` | `0` | Square corners on a control. |
 | `control-sm` | `rounded-control-sm` | `4px` | Small control parts: checkbox box, tab focus outline, table sort button. |
 | `control-xl` | `rounded-control-xl` | `12px` | large buttons and large form fields. |
 
@@ -465,12 +464,12 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 
 | Token | Class | Usage |
 | --- | --- | --- |
-| `2xl` | `shadow-2xl` | Generic shadow step 2xl from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
+| `2xl` | `shadow-2xl` | Generic shadow step 2xl from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
 | `controls-control` | `shadow-controls-control` | Built into the `control` component styles. Not for screens. |
 | `controls-tooltip` | `shadow-controls-tooltip` | Built into the `tooltip` component styles. Not for screens. |
 | `default` | `shadow-default` | Cards (`Card`). |
 | `elevation-high` | `shadow-elevation-high` | Top-layer surfaces: modals and toasts. |
-| `elevation-low` | `shadow-elevation-low` | Slightly raised floating elements: dropdowns attached to a control. _(draft from the name — not yet used in code; team to confirm)_ |
+| `elevation-low` | `shadow-elevation-low` | Slightly raised floating elements: dropdowns attached to a control. |
 | `elevation-medium` | `shadow-elevation-medium` | Small floating elements: select lists, tooltips, the switch thumb. |
 | `focus-base` | `shadow-focus-base` | Focus ring for base controls (`focus-visible:shadow-focus-base`). |
 | `focus-danger` | `shadow-focus-danger` | Focus ring for danger controls (`focus-visible:shadow-focus-danger`). |
@@ -479,11 +478,11 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `forms-active` | `shadow-forms-active` | Built into form fields (active state). Not for screens. |
 | `forms-base` | `shadow-forms-base` | Built into form fields (base state). Not for screens. |
 | `forms-danger` | `shadow-forms-danger` | Built into form fields (danger state). Not for screens. |
-| `lg` | `shadow-lg` | Generic shadow step lg from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
-| `md` | `shadow-md` | Generic shadow step md from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
-| `md-strong` | `shadow-md-strong` | Generic shadow step md-strong from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
-| `sm` | `shadow-sm` | Generic shadow step sm from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
-| `xl` | `shadow-xl` | Generic shadow step xl from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. _(draft from the name — not yet used in code; team to confirm)_ |
+| `lg` | `shadow-lg` | Generic shadow step lg from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
+| `md` | `shadow-md` | Generic shadow step md from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
+| `md-strong` | `shadow-md-strong` | Generic shadow step md-strong from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
+| `sm` | `shadow-sm` | Generic shadow step sm from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
+| `xl` | `shadow-xl` | Generic shadow step xl from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead. |
 
 ## Typography
 
@@ -491,13 +490,13 @@ Prefer the `Typography` component (`variant="<name>"`) over the raw class.
 
 | Class | Size / line height, weight | Usage |
 | --- | --- | --- |
-| `type-title-large` | 72px / 72px, weight 520 | Marketing or hero titles only. _(draft from the name — not yet used in code; team to confirm)_ |
-| `type-title-medium` | 56px / 56px, weight 520 | Page titles on marketing or overview pages. _(draft from the name — not yet used in code; team to confirm)_ |
+| `type-title-large` | 72px / 72px, weight 520 | Marketing or hero titles only. |
+| `type-title-medium` | 56px / 56px, weight 520 | Page titles on marketing or overview pages. |
 | `type-title-small` | 48px / 48px, weight 520 | Page titles in app screens (with `as="h1"`); key numbers on dashboards (with `as="p"`). |
-| `type-subtitle-large` | 32px / 40px, weight 520 | Section titles and prominent values (plan names). _(draft from the name — not yet used in code; team to confirm)_ |
-| `type-subtitle-medium` | 24px / 32px, weight 520 | Section titles and prominent values (plan names). _(draft from the name — not yet used in code; team to confirm)_ |
+| `type-subtitle-large` | 32px / 40px, weight 520 | Section titles and prominent values (plan names). |
+| `type-subtitle-medium` | 24px / 32px, weight 520 | Section titles and prominent values (plan names). |
 | `type-subtitle-small` | 20px / 28px, weight 520 | Card and modal titles (`CardTitle`, `ModalHeader`). |
-| `type-subtitle-xsmall` | 18px / 24px, weight 520 | Titles of small nested groups inside a card. _(draft from the name — not yet used in code; team to confirm)_ |
+| `type-subtitle-xsmall` | 18px / 24px, weight 520 | Titles of small nested groups inside a card. |
 | `type-label-large` | 18px / 24px, weight 480 | UI labels and table cell text (large). |
 | `type-label-medium` | 16px / 20px, weight 480 | UI labels and table cell text (medium). |
 | `type-label-small` | 14px / 20px, weight 480 | UI labels and table cell text (small). |
