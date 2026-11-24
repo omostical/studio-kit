@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Select`.
+
 Lets people choose one value from a list in a form. Use **Combo Box** for long lists that need search, **Radio Group** for up to about 5 visible options, and **Dropdown Menu** for actions.
 
 ---

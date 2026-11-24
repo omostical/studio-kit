@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A building block that shows a person or object with an avatar or thumbnail, title and secondary text, used in lists, tables and menus.
 
 ---

@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A large selectable card for choosing between a few options that need more explanation (plans, templates, account types). Use **Radio Group** or **Checkbox Group** for simple options.
 
 ---

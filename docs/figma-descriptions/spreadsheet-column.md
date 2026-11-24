@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A column of editable **Spreadsheet Cell** items with a header, for grid-style data editing.
 
 ---

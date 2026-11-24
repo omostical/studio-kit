@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A segmented bar that shows progress through a fixed number of stages (for example a status pipeline).
 
 ---

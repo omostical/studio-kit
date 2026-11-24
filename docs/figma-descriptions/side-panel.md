@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A panel that slides in from the side for details or editing while keeping the page visible. Use **Modal** when the task must block the page.
 
 ---

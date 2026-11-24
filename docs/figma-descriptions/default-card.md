@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Card`.
+
 A box that groups related content and actions — a form, a summary, a setting — with optional header and footer. Use **Media Card** when an image leads, **Chart Card** for a chart, and `Container=False` to group content without a box.
 
 ---

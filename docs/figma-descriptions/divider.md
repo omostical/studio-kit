@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A thin line that separates groups of content, optionally with a label. Use spacing first; add a divider only when spacing isn't enough.
 
 ---

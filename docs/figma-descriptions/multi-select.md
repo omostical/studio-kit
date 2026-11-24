@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Lets people choose several values from a list; selections show as chips in the field. Use **Checkbox Group** when all options fit on screen.
 
 ---

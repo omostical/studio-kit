@@ -1,3 +1,5 @@
+**Status: stable** — covered by Input and Select (label, optional props).
+
 The label above a field, with optional "Optional" marker and info icon. Used inside **Form Field**.
 
 ---

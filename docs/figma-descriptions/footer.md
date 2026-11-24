@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The actions area of a **Modal**. Used inside Modal, not on its own.
 
 ---

@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A multi-line field for longer free text (comments, descriptions), with an optional formatting bar. Use **Input** for single-line values.
 
 ---

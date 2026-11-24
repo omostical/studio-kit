@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The main side navigation of the app, with sections, items and optional collapse. Use **Navigation Bar** when there are only a few top-level sections.
 
 ---

@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A month grid for picking a date or date range. Usually used inside **Date picker**; place it on its own only when the calendar is the main content.
 
 ---

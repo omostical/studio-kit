@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A picture, initials or icon that represents a person or organisation. Use **Avatar Group** for several people.
 
 ---

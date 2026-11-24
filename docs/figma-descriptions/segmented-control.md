@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A row of 2–5 mutually exclusive options for switching views or modes (List / Grid, Day / Week / Month). Use **Tabs** for switching between sections of content and **Radio Group** in forms.
 
 ---

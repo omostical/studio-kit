@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A button that opens a filter and shows whether it's active, for table and list toolbars.
 
 ---

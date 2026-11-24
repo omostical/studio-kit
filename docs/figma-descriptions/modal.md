@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Modal`.
+
 A dialog that blocks the page for a focused task or decision (edit an item, confirm a destructive action). Use **Side Panel** when people need to see the page behind it, and **Status Modal** for a single result or confirmation.
 
 ---

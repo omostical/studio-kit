@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Shows a keyboard shortcut (⌘ K) in menus, tooltips and search.
 
 ---

@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Switch`.
+
 Turns a single setting on or off, taking effect immediately. Use **Checkbox** in forms that are submitted.
 
 ---

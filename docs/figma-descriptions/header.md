@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The title area of a **Modal**: title, optional description and close button. Used inside Modal, not on its own.
 
 ---

@@ -1,3 +1,5 @@
+**Status: stable** — covered by Input and Select (suffix prop).
+
 Content at the end of a field (unit, icon, clear or show-password button). Used inside Input, Search and Select.
 
 ---

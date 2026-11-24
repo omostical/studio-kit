@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A field for attaching files, combining a **Dropzone** with the list of uploaded **File** items.
 
 ---

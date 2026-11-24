@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A large clickable tile that starts an action or goes somewhere ("Create project", "Import data").
 
 ---

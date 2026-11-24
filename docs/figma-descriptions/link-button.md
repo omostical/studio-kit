@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A text-only action styled as a link, for navigation or low-emphasis actions inside text, cards and forms ("Forgot your password?", "View all"). Use **Button** for actions that change data.
 
 ---

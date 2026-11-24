@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Shows where the current page sits in the site hierarchy and lets people go back up. Use on pages two or more levels deep; not for a flow of steps (use **Progress Stepper**).
 
 ---

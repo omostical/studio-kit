@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The vertical line between table columns. The Freeze types mark the edge of frozen (sticky) columns, with a shadow while the table scrolls. Used inside **Column**, not on its own.
 
 ---

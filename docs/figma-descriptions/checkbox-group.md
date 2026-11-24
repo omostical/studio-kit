@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A labelled list of **Checkbox** options where people can pick any number.
 
 ---

@@ -1,0 +1,138 @@
+{
+  "$comment": "Usage text for every token in DESIGN.md. Source of the Usage column; `npm run design:build` merges it with the token values. Rules are tried in order and the first `match` (a regex on the token name) wins. `$1`, `$2` insert capture groups; `{intent:1}` inserts labels.intent[capture 1]. `source`: `code` = written from how src/components uses the token; `name` = drafted from the token name only, shown as a draft in DESIGN.md until the team confirms it (then change it to `team`).",
+  "labels": {
+    "intent": {
+      "primary": "primary (the main action, brand colour)",
+      "secondary": "secondary (neutral actions)",
+      "tertiary": "tertiary (lowest-emphasis actions)",
+      "danger": "danger (destructive or failure actions)",
+      "success": "success (confirming actions)",
+      "inverse": "inverse (actions on an inverse surface)"
+    },
+    "state": {
+      "default": "at rest",
+      "hover": "on hover",
+      "pressed": "while pressed",
+      "disabled": "when disabled"
+    },
+    "status": {
+      "positive": "success (props: Badge/Toast `positive`, Alert `success`)",
+      "negative": "failure or danger (props: Badge `negative`, Alert/Toast `error`)",
+      "notice": "warning or attention (props: Badge `notice`, Alert `warning`)",
+      "info": "information",
+      "neutral": "neutral status"
+    }
+  },
+  "color": [
+    { "match": "^static-fill-background$", "usage": "Page canvas behind all content (grey in light). Never for cards or panels: use `static-fill-container`.", "source": "code" },
+    { "match": "^static-fill-foreground$", "usage": "Full-width content sections placed directly on the page canvas. Cards use `static-fill-container`.", "source": "name" },
+    { "match": "^static-fill-container$", "usage": "Cards and boxed panels (`Card`). Never for the page canvas.", "source": "code" },
+    { "match": "^static-fill-overlay$", "usage": "Floating layers: modals, menus, select lists, popovers. Never for in-page cards.", "source": "code" },
+    { "match": "^static-fill-alpha-subtle$", "usage": "Quiet neutral fill on any surface: icon tiles, skeleton blocks, the unchecked Switch track.", "source": "code" },
+    { "match": "^static-fill-alpha-base$", "usage": "Neutral tint one step stronger than `static-fill-alpha-subtle`: hover on neutral rows and list items.", "source": "name" },
+    { "match": "^static-fill-alpha-strong$", "usage": "Strongest neutral tint: pressed or selected neutral rows and list items.", "source": "name" },
+    { "match": "^static-fill-highlight-base$", "usage": "Background of form fields and checkboxes (`Input`, `Select`, `Checkbox`).", "source": "code" },
+    { "match": "^static-fill-highlight-subtle$", "usage": "Background of bordered buttons and bordered tags.", "source": "code" },
+    { "match": "^static-fill-highlight-inverse$", "usage": "Field or bordered-control background on an inverse surface.", "source": "name" },
+    { "match": "^static-fill-inverse-background$", "usage": "Inverse surface (dark in the light theme): tooltips, code blocks.", "source": "code" },
+    { "match": "^static-fill-inverse-(foreground|container|overlay)$", "usage": "The `static-fill-$1` role inside an inverse surface.", "source": "name" },
+    { "match": "^static-fill-inverse-alpha-(subtle|base|strong)$", "usage": "The `static-fill-alpha-$1` role inside an inverse surface.", "source": "name" },
+    { "match": "^static-scrim-base$", "usage": "Dimmed backdrop behind modals.", "source": "code" },
+    { "match": "^static-shadow-outline$", "usage": "Hairline outline inside `shadow-elevation-medium`. Not used as a class on its own.", "source": "code" },
+    { "match": "^static-shadow-focus$", "usage": "Colour of the focus ring. Use it through `shadow-focus-base`, not as a class.", "source": "code" },
+    { "match": "^static-stroke-base$", "usage": "Default border and divider: cards, table rows, section separators.", "source": "code" },
+    { "match": "^static-stroke-subtle$", "usage": "Lighter divider inside a section, between items that already share a container.", "source": "code" },
+    { "match": "^static-stroke-strong$", "usage": "Emphasised neutral border, stronger than `static-stroke-base`.", "source": "name" },
+    { "match": "^static-stroke-inverse-(base|subtle|strong)$", "usage": "The `static-stroke-$1` role on an inverse surface.", "source": "name" },
+    { "match": "^static-text-strong$", "usage": "Headings, key values, emphasised labels.", "source": "code" },
+    { "match": "^static-text-base$", "usage": "Body text and default labels.", "source": "code" },
+    { "match": "^static-text-subtle$", "usage": "Secondary text: descriptions, helper text, captions, table metadata. Never for disabled states: use the `*-disabled` text token of the control.", "source": "code" },
+    { "match": "^static-text-inverse-(strong|base|subtle)$", "usage": "The `static-text-$1` role on an inverse surface (e.g. `Tooltip`).", "source": "code" },
+
+    { "match": "^dynamic-fill-(primary|secondary|danger|success|inverse)-(default|hover|pressed|disabled)$", "usage": "Background of a filled {intent:1} button or control, {state:2}. Text on it: `dynamic-text-on$1-$2`.", "source": "code" },
+    { "match": "^dynamic-fill-(primary|secondary|danger|success|inverse)-alpha-(default|hover|pressed)$", "usage": "Background of a ghost {intent:1} button or control, {state:2} (transparent at rest). Text: `dynamic-text-$1-*`.", "source": "code" },
+    { "match": "^dynamic-fill-(primary|secondary)-alpha-strong-(default|hover|pressed)$", "usage": "Tinted background of a selected or checked {intent:1} control {state:2} (e.g. the `Switch` track).", "source": "code" },
+    { "match": "^dynamic-fill-(danger|success|inverse)-alpha-strong-(default|hover|pressed)$", "usage": "Tinted background of a selected or checked {intent:1} control {state:2}.", "source": "name" },
+    { "match": "^dynamic-fill-tertiary-(default|hover|pressed|disabled)$", "usage": "Background of a filled tertiary control {state:1}. No component uses tertiary yet.", "source": "name" },
+    { "match": "^dynamic-fill-tertiary-alpha(?:-strong)?-(default|hover|pressed)$", "usage": "Ghost or selected background of a tertiary control {state:1}. No component uses tertiary yet.", "source": "name" },
+    { "match": "^dynamic-stroke-(primary|secondary|danger|success|inverse)-(default|hover|pressed|disabled)$", "usage": "Border of a bordered (`appearance=\"border\"`) {intent:1} button {state:2}.", "source": "code" },
+    { "match": "^dynamic-stroke-(primary|secondary|danger)-strong-(default|hover|pressed|disabled)$", "usage": "Emphasised {intent:1} border of form fields and checkboxes {state:2}: focus and checked (primary), error (danger), resting field border (secondary).", "source": "code" },
+    { "match": "^dynamic-stroke-(success|inverse)-strong-(default|hover|pressed|disabled)$", "usage": "Emphasised {intent:1} border of form fields {state:2}.", "source": "name" },
+    { "match": "^dynamic-text-on(primary|secondary|danger|success|inverse)-(default|hover|pressed|disabled)$", "usage": "Text and icons on a filled `dynamic-fill-$1-*` background, {state:2}.", "source": "code" },
+    { "match": "^dynamic-text-(primary|secondary|danger|success|inverse)-(default|hover|pressed|disabled)$", "usage": "Text and icons of bordered and ghost {intent:1} buttons, {state:2}.", "source": "code" },
+
+    { "match": "^semantic-fill-(positive|negative|notice|info|neutral)$", "usage": "Tinted background for {status:1}: low-emphasis `Badge`, `Alert`. Text on it: `semantic-text-onsubtle-$1`.", "source": "code" },
+    { "match": "^semantic-fill-inverse-(positive|negative|notice|info|neutral)$", "usage": "Solid background for {status:1}: high-emphasis `Toast` and `Badge`. Text on it: `semantic-text-oninverse-$1`.", "source": "code" },
+    { "match": "^semantic-stroke-(positive|negative|notice|info|neutral)$", "usage": "Border of an element tinted for {status:1} (bordered `Tag`).", "source": "code" },
+    { "match": "^semantic-text-(positive|negative|notice|info|neutral)$", "usage": "Text and icons that state {status:1} on a regular surface: the Alert icon and a field's helper text in that state.", "source": "code" },
+    { "match": "^semantic-text-onsubtle-(positive|negative|notice|info|neutral)$", "usage": "Text on `semantic-fill-$1` (low-emphasis Badge, Alert text).", "source": "code" },
+    { "match": "^semantic-text-oninverse-(positive|negative|notice|info|neutral)$", "usage": "Text on `semantic-fill-inverse-$1` (high-emphasis Toast and Badge).", "source": "code" },
+
+    { "match": "^non-semantic-fill-([a-z]+)-(subtle|strong)$", "usage": "`Tag` category colour $1, $2 emphasis. Categories only, never status: status uses `semantic-*`.", "source": "code" },
+    { "match": "^non-semantic-stroke-([a-z]+)-default$", "usage": "Border of a bordered `Tag` in category colour $1.", "source": "code" },
+    { "match": "^non-semantic-text-([a-z]+)-on(subtle|strong)$", "usage": "Text on `non-semantic-fill-$1-$2`.", "source": "code" }
+  ],
+  "spacing": [
+    { "match": "^gap-0$", "usage": "No space.", "source": "code" },
+    { "match": "^gap-3$", "usage": "Icon to label inside a control; label to value in a stacked pair.", "source": "code" },
+    { "match": "^gap-5$", "usage": "Between controls in a group or toolbar; title to description.", "source": "code" },
+    { "match": "^gap-7$", "usage": "Tight vertical stacks: icon row to text block, list item internals.", "source": "code" },
+    { "match": "^gap-9$", "usage": "Card header padding; between a row's text and its control; mobile page gutter.", "source": "code" },
+    { "match": "^gap-11$", "usage": "Between form fields; between blocks inside a card.", "source": "code" },
+    { "match": "^gap-12$", "usage": "Card content padding; page side padding from `sm`; grid gap between cards.", "source": "code" },
+    { "match": "^gap-14$", "usage": "Between page sections.", "source": "code" },
+    { "match": "^gap-16$", "usage": "Page top and bottom padding; empty-state padding.", "source": "code" },
+    { "match": "^gap-(\\d+)$", "usage": "Gap scale step $1. Use it only to match a Figma spacing value; the steps with a usage above cover layouts.", "source": "name" }
+  ],
+  "size": [
+    { "match": "^size-7$", "usage": "Small icons inside small badges.", "source": "code" },
+    { "match": "^size-9$", "usage": "Icons inside small and medium controls and badges.", "source": "code" },
+    { "match": "^size-11$", "usage": "Icons inside medium and large buttons; alert icons.", "source": "code" },
+    { "match": "^size-16$", "usage": "Icon tiles and avatars in lists (40px).", "source": "code" },
+    { "match": "^size-28$", "usage": "Largest fixed width (160px), e.g. a select's minimum width. Wider: use `max-w-*` or a grid.", "source": "code" },
+    { "match": "^size-(\\d+)$", "usage": "Size scale step $1 for icons, avatars and fixed widths. Match the Figma size.", "source": "name" }
+  ],
+  "forms": [
+    { "match": "^forms-(xsmall|small|medium|large)$", "usage": "Height of a `$1` control (`h-forms-$1`). Match the component's `size` prop.", "source": "code" },
+    { "match": "^control-([a-z]+)$", "usage": "Inner height of a `$1` control part (checkbox box, switch thumb). Used inside components only.", "source": "code" }
+  ],
+  "radius": [
+    { "match": "^control-sm$", "usage": "Small control parts: checkbox box, tab focus outline, table sort button.", "source": "code" },
+    { "match": "^control-md$", "usage": "xsmall buttons, badges (square), tags, tooltips, select items.", "source": "code" },
+    { "match": "^control-lg$", "usage": "small and medium buttons, form fields.", "source": "code" },
+    { "match": "^control-xl$", "usage": "large buttons and large form fields.", "source": "code" },
+    { "match": "^control-full$", "usage": "Pills: round badges and tags, switch, pill tabs.", "source": "code" },
+    { "match": "^control-none$", "usage": "Square corners on a control.", "source": "name" },
+    { "match": "^container-sm$", "usage": "Small containers: icon tiles, inline panels.", "source": "name" },
+    { "match": "^container-md$", "usage": "Alerts, toasts, select menus.", "source": "code" },
+    { "match": "^container-lg$", "usage": "Cards and modals.", "source": "code" },
+    { "match": "^container-xl$", "usage": "Large containers: full-page sheets and hero panels.", "source": "name" },
+    { "match": "^container-none$", "usage": "Square corners on a container.", "source": "name" }
+  ],
+  "shadow": [
+    { "match": "^default$", "usage": "Cards (`Card`).", "source": "code" },
+    { "match": "^elevation-low$", "usage": "Slightly raised floating elements: dropdowns attached to a control.", "source": "name" },
+    { "match": "^elevation-medium$", "usage": "Small floating elements: select lists, tooltips, the switch thumb.", "source": "code" },
+    { "match": "^elevation-high$", "usage": "Top-layer surfaces: modals and toasts.", "source": "code" },
+    { "match": "^focus-(base|danger|success|inversed)$", "usage": "Focus ring for $1 controls (`focus-visible:shadow-focus-$1`).", "source": "code" },
+    { "match": "^controls-(control|tooltip)$", "usage": "Built into the `$1` component styles. Not for screens.", "source": "code" },
+    { "match": "^forms-(base|active|danger)$", "usage": "Built into form fields ($1 state). Not for screens.", "source": "code" },
+    { "match": "^(sm|md|md-strong|lg|xl|2xl)$", "usage": "Generic shadow step $1 from the primitives. Screens use `shadow-default` or `shadow-elevation-*` instead.", "source": "name" }
+  ],
+  "type": [
+    { "match": "^title-large$", "usage": "Marketing or hero titles only.", "source": "name" },
+    { "match": "^title-small$", "usage": "Page titles in app screens (with `as=\"h1\"`); key numbers on dashboards (with `as=\"p\"`).", "source": "code" },
+    { "match": "^title-medium$", "usage": "Page titles on marketing or overview pages.", "source": "name" },
+    { "match": "^subtitle-(large|medium)$", "usage": "Section titles and prominent values (plan names).", "source": "name" },
+    { "match": "^subtitle-small$", "usage": "Card and modal titles (`CardTitle`, `ModalHeader`).", "source": "code" },
+    { "match": "^subtitle-xsmall$", "usage": "Titles of small nested groups inside a card.", "source": "name" },
+    { "match": "^label-strong-(large|medium|small)$", "usage": "Emphasised UI labels: button text, table headers, field labels ($1).", "source": "code" },
+    { "match": "^label-(large|medium|small)$", "usage": "UI labels and table cell text ($1).", "source": "code" },
+    { "match": "^body-strong-(large|medium|small)$", "usage": "Emphasis inside running text ($1).", "source": "code" },
+    { "match": "^body-(large|medium|small)$", "usage": "Running text: page descriptions (`large`), body (`medium`), dense help text (`small`).", "source": "code" },
+    { "match": "^caption-strong-(medium|small)$", "usage": "Emphasised small text: xsmall buttons, small badges ($1).", "source": "code" },
+    { "match": "^caption-(medium|small)$", "usage": "Small secondary text: metadata labels, timestamps ($1).", "source": "code" },
+    { "match": "^number-strong-(large|medium|small|xsmall)$", "usage": "Emphasised figures with tabular digits: totals, prices ($1).", "source": "code" },
+    { "match": "^number-(large|medium|small|xsmall)$", "usage": "Figures with tabular digits: table numbers, amounts ($1).", "source": "code" }
+  ]
+}

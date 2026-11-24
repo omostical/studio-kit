@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A field for one date, with a **Calendar** popover. Use **Date picker (Date range)** for start and end dates.
 
 ---

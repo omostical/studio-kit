@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 One link in **Breadcrumbs**. Use the Breadcrumbs component in layouts; this is the building block.
 
 ---

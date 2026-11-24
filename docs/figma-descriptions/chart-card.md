@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A card that holds one chart with its title, summary figures and legend, for dashboards.
 
 ---

@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Table`.
+
 A table column with its header and **Table Cell** items, for building tables of structured data.
 
 ---

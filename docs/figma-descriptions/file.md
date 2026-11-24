@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 One uploaded or uploading file in **File Upload**: name, size, progress or status, and actions.
 
 ---

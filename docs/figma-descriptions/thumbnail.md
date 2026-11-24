@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A small preview of a file or media item by type (PDF, image, video, document).
 
 ---

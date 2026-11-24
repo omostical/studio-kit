@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A card led by an image or video (articles, templates, products). Pick the Ratio that matches the media. Use **Default Card** when there's no image.
 
 ---

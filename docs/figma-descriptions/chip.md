@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A small interactive element for filters, choices and entered values (filter chips, selected tags in a field). Use **Tag** for read-only labels and **Segmented Control** for switching views.
 
 ---

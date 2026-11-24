@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Tag`.
+
 A small read-only label for categories and metadata (project type, team, topic). Use **Status Badge** for states and **Chip** for interactive filters or values.
 
 ---

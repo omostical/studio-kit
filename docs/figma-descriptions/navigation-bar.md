@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The top bar of the app: product logo, main navigation, search and account. Use **Sidebar** when there are many sections.
 
 ---

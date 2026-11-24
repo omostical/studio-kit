@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A small dialog for a result or confirmation (success, warning, danger) with an icon, message and one or two actions.
 
 ---
