@@ -3,7 +3,7 @@
 Repository: studio-kit (github.com/omostical/studio-kit) at b8e6e39, 2026-11-21
 Scope: app holding its own design system (not published; `package.json` has no `files`/`exports`); agents served: both contributor agents (editing `src/components`, tokens) and consumer agents (building `src/app/prototypes`), in this repository; agent files live in: root `AGENTS.md`, `CLAUDE.md` (`@AGENTS.md`), `.claude/skills/`. Working assumption — see question 1.
 Stack: Next 16.1.6 + React 19.2.3, Tailwind v4 (`@theme` in `src/styles/generated/theme.css`), Radix primitives, Storybook 10.6.8 (16 stories), tokens from Figma DTCG JSON (`tokens/figma/`) built by `scripts/build-tokens.mjs`
-Levels (after setup week2, 2026-11-26): silent 2, guesses 4, obeys 9, tells you 0. Using: obeys 3, guesses 3. Not allowed: obeys 6, guesses 1, silent 1. Doesn't exist: silent 1. After week1: silent 3, guesses 11, obeys 1. Audit of 2026-11-21: silent 7, guesses 7, obeys 1
+Levels (after setup week2, 2026-11-26): silent 2, guesses 3, obeys 10, tells you 0. Using: obeys 3, guesses 3. Not allowed: obeys 7, silent 1. Doesn't exist: silent 1. After week1: silent 3, guesses 11, obeys 1. Audit of 2026-11-21: silent 7, guesses 7, obeys 1
 
 ## Top gaps
 
@@ -11,7 +11,7 @@ The rank is a judgment on two scales (frequency × cost, from `references/doctri
 
 Progress, 2026-11-24 (`setup week1`): ranks 1 and 4 are closed (areas 4 and 7 now `answered`). Rank 5 has its canonical form recorded; enforcement follows the Figma rename (week 2). Ranks 2 and 3 are open (weeks 3 and 2).
 
-Progress, 2026-11-26 (`setup week2`): rank 5 is enforced (`lint:tokens` intent-word check). Rank 3 is built (every check in the `tokens` job) and closes when `main` is protected after the week-2 pull request merges. Rank 2 is open (week 3).
+Progress, 2026-11-26 (`setup week2`): rank 5 is enforced (`lint:tokens` intent-word check). Rank 3 is closed: `main` requires the `tokens` check and pull requests. Rank 2 is open (week 3).
 
 | Rank | Gap | Class | Question | Frequency x cost | Evidence | Closed by |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ Progress, 2026-11-26 (`setup week2`): rank 5 is enforced (`lint:tokens` intent-w
 | 10 | Exceptions | answered | obeys | Marker `token-lint-ignore: <reason>` on the line or the line above; `lint:tokens` fails on a reason under 20 characters and on a marker that excuses nothing (tested). 6 recorded exceptions with reasons: `Modal.tsx` (2), `Select.tsx` (1), `Toast.tsx` (3) |
 | 11 | Agent hooks | answered | obeys | Week 2: `.claude/hooks/pre-tool-use.sh`, registered in `.claude/settings.json`, refuses Edit/Write on `tokens/figma/*`, `src/styles/generated/*`, `src/tokens/generated.ts`, `DESIGN.md`, generated descriptions, and real rules/skills under tool folders; refuses `--no-verify` and commits on `main`; each refusal names the command to run (13 cases tested). Cursor and Codex meet the same rules in CI only |
 | 12 | Gap logging | missing | silent | See top gap 2 |
-| 13 | CI gate | violated | guesses | The `tokens` job now runs every design check (areas 4, 7, 8, 9, 10). `main` is still unprotected (`gh api …/branches/main/protection` → 404) until the week-2 pull request is pushed and merged; then protection requires `tokens` and pull requests, admins may bypass (team answer, 2026-11-26) |
+| 13 | CI gate | answered | obeys | `main` protected on 2026-11-26 (`gh api repos/omostical/studio-kit/branches/main/protection`): required check `tokens`, pull requests required (0 approvals), force pushes and deletion off, admins may bypass (team answer). The `tokens` job runs every design check (areas 4, 7, 8, 9, 10); PR #1 showed `BLOCKED` while it ran |
 | 14 | Change discipline | missing | silent | No `.github/PULL_REQUEST_TEMPLATE*`, no change-type labels (`gh label list`), no changelog |
 | 15 | Consistency | violated | obeys | Canonical words `danger` / `success` are enforced: `lint:tokens` fails on `"error"`, `"negative"`, `"positive"` in any component file except `Alert.tsx`, `Toast.tsx`, `Badge.tsx` (tested). Those 3 keep the old words until the Figma rename. Raw `<a>` 9 in 3 files (docs site) unchanged |
 
