@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
+Status: `beta` = Avatar, Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -67,6 +67,7 @@ Status: `beta` = Modal, Tooltip, Tabs, Toast, Table; every other component in th
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |
+| `Avatar` | A person (rounded) or organisation (square) | `name` `src` `alt` (`""` next to a visible name) · `type` rounded·square · `size` xsmall…xxlarge · `status` `statusLabel` `selected`; leave `variant` unset (photo → initials → icon) |
 | `Badge` | Status of an item (Active, Pending, Failed) | `status` negative·notice·positive·info·neutral · `emphasis` low·high · `size` |
 | `Tag` | Category / metadata label (not status) | `color` (13 categories) · `emphasis` filled·border · `size` · `rounded` |
 | `Card` + `CardHeader/Title/Description/Content/Footer` | Group content and its actions | `container` (false = no box, for grey backgrounds) · `CardTitle as` (h2 by default; h3 inside a titled section) |

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import { IconButton } from "@/components/IconButton";
+import { Avatar } from "@/components/Avatar";
 import { Badge, type BadgeStatus } from "@/components/Badge";
 import { Input } from "@/components/Input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/Card";
@@ -381,10 +382,37 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
+      {/* ─── Avatar ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="avatar"
+        eyebrow="Data display / 01"
+        title="Avatar"
+        description="Figma Avatar: Variant (image · initials · icon) × Type (rounded for people, square for organisations) × Size × Selected × Status. Leave variant unset: photo, then initials, then icon."
+      >
+        <SubBlock id="avatar-variants" title="Variants and type">
+          <PreviewFrame>
+            <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+            <Avatar name="Ada Lovelace" />
+            <Avatar alt="Unknown member" />
+            <Avatar type="square" src="/avatars/sample-team.svg" name="Northwind" />
+            <Avatar type="square" name="Northwind Traders" />
+            <Avatar type="square" alt="Workspace" />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="avatar-sizes" title="Sizes, status and selected">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large", "xlarge", "xxlarge"] as const).map((size) => (
+              <Avatar key={size} size={size} name="Grace Hopper" status />
+            ))}
+            <Avatar size="large" src="/avatars/sample-person.svg" name="Ada Lovelace" selected />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
       {/* ─── Badge ──────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="badge"
-        eyebrow="Data display / 01"
+        eyebrow="Data display / 02"
         title="Badge"
         description="Figma Status Badge: Status × Emphasis (low · high) × Shape × Size. For categories, use Tag."
       >
@@ -414,7 +442,7 @@ export default function ComponentsPage() {
       {/* ─── Tag ────────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="tag"
-        eyebrow="Data display / 02"
+        eyebrow="Data display / 03"
         title="Tag"
         description="Figma Tag: 13 category colours × Emphasis (filled · border) × Size × Rounded. Colours mean categories, never status."
       >
@@ -453,7 +481,7 @@ export default function ComponentsPage() {
       {/* ─── Typography ─────────────────────────────────────────────────────── */}
       <ComponentSection
         id="typography"
-        eyebrow="Data display / 03"
+        eyebrow="Data display / 04"
         title="Typography"
         description="The Figma text styles, generated from the Typography variables. variant = style name in kebab case."
       >
@@ -581,7 +609,7 @@ export default function ComponentsPage() {
       {/* ─── Table ──────────────────────────────────────────────────────────── */}
       <ComponentSection
         id="table"
-        eyebrow="Data display / 04"
+        eyebrow="Data display / 05"
         title="Table"
         description="Figma Column + Table Cell as real table markup: sortable headers, selectable rows, right-aligned tabular numbers."
       >

@@ -11,7 +11,7 @@ line to `CHANGELOG.md`.
 
 ## Components
 
-- Avatar: a person's photo, or their initials when there is no photo, in list rows and headers — needed by the team-members prototype (branch `claude/phase3-retest-team-members-2934b4`, `page.tsx:92` initials stand-in). Catalog: `planned`
+- Avatar Orb: the animated gradient orb variant of Avatar (Figma `Variant=Orb`, e.g. an AI assistant) — needed by `src/components/Avatar/Avatar.tsx`; Figma builds it from images and blurs, with no tokens
 - Dropdown Menu: several row actions behind one "more" button — needed by the team-members prototype (same branch, two buttons per row instead). Catalog: `planned`
 - Textarea: multi-line text field with label, helper text and error — needed by any form with a message or note field. Catalog: `planned`
 - Select clear option: reset a filter Select back to "All" without picking a value — needed by the Phase 3 re-test filters
