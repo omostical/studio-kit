@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Avatar`.
 
 A picture, initials or icon that represents a person or organisation. Use **Avatar Group** for several people.
 
@@ -18,6 +18,7 @@ A picture, initials or icon that represents a person or organisation. Use **Avat
 - Use a photo when you have one, initials when you don't, and the icon as a last resort.
 - Circles are for people; rounded squares for organisations, teams and workspaces.
 - The status dot shows presence; don't use it for anything else.
+- In code, leave `variant` unset: the avatar shows the photo, falls back to initials when the photo fails to load, and to the icon when there is no name. The Figma `Orb` variant is not in code yet.
 
 ---
 

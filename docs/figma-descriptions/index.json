@@ -39,7 +39,8 @@
   {
     "id": "7807:149649",
     "name": "Avatar",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Avatar",
     "file": "avatar.md"
   },
   {

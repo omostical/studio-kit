@@ -68,6 +68,7 @@
     { "match": "^semantic-text-onsubtle-(positive|negative|notice|info|neutral)$", "usage": "Text on `semantic-fill-$1` (low-emphasis Badge, Alert text).", "source": "code" },
     { "match": "^semantic-text-oninverse-(positive|negative|notice|info|neutral)$", "usage": "Text on `semantic-fill-inverse-$1` (high-emphasis Toast and Badge).", "source": "code" },
 
+    { "match": "^non-semantic-fill-brand-subtle$", "usage": "`Tag` category colour brand, subtle emphasis, and the background of `Avatar` initials. Categories and avatars only, never status: status uses `semantic-*`.", "source": "code" },
     { "match": "^non-semantic-fill-([a-z]+)-(subtle|strong)$", "usage": "`Tag` category colour $1, $2 emphasis. Categories only, never status: status uses `semantic-*`.", "source": "code" },
     { "match": "^non-semantic-stroke-([a-z]+)-default$", "usage": "Border of a bordered `Tag` in category colour $1.", "source": "code" },
     { "match": "^non-semantic-text-([a-z]+)-on(subtle|strong)$", "usage": "Text on `non-semantic-fill-$1-$2`.", "source": "code" }

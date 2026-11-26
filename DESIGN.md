@@ -290,7 +290,7 @@ values are the Desktop values; below 768px some control sizes are smaller (`src/
 | `non-semantic-fill-blue-strong` | `#4178FA` | `#3564AF` | `Tag` category colour blue, strong emphasis. Categories only, never status: status uses `semantic-*`. |
 | `non-semantic-fill-blue-subtle` | `#CBDBF7` | `#2E4E80` | `Tag` category colour blue, subtle emphasis. Categories only, never status: status uses `semantic-*`. |
 | `non-semantic-fill-brand-strong` | `#4763CF` | `#6681D8` | `Tag` category colour brand, strong emphasis. Categories only, never status: status uses `semantic-*`. |
-| `non-semantic-fill-brand-subtle` | `#ABBAF4` | `#374DA2` | `Tag` category colour brand, subtle emphasis. Categories only, never status: status uses `semantic-*`. |
+| `non-semantic-fill-brand-subtle` | `#ABBAF4` | `#374DA2` | `Tag` category colour brand, subtle emphasis, and the background of `Avatar` initials. Categories and avatars only, never status: status uses `semantic-*`. |
 | `non-semantic-fill-cyan-strong` | `#05B9E1` | `#048FBA` | `Tag` category colour cyan, strong emphasis. Categories only, never status: status uses `semantic-*`. |
 | `non-semantic-fill-cyan-subtle` | `#C6ECF5` | `#156078` | `Tag` category colour cyan, subtle emphasis. Categories only, never status: status uses `semantic-*`. |
 | `non-semantic-fill-green-strong` | `#1EB861` | `#2B993B` | `Tag` category colour green, strong emphasis. Categories only, never status: status uses `semantic-*`. |

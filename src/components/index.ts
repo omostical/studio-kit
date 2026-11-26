@@ -1,6 +1,7 @@
 // Studio Kit component library — one export per component.
 // Each component lives in its own folder: Component.tsx, Component.stories.tsx, index.ts
 export * from "./Alert";
+export * from "./Avatar";
 export * from "./Badge";
 export * from "./Button";
 export * from "./Card";

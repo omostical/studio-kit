@@ -51,6 +51,7 @@ The team chose one word pair for failure and success (`design-system-audit.md`, 
 - Descriptions are generated: edit `docs/figma-descriptions/components.json`, then run
   `npm run descriptions:build`. Only `button.md` and `input.md` are hand-written. `npm run descriptions:check` (in
   CI) fails when a generated file differs from its source.
+- When behaviour changes, update the JSDoc, the story and the description in the same change.
 
 ## Values without a token
 
@@ -58,7 +59,6 @@ Component code has no arbitrary values (`max-w-[400px]`, `z-[60]`), except recor
 no token, keep the literal and put `token-lint-ignore: <why no token fits>` (20+ characters) on the same line or the
 line above, as in `Modal.tsx`, `Toast.tsx` and `Select.tsx`. `npm run lint:tokens` fails on an arbitrary value
 without the marker, on a marker without a reason, and on a marker that excuses nothing. Stories are exempt.
-- When behaviour changes, update the JSDoc, the story and the description in the same change.
 
 ## Change type and changelog
 

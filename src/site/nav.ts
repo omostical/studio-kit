@@ -40,6 +40,7 @@ export const componentGroups: DocGroup[] = [
   {
     name: "Data display",
     items: [
+      { slug: "avatar", title: "Avatar" },
       { slug: "badge", title: "Badge" },
       { slug: "tag", title: "Tag" },
       { slug: "typography", title: "Typography" },
