@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `DropdownMenu`.
 
 A list of actions or options that opens from a button ("More", user menu, Split Button). Use **Single Select** to choose a value in a form.
 
@@ -14,6 +14,7 @@ A list of actions or options that opens from a button ("More", user menu, Split 
 - Group related items and separate groups with dividers.
 - Put destructive actions last, in Danger style.
 - Keep it short; avoid more than one level of submenu.
+- In code: `DropdownMenuItem` for actions (`variant="danger"` for destructive), `DropdownMenuRadioItem` / `DropdownMenuCheckboxItem` for options, `DropdownMenuLabel` and `DropdownMenuSeparator` for groups. The Search, Select All and Create slots are not in code yet.
 
 ---
 

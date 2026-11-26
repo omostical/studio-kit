@@ -21,7 +21,7 @@ and when to use each one: `DESIGN.md`.
 - **Settings:** sections as Cards with a `CardHeader` title/description; rows `flex items-start justify-between
   gap-gap-9` with a `Switch` or control on the right; separate rows with `border-b border-static-stroke-base`.
 - **Lists / data:** toolbar row (`Input` with search prefix + filter/primary Buttons, `gap-gap-5`) above a `Table`
-  in a Card; statuses as `Badge`; row actions as `IconButton` + `Tooltip`; numbers `numeric`.
+  in a Card; statuses as `Badge`; one or two row actions as `IconButton` + `Tooltip`, three or more as a `DropdownMenu` behind a "More" `IconButton` (`aria-label` names the row); numbers `numeric`.
 - **Dashboards:** responsive grid `grid gap-gap-12 sm:grid-cols-2 lg:grid-cols-4` of Cards; key number
   `Typography as="p" variant="title-small"`, label `caption-medium tone="subtle"`.
 - **Empty / loading / error states:** every screen that has one shows it — empty: one sentence + one Primary

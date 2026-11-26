@@ -138,13 +138,15 @@
   {
     "id": "1490:38985",
     "name": "Dropdown Menu",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/DropdownMenu",
     "file": "dropdown-menu.md"
   },
   {
     "id": "1294:41224",
     "name": "Dropdown Menu / Menu Item",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/DropdownMenu",
     "file": "dropdown-menu-menu-item.md"
   },
   {

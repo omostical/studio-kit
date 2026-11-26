@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `DropdownMenu`.
 
 One row in a **Dropdown Menu** or **Select** list: label with optional icon, description, shortcut, checkbox or radio.
 
