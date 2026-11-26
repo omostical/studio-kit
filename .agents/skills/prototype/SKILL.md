@@ -11,7 +11,8 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
 ## 1. Plan (briefly, in your reply)
 - Name the screen and pick a slug (`billing-settings`).
 - List the sections and, for each, which components it uses (see the table in `AGENTS.md`). If a need isn't
-  covered by a component, say so and compose it from tokens — don't invent a lookalike of an existing component.
+  covered by a component, follow "When the answer doesn't exist" in `AGENTS.md`: log it in `GAPS.md`, then leave
+  it out or build a minimal stand-in marked `// stand-in: <Name>`. Never a lookalike of an existing component.
 - Decide realistic content: real-sounding names, amounts, dates; no "Lorem ipsum", no "Label".
 - Ask only if the screen's purpose is genuinely unclear; otherwise choose sensible defaults and state them.
 
@@ -53,6 +54,6 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
 - Fix what you see before reporting.
 
 ## 5. Report
-- The URL (`/prototypes/<slug>`), the components used, the check results, any gap where no component fitted (a
-  candidate for the design system), anything you assumed, and anything in `AGENTS.md`, `DESIGN.md`, `.agents/rules/screens.md` or this skill that was
+- The URL (`/prototypes/<slug>`), the components used, the check results, every gap you added to `GAPS.md` and
+  every stand-in you built (file:line), anything you assumed, and anything in `AGENTS.md`, `DESIGN.md`, `.agents/rules/screens.md` or this skill that was
   missing or wrong.

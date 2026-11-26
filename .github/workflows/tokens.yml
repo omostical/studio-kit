@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the change-discipline step compares against the base branch
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -29,3 +31,18 @@ jobs:
       - run: npx eslint src --max-warnings=0
       - run: npx tsc --noEmit
       - run: npm run build
+      # Change discipline (warnings, not blocking): a pull request that changes a component ticks a change type in
+      # the template and adds a CHANGELOG.md line.
+      - name: Change type and changelog
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE: origin/${{ github.base_ref }}
+        run: |
+          changed=$(git diff --name-only "$BASE"...HEAD)
+          components=$(printf '%s\n' "$changed" | grep -E '^src/components/.+\.tsx?$' | grep -v '\.stories\.tsx$' || true)
+          [ -n "$components" ] || { echo "No component files changed."; exit 0; }
+          printf '%s\n' "$changed" | grep -qx 'CHANGELOG.md' \
+            || echo "::warning::src/components changed without a CHANGELOG.md line. Add '- <type>(<Component>): <what> — <why> (#<PR>)' under Unreleased."
+          printf '%s' "$PR_BODY" | grep -Eiq '^- \[x\] (create|refine|extend|refactor)' \
+            || echo "::warning::No change type ticked in the PR description. Tick one of create, refine, extend, refactor (.github/pull_request_template.md)."
