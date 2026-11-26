@@ -10,10 +10,20 @@
 // Each entry's `status` (stable · beta · planned) and `code` path go into index.json and onto the first line of
 // its description, so agents and designers see whether a component exists in code. Keys starting with `code:`
 // are code components without a generated description (Button, Input, Typography).
-import { readFileSync, writeFileSync } from "node:fs";
+//
+// `--check` (npm run descriptions:check, run in CI) writes nothing and fails when a generated file differs from
+// what components.json and figma-properties.json produce.
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const dir = "docs/figma-descriptions";
+const CHECK = process.argv.includes("--check");
+const stale = [];
+function output(file, text) {
+  const path = join(dir, file);
+  if (!CHECK) return writeFileSync(path, text);
+  if (!existsSync(path) || readFileSync(path, "utf8") !== text) stale.push(path);
+}
 const prose = JSON.parse(readFileSync(join(dir, "components.json"), "utf8"));
 const props = JSON.parse(readFileSync(join(dir, "figma-properties.json"), "utf8"));
 
@@ -62,12 +72,20 @@ for (const [id, p] of Object.entries(prose)) {
   if (p.a11y?.length) parts.push("---", "**Accessibility**", ...p.a11y.map((a) => `- ${a}`));
   const md = parts.join("\n\n").replace(/\n\n- /g, "\n- ").replace(/(\*\*[A-Za-z ]+\*\*)\n- /g, "$1\n- ");
   const file = `${slug(p.name)}.md`;
-  writeFileSync(join(dir, file), md + "\n");
+  output(file, md + "\n");
   index.push({ ...entry, file });
 }
 if (problems.length) {
   console.error(problems.join("\n"));
   process.exit(1);
 }
-writeFileSync(join(dir, "index.json"), JSON.stringify(index, null, 2) + "\n");
+output("index.json", JSON.stringify(index, null, 2) + "\n");
+if (CHECK) {
+  if (stale.length) {
+    console.error(`${stale.join("\n")}\n\n✗ ${stale.length} generated description file(s) are out of date. Edit docs/figma-descriptions/components.json (never the .md), run \`npm run descriptions:build\` and commit the result.`);
+    process.exit(1);
+  }
+  console.log(`✓ docs/figma-descriptions is current: ${index.length} components in index.json.`);
+  process.exit(0);
+}
 console.log(`wrote ${index.filter((e) => !e.id.startsWith("code:")).length} descriptions; index.json lists ${index.length} components`);

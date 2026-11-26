@@ -6,6 +6,7 @@ import { Button, type ButtonAppearance, type ButtonVariant } from "@/components/
 import { Badge, type BadgeStatus } from "@/components/Badge";
 import { Input } from "@/components/Input";
 import { Switch } from "@/components/Switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
 import { ArrowRight, Download } from "lucide-react";
 
 // ── Code snippet ─────────────────────────────────────────────────────────────
@@ -20,9 +21,9 @@ function CodeBlock({ code }: { code: string }) {
     <div className="overflow-hidden bg-static-fill-inverse-background text-static-text-inverse-strong">
       <div className="flex items-center justify-between border-b border-static-stroke-inverse-base px-gap-9 py-gap-6">
         <span className="font-code type-caption-medium text-static-text-inverse-subtle">JSX</span>
-        <button onClick={copy} className="type-caption-medium text-static-text-inverse-subtle transition-colors hover:text-static-text-inverse-strong">
+        <Button variant="inverse" appearance="ghost" size="xsmall" onClick={copy}>
           {copied ? "Copied!" : "Copy"}
-        </button>
+        </Button>
       </div>
       <pre className="overflow-x-auto p-gap-9 font-code text-300 leading-500">
         <code>{code}</code>
@@ -216,10 +217,8 @@ function InputPlayground() {
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 const tabs = ["Button", "Badge", "Input"] as const;
-type Tab = (typeof tabs)[number];
 
 export default function PlaygroundPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("Button");
 
   return (
     <div className="min-h-screen bg-static-fill-foreground text-static-text-strong">
@@ -249,27 +248,18 @@ export default function PlaygroundPage() {
           <p className="type-body-large text-static-text-subtle">Try the components live. Change props and copy the generated code.</p>
         </div>
 
-        <div role="tablist" className="mb-gap-14 flex items-center gap-gap-3 border-b border-static-stroke-subtle">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              role="tab"
-              aria-selected={activeTab === tab}
-              onClick={() => setActiveTab(tab)}
-              className={`-mb-px border-b-2 px-gap-9 py-gap-6 type-label-strong-small transition-colors ${
-                activeTab === tab
-                  ? "border-dynamic-stroke-primary-strong-default text-dynamic-text-primary-default"
-                  : "border-transparent text-static-text-subtle hover:text-static-text-strong"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {activeTab === "Button" && <ButtonPlayground />}
-        {activeTab === "Badge" && <BadgePlayground />}
-        {activeTab === "Input" && <InputPlayground />}
+        <Tabs defaultValue="Button">
+          <TabsList className="mb-gap-14">
+            {tabs.map((tab) => (
+              <TabsTrigger key={tab} value={tab}>
+                {tab}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <TabsContent value="Button"><ButtonPlayground /></TabsContent>
+          <TabsContent value="Badge"><BadgePlayground /></TabsContent>
+          <TabsContent value="Input"><InputPlayground /></TabsContent>
+        </Tabs>
       </div>
     </div>
   );

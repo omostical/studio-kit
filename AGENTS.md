@@ -20,19 +20,22 @@ you to everything else; you shouldn't have to read the component source to use t
 2. **Use tokens for every visual value.** Colours, spacing, radius, type and shadows come from the token classes
    in `DESIGN.md`. No hex codes, no `rgb()`, no Tailwind palette classes (`bg-blue-500`, `text-gray-700`), no
    arbitrary values for things a token covers. `npm run lint:tokens` fails on raw colours, on token classes that
-   don't exist, and (in `src/app/prototypes`) on arbitrary values — run it.
+   don't exist, and (in `src/app/prototypes` and `src/components`) on arbitrary values — run it. A value with no
+   token stays only with `token-lint-ignore: <why no token fits>` on its line or the line above.
 3. **Never edit generated files**: `tokens/figma/*`, `src/styles/generated/*`, `src/tokens/generated.ts`,
    `DESIGN.md`, and the generated `docs/figma-descriptions/*.md` and `index.json`. Design changes happen in Figma,
    then `npm run tokens:build` (see `tokens/README.md`); usage text lives in `tokens/usage.json`, then
-   `npm run design:build`.
+   `npm run design:build`; descriptions come from `docs/figma-descriptions/components.json`, then
+   `npm run descriptions:build`. In Claude Code, `.claude/hooks/pre-tool-use.sh` refuses edits to these files.
 4. **Props mirror Figma.** Figma "Variant" → `variant`, "Style" → `appearance`, "Size" → `size` with values
    `xsmall | small | medium | large`. Use those words when talking to designers.
 5. **Accessibility is part of done:** every field has a `label`; icon-only buttons have `aria-label` (and usually
    a `Tooltip`); every error message names the action that fixes it ("Enter the 16-digit number on the front of
    the card."), never only "Invalid" or "Error"; one Primary button per section; status is never shown by colour
    alone; headings go h1 → h2 → h3 without skips.
-6. **Before you finish:** `npx tsc --noEmit && npx eslint src && npm run lint:tokens && npm run design:check &&
-   npm run build`, then look at the result in the browser in light **and** dark (`data-theme="dark"` on a parent)
+6. **Before you finish:** `npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens &&
+   npm run design:check && npm run descriptions:check && npm run build` (what CI runs; `main` only merges green
+   pull requests), then look at the result in the browser in light **and** dark (`data-theme="dark"` on a parent)
    and at 375px wide.
 
 ## Where to look up a component

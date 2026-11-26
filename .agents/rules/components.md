@@ -32,8 +32,8 @@ with the components is covered by `.agents/rules/screens.md`.
 The team chose one word pair for failure and success (`design-system-audit.md`, team decisions 2 and rename scope).
 
 - New props and new prop values use `danger` for failure or destructive intent and `success` for success. They never
-  use `error`, `negative` or `positive`. Check: `rg -n '"(error|negative|positive)"' src/components --glob '!*.stories.tsx'`
-  prints only the lines listed below.
+  use `error`, `negative` or `positive`. `npm run lint:tokens` fails on those words in any component file except
+  `Alert.tsx`, `Toast.tsx` and `Badge.tsx`.
 - These existing values still use the old words until they are renamed in Figma, then in code, stories and
   descriptions:
   - `Alert` `status`: `error` → `danger`
@@ -49,9 +49,18 @@ The team chose one word pair for failure and success (`design-system-audit.md`, 
   `planned` (Figma description only, no code).
 - A new component enters as `beta` with its `code` path. Moving it to `stable` is a team decision.
 - Descriptions are generated: edit `docs/figma-descriptions/components.json`, then run
-  `node scripts/build-descriptions.mjs`. Only `button.md` and `input.md` are hand-written.
+  `npm run descriptions:build`. Only `button.md` and `input.md` are hand-written. `npm run descriptions:check` (in
+  CI) fails when a generated file differs from its source.
+
+## Values without a token
+
+Component code has no arbitrary values (`max-w-[400px]`, `z-[60]`), except recorded ones. When a Figma value has
+no token, keep the literal and put `token-lint-ignore: <why no token fits>` (20+ characters) on the same line or the
+line above, as in `Modal.tsx`, `Toast.tsx` and `Select.tsx`. `npm run lint:tokens` fails on an arbitrary value
+without the marker, on a marker without a reason, and on a marker that excuses nothing. Stories are exempt.
 - When behaviour changes, update the JSDoc, the story and the description in the same change.
 
 ## Before you finish
 
-`npx tsc --noEmit && npx eslint src && npm run lint:tokens && npm run design:check && npm run build`
+`npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens && npm run design:check &&
+npm run descriptions:check && npm run build` — the same steps CI runs (`.github/workflows/tokens.yml`).

@@ -131,6 +131,7 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             <SelectPrimitive.Content
               position="popper"
               sideOffset={4}
+              // token-lint-ignore: Radix runtime variable, so the menu is at least as wide as its trigger
               className="relative z-50 max-h-80 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-container-md bg-static-fill-overlay shadow-elevation-medium"
             >
               <SelectPrimitive.Viewport className="p-gap-3">{children}</SelectPrimitive.Viewport>

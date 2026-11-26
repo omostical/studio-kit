@@ -19,9 +19,11 @@ const ROOT = new URL("..", import.meta.url).pathname;
 // and is deliberately excluded.
 const SCOPES = ["src/components", "src/app/playground", "src/app/prototypes"];
 
-// Screens built from the kit (agents' and designers' prototypes) are held to a stricter rule: no arbitrary
-// values either. Components may need one-off widths the token scale doesn't cover; screens shouldn't.
-const STRICT_SCOPES = ["src/app/prototypes"];
+// No arbitrary values either (`max-w-[400px]`) in screens and components. A component that needs a value the
+// token scale doesn't cover records it as an exception with a reason (see "Exceptions" below). Stories are
+// demo layout and stay out of this rule.
+const STRICT_SCOPES = ["src/app/prototypes", "src/components"];
+const STRICT_SKIP = /\.stories\.tsx$/;
 const ARBITRARY = new RegExp(
   "(?<![\\w-])(?:[a-z0-9-]+:)*-?(?:p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|w|h|size|min-[hw]|max-[hw]|top|bottom|left|right|inset(?:-[xy])?|translate-[xy]|rounded(?:-[trbl]{1,2})?|text|bg|border(?:-[trblxy])?|fill|stroke|leading|tracking|shadow|z)-\\[[^\\]]+\\]",
   "g"
@@ -75,7 +77,7 @@ function unknownToken(m) {
   return false;
 }
 
-let problems = 0;
+let unknownProblems = 0;
 // src/app covers the playground and prototypes, so only add the folders outside it.
 for (const scope of ["src/components", "src/app", "src/site"]) {
   for (const file of walk(join(ROOT, scope))) {
@@ -83,55 +85,101 @@ for (const scope of ["src/components", "src/app", "src/site"]) {
       for (const m of line.matchAll(TOKEN_CLASS)) {
         if (/(?:id=["']|#)$/.test(line.slice(0, m.index))) continue; // anchor ids, not classes
         if (!unknownToken(m)) continue;
-        problems++;
+        unknownProblems++;
         console.log(`${relative(ROOT, file)}:${i + 1}  unknown token class "${m[0]}" — no matching token in src/styles/generated/theme.css`);
       }
     });
   }
 }
 
+// ─── Exceptions ──────────────────────────────────────────────────────────────
+// A deliberate literal carries `token-lint-ignore: <reason>` on the same line or the line above. The reason says
+// why no token fits (20+ characters). A marker that excuses nothing fails as stale, so exceptions can't outlive
+// their literal.
+const MARKER = /token-lint-ignore(?::\s*(.*?))?\s*(?:\*\/\s*\}?)?$/;
+const MIN_REASON = 20;
+const fileHits = new Map(); // file → [{ line, text }]
+const hit = (file, i, text) => {
+  if (!fileHits.has(file)) fileHits.set(file, []);
+  fileHits.get(file).push({ line: i, text });
+};
+const tryWalk = (dir) => {
+  try {
+    return [...walk(join(ROOT, dir))];
+  } catch {
+    return []; // folder doesn't exist yet
+  }
+};
+
 for (const scope of SCOPES) {
-  for (const file of walk(join(ROOT, scope))) {
-    const lines = readFileSync(file, "utf8").split("\n");
-    lines.forEach((line, i) => {
+  for (const file of tryWalk(scope)) {
+    readFileSync(file, "utf8").split("\n").forEach((line, i) => {
       // CSS custom-property definitions are where token values live — allowed.
       if (file.endsWith(".css") && /^\s*--[\w-]+\s*:/.test(line)) return;
-      if (/token-lint-ignore/.test(line)) return;
       for (const m of line.matchAll(RAW_CLASS)) {
-        problems++;
         const hint = HINTS[m[1]] ?? "a semantic token";
-        console.log(`${relative(ROOT, file)}:${i + 1}  raw colour "${m[0]}"  →  use ${hint}`);
+        hit(file, i, `raw colour "${m[0]}"  →  use ${hint} (DESIGN.md lists every token and its usage)`);
       }
-      for (const m of line.matchAll(HEX)) {
-        problems++;
-        console.log(`${relative(ROOT, file)}:${i + 1}  hex "${m[0]}"  →  use var(--token) instead`);
-      }
+      for (const m of line.matchAll(HEX)) hit(file, i, `hex "${m[0]}"  →  use var(--<token>); pick the token by its usage in DESIGN.md`);
     });
   }
 }
 
 for (const scope of STRICT_SCOPES) {
-  let files;
-  try {
-    files = [...walk(join(ROOT, scope))];
-  } catch {
-    continue; // folder doesn't exist yet
-  }
-  for (const file of files) {
+  for (const file of tryWalk(scope).filter((f) => !STRICT_SKIP.test(f))) {
     readFileSync(file, "utf8").split("\n").forEach((line, i) => {
-      if (/token-lint-ignore/.test(line)) return;
-      for (const m of line.matchAll(ARBITRARY)) {
-        problems++;
-        console.log(`${relative(ROOT, file)}:${i + 1}  arbitrary value "${m[0]}"  →  use a token class (gap-*, size-*, forms-*, rounded-*, type-*) — see AGENTS.md`);
-      }
+      for (const m of line.matchAll(ARBITRARY))
+        hit(file, i, `arbitrary value "${m[0]}"  →  use a token class (gap-*, size-*, control-*, forms-*, rounded-*, type-*) from DESIGN.md`);
     });
   }
 }
 
+let problems = unknownProblems;
+const report = (file, i, text) => {
+  problems++;
+  console.log(`${relative(ROOT, file)}:${i + 1}  ${text}`);
+};
+const markerFiles = new Set([...fileHits.keys()]);
+for (const scope of new Set([...SCOPES, ...STRICT_SCOPES])) for (const f of tryWalk(scope)) markerFiles.add(f);
+for (const file of markerFiles) {
+  const lines = readFileSync(file, "utf8").split("\n");
+  const markers = new Map(); // line → { reason, used }
+  lines.forEach((l, i) => {
+    const m = MARKER.exec(l);
+    if (m && /token-lint-ignore/.test(l)) markers.set(i, { reason: (m[1] ?? "").trim(), used: false });
+  });
+  for (const { line, text } of fileHits.get(file) ?? []) {
+    const at = markers.has(line) ? line : markers.has(line - 1) ? line - 1 : null;
+    if (at === null) {
+      report(file, line, `${text}. No token fits? Keep the value and put \`token-lint-ignore: <why no token fits>\` on this line or the line above, then name the missing token in your report.`);
+      continue;
+    }
+    markers.get(at).used = true;
+  }
+  for (const [i, { reason, used }] of markers) {
+    if (!used) report(file, i, "stale exception: token-lint-ignore excuses nothing on this line or the next. Remove the marker.");
+    else if (reason.length < MIN_REASON)
+      report(file, i, `exception without a reason: write \`token-lint-ignore: <why no token fits>\` (${MIN_REASON}+ characters).`);
+  }
+}
+
+// ─── Intent words ────────────────────────────────────────────────────────────
+// The canonical intent words are `danger` and `success` (AGENTS.md "Intent words"). Only these components still
+// define the older values, until the Figma rename. No other component may introduce them as a prop value.
+const OLD_INTENT_ALLOWED = ["src/components/Alert/Alert.tsx", "src/components/Toast/Toast.tsx", "src/components/Badge/Badge.tsx"];
+const OLD_INTENT = /["'](error|negative|positive)["']/g;
+for (const file of tryWalk("src/components").filter((f) => !/\.stories\.tsx$/.test(f))) {
+  if (OLD_INTENT_ALLOWED.includes(relative(ROOT, file))) continue;
+  readFileSync(file, "utf8").split("\n").forEach((line, i) => {
+    for (const m of line.matchAll(OLD_INTENT))
+      report(file, i, `intent word "${m[1]}"  →  use "${m[1] === "positive" ? "success" : "danger"}". Only Alert, Toast and Badge keep the old words until the Figma rename (AGENTS.md "Intent words").`);
+  });
+}
+
 if (problems) {
-  console.log(`\n✗ ${problems} token problem(s): hard-coded colours or class names that match no design token.`);
+  console.log(`\n✗ ${problems} token problem(s): hard-coded values, unknown token classes, exceptions without a reason, or old intent words.`);
   process.exit(1);
 }
 console.log(
-  `✓ No hard-coded colours in ${SCOPES.join(", ")}; no arbitrary values in ${STRICT_SCOPES.join(", ")}; every token class in src/app, src/site and src/components exists.`
+  `✓ No hard-coded colours in ${SCOPES.join(", ")}; no unexcused arbitrary values in ${STRICT_SCOPES.join(", ")} (stories excepted); every exception has a reason; every token class exists; old intent words only in Alert, Toast, Badge.`
 );

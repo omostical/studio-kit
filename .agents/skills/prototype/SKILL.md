@@ -39,7 +39,7 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
   `as="p"`. Modals: open them through `ModalTrigger` (see "Modals" in `.agents/rules/screens.md`).
 
 ## 4. Check
-- `npx tsc --noEmit && npx eslint src && npm run lint:tokens && npm run design:check && npm run build` — fix
+- `npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens && npm run design:check && npm run build` — fix
   everything. `lint:tokens` also rejects arbitrary values (`w-[160px]`) in prototypes; use the Size scale in
   `DESIGN.md`.
 - Start the site (preview the `site` config in `.claude/launch.json`, or `npm run dev`), open

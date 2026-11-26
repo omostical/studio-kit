@@ -81,7 +81,9 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         className={cn(
           "pointer-events-auto flex w-full items-start gap-gap-7",
           isHigh
+            // token-lint-ignore: Figma Toast max width, high emphasis 400px; no container-width token exists
             ? cn("max-w-[400px] rounded-container-md py-gap-5 pl-gap-9 pr-gap-5 shadow-elevation-medium", high[status])
+            // token-lint-ignore: Figma Toast max width, low emphasis 460px; no container-width token exists
             : "max-w-[460px] rounded-container-lg bg-static-fill-overlay py-gap-9 pl-gap-9 pr-gap-5 text-static-text-strong shadow-elevation-high",
           className
         )}
@@ -152,6 +154,7 @@ export function ToastProvider({ children, label = "Notifications" }: { children:
         aria-label={label}
         role="status"
         aria-live="polite"
+        // token-lint-ignore: z-60 keeps toasts above an open Modal (z-50); 16px gutters; no z-index or width token
         className="pointer-events-none fixed bottom-gap-12 left-1/2 z-[60] flex w-[calc(100%-32px)] max-w-[460px] -translate-x-1/2 flex-col items-center gap-gap-5"
       >
         {items.map((item) => (

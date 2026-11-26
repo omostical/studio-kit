@@ -1,5 +1,7 @@
 name: Design tokens
 
+# The design-system gate. `main` is protected and requires this job (`tokens`) to pass before a pull request
+# merges. Every step prints what to run to fix it.
 on:
   pull_request:
   push:
@@ -17,7 +19,13 @@ jobs:
       - run: npm ci
       # Generated token files must match the Figma export in tokens/figma/ (run `npm run tokens:build` to fix).
       - run: npm run tokens:check
-      # Components may only use semantic tokens, never raw colours.
+      # DESIGN.md must match the tokens and tokens/usage.json, and every token needs a usage (`npm run design:build`).
+      - run: npm run design:check
+      # Generated component descriptions and the catalog index must match components.json (`npm run descriptions:build`).
+      - run: npm run descriptions:check
+      # No raw colours, no unexcused arbitrary values, exceptions carry a reason, no new old intent words.
       - run: npm run lint:tokens
+      # Raw <button>/<input>/<select>/<textarea> and @radix-ui imports in screens are warnings; warnings fail here.
+      - run: npx eslint src --max-warnings=0
       - run: npx tsc --noEmit
       - run: npm run build
