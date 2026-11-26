@@ -21,4 +21,3 @@ line to `CHANGELOG.md`.
 
 - Container widths: fixed widths for Modal (400, 600, 800) and Toast (400, 460) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx` (recorded as `token-lint-ignore` exceptions)
 - Layer order: a z-index scale so toasts sit above modals — needed by `src/components/Toast/Toast.tsx` (`z-[60]` exception)
-- Accent colour: the docs site's purple accent has no token — needed by the docs-site migration (branch `claude/jovial-cartwright-2178c5`)

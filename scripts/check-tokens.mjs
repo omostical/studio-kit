@@ -15,9 +15,17 @@ import { join, relative } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 
-// Folders held to the rule. The docs-site chrome (src/site) has its own look
-// and is deliberately excluded.
-const SCOPES = ["src/components", "src/app/playground", "src/app/prototypes"];
+// Folders held to the rule: the components, the screens built from them, and the docs site (home page,
+// /components, /tokens and the src/site chrome), which uses the same tokens as everything it documents.
+const SCOPES = [
+  "src/components",
+  "src/app/playground",
+  "src/app/prototypes",
+  "src/app/page.tsx",
+  "src/app/components",
+  "src/app/tokens",
+  "src/site",
+];
 
 // No arbitrary values either (`max-w-[400px]`) in screens and components. A component that needs a value the
 // token scale doesn't cover records it as an exception with a reason (see "Exceptions" below). Stories are
@@ -45,6 +53,7 @@ const HINTS = {
 };
 
 function* walk(dir) {
+  if (!statSync(dir).isDirectory()) return yield dir; // a scope can be a single file
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) yield* walk(p);

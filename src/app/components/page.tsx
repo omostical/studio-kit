@@ -19,7 +19,6 @@ import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
-import { W } from "@/site/wideset";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
 const appearances = ["filled", "border", "ghost"] as const;
@@ -61,7 +60,7 @@ function ComponentSection({
         style={{
           fontFamily: "var(--font-plex-mono), monospace",
           fontSize: "11px",
-          color: W.gray500,
+          color: "var(--static-text-subtle)",
           letterSpacing: "0.05em",
         }}
       >
@@ -74,7 +73,7 @@ function ComponentSection({
           fontSize: "32px",
           letterSpacing: "-0.03em",
           lineHeight: 1.1,
-          color: W.black,
+          color: "var(--static-text-strong)",
           fontFamily: "var(--font-inter), system-ui, sans-serif",
         }}
       >
@@ -85,7 +84,7 @@ function ComponentSection({
         style={{
           fontSize: "15px",
           lineHeight: 1.55,
-          color: W.gray600,
+          color: "var(--static-text-base)",
         }}
       >
         {description}
@@ -112,7 +111,7 @@ function SubBlock({
         style={{
           fontSize: "16px",
           letterSpacing: "-0.01em",
-          color: W.black,
+          color: "var(--static-text-strong)",
           fontFamily: "var(--font-inter), system-ui, sans-serif",
         }}
       >
@@ -137,7 +136,7 @@ export default function ComponentsPage() {
           style={{
             fontFamily: "var(--font-plex-mono), monospace",
             fontSize: "11px",
-            color: W.gray500,
+            color: "var(--static-text-subtle)",
             letterSpacing: "0.05em",
           }}
         >
@@ -149,7 +148,7 @@ export default function ComponentsPage() {
             fontSize: "clamp(40px, 5vw, 56px)",
             letterSpacing: "-0.04em",
             lineHeight: 0.96,
-            color: W.black,
+            color: "var(--static-text-strong)",
             fontFamily: "var(--font-inter), system-ui, sans-serif",
           }}
         >
@@ -160,7 +159,7 @@ export default function ComponentsPage() {
           style={{
             fontSize: "16px",
             lineHeight: 1.55,
-            color: W.gray600,
+            color: "var(--static-text-base)",
           }}
         >
           Accessible React components built on Radix UI and Tailwind, with
