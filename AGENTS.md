@@ -33,8 +33,8 @@ you to everything else; you shouldn't have to read the component source to use t
    a `Tooltip`); every error message names the action that fixes it ("Enter the 16-digit number on the front of
    the card."), never only "Invalid" or "Error"; one Primary button per section; status is never shown by colour
    alone; headings go h1 → h2 → h3 without skips.
-6. **Before you finish:** `npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens &&
-   npm run design:check && npm run descriptions:check && npm run build` (what CI runs; `main` only merges green
+6. **Before you finish:** `npm run tokens:check && npm run design:check && npm run descriptions:check &&
+   npm run lint:tokens && npx eslint src --max-warnings=0 && npx tsc --noEmit && npm run build` (what CI runs; `main` only merges green
    pull requests), then look at the result in the browser in light **and** dark (`data-theme="dark"` on a parent)
    and at 375px wide.
 

@@ -62,5 +62,5 @@ without the marker, on a marker without a reason, and on a marker that excuses n
 
 ## Before you finish
 
-`npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens && npm run design:check &&
-npm run descriptions:check && npm run build` — the same steps CI runs (`.github/workflows/tokens.yml`).
+`npm run tokens:check && npm run design:check && npm run descriptions:check && npm run lint:tokens &&
+npx eslint src --max-warnings=0 && npx tsc --noEmit && npm run build` — the same steps CI runs (`.github/workflows/tokens.yml`).
