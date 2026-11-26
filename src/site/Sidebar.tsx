@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { componentGroups, W } from "./wideset";
+import { componentGroups } from "./nav";
 
 export function Sidebar() {
   const [active, setActive] = useState<string>("");
@@ -41,7 +41,7 @@ export function Sidebar() {
           style={{
             fontFamily: "var(--font-plex-mono), monospace",
             fontSize: "11px",
-            color: W.gray500,
+            color: "var(--static-text-subtle)",
             letterSpacing: "0.05em",
           }}
         >
@@ -53,9 +53,9 @@ export function Sidebar() {
               href="/components#intro"
               className="block py-1.5 px-2 rounded-md transition-colors"
               style={{
-                color: W.gray600,
+                color: "var(--static-text-base)",
                 background:
-                  active === "intro" ? W.gray200 : "transparent",
+                  active === "intro" ? "var(--static-fill-alpha-strong)" : "transparent",
               }}
             >
               Introduction
@@ -71,7 +71,7 @@ export function Sidebar() {
             style={{
               fontFamily: "var(--font-plex-mono), monospace",
               fontSize: "11px",
-              color: W.gray500,
+              color: "var(--static-text-subtle)",
               letterSpacing: "0.05em",
             }}
           >
@@ -86,8 +86,8 @@ export function Sidebar() {
                     href={`#${item.slug}`}
                     className="block py-1.5 px-2 rounded-md transition-colors"
                     style={{
-                      color: isActive ? W.black : W.gray600,
-                      background: isActive ? W.gray200 : "transparent",
+                      color: isActive ? "var(--static-text-strong)" : "var(--static-text-base)",
+                      background: isActive ? "var(--static-fill-alpha-strong)" : "transparent",
                       fontWeight: isActive ? 500 : 400,
                     }}
                   >

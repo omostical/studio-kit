@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { W } from "./wideset";
 
 type Heading = { id: string; text: string; level: number };
 
@@ -58,7 +57,7 @@ export function TOC() {
         style={{
           fontFamily: "var(--font-plex-mono), monospace",
           fontSize: "11px",
-          color: W.gray500,
+          color: "var(--static-text-subtle)",
           letterSpacing: "0.05em",
         }}
       >
@@ -76,7 +75,7 @@ export function TOC() {
                 href={`#${h.id}`}
                 className="transition-colors"
                 style={{
-                  color: isActive ? W.black : W.gray500,
+                  color: isActive ? "var(--static-text-strong)" : "var(--static-text-subtle)",
                   fontSize: h.level === 3 ? "12.5px" : "13px",
                   fontWeight: isActive ? 500 : 400,
                 }}

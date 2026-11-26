@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, Github } from "lucide-react";
 import { Sidebar } from "@/site/Sidebar";
 import { TOC } from "@/site/TOC";
-import { W } from "@/site/wideset";
 
 export default function ComponentsLayout({
   children,
@@ -13,8 +12,8 @@ export default function ComponentsLayout({
     <div
       className="min-h-screen"
       style={{
-        background: W.gray100,
-        color: W.black,
+        background: "var(--static-fill-background)",
+        color: "var(--static-text-strong)",
         fontFamily: "var(--font-inter), system-ui, sans-serif",
         letterSpacing: "-0.01em",
       }}
@@ -23,19 +22,19 @@ export default function ComponentsLayout({
       <header
         className="sticky top-0 z-50 backdrop-blur-md"
         style={{
-          borderBottom: `1px solid ${W.gray200}`,
-          background: "rgba(245,245,245,0.85)",
+          borderBottom: "1px solid var(--static-stroke-base)",
+          background: "color-mix(in srgb, var(--static-fill-background) 85%, transparent)",
         }}
       >
         <div className="mx-auto px-6 h-14 flex items-center justify-between max-w-[1400px]">
           <Link href="/" className="flex items-center gap-2.5">
             <div
-              className="size-7 flex items-center justify-center text-white text-xs font-bold shrink-0"
-              style={{ background: W.black, borderRadius: "0.5rem" }}
+              className="size-7 flex items-center justify-center bg-static-fill-inverse-background text-static-text-inverse-strong text-xs font-bold shrink-0"
+              style={{ borderRadius: "0.5rem" }}
             >
               SK
             </div>
-            <span className="text-sm font-medium" style={{ color: W.black }}>
+            <span className="text-sm font-medium" style={{ color: "var(--static-text-strong)" }}>
               Studio Kit
             </span>
             <span
@@ -43,8 +42,8 @@ export default function ComponentsLayout({
               style={{
                 fontFamily: "var(--font-plex-mono), monospace",
                 fontSize: "10px",
-                color: W.gray500,
-                border: `1px solid ${W.gray200}`,
+                color: "var(--static-text-subtle)",
+                border: "1px solid var(--static-stroke-base)",
                 borderRadius: "4px",
               }}
             >
@@ -63,7 +62,7 @@ export default function ComponentsLayout({
                 href={l.href}
                 className="text-sm transition-colors"
                 style={{
-                  color: l.active ? W.black : W.gray600,
+                  color: l.active ? "var(--static-text-strong)" : "var(--static-text-base)",
                   fontWeight: l.active ? 500 : 400,
                 }}
               >
@@ -79,14 +78,14 @@ export default function ComponentsLayout({
               rel="noopener noreferrer"
               aria-label="GitHub"
               className="hidden md:inline-flex items-center justify-center size-8"
-              style={{ color: W.gray600 }}
+              style={{ color: "var(--static-text-base)" }}
             >
               <Github className="size-4" />
             </a>
             <Link
               href="/playground"
               className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium"
-              style={{ color: W.black }}
+              style={{ color: "var(--static-text-strong)" }}
             >
               Playground <ArrowRight className="size-3.5" />
             </Link>

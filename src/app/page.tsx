@@ -11,22 +11,9 @@ import { Badge } from "@/components/Badge";
 import { Tag } from "@/components/Tag";
 import { Input } from "@/components/Input";
 
-// ─── wideset.co palette (lifted from their CSS) ───────────────────────────────
-const W = {
-  black: "#141414",
-  gray100: "#F5F5F5", // whitesmoke
-  gray200: "#E9E9E9",
-  gray300: "#ADADAD",
-  gray400: "#9B9B9B",
-  gray500: "#808080",
-  gray600: "#424242",
-  gray700: "#242424",
-  white: "#FFFFFF",
-  purple: "#4734F7",
-  yellow: "#E6FF27",
-  darkStroke: "rgba(0,0,0,0.15)",
-  lightStroke: "rgba(255,255,255,0.15)",
-} as const;
+// Brand accent kept from the old wideset palette. No token covers a decorative brand-accent colour yet: swap
+// this for the token once Figma has one.
+const ACCENT = "#4734F7"; // token-lint-ignore: decorative hero accent, no brand-accent token exists yet
 
 // ─── Animation keyframes injected via <style> ─────────────────────────────────
 const animCSS = `
@@ -46,8 +33,8 @@ const animCSS = `
 
   .sk-page {
     font-family: var(--font-inter), system-ui, sans-serif;
-    color: ${W.black};
-    background: ${W.gray100};
+    color: var(--static-text-strong);
+    background: var(--static-fill-background);
     letter-spacing: -0.01em;
   }
   .sk-mono {
@@ -67,64 +54,28 @@ const animCSS = `
     line-height: 1.05;
   }
 
-  .sk-nav-link { color: ${W.gray600}; transition: color 0.15s; }
-  .sk-nav-link:hover { color: ${W.black}; }
+  .sk-nav-link { color: var(--static-text-base); transition: color 0.15s; }
+  .sk-nav-link:hover { color: var(--static-text-strong); }
 
   .sk-card {
-    background: ${W.white};
-    border: 1px solid ${W.gray200};
+    background: var(--static-fill-container);
+    border: 1px solid var(--static-stroke-base);
     border-radius: 1rem;
     transition: transform 0.2s ease, border-color 0.2s ease;
   }
-  .sk-card:hover { transform: translateY(-2px); border-color: ${W.gray300}; }
+  .sk-card:hover { transform: translateY(-2px); border-color: var(--static-stroke-strong); }
   .sk-card:hover .sk-arrow { transform: translate(2px, -2px); }
-
-  .sk-cta-primary {
-    background: ${W.black};
-    color: ${W.white};
-    border: 1px solid ${W.black};
-    border-radius: 0.75rem;
-    height: 48px;
-    padding: 0 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    transition: opacity 0.15s;
-  }
-  .sk-cta-primary:hover { opacity: 0.85; }
-
-  .sk-cta-secondary {
-    background: transparent;
-    color: ${W.black};
-    border: 1px solid ${W.darkStroke};
-    border-radius: 0.75rem;
-    height: 48px;
-    padding: 0 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-  .sk-cta-secondary:hover { background: ${W.gray200}; }
 
   .sk-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.4rem 0.75rem;
-    border: 1px solid ${W.darkStroke};
+    border: 1px solid var(--static-stroke-base);
     border-radius: 999px;
-    background: ${W.white};
+    background: var(--static-fill-highlight-subtle);
     font-size: 12px;
-    color: ${W.gray700};
+    color: var(--static-text-base);
   }
 `;
 
@@ -146,8 +97,8 @@ export default function Home() {
         <header
           className="sticky top-0 z-50 backdrop-blur-md"
           style={{
-            borderBottom: `1px solid ${W.gray200}`,
-            background: "rgba(245,245,245,0.85)",
+            borderBottom: "1px solid var(--static-stroke-base)",
+            background: "color-mix(in srgb, var(--static-fill-background) 85%, transparent)",
           }}
         >
           <div
@@ -156,14 +107,14 @@ export default function Home() {
           >
             <Link href="/" className="flex items-center gap-2.5">
               <div
-                className="size-7 flex items-center justify-center text-white text-xs font-bold shrink-0"
-                style={{ background: W.black, borderRadius: "0.5rem" }}
+                className="size-7 flex items-center justify-center bg-static-fill-inverse-background text-static-text-inverse-strong text-xs font-bold shrink-0"
+                style={{ borderRadius: "0.5rem" }}
               >
                 SK
               </div>
               <span
                 className="text-sm font-medium"
-                style={{ color: W.black }}
+                style={{ color: "var(--static-text-strong)" }}
               >
                 Studio Kit
               </span>
@@ -171,8 +122,8 @@ export default function Home() {
                 className="sk-mono ml-1 hidden sm:inline-flex items-center px-1.5 py-0.5"
                 style={{
                   fontSize: "10px",
-                  color: W.gray500,
-                  border: `1px solid ${W.gray200}`,
+                  color: "var(--static-text-subtle)",
+                  border: "1px solid var(--static-stroke-base)",
                   borderRadius: "4px",
                 }}
               >
@@ -209,7 +160,7 @@ export default function Home() {
               <Link
                 href="/components"
                 className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium"
-                style={{ color: W.black }}
+                style={{ color: "var(--static-text-strong)" }}
               >
                 Get started <ArrowRight className="size-3.5" />
               </Link>
@@ -229,7 +180,7 @@ export default function Home() {
             >
               <span
                 className="size-1.5 rounded-full"
-                style={{ background: W.purple }}
+                style={{ background: ACCENT }}
               />
               <span>v0.1.0 — Figma → Production</span>
             </div>
@@ -238,14 +189,14 @@ export default function Home() {
               className="sk-anim sk-d2 sk-display mb-7"
               style={{
                 fontSize: "clamp(56px, 9vw, 112px)",
-                color: W.black,
+                color: "var(--static-text-strong)",
               }}
             >
               Stay creative
               <br />
               with one design
               <br />
-              <span style={{ color: W.purple }}>system.</span>
+              <span style={{ color: ACCENT }}>system.</span>
             </h1>
 
             <p
@@ -253,7 +204,7 @@ export default function Home() {
               style={{
                 fontSize: "18px",
                 lineHeight: "1.55",
-                color: W.gray600,
+                color: "var(--static-text-base)",
                 letterSpacing: "-0.01em",
               }}
             >
@@ -263,22 +214,24 @@ export default function Home() {
             </p>
 
             <div className="sk-anim sk-d4 flex items-center gap-3 flex-wrap">
-              <Link href="/components" className="sk-cta-primary">
-                Browse components <ArrowRight size={16} />
-              </Link>
-              <Link href="/tokens" className="sk-cta-secondary">
-                View tokens
-              </Link>
+              <Button asChild size="large">
+                <Link href="/components">
+                  Browse components <ArrowRight />
+                </Link>
+              </Button>
+              <Button asChild size="large" variant="secondary" appearance="border">
+                <Link href="/tokens">View tokens</Link>
+              </Button>
             </div>
 
             <div
               className="sk-anim sk-d5 sk-mono flex flex-wrap items-center gap-x-6 gap-y-2 mt-10"
-              style={{ color: W.gray500, fontSize: "12px" }}
+              style={{ color: "var(--static-text-subtle)", fontSize: "12px" }}
             >
               <span className="inline-flex items-center gap-1.5">
                 <span
                   className="size-1.5 rounded-full"
-                  style={{ background: W.purple }}
+                  style={{ background: ACCENT }}
                 />
                 Open source
               </span>
@@ -301,7 +254,7 @@ export default function Home() {
                 className="sk-mono uppercase mb-4"
                 style={{
                   fontSize: "12px",
-                  color: W.gray500,
+                  color: "var(--static-text-subtle)",
                   letterSpacing: "0.04em",
                 }}
               >
@@ -311,7 +264,7 @@ export default function Home() {
                 className="sk-h2"
                 style={{
                   fontSize: "clamp(36px, 5vw, 56px)",
-                  color: W.black,
+                  color: "var(--static-text-strong)",
                 }}
               >
                 Everything you need to ship
@@ -330,20 +283,20 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="sk-mono"
-                    style={{ fontSize: "13px", color: W.gray500 }}
+                    style={{ fontSize: "13px", color: "var(--static-text-subtle)" }}
                   >
                     01 — Tokens
                   </span>
                   <ArrowUpRight
                     className="sk-arrow size-4 transition-transform"
-                    style={{ color: W.gray400 }}
+                    style={{ color: "var(--static-text-subtle)" }}
                   />
                 </div>
                 <h3
                   className="font-medium mb-3"
                   style={{
                     fontSize: "24px",
-                    color: W.black,
+                    color: "var(--static-text-strong)",
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -353,7 +306,7 @@ export default function Home() {
                   className="mb-6 max-w-md"
                   style={{
                     fontSize: "15px",
-                    color: W.gray600,
+                    color: "var(--static-text-base)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -362,19 +315,24 @@ export default function Home() {
                   production.
                 </p>
                 <div className="flex gap-1.5">
-                  {[W.gray100, W.gray300, W.purple, W.yellow, W.black].map(
-                    (c, i) => (
-                      <div
-                        key={i}
-                        className="size-7"
-                        style={{
-                          background: c,
-                          borderRadius: "6px",
-                          border: `1px solid ${W.gray200}`,
-                        }}
-                      />
-                    )
-                  )}
+                  {[
+                    "static-fill-background",
+                    "static-fill-inverse-background",
+                    "dynamic-fill-primary-default",
+                    "dynamic-fill-success-default",
+                    "dynamic-fill-danger-default",
+                  ].map((token) => (
+                    <div
+                      key={token}
+                      title={token}
+                      className="size-7"
+                      style={{
+                        background: `var(--${token})`,
+                        borderRadius: "6px",
+                        border: "1px solid var(--static-stroke-base)",
+                      }}
+                    />
+                  ))}
                 </div>
               </Link>
 
@@ -387,20 +345,20 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="sk-mono"
-                    style={{ fontSize: "13px", color: W.gray500 }}
+                    style={{ fontSize: "13px", color: "var(--static-text-subtle)" }}
                   >
                     02 — Components
                   </span>
                   <ArrowUpRight
                     className="sk-arrow size-4 transition-transform"
-                    style={{ color: W.gray400 }}
+                    style={{ color: "var(--static-text-subtle)" }}
                   />
                 </div>
                 <h3
                   className="font-medium mb-3"
                   style={{
                     fontSize: "24px",
-                    color: W.black,
+                    color: "var(--static-text-strong)",
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -409,7 +367,7 @@ export default function Home() {
                 <p
                   style={{
                     fontSize: "15px",
-                    color: W.gray600,
+                    color: "var(--static-text-base)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -427,20 +385,20 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="sk-mono"
-                    style={{ fontSize: "13px", color: W.gray500 }}
+                    style={{ fontSize: "13px", color: "var(--static-text-subtle)" }}
                   >
                     03 — Playground
                   </span>
                   <ArrowUpRight
                     className="sk-arrow size-4 transition-transform"
-                    style={{ color: W.gray400 }}
+                    style={{ color: "var(--static-text-subtle)" }}
                   />
                 </div>
                 <h3
                   className="font-medium mb-3"
                   style={{
                     fontSize: "24px",
-                    color: W.black,
+                    color: "var(--static-text-strong)",
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -449,7 +407,7 @@ export default function Home() {
                 <p
                   style={{
                     fontSize: "15px",
-                    color: W.gray600,
+                    color: "var(--static-text-base)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -469,20 +427,20 @@ export default function Home() {
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="sk-mono"
-                    style={{ fontSize: "13px", color: W.gray500 }}
+                    style={{ fontSize: "13px", color: "var(--static-text-subtle)" }}
                   >
                     04 — Storybook
                   </span>
                   <ArrowUpRight
                     className="sk-arrow size-4 transition-transform"
-                    style={{ color: W.gray400 }}
+                    style={{ color: "var(--static-text-subtle)" }}
                   />
                 </div>
                 <h3
                   className="font-medium mb-3"
                   style={{
                     fontSize: "24px",
-                    color: W.black,
+                    color: "var(--static-text-strong)",
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -492,7 +450,7 @@ export default function Home() {
                   className="max-w-md"
                   style={{
                     fontSize: "15px",
-                    color: W.gray600,
+                    color: "var(--static-text-base)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -507,9 +465,9 @@ export default function Home() {
         {/* ── Component browse ─────────────────────────────────────────────── */}
         <section
           style={{
-            background: W.white,
-            borderTop: `1px solid ${W.gray200}`,
-            borderBottom: `1px solid ${W.gray200}`,
+            background: "var(--static-fill-foreground)",
+            borderTop: "1px solid var(--static-stroke-base)",
+            borderBottom: "1px solid var(--static-stroke-base)",
           }}
         >
           <div
@@ -522,7 +480,7 @@ export default function Home() {
                   className="sk-mono uppercase mb-4"
                   style={{
                     fontSize: "12px",
-                    color: W.gray500,
+                    color: "var(--static-text-subtle)",
                     letterSpacing: "0.04em",
                   }}
                 >
@@ -532,7 +490,7 @@ export default function Home() {
                   className="sk-h2"
                   style={{
                     fontSize: "clamp(36px, 5vw, 56px)",
-                    color: W.black,
+                    color: "var(--static-text-strong)",
                   }}
                 >
                   Browse components.
@@ -541,7 +499,7 @@ export default function Home() {
               <Link
                 href="/components"
                 className="inline-flex items-center gap-1.5 text-sm font-medium"
-                style={{ color: W.black }}
+                style={{ color: "var(--static-text-strong)" }}
               >
                 See all <ArrowRight className="size-3.5" />
               </Link>
@@ -629,23 +587,23 @@ export default function Home() {
                 >
                   <div
                     className="flex items-center justify-center p-6"
-                    style={{ background: W.gray100, minHeight: 120 }}
+                    style={{ background: "var(--static-fill-alpha-subtle)", minHeight: 120 }}
                   >
                     {item.preview}
                   </div>
                   <div
                     className="px-4 py-3"
-                    style={{ borderTop: `1px solid ${W.gray200}` }}
+                    style={{ borderTop: "1px solid var(--static-stroke-base)" }}
                   >
                     <p
                       className="text-sm font-medium"
-                      style={{ color: W.black, letterSpacing: "-0.01em" }}
+                      style={{ color: "var(--static-text-strong)", letterSpacing: "-0.01em" }}
                     >
                       {item.title}
                     </p>
                     <p
                       className="sk-mono"
-                      style={{ fontSize: "11px", color: W.gray500 }}
+                      style={{ fontSize: "11px", color: "var(--static-text-subtle)" }}
                     >
                       {item.meta}
                     </p>
@@ -658,7 +616,7 @@ export default function Home() {
                 href="/components"
                 className="sk-card flex items-center justify-center text-center p-8"
                 style={{
-                  background: W.gray100,
+                  background: "var(--static-fill-alpha-subtle)",
                   borderStyle: "dashed",
                   textDecoration: "none",
                   minHeight: 120,
@@ -666,7 +624,7 @@ export default function Home() {
               >
                 <span
                   className="inline-flex items-center gap-1.5 text-sm font-medium"
-                  style={{ color: W.black }}
+                  style={{ color: "var(--static-text-strong)" }}
                 >
                   See all <ArrowRight className="size-3.5" />
                 </span>
@@ -676,7 +634,11 @@ export default function Home() {
         </section>
 
         {/* ── Stats — DARK like wideset ────────────────────────────────────── */}
-        <section style={{ background: W.black, color: W.white }}>
+        {/* Always dark: data-theme="dark" scopes the dark token values to this band in both themes. */}
+        <section
+          data-theme="dark"
+          style={{ background: "var(--static-fill-foreground)", color: "var(--static-text-strong)" }}
+        >
           <div
             className="mx-auto px-6 py-24"
             style={{ maxWidth: "61.5rem" }}
@@ -685,7 +647,7 @@ export default function Home() {
               className="sk-mono uppercase mb-12"
               style={{
                 fontSize: "12px",
-                color: W.gray400,
+                color: "var(--static-text-subtle)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -703,14 +665,14 @@ export default function Home() {
                     className="sk-display mb-2"
                     style={{
                       fontSize: "clamp(48px, 6vw, 72px)",
-                      color: W.white,
+                      color: "var(--static-text-strong)",
                     }}
                   >
                     {value}
                   </p>
                   <p
                     className="sk-mono"
-                    style={{ fontSize: "13px", color: W.gray400 }}
+                    style={{ fontSize: "13px", color: "var(--static-text-subtle)" }}
                   >
                     {label}
                   </p>
@@ -723,8 +685,8 @@ export default function Home() {
         {/* ── CTA band ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            background: W.gray100,
-            borderBottom: `1px solid ${W.gray200}`,
+            background: "var(--static-fill-background)",
+            borderBottom: "1px solid var(--static-stroke-base)",
           }}
         >
           <div
@@ -735,7 +697,7 @@ export default function Home() {
               className="sk-h2 mb-5"
               style={{
                 fontSize: "clamp(32px, 4vw, 48px)",
-                color: W.black,
+                color: "var(--static-text-strong)",
               }}
             >
               Start building.
@@ -744,7 +706,7 @@ export default function Home() {
               className="mb-9 mx-auto max-w-md"
               style={{
                 fontSize: "16px",
-                color: W.gray600,
+                color: "var(--static-text-base)",
                 lineHeight: 1.5,
               }}
             >
@@ -752,23 +714,26 @@ export default function Home() {
               minutes.
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
-              <Link href="/components" className="sk-cta-primary">
-                Browse components <ArrowRight size={16} />
-              </Link>
-              <a
-                href="https://github.com/omostical/studio-kit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sk-cta-secondary"
-              >
-                <Github className="size-4" /> View on GitHub
-              </a>
+              <Button asChild size="large">
+                <Link href="/components">
+                  Browse components <ArrowRight />
+                </Link>
+              </Button>
+              <Button asChild size="large" variant="secondary" appearance="border">
+                <a
+                  href="https://github.com/omostical/studio-kit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github /> View on GitHub
+                </a>
+              </Button>
             </div>
           </div>
         </section>
 
         {/* ── Footer — wideset-style multi-col ─────────────────────────────── */}
-        <footer style={{ background: W.black }}>
+        <footer data-theme="dark" style={{ background: "var(--static-fill-foreground)" }}>
           <div
             className="mx-auto px-6 py-16"
             style={{ maxWidth: "61.5rem" }}
@@ -779,8 +744,8 @@ export default function Home() {
                   <div
                     className="size-8 flex items-center justify-center text-xs font-bold shrink-0"
                     style={{
-                      background: W.white,
-                      color: W.black,
+                      background: "var(--static-fill-inverse-background)",
+                      color: "var(--static-text-inverse-strong)",
                       borderRadius: "0.5rem",
                     }}
                   >
@@ -788,14 +753,14 @@ export default function Home() {
                   </div>
                   <span
                     className="text-sm font-medium"
-                    style={{ color: W.white }}
+                    style={{ color: "var(--static-text-strong)" }}
                   >
                     Studio Kit
                   </span>
                 </Link>
                 <p
                   className="text-sm max-w-xs mb-6"
-                  style={{ color: W.gray400, lineHeight: 1.5 }}
+                  style={{ color: "var(--static-text-subtle)", lineHeight: 1.5 }}
                 >
                   A complete design system bridging Figma and production. Open
                   source, MIT licensed.
@@ -807,8 +772,8 @@ export default function Home() {
                   aria-label="GitHub"
                   className="inline-flex items-center justify-center size-8"
                   style={{
-                    color: W.gray300,
-                    border: `1px solid ${W.lightStroke}`,
+                    color: "var(--static-text-base)",
+                    border: "1px solid var(--static-stroke-base)",
                     borderRadius: "8px",
                   }}
                 >
@@ -821,7 +786,7 @@ export default function Home() {
                   className="sk-mono uppercase mb-4"
                   style={{
                     fontSize: "11px",
-                    color: W.gray500,
+                    color: "var(--static-text-subtle)",
                     letterSpacing: "0.05em",
                   }}
                 >
@@ -837,7 +802,7 @@ export default function Home() {
                       <Link
                         href={l.href}
                         className="text-sm transition-opacity hover:opacity-70"
-                        style={{ color: W.gray300 }}
+                        style={{ color: "var(--static-text-base)" }}
                       >
                         {l.label}
                       </Link>
@@ -851,7 +816,7 @@ export default function Home() {
                   className="sk-mono uppercase mb-4"
                   style={{
                     fontSize: "11px",
-                    color: W.gray500,
+                    color: "var(--static-text-subtle)",
                     letterSpacing: "0.05em",
                   }}
                 >
@@ -864,7 +829,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: W.gray300 }}
+                      style={{ color: "var(--static-text-base)" }}
                     >
                       Storybook
                     </a>
@@ -875,7 +840,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: W.gray300 }}
+                      style={{ color: "var(--static-text-base)" }}
                     >
                       GitHub
                     </a>
@@ -886,7 +851,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm transition-opacity hover:opacity-70"
-                      style={{ color: W.gray300 }}
+                      style={{ color: "var(--static-text-base)" }}
                     >
                       Figma
                     </a>
@@ -899,7 +864,7 @@ export default function Home() {
                   className="sk-mono uppercase mb-4"
                   style={{
                     fontSize: "11px",
-                    color: W.gray500,
+                    color: "var(--static-text-subtle)",
                     letterSpacing: "0.05em",
                   }}
                 >
@@ -909,7 +874,7 @@ export default function Home() {
                   <li>
                     <span
                       className="text-sm"
-                      style={{ color: W.gray300 }}
+                      style={{ color: "var(--static-text-base)" }}
                     >
                       MIT License
                     </span>
@@ -917,7 +882,7 @@ export default function Home() {
                   <li>
                     <span
                       className="text-sm"
-                      style={{ color: W.gray300 }}
+                      style={{ color: "var(--static-text-base)" }}
                     >
                       v0.1.0
                     </span>
@@ -928,11 +893,11 @@ export default function Home() {
 
             <div
               className="pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-              style={{ borderTop: `1px solid ${W.lightStroke}` }}
+              style={{ borderTop: "1px solid var(--static-stroke-base)" }}
             >
               <p
                 className="sk-mono"
-                style={{ fontSize: "11px", color: W.gray500 }}
+                style={{ fontSize: "11px", color: "var(--static-text-subtle)" }}
               >
                 © {new Date().getFullYear()} Studio Kit. Built with care.
               </p>
@@ -941,7 +906,7 @@ export default function Home() {
                   <span
                     key={tech}
                     className="sk-mono"
-                    style={{ fontSize: "11px", color: W.gray500 }}
+                    style={{ fontSize: "11px", color: "var(--static-text-subtle)" }}
                   >
                     {tech}
                   </span>

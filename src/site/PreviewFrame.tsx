@@ -1,5 +1,4 @@
 import * as React from "react";
-import { W } from "./wideset";
 
 export function PreviewFrame({
   children,
@@ -16,7 +15,7 @@ export function PreviewFrame({
     <div
       className={`overflow-hidden ${className}`}
       style={{
-        border: `1px solid ${W.gray200}`,
+        border: "1px solid var(--static-stroke-base)",
         borderRadius: "0.75rem",
       }}
     >
@@ -25,7 +24,7 @@ export function PreviewFrame({
           align === "center" ? "justify-center" : "justify-start"
         }`}
         style={{
-          background: dark ? W.black : W.gray100,
+          background: "var(--static-fill-background)",
           minHeight: 140,
         }}
         {...(dark ? { "data-theme": "dark" as const } : {})}
@@ -43,7 +42,7 @@ export function PreviewLabel({ children }: { children: React.ReactNode }) {
       style={{
         fontFamily: "var(--font-plex-mono), monospace",
         fontSize: "11px",
-        color: W.gray500,
+        color: "var(--static-text-subtle)",
         letterSpacing: "0.05em",
       }}
     >
