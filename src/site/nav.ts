@@ -35,6 +35,7 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "modal", title: "Modal" },
       { slug: "tooltip", title: "Tooltip" },
+      { slug: "dropdown-menu", title: "Dropdown Menu" },
     ],
   },
   {

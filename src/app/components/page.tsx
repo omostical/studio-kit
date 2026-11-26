@@ -10,6 +10,17 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/DropdownMenu";
 import { Alert } from "@/components/Alert";
 import { Select, SelectItem } from "@/components/Select";
 import { Tag, tagColors } from "@/components/Tag";
@@ -18,7 +29,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X } from "lucide-react";
+import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -31,6 +42,30 @@ const typeSamples: TypographyVariant[] = [
   "body-large", "body-medium", "body-small", "caption-medium", "number-medium",
 ];
 const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+function MenuOptionsDemo() {
+  const [sort, setSort] = useState("newest");
+  const [showPaid, setShowPaid] = useState(true);
+  const [showFailed, setShowFailed] = useState(false);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="secondary" appearance="border">View options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={sort} onValueChange={setSort}>
+          <DropdownMenuRadioItem value="newest">Newest first</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="oldest">Oldest first</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>Show</DropdownMenuLabel>
+        <DropdownMenuCheckboxItem checked={showPaid} onCheckedChange={(v) => setShowPaid(v === true)} onSelect={(e) => e.preventDefault()}>Paid</DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showFailed} onCheckedChange={(v) => setShowFailed(v === true)} onSelect={(e) => e.preventDefault()}>Failed</DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 function ToastDemo() {
   const { show } = useToast();
@@ -576,6 +611,36 @@ export default function ComponentsPage() {
             <Tooltip content="Edit"><IconButton appearance="border" icon={<Pencil />} aria-label="Edit" /></Tooltip>
             <Tooltip content="Edit" description="Rename or change the cover"><IconButton appearance="border" icon={<Pencil />} aria-label="Edit with description" /></Tooltip>
             <Tooltip content="Close" variant="inverse" side="bottom"><IconButton appearance="border" icon={<X />} aria-label="Close" /></Tooltip>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Dropdown Menu ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="dropdown-menu"
+        eyebrow="Overlays / 03"
+        title="Dropdown Menu"
+        description="Figma Dropdown Menu and Menu Item: actions (destructive last) or options behind a button. Arrow keys move, Enter activates, Escape closes and returns focus to the trigger."
+      >
+        <SubBlock id="dropdown-menu-actions" title="Row actions">
+          <PreviewFrame>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <IconButton appearance="border" icon={<MoreHorizontal />} aria-label="More actions for order 1042" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem icon={<RotateCcw />}>Reorder</DropdownMenuItem>
+                <DropdownMenuItem icon={<Download />} shortcut="⌘D">Download invoice</DropdownMenuItem>
+                <DropdownMenuItem icon={<Copy />} description="Copies the order number">Copy order ID</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem variant="danger" icon={<Trash2 />}>Cancel order</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="dropdown-menu-options" title="Options">
+          <PreviewFrame>
+            <MenuOptionsDemo />
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

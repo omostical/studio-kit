@@ -55,12 +55,13 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
 | `Button` | Actions | `variant` primary·secondary·danger·success·inverse · `appearance` filled·border·ghost · `size` · `prefixIcon` `suffixIcon` `loading` `asChild` |
 | `IconButton` | Compact well-known actions (close, edit, more) | same as Button + `icon`, required `aria-label`; defaults secondary + ghost |
+| `DropdownMenu` + `DropdownMenuTrigger/Content/Item/CheckboxItem/RadioGroup/RadioItem/Label/Separator/Sub*` | Several actions behind one button (row "More", user menu) | `DropdownMenuTrigger asChild` around an `IconButton`/`Button` · `DropdownMenuItem icon description shortcut variant` default·danger (danger last) · radio/checkbox items for options |
 | `Input` | Single-line text field | `label` `helperText` `error` `optional` `prefix` `suffix` (icons or text) · `size` small·medium·large · `appearance` border·ghost · `wrapperClassName` (sizes the whole field; `className` styles the input) |
 | `Select` + `SelectItem` | Pick one value in a form | same field props as Input; `value`/`onValueChange` |
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
@@ -77,10 +78,10 @@ Status: `beta` = Avatar, Modal, Tooltip, Tabs, Toast, Table; every other compone
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
 
-Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; navigation link → `Button
-asChild` around `next/link` with `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in
-page → Alert; message after an action → Toast; blocking task → Modal; settings toggle → Switch; form choice →
-Checkbox / Select.
+Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
+row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
+`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
+action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
 still use older values until they are renamed in Figma: `Alert` `status="error"`, `Toast` `status="error"` /
