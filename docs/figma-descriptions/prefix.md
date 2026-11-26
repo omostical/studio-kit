@@ -1,3 +1,5 @@
+**Status: stable** — covered by Input and Select (prefix prop).
+
 Content at the start of a field (icon, text, country code, small button). Used inside Input, Search and Select.
 
 ---

@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Checkbox`.
+
 Lets people turn a single option on or off, or pick several options from a list. Use **Switch** for settings that take effect immediately and **Radio Button** when only one option can be chosen.
 
 ---

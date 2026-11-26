@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A field for a start and end date, with a two-month **Calendar** popover and optional preset ranges ("Last 7 days").
 
 ---

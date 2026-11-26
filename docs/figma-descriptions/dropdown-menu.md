@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A list of actions or options that opens from a button ("More", user menu, Split Button). Use **Single Select** to choose a value in a form.
 
 ---

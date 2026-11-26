@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A compact card for one item on a board (task, deal, ticket), or a group of them. Use it on board columns, not as a general container.
 
 ---

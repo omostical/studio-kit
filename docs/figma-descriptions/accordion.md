@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A heading that expands and collapses a section of content, for long pages where people only need some sections (FAQs, settings groups, filters). Use **Accordion Group** to stack several, and **Tabs** when sections are peers people switch between.
 
 ---

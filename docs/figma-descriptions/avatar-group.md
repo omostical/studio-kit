@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Overlapping avatars for a set of people (members, assignees), with a "+N" counter when there are more.
 
 ---

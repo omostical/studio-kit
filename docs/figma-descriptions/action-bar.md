@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A floating bar of actions that appears when people select items (rows in a table, files, cards) and applies the actions to that selection.
 
 ---

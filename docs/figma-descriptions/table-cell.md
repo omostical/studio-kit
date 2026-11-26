@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Table`.
+
 One cell of a table: text, number, badge, avatar, actions and other content types.
 
 ---

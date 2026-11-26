@@ -36,7 +36,7 @@ const Switch = React.forwardRef<React.ElementRef<typeof SwitchPrimitive.Root>, S
         disabled={disabled}
         aria-describedby={description != null ? `${switchId}-description` : undefined}
         className={cn(
-          "peer inline-flex shrink-0 cursor-pointer items-center rounded-control-full p-[2px] transition-colors duration-150",
+          "peer inline-flex shrink-0 cursor-pointer items-center rounded-control-full p-gap-2 transition-colors duration-150",
           "focus-visible:outline-none focus-visible:shadow-focus-base",
           "data-[state=unchecked]:bg-dynamic-fill-secondary-alpha-strong-default data-[state=unchecked]:hover:bg-dynamic-fill-secondary-alpha-strong-hover",
           "data-[state=checked]:bg-dynamic-fill-primary-default data-[state=checked]:hover:bg-dynamic-fill-primary-hover",

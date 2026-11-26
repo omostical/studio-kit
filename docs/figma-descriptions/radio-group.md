@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A labelled set of **Radio Button** options where exactly one can be chosen.
 
 ---

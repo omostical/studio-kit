@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A text field with a filtered list of options, for choosing from long lists (countries, people, products) by typing. Use **Single Select** for short lists that don't need search.
 
 ---

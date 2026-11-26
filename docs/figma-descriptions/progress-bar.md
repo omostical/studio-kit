@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Shows how far a task has got (upload, setup, quota). Use a spinner when progress can't be measured.
 
 ---

@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Shows the steps of a multi-step flow (checkout, onboarding) and where people are. Use **Breadcrumbs** for site hierarchy.
 
 ---

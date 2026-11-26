@@ -1,3 +1,5 @@
+**Status: stable** — in code as `IconButton`.
+
 A button that shows only an icon, for compact, frequently used actions in toolbars, table rows and headers (close, edit, more). Use **Button** when there is room for a label, and **Link Button** to go to another page.
 
 ---

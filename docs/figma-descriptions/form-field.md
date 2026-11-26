@@ -1,3 +1,5 @@
+**Status: stable** — covered by Input and Select (label, optional, helperText, error props).
+
 A complete form field: label, optional "Optional" marker, the control (Input, Text Area, Select, Date picker…), helper text and error message. Use it for every field in a form; pick the control with Type.
 
 ---

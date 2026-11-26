@@ -1,3 +1,5 @@
+**Status: stable** — covered by Input and Select (helperText, error props).
+
 The text under a field for hints, warnings and error messages. Used inside **Form Field**.
 
 ---

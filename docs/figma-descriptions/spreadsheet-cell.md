@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 One editable cell of a spreadsheet: text, number, select, date and other types.
 
 ---

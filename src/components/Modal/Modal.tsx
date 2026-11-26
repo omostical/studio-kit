@@ -26,6 +26,7 @@ const Modal = DialogPrimitive.Root;
 const ModalTrigger = DialogPrimitive.Trigger;
 const ModalClose = DialogPrimitive.Close;
 
+// token-lint-ignore: Figma Modal widths Small 400 / Medium 600 / Large 800; no container-width token exists
 const widths = { small: "max-w-[400px]", medium: "max-w-[600px]", large: "max-w-[800px]" } as const;
 
 export interface ModalContentProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
@@ -41,6 +42,7 @@ const ModalContent = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Co
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
+          // token-lint-ignore: viewport-relative limits (90% of the screen height, 16px gutter each side at 375px)
           "fixed left-1/2 top-1/2 z-50 flex max-h-[90vh] w-[calc(100%-32px)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden",
           "rounded-container-lg bg-static-fill-overlay text-static-text-strong shadow-elevation-high focus:outline-none",
           widths[size],

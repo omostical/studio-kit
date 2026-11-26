@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 The drag-and-drop area of **File Upload**, with a button to browse files.
 
 ---

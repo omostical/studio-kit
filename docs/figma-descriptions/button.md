@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Button`.
+
 Buttons trigger an action: submitting a form, confirming, moving a flow forward, or a destructive operation. To go to another page, use **Link Button**. For icon-only actions, use **Icon Button**. For a main action with related alternatives, use **Split Button**.
 
 ---

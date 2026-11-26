@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Tooltip`.
+
 A short text hint shown on hover and focus, for icon-only buttons and truncated text. Use **Pop-up** for anything interactive or longer than a sentence.
 
 ---

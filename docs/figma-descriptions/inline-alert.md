@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Alert`.
+
 A message inside the page, next to the content it's about (a form, a card, a section). Use **System Alert** for app-wide messages and **Toast** for short confirmations.
 
 ---

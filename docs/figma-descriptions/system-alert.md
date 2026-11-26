@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A full-width banner for messages about the whole app or account (maintenance, billing, outage). Use **Inline Alert** for messages about one part of the page.
 
 ---

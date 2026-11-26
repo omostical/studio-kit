@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A field for searching content, with a search icon and optional clear button and shortcut hint.
 
 ---

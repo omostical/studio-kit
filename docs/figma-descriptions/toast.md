@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Toast`.
+
 A short, temporary message after an action ("Saved", "Message sent"), optionally with Undo. Use **Inline Alert** for messages people must read or act on.
 
 ---

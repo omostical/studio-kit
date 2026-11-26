@@ -1,3 +1,5 @@
+**Status: beta** — in code as `Tabs`.
+
 Switches between related sections of content on the same page. Use **Segmented Control** to switch views of the same content and **Sidebar** or **Navigation Bar** to go to other pages.
 
 ---

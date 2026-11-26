@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A stack of **Accordion** items with shared spacing and dividers.
 
 ---

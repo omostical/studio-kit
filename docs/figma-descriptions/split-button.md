@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A button with a main action plus a menu of related alternatives ("Save" + "Save as draft", "Export as…"). Use **Button** when there is only one action and **Dropdown Menu** when no option is the obvious default.
 
 ---

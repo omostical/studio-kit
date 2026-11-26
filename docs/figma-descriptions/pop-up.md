@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A small floating panel anchored to a trigger, for extra details or quick actions that don't need a full Modal.
 
 ---

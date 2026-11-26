@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Badge`.
+
 A small label that shows the status of an item (Active, Pending, Failed). Use **Tag** for categories and **Chip** for interactive filters.
 
 ---

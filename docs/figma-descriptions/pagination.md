@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Moves through pages of a long list or table. Consider "Load more" or infinite scroll for feeds.
 
 ---

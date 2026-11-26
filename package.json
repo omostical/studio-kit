@@ -11,7 +11,11 @@
     "build-storybook": "storybook build",
     "lint:tokens": "node scripts/check-tokens.mjs",
     "tokens:build": "node scripts/build-tokens.mjs",
-    "tokens:check": "node scripts/build-tokens.mjs --check"
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "design:build": "node scripts/build-design-md.mjs",
+    "design:check": "node scripts/build-design-md.mjs --check",
+    "descriptions:build": "node scripts/build-descriptions.mjs",
+    "descriptions:check": "node scripts/build-descriptions.mjs --check"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

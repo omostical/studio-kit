@@ -1,3 +1,5 @@
+**Status: stable** — in code as `Input`.
+
 **Input** — single-line field for short, free-form text: names, emails, search terms, numbers. This is the field on its own; in forms, use **Form Field** (`Type=Text Input`), which adds the label, helper text and error message. For multi-line text use **Text Area**; to choose from a fixed list use **Single Select** or **Combo Box**; for search bars use **Search**.
 
 ---

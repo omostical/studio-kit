@@ -2,361 +2,478 @@
   {
     "id": "557:13737",
     "name": "Icon Button",
+    "status": "stable",
+    "code": "src/components/IconButton",
     "file": "icon-button.md"
   },
   {
     "id": "4402:90631",
     "name": "Split Button",
+    "status": "planned",
     "file": "split-button.md"
   },
   {
     "id": "557:15154",
     "name": "Link Button",
+    "status": "planned",
     "file": "link-button.md"
   },
   {
     "id": "557:9948",
     "name": "Accordion",
+    "status": "planned",
     "file": "accordion.md"
   },
   {
     "id": "2746:2110",
     "name": "Accordion Group",
+    "status": "planned",
     "file": "accordion-group.md"
   },
   {
     "id": "9711:2016",
     "name": "Action Bar",
+    "status": "planned",
     "file": "action-bar.md"
   },
   {
     "id": "7807:149649",
     "name": "Avatar",
+    "status": "planned",
     "file": "avatar.md"
   },
   {
     "id": "7807:149985",
     "name": "Avatar Group",
+    "status": "planned",
     "file": "avatar-group.md"
   },
   {
     "id": "9728:22669",
     "name": "Breadcrumbs",
+    "status": "planned",
     "file": "breadcrumbs.md"
   },
   {
     "id": "9728:18794",
     "name": "Breadcrumb Item",
+    "status": "planned",
     "file": "breadcrumb-item.md"
   },
   {
     "id": "557:17399",
     "name": "Calendar",
+    "status": "planned",
     "file": "calendar.md"
   },
   {
     "id": "15489:870",
     "name": "Default Card",
+    "status": "stable",
+    "code": "src/components/Card",
     "file": "default-card.md"
   },
   {
     "id": "15492:1640",
     "name": "Media Card",
+    "status": "planned",
     "file": "media-card.md"
   },
   {
     "id": "15489:18838",
     "name": "Chart Card",
+    "status": "planned",
     "file": "chart-card.md"
   },
   {
     "id": "15478:19922",
     "name": "Kanban Card",
+    "status": "planned",
     "file": "kanban-card.md"
   },
   {
     "id": "557:18425",
     "name": "Checkbox",
+    "status": "stable",
+    "code": "src/components/Checkbox",
     "file": "checkbox.md"
   },
   {
     "id": "1584:59304",
     "name": "Checkbox Group",
+    "status": "planned",
     "file": "checkbox-group.md"
   },
   {
     "id": "557:80335",
     "name": "Chip",
+    "status": "planned",
     "file": "chip.md"
   },
   {
     "id": "5141:151685",
     "name": "Combo Box",
+    "status": "planned",
     "file": "combo-box.md"
   },
   {
     "id": "4209:13875",
     "name": "Date picker (Single date)",
+    "status": "planned",
     "file": "date-picker-single-date.md"
   },
   {
     "id": "4209:18675",
     "name": "Date picker (Date range)",
+    "status": "planned",
     "file": "date-picker-date-range.md"
   },
   {
     "id": "13101:22726",
     "name": "Divider",
+    "status": "planned",
     "file": "divider.md"
   },
   {
     "id": "1490:38985",
     "name": "Dropdown Menu",
+    "status": "planned",
     "file": "dropdown-menu.md"
   },
   {
     "id": "1294:41224",
     "name": "Dropdown Menu / Menu Item",
+    "status": "planned",
     "file": "dropdown-menu-menu-item.md"
   },
   {
     "id": "5157:3056",
     "name": "File Upload",
+    "status": "planned",
     "file": "file-upload.md"
   },
   {
     "id": "5155:3828",
     "name": "Dropzone",
+    "status": "planned",
     "file": "dropzone.md"
   },
   {
     "id": "557:88402",
     "name": "File",
+    "status": "planned",
     "file": "file.md"
   },
   {
     "id": "557:49476",
     "name": "Filter Button",
+    "status": "planned",
     "file": "filter-button.md"
   },
   {
     "id": "557:51656",
     "name": "Form Field",
+    "status": "stable",
+    "code": "src/components/_shared/field.tsx",
+    "via": "Input and Select (label, optional, helperText, error props)",
     "file": "form-field.md"
   },
   {
     "id": "4705:88320",
     "name": "Inline Alert",
+    "status": "stable",
+    "code": "src/components/Alert",
     "file": "inline-alert.md"
   },
   {
     "id": "9855:38649",
     "name": "Modal",
+    "status": "beta",
+    "code": "src/components/Modal",
     "file": "modal.md"
   },
   {
     "id": "9987:42531",
     "name": "Status Modal",
+    "status": "planned",
     "file": "status-modal.md"
   },
   {
     "id": "13058:13975",
     "name": "Header",
+    "status": "planned",
     "file": "header.md"
   },
   {
     "id": "13062:16646",
     "name": "Footer",
+    "status": "planned",
     "file": "footer.md"
   },
   {
     "id": "5321:9464",
     "name": "Navigation Bar",
+    "status": "planned",
     "file": "navigation-bar.md"
   },
   {
     "id": "10785:99185",
     "name": "Notifications",
+    "status": "planned",
     "file": "notifications.md"
   },
   {
     "id": "2646:12655",
     "name": "Pagination",
+    "status": "planned",
     "file": "pagination.md"
   },
   {
     "id": "10852:61592",
     "name": "Pop-up",
+    "status": "planned",
     "file": "pop-up.md"
   },
   {
     "id": "4716:92306",
     "name": "Progress Bar",
+    "status": "planned",
     "file": "progress-bar.md"
   },
   {
     "id": "10034:31374",
     "name": "Progress Stepper",
+    "status": "planned",
     "file": "progress-stepper.md"
   },
   {
     "id": "2642:14283",
     "name": "Progress Tracker",
+    "status": "planned",
     "file": "progress-tracker.md"
   },
   {
     "id": "557:58107",
     "name": "Radio Button",
+    "status": "planned",
     "file": "radio-button.md"
   },
   {
     "id": "1584:59135",
     "name": "Radio Group",
+    "status": "planned",
     "file": "radio-group.md"
   },
   {
     "id": "9986:109308",
     "name": "Search",
+    "status": "planned",
     "file": "search.md"
   },
   {
     "id": "557:61066",
     "name": "Segmented Control",
+    "status": "planned",
     "file": "segmented-control.md"
   },
   {
     "id": "1862:10385",
     "name": "Single Select",
+    "status": "stable",
+    "code": "src/components/Select",
     "file": "single-select.md"
   },
   {
     "id": "1902:4145",
     "name": "Multi Select",
+    "status": "planned",
     "file": "multi-select.md"
   },
   {
     "id": "5240:20822",
     "name": "Sidebar",
+    "status": "planned",
     "file": "sidebar.md"
   },
   {
     "id": "557:76753",
     "name": "Side Panel",
+    "status": "planned",
     "file": "side-panel.md"
   },
   {
     "id": "557:71428",
     "name": "Slider",
+    "status": "planned",
     "file": "slider.md"
   },
   {
     "id": "10590:65508",
     "name": "Spreadsheet Column",
+    "status": "planned",
     "file": "spreadsheet-column.md"
   },
   {
     "id": "10590:65934",
     "name": "Spreadsheet Cell",
+    "status": "planned",
     "file": "spreadsheet-cell.md"
   },
   {
     "id": "557:10806",
     "name": "Status Badge",
+    "status": "stable",
+    "code": "src/components/Badge",
     "file": "status-badge.md"
   },
   {
     "id": "557:75442",
     "name": "Switch",
+    "status": "stable",
+    "code": "src/components/Switch",
     "file": "switch.md"
   },
   {
     "id": "557:55446",
     "name": "System Alert",
+    "status": "planned",
     "file": "system-alert.md"
   },
   {
     "id": "9234:85146",
     "name": "Column",
+    "status": "beta",
+    "code": "src/components/Table",
     "file": "column.md"
   },
   {
     "id": "9233:69190",
     "name": "Column Divider",
+    "status": "planned",
     "file": "column-divider.md"
   },
   {
     "id": "9233:69238",
     "name": "Table Cell",
+    "status": "beta",
+    "code": "src/components/Table",
     "file": "table-cell.md"
   },
   {
     "id": "2014:13749",
     "name": "Tabs",
+    "status": "beta",
+    "code": "src/components/Tabs",
     "file": "tabs.md"
   },
   {
     "id": "831:14706",
     "name": "Tag",
+    "status": "stable",
+    "code": "src/components/Tag",
     "file": "tag.md"
   },
   {
     "id": "557:82344",
     "name": "Text Area",
+    "status": "planned",
     "file": "text-area.md"
   },
   {
     "id": "9657:159805",
     "name": "Select Tile",
+    "status": "planned",
     "file": "select-tile.md"
   },
   {
     "id": "557:85743",
     "name": "Action Tile",
+    "status": "planned",
     "file": "action-tile.md"
   },
   {
     "id": "4705:89222",
     "name": "Toast",
+    "status": "beta",
+    "code": "src/components/Toast",
     "file": "toast.md"
   },
   {
     "id": "557:88017",
     "name": "Tooltip",
+    "status": "beta",
+    "code": "src/components/Tooltip",
     "file": "tooltip.md"
   },
   {
     "id": "1699:2520",
     "name": "Entity",
+    "status": "planned",
     "file": "entity.md"
   },
   {
     "id": "1902:22669",
     "name": "Helper Text",
+    "status": "stable",
+    "code": "src/components/_shared/field.tsx",
+    "via": "Input and Select (helperText, error props)",
     "file": "helper-text.md"
   },
   {
     "id": "4803:158547",
     "name": "Field Label",
+    "status": "stable",
+    "code": "src/components/_shared/field.tsx",
+    "via": "Input and Select (label, optional props)",
     "file": "field-label.md"
   },
   {
     "id": "1699:21315",
     "name": "Prefix",
+    "status": "stable",
+    "code": "src/components/_shared/field.tsx",
+    "via": "Input and Select (prefix prop)",
     "file": "prefix.md"
   },
   {
     "id": "1699:36894",
     "name": "Suffix",
+    "status": "stable",
+    "code": "src/components/_shared/field.tsx",
+    "via": "Input and Select (suffix prop)",
     "file": "suffix.md"
   },
   {
     "id": "938:36926",
     "name": "Thumbnail",
+    "status": "planned",
     "file": "thumbnail.md"
   },
   {
     "id": "938:37191",
     "name": "Shortcut",
+    "status": "planned",
     "file": "shortcut.md"
+  },
+  {
+    "id": "code:Button",
+    "name": "Button",
+    "status": "stable",
+    "code": "src/components/Button",
+    "file": "button.md"
+  },
+  {
+    "id": "code:Input",
+    "name": "Input",
+    "status": "stable",
+    "code": "src/components/Input",
+    "file": "input.md"
+  },
+  {
+    "id": "code:Typography",
+    "name": "Typography",
+    "status": "stable",
+    "code": "src/components/Typography",
+    "via": "Figma text styles, not a Figma component"
   }
 ]

@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 A panel listing activity and messages for the user, with read and unread states.
 
 ---

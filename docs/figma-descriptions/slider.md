@@ -1,3 +1,5 @@
+**Status: planned** — Figma only; there is no code component yet.
+
 Picks a value or range by dragging along a track (volume, price range). Use an **Input** when people need an exact value.
 
 ---

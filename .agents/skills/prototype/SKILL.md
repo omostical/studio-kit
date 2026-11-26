@@ -27,19 +27,21 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
 ## 3. Build
 - Create `src/app/prototypes/<slug>/page.tsx`. Add `"use client";` if it has state or handlers.
 - Import only from `@/components/*`, `lucide-react` (icons) and `react`. Styling only with token classes
-  (`bg-static-fill-*`, `text-static-text-*`, `p-gap-*`, `rounded-container-*`, `type-*` …) — see `AGENTS.md`.
-- Follow "Composing screens" in `AGENTS.md`: page shell, one Primary action per section, labels on every field,
+  (`bg-static-fill-*`, `text-static-text-*`, `p-gap-*`, `rounded-container-*`, `type-*` …). Read `DESIGN.md` first and
+  pick each token by its usage column.
+- Before writing the page, read `.agents/rules/screens.md` and follow it: page shell, one Primary action per section, labels on every field,
   `aria-label` on icon buttons, statuses as `Badge`, errors as `Alert`, confirmations as `Toast` (wrap the page
   in `ToastProvider` if you use it).
 - Make the main interactions work with local state (tabs switch, modal opens, toggle toggles, form validates and
   shows the error state). Include an empty or error state when the screen has one.
-- Responsive: one column at 375px, wider layout from `sm:`/`lg:`. Tables follow "Tables at 375px" in `AGENTS.md`.
+- Responsive: one column at 375px, wider layout from `sm:`/`lg:`. Tables follow "Tables at 375px" in `.agents/rules/screens.md`.
 - Headings: page title `as="h1"`, sections `h2` (`CardTitle` already is); styled values that aren't headings get
-  `as="p"`. Modals: open them through `ModalTrigger` (see "Modals" in `AGENTS.md`).
+  `as="p"`. Modals: open them through `ModalTrigger` (see "Modals" in `.agents/rules/screens.md`).
 
 ## 4. Check
-- `npx tsc --noEmit && npx eslint src && npm run lint:tokens && npm run build` — fix everything. `lint:tokens`
-  also rejects arbitrary values (`w-[160px]`) in prototypes; use the Size scale in `AGENTS.md`.
+- `npx tsc --noEmit && npx eslint src --max-warnings=0 && npm run lint:tokens && npm run design:check && npm run build` — fix
+  everything. `lint:tokens` also rejects arbitrary values (`w-[160px]`) in prototypes; use the Size scale in
+  `DESIGN.md`.
 - Start the site (preview the `site` config in `.claude/launch.json`, or `npm run dev`), open
   `http://localhost:3000/prototypes/<slug>`, and look at it:
   - light, dark (set `data-theme="dark"` on `<html>`; the theme animates, so wait a moment before a screenshot),
@@ -52,5 +54,5 @@ Input: a description of the screen ($ARGUMENTS), e.g. "billing settings with pla
 
 ## 5. Report
 - The URL (`/prototypes/<slug>`), the components used, the check results, any gap where no component fitted (a
-  candidate for the design system), anything you assumed, and anything in `AGENTS.md` or this skill that was
+  candidate for the design system), anything you assumed, and anything in `AGENTS.md`, `DESIGN.md`, `.agents/rules/screens.md` or this skill that was
   missing or wrong.
