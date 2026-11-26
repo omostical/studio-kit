@@ -94,7 +94,8 @@ never invent it, and never build a lookalike of a component that exists.
 1. **Check it really is missing.** Search `docs/figma-descriptions/index.json` (a `planned` entry has no code) and
    `GAPS.md`, and the "Choosing" line above. If a `stable` or `beta` component does the job, use it.
 2. **Log it.** Add one line to `GAPS.md`, under Components or Tokens:
-   `- <Name>: <what it must do> — needed by <file>`. If the line exists, add your file to it.
+   `- <Name>: <what it must do> — needed by <file>`. `<Name>` is the component's `name` in `index.json` when it is
+   `planned` there (e.g. `Dropdown Menu`), otherwise a short noun. If the line exists, add your file to it.
 3. **Then either leave it out, or build a minimal stand-in.** A stand-in is composed only of Studio Kit
    components and token classes, and sits right under a `// stand-in: <Name>` comment (`{/* stand-in: <Name> */}`
    in JSX) that names its `GAPS.md` line. `npm run lint:tokens` fails on a stand-in without that line.

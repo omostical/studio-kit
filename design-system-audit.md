@@ -3,7 +3,7 @@
 Repository: studio-kit (github.com/omostical/studio-kit) at b8e6e39, 2026-11-21
 Scope: app holding its own design system (not published; `package.json` has no `files`/`exports`); agents served: both contributor agents (editing `src/components`, tokens) and consumer agents (building `src/app/prototypes`), in this repository; agent files live in: root `AGENTS.md`, `CLAUDE.md` (`@AGENTS.md`), `.claude/skills/`. Working assumption — see question 1.
 Stack: Next 16.1.6 + React 19.2.3, Tailwind v4 (`@theme` in `src/styles/generated/theme.css`), Radix primitives, Storybook 10.6.8 (16 stories), tokens from Figma DTCG JSON (`tokens/figma/`) built by `scripts/build-tokens.mjs`
-Levels (after setup week2, 2026-11-26): silent 2, guesses 3, obeys 10, tells you 0. Using: obeys 3, guesses 3. Not allowed: obeys 7, silent 1. Doesn't exist: silent 1. After week1: silent 3, guesses 11, obeys 1. Audit of 2026-11-21: silent 7, guesses 7, obeys 1
+Levels (after setup week3, 2026-11-26): silent 0, guesses 4, obeys 10, tells you 1. Using: obeys 3, guesses 3. Not allowed: obeys 7, guesses 1. Doesn't exist: tells you 1. After week2: silent 2, guesses 3, obeys 10. After week1: silent 3, guesses 11, obeys 1. Audit of 2026-11-21: silent 7, guesses 7, obeys 1
 
 ## Top gaps
 
@@ -12,6 +12,8 @@ The rank is a judgment on two scales (frequency × cost, from `references/doctri
 Progress, 2026-11-24 (`setup week1`): ranks 1 and 4 are closed (areas 4 and 7 now `answered`). Rank 5 has its canonical form recorded; enforcement follows the Figma rename (week 2). Ranks 2 and 3 are open (weeks 3 and 2).
 
 Progress, 2026-11-26 (`setup week2`): rank 5 is enforced (`lint:tokens` intent-word check). Rank 3 is closed: `main` requires the `tokens` check and pull requests. Rank 2 is open (week 3).
+
+Progress, 2026-11-26 (`setup week3`): rank 2 is closed: `GAPS.md`, the gap instruction in `AGENTS.md`, stand-ins checked by `lint:tokens`. All five top gaps are closed.
 
 | Rank | Gap | Class | Question | Frequency x cost | Evidence | Closed by |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -36,9 +38,9 @@ Progress, 2026-11-26 (`setup week2`): rank 5 is enforced (`lint:tokens` intent-w
 | 9 | Lint and types for agents | answered | obeys | Week 2: `eslint.config.mjs` warns on raw `<button>`, `<input>`, `<select>`, `<textarea>` in `src/app/**/*.tsx` and on `@radix-ui/*` imports, each message naming the component to use and the disable-with-reason path; CI runs `eslint src --max-warnings=0`. The 2 raw buttons in `src/app/playground/page.tsx` became `Tabs` and `Button`. `lint:tokens` messages say what to do when no token fits (gap log: week 3) |
 | 10 | Exceptions | answered | obeys | Marker `token-lint-ignore: <reason>` on the line or the line above; `lint:tokens` fails on a reason under 20 characters and on a marker that excuses nothing (tested). 6 recorded exceptions with reasons: `Modal.tsx` (2), `Select.tsx` (1), `Toast.tsx` (3) |
 | 11 | Agent hooks | answered | obeys | Week 2: `.claude/hooks/pre-tool-use.sh`, registered in `.claude/settings.json`, refuses Edit/Write on `tokens/figma/*`, `src/styles/generated/*`, `src/tokens/generated.ts`, `DESIGN.md`, generated descriptions, and real rules/skills under tool folders; refuses `--no-verify` and commits on `main`; each refusal names the command to run (13 cases tested). Cursor and Codex meet the same rules in CI only |
-| 12 | Gap logging | missing | silent | See top gap 2 |
+| 12 | Gap logging | answered | tells you | Week 3: `GAPS.md` (8 gaps seeded from the Phase 3 tests and the week-2 exceptions); `AGENTS.md` "When the answer doesn't exist": check the catalog, log a line, leave out or stand in under `// stand-in: <Name>`, report; `lint:tokens` fails on a stand-in with no `GAPS.md` line (tested). No GitHub label, per decision 4. Readiness test `gaps`: speaks |
 | 13 | CI gate | answered | obeys | `main` protected on 2026-11-26 (`gh api repos/omostical/studio-kit/branches/main/protection`): required check `tokens`, pull requests required (0 approvals), force pushes and deletion off, admins may bypass (team answer). The `tokens` job runs every design check (areas 4, 7, 8, 9, 10); PR #1 showed `BLOCKED` while it ran |
-| 14 | Change discipline | missing | silent | No `.github/PULL_REQUEST_TEMPLATE*`, no change-type labels (`gh label list`), no changelog |
+| 14 | Change discipline | answered | guesses | Week 3: `.github/pull_request_template.md` (change type create · refine · extend · refactor), `CHANGELOG.md`, and a warning step in the `tokens` job when `src/components` changes without a changelog line or a ticked type (warning for one cycle, per `references/change-types.md`). Blast radius and visual regression: deferred |
 | 15 | Consistency | violated | obeys | Canonical words `danger` / `success` are enforced: `lint:tokens` fails on `"error"`, `"negative"`, `"positive"` in any component file except `Alert.tsx`, `Toast.tsx`, `Badge.tsx` (tested). Those 3 keep the old words until the Figma rename. Raw `<a>` 9 in 3 files (docs site) unchanged |
 
 ## Readiness tests, setup week2 (2026-11-26)
@@ -49,6 +51,7 @@ Fresh agents, repository files only, instruction: "Flag missing context. Do not 
 | --- | --- | --- | --- | --- |
 | enforcement | Status pill in a prototype: 2px inset, 123px width, Radix Toggle directly | speaks | Badge/Switch not Radix (`eslint.config.mjs:38-46`), `p-gap-2` = 2px (`DESIGN.md:372`), no token for 123px between `size-25` 112px and `size-26` 128px (`DESIGN.md:427-428`), `token-lint-ignore: <reason>` path, no rounding to the nearest value | Where to log a gap → missing (week 3); whether a prototype exception needs sign-off → missing (week 3, decision 5) |
 | ci | Change Button padding and its Figma description | speaks | `button.md` hand-written, the rest generated (`.claude/hooks/pre-tool-use.sh:49-52`), the eight `tokens` steps (`tokens.yml:19-31`), Figma first for a token value change | `tokens:check` missing from the before-you-finish chain → violated, fixed in `AGENTS.md` rule 6 and `.agents/rules/components.md`; branch protection unverifiable from files → pending merge; reviewers/CODEOWNERS, changelog, breaking-change policy → missing (area 14, week 3); how `button.md` reaches Figma → disconnected |
+| gaps | Order-history prototype needs a thumbnail, a more-actions menu and a date-range picker | speaks | All three found `planned` (`index.json`), GAPS.md lines added or extended, stand-ins only from kit components under `stand-in:`, menu left out as separate `IconButton`s rather than a lookalike, report lists gaps and stand-ins (`AGENTS.md` "When the answer doesn't exist") | Gap naming → missing, fixed (catalog `name` when `planned`); image element (`<img>` vs `next/image`) and a thumbnail radius → missing, open; a GAPS.md path on another branch → stale, fixed |
 
 ## Questions only the team can answer
 
@@ -65,6 +68,7 @@ Fresh agents, repository files only, instruction: "Flag missing context. Do not 
 11. Which agents besides Claude Code work here (Cursor, Codex…)? The answer decides whether rules go in `.agents/` with symlinks.
 12. `dynamic-fill-tertiary-default` is `#0A0A0A` in Dark, the same value as `static-fill-background` (the dark page canvas), so a tertiary fill is invisible on the page in dark mode. Is that intended, or should the Figma Dark value change? No component uses tertiary today (found during the 2026-11-24 usage review).
 13. Every `semantic-*-info` token aliases the blue scale except two: `semantic-fill-inverse-info` (`var(--colors-dark-indigo-400)`) and `semantic-text-info` (`var(--colors-light-indigo-400)`) in `src/styles/generated/tokens.css:1235,1249` (Dark block). Should they move to blue in Figma, or is indigo intended there? (found during setup week2, 2026-11-26)
+14. Image guidance: may screens use a plain `<img>` or `next/image` (the prototype skill allows imports only from `@/components/*`, `lucide-react`, `react`), and which radius token frames an image thumbnail? (found by the week-3 readiness test)
 
 ## Team decisions (2026-11-21)
 
