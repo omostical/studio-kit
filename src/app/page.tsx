@@ -11,10 +11,6 @@ import { Badge } from "@/components/Badge";
 import { Tag } from "@/components/Tag";
 import { Input } from "@/components/Input";
 
-// Brand accent kept from the old wideset palette. No token covers a decorative brand-accent colour yet: swap
-// this for the token once Figma has one.
-const ACCENT = "#4734F7"; // token-lint-ignore: decorative hero accent, no brand-accent token exists yet
-
 // ─── Animation keyframes injected via <style> ─────────────────────────────────
 const animCSS = `
   @keyframes sk-fade-up {
@@ -178,10 +174,7 @@ export default function Home() {
               className="sk-anim sk-d1 sk-pill mb-8 sk-mono"
               style={{ width: "fit-content" }}
             >
-              <span
-                className="size-1.5 rounded-full"
-                style={{ background: ACCENT }}
-              />
+              <span className="size-1.5 rounded-full bg-dynamic-fill-primary-default" />
               <span>v0.1.0 — Figma → Production</span>
             </div>
 
@@ -196,7 +189,7 @@ export default function Home() {
               <br />
               with one design
               <br />
-              <span style={{ color: ACCENT }}>system.</span>
+              <span className="text-dynamic-text-primary-default">system.</span>
             </h1>
 
             <p
@@ -229,10 +222,7 @@ export default function Home() {
               style={{ color: "var(--static-text-subtle)", fontSize: "12px" }}
             >
               <span className="inline-flex items-center gap-1.5">
-                <span
-                  className="size-1.5 rounded-full"
-                  style={{ background: ACCENT }}
-                />
+                <span className="size-1.5 rounded-full bg-dynamic-fill-primary-default" />
                 Open source
               </span>
               <span>MIT licensed</span>
