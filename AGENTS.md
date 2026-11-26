@@ -76,16 +76,32 @@ Status: `beta` = Modal, Tooltip, Tabs, Toast, Table; every other component in th
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
 
-Choosing: action → Button; navigation link → `Button asChild` around `next/link` with `appearance="ghost"`, or a
-plain link; status → Badge; category → Tag; message in page → Alert; message after an action → Toast;
-blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
+Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; navigation link → `Button
+asChild` around `next/link` with `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in
+page → Alert; message after an action → Toast; blocking task → Modal; settings toggle → Switch; form choice →
+Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
 still use older values until they are renamed in Figma: `Alert` `status="error"`, `Toast` `status="error"` /
 `"positive"`, `Badge` `status="negative"` / `"positive"`. Use those values on those three components today; never
 introduce `error`, `negative` or `positive` as a new prop value.
 
-## Tokens
+## When the answer doesn't exist
+
+The kit doesn't cover everything. When you need a component, prop value or token it doesn't have, flag it:
+never invent it, and never build a lookalike of a component that exists.
+
+1. **Check it really is missing.** Search `docs/figma-descriptions/index.json` (a `planned` entry has no code) and
+   `GAPS.md`, and the "Choosing" line above. If a `stable` or `beta` component does the job, use it.
+2. **Log it.** Add one line to `GAPS.md`, under Components or Tokens:
+   `- <Name>: <what it must do> — needed by <file>`. If the line exists, add your file to it.
+3. **Then either leave it out, or build a minimal stand-in.** A stand-in is composed only of Studio Kit
+   components and token classes, and sits right under a `// stand-in: <Name>` comment (`{/* stand-in: <Name> */}`
+   in JSX) that names its `GAPS.md` line. `npm run lint:tokens` fails on a stand-in without that line.
+   - A missing **token** has no stand-in: keep the literal with `token-lint-ignore: <why no token fits>` on its
+     line or the line above (never the nearest token's value), and log the token in `GAPS.md`.
+4. **Report it.** Your final message lists every gap you logged and every stand-in you built.
+
 
 `DESIGN.md` is the reference: every colour, spacing, size, radius, shadow and type token, its value in Light and
 Dark, and its usage. Token names are the Figma variable path in kebab case (`Dynamic/Fill/Primary/Default` →
@@ -99,6 +115,9 @@ page.
 - **New client / rebrand:** `/new-client <name>`.
 - **Change a component:** `.agents/rules/components.md`.
 - **Change token usage text:** edit `tokens/usage.json`, then `npm run design:build`.
+- **Missing component or token:** a line in `GAPS.md` (see "When the answer doesn't exist").
+- **Open a pull request:** `main` only takes pull requests with the `tokens` check green. Fill in the template's
+  change type; component and token changes add a line to `CHANGELOG.md`.
 
 ## Agent files
 

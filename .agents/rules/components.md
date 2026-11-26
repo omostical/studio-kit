@@ -60,6 +60,17 @@ line above, as in `Modal.tsx`, `Toast.tsx` and `Select.tsx`. `npm run lint:token
 without the marker, on a marker without a reason, and on a marker that excuses nothing. Stories are exempt.
 - When behaviour changes, update the JSDoc, the story and the description in the same change.
 
+## Change type and changelog
+
+Every change to a component or token has one type, ticked in the pull request template
+(`.github/pull_request_template.md`): `create` (new), `refine` (visual only, no API change), `extend` (adds props or
+values, removes nothing), `refactor` (same rendered output, same API). A `refine` that starts adding props is now an
+`extend`: say so in the PR, don't widen it silently.
+
+Add one line to `CHANGELOG.md` under Unreleased: `- <type>(<Component>): <what changed> — <why> (#<PR>)`. CI warns
+when `src/components/` changes without a `CHANGELOG.md` line or without a ticked change type. Building a component
+listed in `GAPS.md` deletes its line there in the same PR.
+
 ## Before you finish
 
 `npm run tokens:check && npm run design:check && npm run descriptions:check && npm run lint:tokens &&

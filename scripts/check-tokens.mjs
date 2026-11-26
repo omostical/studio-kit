@@ -151,7 +151,7 @@ for (const file of markerFiles) {
   for (const { line, text } of fileHits.get(file) ?? []) {
     const at = markers.has(line) ? line : markers.has(line - 1) ? line - 1 : null;
     if (at === null) {
-      report(file, line, `${text}. No token fits? Keep the value and put \`token-lint-ignore: <why no token fits>\` on this line or the line above, then name the missing token in your report.`);
+      report(file, line, `${text}. No token fits? Keep the value and put \`token-lint-ignore: <why no token fits>\` on this line or the line above, and add the missing token to GAPS.md under Tokens.`);
       continue;
     }
     markers.get(at).used = true;
@@ -176,10 +176,31 @@ for (const file of tryWalk("src/components").filter((f) => !/\.stories\.tsx$/.te
   });
 }
 
+// ─── Stand-ins ───────────────────────────────────────────────────────────────
+// A minimal stand-in for a missing component is marked `// stand-in: <Name>` and needs a `- <Name>:` line in
+// GAPS.md, so every workaround is on the team's list.
+const gapsFile = join(ROOT, "GAPS.md");
+let gapNames = new Set();
+try {
+  gapNames = new Set([...readFileSync(gapsFile, "utf8").matchAll(/^- ([^:\n]+):/gm)].map((m) => m[1].trim().toLowerCase()));
+} catch {
+  // no GAPS.md: every stand-in fails below
+}
+const STAND_IN = /stand-in:\s*([^—*\n]+?)\s*(?:—|\*\/|$)/;
+for (const scope of ["src/app", "src/components"]) {
+  for (const file of tryWalk(scope)) {
+    readFileSync(file, "utf8").split("\n").forEach((line, i) => {
+      const m = STAND_IN.exec(line);
+      if (m && !gapNames.has(m[1].trim().toLowerCase()))
+        report(file, i, `stand-in "${m[1].trim()}" has no line in GAPS.md. Add \`- ${m[1].trim()}: <what it must do> — needed by ${relative(ROOT, file)}\` under Components.`);
+    });
+  }
+}
+
 if (problems) {
   console.log(`\n✗ ${problems} token problem(s): hard-coded values, unknown token classes, exceptions without a reason, or old intent words.`);
   process.exit(1);
 }
 console.log(
-  `✓ No hard-coded colours in ${SCOPES.join(", ")}; no unexcused arbitrary values in ${STRICT_SCOPES.join(", ")} (stories excepted); every exception has a reason; every token class exists; old intent words only in Alert, Toast, Badge.`
+  `✓ No hard-coded colours in ${SCOPES.join(", ")}; no unexcused arbitrary values in ${STRICT_SCOPES.join(", ")} (stories excepted); every exception has a reason; every token class exists; old intent words only in Alert, Toast, Badge; every stand-in is listed in GAPS.md.`
 );

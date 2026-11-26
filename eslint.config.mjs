@@ -18,8 +18,8 @@ const eslintConfig = defineConfig([
   ]),
   ...storybook.configs["flat/recommended"],
   // Screens are built from Studio Kit components (AGENTS.md rule 1). Warnings, and CI runs eslint with
-  // --max-warnings=0: a raw element merges only with `// eslint-disable-next-line no-restricted-syntax -- <the
-  // component that is missing>`, so every exception names its gap.
+  // --max-warnings=0: a raw element merges only with `// eslint-disable-next-line no-restricted-syntax --
+  // stand-in: <Gap name>`, and lint:tokens checks that name against GAPS.md.
   {
     files: ["src/app/**/*.tsx"],
     rules: {
@@ -32,7 +32,7 @@ const eslintConfig = defineConfig([
           ["textarea", "No Textarea component exists yet (planned)."],
         ].map(([el, use]) => ({
           selector: `JSXOpeningElement[name.name='${el}']`,
-          message: `${use} If no component can do this, keep the raw <${el}> with \`// eslint-disable-next-line no-restricted-syntax -- <the missing component>\` and name the gap in your report.`,
+          message: `${use} If no component can do this, keep the raw <${el}> with \`// eslint-disable-next-line no-restricted-syntax -- stand-in: <Gap name>\` and add that gap to GAPS.md.`,
         })),
       ],
       "no-restricted-imports": [
@@ -42,7 +42,7 @@ const eslintConfig = defineConfig([
             {
               group: ["@radix-ui/*"],
               message:
-                "Import the Studio Kit component from @/components instead (it wraps Radix with tokens, states and a11y). If none exists, check docs/figma-descriptions/index.json: a `planned` component has no code, so name the gap in your report rather than building it from Radix.",
+                "Import the Studio Kit component from @/components instead (it wraps Radix with tokens, states and a11y). If none exists, check docs/figma-descriptions/index.json: a `planned` component has no code, so add it to GAPS.md and build a minimal stand-in from Studio Kit components and tokens (marked `// stand-in: <Gap name>`), never from Radix.",
             },
           ],
         },
