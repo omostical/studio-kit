@@ -33,6 +33,8 @@ import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePane
 import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, PopupFooter } from "@/components/Popup";
 import { StatusModal, StatusModalTrigger, StatusModalClose, StatusModalContent } from "@/components/StatusModal";
 import { SystemAlert, type SystemAlertStatus } from "@/components/SystemAlert";
+import { Notifications, NotificationsTrigger, NotificationsContent, NotificationsHeader, NotificationsToolbar, NotificationList, NotificationItem, NotificationGroupLabel, NotificationsFooter } from "@/components/Notifications";
+import { Bell, Settings } from "lucide-react";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -802,6 +804,56 @@ export default function ComponentsPage() {
               ))
             )}
           </div>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Notifications ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="notifications"
+        eyebrow="Overlays / 07"
+        title="Notifications"
+        description="Figma Notifications: an activity panel opened from a bell button, composed from Popover, Avatar, Tabs and Button. The bell's name carries the unread count; unread rows say so in text as well as colour."
+      >
+        <SubBlock id="notifications-panel" title="Panel with tabs, groups and unread rows">
+          <PreviewFrame>
+            <Notifications>
+              <NotificationsTrigger asChild>
+                <IconButton appearance="border" icon={<Bell />} aria-label="Notifications, 1 unread" />
+              </NotificationsTrigger>
+              <NotificationsContent>
+                <Tabs size="small" defaultValue="all" className="min-h-0 gap-gap-0">
+                  <NotificationsHeader action={<Button size="small" variant="secondary" appearance="ghost">Mark all as read</Button>} />
+                  <NotificationsToolbar>
+                    <TabsList divider={false}>
+                      <TabsTrigger value="all">All</TabsTrigger>
+                      <TabsTrigger value="unread">Unread</TabsTrigger>
+                    </TabsList>
+                    <IconButton size="small" icon={<Settings />} aria-label="Notification settings" />
+                  </NotificationsToolbar>
+                  <TabsContent value="all" className="min-h-0 overflow-y-auto">
+                    <NotificationList>
+                      <NotificationItem unread href="#notifications" avatar={<Avatar size="small" name="Studio Kit" alt="" />} title={<><strong>Studio Kit</strong> launched a new feature in Projects</>} time="Just now" />
+                      <NotificationItem href="#notifications" avatar={<Avatar size="small" name="Darya Lee" alt="" />} title={<><strong>Darya Lee</strong> sent a message</>} time="13 min ago" content="Hi all, sharing the diagram we talked about yesterday." />
+                      <NotificationGroupLabel>March</NotificationGroupLabel>
+                      <NotificationItem
+                        href="#notifications"
+                        avatar={<Avatar size="small" name="Ralph Ito" alt="" />}
+                        title={<><strong>Ralph Ito</strong> asked to swap the Friday shift</>}
+                        time="Mar 4"
+                        actions={<><Button size="xsmall">Accept</Button><Button size="xsmall" variant="secondary" appearance="border">Decline</Button></>}
+                      />
+                    </NotificationList>
+                  </TabsContent>
+                  <TabsContent value="unread" className="min-h-0 overflow-y-auto">
+                    <NotificationList>
+                      <NotificationItem unread href="#notifications" avatar={<Avatar size="small" name="Studio Kit" alt="" />} title={<><strong>Studio Kit</strong> launched a new feature in Projects</>} time="Just now" />
+                    </NotificationList>
+                  </TabsContent>
+                  <NotificationsFooter><Button size="small" variant="secondary" appearance="ghost">Show more</Button></NotificationsFooter>
+                </Tabs>
+              </NotificationsContent>
+            </Notifications>
+          </PreviewFrame>
         </SubBlock>
       </ComponentSection>
 

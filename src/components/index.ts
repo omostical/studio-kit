@@ -22,3 +22,4 @@ export * from "./SidePanel";
 export * from "./Popup";
 export * from "./StatusModal";
 export * from "./SystemAlert";
+export * from "./Notifications";

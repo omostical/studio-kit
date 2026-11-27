@@ -223,7 +223,8 @@
   {
     "id": "10785:99185",
     "name": "Notifications",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Notifications",
     "file": "notifications.md"
   },
   {

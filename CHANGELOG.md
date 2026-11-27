@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Notifications): activity panel on Radix Popover composed from Avatar, Tabs and Button, with unread rows, group labels, quoted content and row actions — Notifications was planned in the catalog (batch 4 overlays)
+
 - create(SystemAlert): full-width app banner, 5 statuses in high and low emphasis, with one action and dismiss — System Alert was planned in the catalog (batch 4 overlays)
 
 - create(StatusModal): result or confirmation dialog on Modal with a status icon and tinted wash, 5 types, vertical and horizontal — Status Modal was planned in the catalog (batch 4 overlays)

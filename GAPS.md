@@ -19,8 +19,9 @@ line to `CHANGELOG.md`.
 - Toast warning status: a warning-level confirmation (e.g. "Saved, but 2 rows were skipped") — needed by the Phase 3 re-test
 - Side Panel keyboard footer: the Details/Task footer of keyboard hints ("Navigate", "Return to parent", "Close") — needed by `src/components/SidePanel/SidePanel.tsx`; the panel has no keyboard navigation between items to hint at yet
 - Side Panel task header: the Task type's 64px action bar above the title and its progress tracker (Form type) — needed by `src/components/SidePanel/SidePanel.tsx`; compose with Button/IconButton in the header children until then
+- Notifications unread dot colour: Figma binds the 6px unread dot to the primitive `Colors/Light/Blue/600`, not a semantic variable — needed by `src/components/Notifications/Notifications.tsx`; code uses `Dynamic/Fill/Primary/Default` until Figma binds a semantic token
 
 ## Tokens
 
-- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460), Dropdown Menu (320), Side Panel (560, 704, 960) and Pop-up (492) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx`, `src/components/SidePanel/SidePanel.tsx`, `src/components/Popup/Popup.tsx` (recorded as `token-lint-ignore` exceptions)
+- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460), Dropdown Menu (320), Side Panel (560, 704, 960), Pop-up (492) and Notifications (420) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx`, `src/components/SidePanel/SidePanel.tsx`, `src/components/Popup/Popup.tsx`, `src/components/Notifications/Notifications.tsx` (recorded as `token-lint-ignore` exceptions)
 - Layer order: a z-index scale so toasts sit above modals — needed by `src/components/Toast/Toast.tsx` (`z-[60]` exception)

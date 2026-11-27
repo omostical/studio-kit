@@ -40,6 +40,7 @@ export const componentGroups: DocGroup[] = [
       { slug: "side-panel", title: "Side Panel" },
       { slug: "popup", title: "Pop-up" },
       { slug: "status-modal", title: "Status Modal" },
+      { slug: "notifications", title: "Notifications" },
     ],
   },
   {
