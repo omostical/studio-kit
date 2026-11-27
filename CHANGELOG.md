@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Chip): toggle (aria-pressed, check when pressed) and removable ("Remove <value>" button) chips in Primary/Secondary, filled/border, three sizes, with icon/logo/avatar prefix — batch 2 of the StudioKIT 2.0 catalog
+
 - create(LinkButton): text-only link-style action in five variants and two sizes with prefix/suffix icons; `asChild` renders a real link — its own component because Figma gives it no fill, height or Style; batch 2 of the StudioKIT 2.0 catalog
 
 - create(Thumbnail): file-type, image, logo, icon and text previews in five sizes with the Figma radius steps (Control/sm, md, lg) — answers the thumbnail-radius question (audit question 14); batch 2 of the StudioKIT 2.0 catalog

@@ -109,7 +109,8 @@
   {
     "id": "557:80335",
     "name": "Chip",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Chip",
     "file": "chip.md"
   },
   {

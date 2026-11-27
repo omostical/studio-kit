@@ -34,6 +34,7 @@ import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
 import { LinkButton } from "@/components/LinkButton";
+import { Chip } from "@/components/Chip";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -80,6 +81,25 @@ function ToastDemo() {
 
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
+function ChipDemo() {
+  const [filters, setFilters] = useState<Record<string, boolean>>({ Paid: true, Pending: false, Failed: false });
+  const [tags, setTags] = useState(["Design", "Research", "Billing"]);
+  return (
+    <div className="grid gap-gap-9">
+      <div className="flex flex-wrap gap-gap-5" role="group" aria-label="Filter by status">
+        {Object.keys(filters).map((k) => (
+          <Chip key={k} pressed={filters[k]} onPressedChange={(p) => setFilters({ ...filters, [k]: p })}>{k}</Chip>
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-gap-5">
+        {tags.map((t) => (
+          <Chip key={t} appearance="border" onRemove={() => setTags(tags.filter((x) => x !== t))}>{t}</Chip>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ComponentSection({
   id,
   eyebrow,
@@ -836,6 +856,29 @@ export default function ComponentsPage() {
             <LinkButton variant="success" prefixIcon={<Plus />}>Add address</LinkButton>
             <LinkButton size="large">View invoice</LinkButton>
             <LinkButton disabled>Resend code</LinkButton>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Chip ────────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="chip"
+        eyebrow="Data display / 07"
+        title="Chip"
+        description="Figma Chip: Variant × Style × Size, with a prefix and a remove ×. Filter chips toggle (aria-pressed); input chips have a Remove button. Use Tag for read-only labels."
+      >
+        <SubBlock id="chip-kinds" title="Filter and removable">
+          <PreviewFrame>
+            <ChipDemo />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="chip-sizes" title="Sizes and styles">
+          <PreviewFrame>
+            <Chip size="small">Small</Chip>
+            <Chip>Medium</Chip>
+            <Chip size="large" prefix={<Search />}>Large</Chip>
+            <Chip variant="primary" appearance="border">Border</Chip>
+            <Chip disabled>Disabled</Chip>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
