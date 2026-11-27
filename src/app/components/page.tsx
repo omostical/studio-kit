@@ -30,6 +30,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
+import { Pagination, type PaginationType } from "@/components/Pagination";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -77,6 +78,25 @@ function ToastDemo() {
 
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
+function PaginationDemo({ type, pageCount }: { type: PaginationType; pageCount: number }) {
+  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState(10);
+  return (
+    <Pagination
+      className="w-full"
+      type={type}
+      page={page}
+      pageCount={pageCount}
+      onPageChange={setPage}
+      rowsPerPage={rows}
+      onRowsPerPageChange={(n) => {
+        setRows(n);
+        setPage(1);
+      }}
+    />
+  );
+}
+
 function ComponentSection({
   id,
   eyebrow,
@@ -773,6 +793,24 @@ export default function ComponentsPage() {
                 </BreadcrumbItem>
               ))}
             </Breadcrumbs>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Pagination ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="pagination"
+        eyebrow="Navigation / 03"
+        title="Pagination"
+        description="Figma Pagination: Less numbers (5 slots), More numbers (9 slots) or Overflow (a page picker), with an optional Rows per page control. Page buttons are named “Page 3”; the current one has aria-current."
+      >
+        <SubBlock id="pagination-types" title="Type">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <PaginationDemo type="less-numbers" pageCount={5} />
+              <PaginationDemo type="more-numbers" pageCount={99} />
+              <PaginationDemo type="overflow" pageCount={45} />
+            </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

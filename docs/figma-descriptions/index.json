@@ -230,7 +230,8 @@
   {
     "id": "2646:12655",
     "name": "Pagination",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Pagination",
     "file": "pagination.md"
   },
   {

@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Pagination): page controls for long lists and tables, in `<nav aria-label="Pagination">` — less-numbers (5 slots), more-numbers (9 slots, "…" for gaps) and overflow (Prev / page Select / Next) types, optional Rows per page Select — batch 3 (navigation) of the Figma components
+
 - create(Breadcrumbs): trail from the top level to the current page, on `<nav aria-label="Breadcrumb">` and an ordered list — arrow or slash separators, icon root item, current page with `aria-current`, middle levels collapse into a "…" button — batch 3 (navigation) of the Figma components
 
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions
