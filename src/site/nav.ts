@@ -8,6 +8,7 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "button", title: "Button" },
       { slug: "icon-button", title: "Icon Button" },
+      { slug: "link-button", title: "Link Button" },
     ],
   },
   {

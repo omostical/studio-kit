@@ -21,3 +21,4 @@ export * from "./Table";
 export * from "./Divider";
 export * from "./ProgressBar";
 export * from "./Thumbnail";
+export * from "./LinkButton";

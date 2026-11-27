@@ -15,7 +15,8 @@
   {
     "id": "557:15154",
     "name": "Link Button",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/LinkButton",
     "file": "link-button.md"
   },
   {

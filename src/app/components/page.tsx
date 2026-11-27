@@ -33,6 +33,7 @@ import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateC
 import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
+import { LinkButton } from "@/components/LinkButton";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -816,6 +817,25 @@ export default function ComponentsPage() {
             {(["xsmall", "small", "medium", "large", "xlarge"] as const).map((size) => (
               <Thumbnail key={size} size={size} src="/avatars/sample-team.svg" alt={`Team photo, ${size}`} />
             ))}
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Link Button ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="link-button"
+        eyebrow="Actions / 03"
+        title="Link Button"
+        description="Figma Link Button: Variant × Size (small · large). Its own component, not a Button style. Navigation renders a link with asChild; in-page actions render a button."
+      >
+        <SubBlock id="link-button-variants" title="Variants and sizes">
+          <PreviewFrame>
+            <LinkButton asChild suffixIcon={<ArrowRight />}><a href="#link-button">View all</a></LinkButton>
+            <LinkButton variant="secondary">Forgot your password?</LinkButton>
+            <LinkButton variant="danger">Remove card</LinkButton>
+            <LinkButton variant="success" prefixIcon={<Plus />}>Add address</LinkButton>
+            <LinkButton size="large">View invoice</LinkButton>
+            <LinkButton disabled>Resend code</LinkButton>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
