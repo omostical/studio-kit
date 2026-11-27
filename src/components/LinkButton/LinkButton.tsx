@@ -48,7 +48,6 @@ export interface LinkButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 /** A text-only action styled as a link (Figma Link Button). Use it to go somewhere; use Button to change data. */
 const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
   ({ className, variant = "primary", size = "small", prefixIcon, suffixIcon, asChild = false, disabled, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
     const classes = cn(
       "inline-flex w-fit items-center gap-gap-5 whitespace-nowrap rounded-control-sm px-gap-5 py-gap-3 transition-[color,background-color,box-shadow] duration-150 focus-visible:outline-none disabled:pointer-events-none aria-disabled:pointer-events-none [&_svg]:size-size-9 [&_svg]:shrink-0",
       size === "large" ? "type-label-strong-medium" : "type-label-strong-small",
@@ -56,24 +55,24 @@ const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
       controlFocus[variant],
       className
     );
-    const icons = (
-      <>
-        {prefixIcon != null && <span aria-hidden="true" className="inline-flex">{prefixIcon}</span>}
-        <Slottable>{children}</Slottable>
-        {suffixIcon != null && <span aria-hidden="true" className="inline-flex">{suffixIcon}</span>}
-      </>
-    );
+    const prefix = prefixIcon != null && <span aria-hidden="true" className="inline-flex">{prefixIcon}</span>;
+    const suffix = suffixIcon != null && <span aria-hidden="true" className="inline-flex">{suffixIcon}</span>;
     if (asChild) {
+      // Slottable must be a direct child of Slot, so the icons sit beside it, not inside a fragment.
       return (
-        <Comp ref={ref} className={classes} aria-disabled={disabled || undefined} {...props}>
-          {icons}
-        </Comp>
+        <Slot ref={ref} className={classes} aria-disabled={disabled || undefined} {...props}>
+          {prefix}
+          <Slottable>{children}</Slottable>
+          {suffix}
+        </Slot>
       );
     }
     return (
-      <Comp ref={ref} type="button" className={classes} disabled={disabled} {...props}>
-        {icons}
-      </Comp>
+      <button ref={ref} type="button" className={classes} disabled={disabled} {...props}>
+        {prefix}
+        {children}
+        {suffix}
+      </button>
     );
   }
 );

@@ -10,7 +10,7 @@ import type { AvatarProps } from "@/components/Avatar/Avatar";
  * Overlapping avatars for a set of people, with a "+N" counter. Built on Avatar (rounded).
  * Figma property → prop:  Layout → layout (row · grid) · Size → size (xsmall 20 · small 24 · medium 32 · large 40) ·
  * More People → shown automatically when there are more people than `max`.
- * Row: avatars overlap by 6px (Gap/4), each with a 2px ring (3px at large; Figma Border Width/md, lg). Figma binds
+ * Row: avatars overlap by 6px (Gap/4), each with a 2px ring (3px at large; Figma Border Width/md, lg) drawn outside the avatar, as an outline. Figma binds
  * the ring width but gives it no colour, so code draws it in Static/Fill/Container (the card surface).
  * Grid: 2 × 2, Gap/3 apart, no ring.
  * Counter: Dynamic/Fill/Secondary/Alpha/Strong/Default, Static/Text/Base, Caption/Strong/Small (xsmall, small),
@@ -26,10 +26,10 @@ const circle: Record<AvatarGroupSize, string> = {
   large: "size-size-16 type-label-strong-small",
 };
 const ring: Record<AvatarGroupSize, string> = {
-  xsmall: "border-2 border-static-fill-container",
-  small: "border-2 border-static-fill-container",
-  medium: "border-2 border-static-fill-container",
-  large: "border-3 border-static-fill-container",
+  xsmall: "outline-2 outline-static-fill-container",
+  small: "outline-2 outline-static-fill-container",
+  medium: "outline-2 outline-static-fill-container",
+  large: "outline-3 outline-static-fill-container",
 };
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
