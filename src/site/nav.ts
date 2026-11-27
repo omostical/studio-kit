@@ -19,6 +19,7 @@ export const componentGroups: DocGroup[] = [
       { slug: "switch", title: "Switch" },
       { slug: "radio-button", title: "Radio Button" },
       { slug: "radio-group", title: "Radio Group" },
+      { slug: "text-area", title: "Text Area" },
     ],
   },
   {

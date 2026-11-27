@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(TextArea): multi-line field on the Input field shell — label, optional, helper text, error, three sizes, resizable — closes the Textarea gap; batch 1 of the StudioKIT 2.0 form components
+
 - create(RadioGroup): labelled set of RadioButtons on Radix Radio Group — vertical/horizontal, label, optional, helper text, error that turns options Danger; adds the shared FieldGroupShell — batch 1 of the StudioKIT 2.0 form components
 
 - create(RadioButton): one pick-one option on Radix Radio Group — label, description, large and small, danger, disabled — batch 1 of the StudioKIT 2.0 form components

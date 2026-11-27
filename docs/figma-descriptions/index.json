@@ -381,7 +381,8 @@
   {
     "id": "557:82344",
     "name": "Text Area",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/TextArea",
     "file": "text-area.md"
   },
   {

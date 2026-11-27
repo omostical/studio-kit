@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { TextArea } from "@/components/TextArea";
 import { RadioButton } from "@/components/RadioButton";
 import { RadioGroup } from "@/components/RadioGroup";
 import {
@@ -440,6 +441,25 @@ export default function ComponentsPage() {
                 <RadioButton value="10" label="2–10" />
                 <RadioButton value="50" label="11–50" />
               </RadioGroup>
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Text Area ──────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="text-area"
+        eyebrow="Form / 07"
+        title="Text Area"
+        description="Multi-line text with the same label, helper text and error as Input. Size it with rows; people can drag it taller."
+      >
+        <SubBlock id="text-area-states" title="States and sizes">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9 sm:grid-cols-2">
+              <TextArea label="Message" placeholder="Tell us what happened" helperText="Up to 500 characters." />
+              <TextArea label="Note" optional defaultValue="Delivered to the side door." size="small" />
+              <TextArea label="Description" error="Describe the problem so we can reproduce it." />
+              <TextArea label="Disabled" disabled defaultValue="Read-only note" size="large" />
             </div>
           </PreviewFrame>
         </SubBlock>

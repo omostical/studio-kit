@@ -14,7 +14,8 @@ line to `CHANGELOG.md`.
 - Avatar Orb: the animated gradient orb variant of Avatar (Figma `Variant=Orb`, e.g. an AI assistant) — needed by `src/components/Avatar/Avatar.tsx`; Figma builds it from images and blurs, with no tokens
 - Dropdown Menu search: the Figma Search, Select All and Create slots of Dropdown Menu (Type=Selection) — needed by `src/components/DropdownMenu/DropdownMenu.tsx`; long option lists use Select until then
 - Menu Item progress: the Figma Progress menu-item type (an item with a progress bar) — needed by `src/components/DropdownMenu/DropdownMenu.tsx`
-- Textarea: multi-line text field with label, helper text and error — needed by any form with a message or note field. Catalog: `planned`
+- Text Area formatting bar: the Figma Formatting Bar slot of Text Area (bold, italic, lists, links, undo) — needed by `src/components/TextArea/TextArea.tsx`; rich text needs an editor, not a textarea
+- Text Area character count: a live count against a limit, announced near the limit (catalog usage) — needed by `src/components/TextArea/TextArea.tsx`; not in the Figma component yet
 - Select clear option: reset a filter Select back to "All" without picking a value — needed by the Phase 3 re-test filters
 - Toast warning status: a warning-level confirmation (e.g. "Saved, but 2 rows were skipped") — needed by the Phase 3 re-test
 

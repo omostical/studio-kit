@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -63,6 +63,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `IconButton` | Compact well-known actions (close, edit, more) | same as Button + `icon`, required `aria-label`; defaults secondary + ghost |
 | `DropdownMenu` + `DropdownMenuTrigger/Content/Item/CheckboxItem/RadioGroup/RadioItem/Label/Separator/Sub*` | Several actions behind one button (row "More", user menu) | `DropdownMenuTrigger asChild` around an `IconButton`/`Button` · `DropdownMenuItem icon description shortcut variant` default·danger (danger last) · radio/checkbox items for options |
 | `Input` | Single-line text field | `label` `helperText` `error` `optional` `prefix` `suffix` (icons or text) · `size` small·medium·large · `appearance` border·ghost · `wrapperClassName` (sizes the whole field; `className` styles the input) |
+| `TextArea` | Multi-line text field (message, note, description) | same field props as Input · `rows` (default 3) `resizable` · `size` small·medium·large |
 | `Select` + `SelectItem` | Pick one value in a form | same field props as Input; `value`/`onValueChange` |
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
 | `RadioButton` | One option of a pick-one set (always inside `RadioGroup`) | `value` `label` `description` · `size` small·large · `variant` primary·danger · `disabled` |
