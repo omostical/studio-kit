@@ -10,13 +10,6 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
-import { Search as SearchField } from "@/components/Search";
-import { Slider } from "@/components/Slider";
-import { SegmentedControl, SegmentedControlItem } from "@/components/SegmentedControl";
-import { CheckboxGroup } from "@/components/CheckboxGroup";
-import { TextArea } from "@/components/TextArea";
-import { RadioButton } from "@/components/RadioButton";
-import { RadioGroup } from "@/components/RadioGroup";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -36,7 +29,15 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home, BarChart3, Bell, Settings } from "lucide-react";
+import { Search, ArrowRight, BarChart3, Bell, Copy, Download, Eye, Folder, Home, LayoutGrid, List, Mail, MoreHorizontal, Pencil, Plus, RotateCcw, Settings, Trash2, X } from "lucide-react";
+import { PreviewFrame } from "@/site/PreviewFrame";
+import { Search as SearchField } from "@/components/Search";
+import { Slider } from "@/components/Slider";
+import { SegmentedControl, SegmentedControlItem } from "@/components/SegmentedControl";
+import { CheckboxGroup } from "@/components/CheckboxGroup";
+import { TextArea } from "@/components/TextArea";
+import { RadioButton } from "@/components/RadioButton";
+import { RadioGroup } from "@/components/RadioGroup";
 import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
@@ -53,7 +54,6 @@ import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, 
 import { StatusModal, StatusModalTrigger, StatusModalClose, StatusModalContent } from "@/components/StatusModal";
 import { SystemAlert, type SystemAlertStatus } from "@/components/SystemAlert";
 import { Notifications, NotificationsTrigger, NotificationsContent, NotificationsHeader, NotificationsToolbar, NotificationList, NotificationItem, NotificationGroupLabel, NotificationsFooter } from "@/components/Notifications";
-import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
 const appearances = ["filled", "border", "ghost"] as const;
@@ -98,7 +98,6 @@ function ToastDemo() {
 }
 
 
-// ─── Reusable doc section header ──────────────────────────────────────────────
 function ChipDemo() {
   const [filters, setFilters] = useState<Record<string, boolean>>({ Paid: true, Pending: false, Failed: false });
   const [tags, setTags] = useState(["Design", "Research", "Billing"]);
@@ -115,6 +114,9 @@ function ChipDemo() {
         ))}
       </div>
     </div>
+  );
+}
+
 function PaginationDemo({ type, pageCount }: { type: PaginationType; pageCount: number }) {
   const [page, setPage] = useState(1);
   const [rows, setRows] = useState(10);
@@ -134,6 +136,7 @@ function PaginationDemo({ type, pageCount }: { type: PaginationType; pageCount: 
   );
 }
 
+// ─── Reusable doc section header ──────────────────────────────────────────────
 function ComponentSection({
   id,
   eyebrow,
@@ -353,6 +356,41 @@ export default function ComponentsPage() {
             {sizes4.map((size) => (
               <IconButton key={size} size={size} appearance="border" icon={<X />} aria-label={`Close (${size})`} />
             ))}
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Link Button ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="link-button"
+        eyebrow="Actions / 03"
+        title="Link Button"
+        description="Figma Link Button: Variant × Size (small · large). Its own component, not a Button style. Navigation renders a link with asChild; in-page actions render a button."
+      >
+        <SubBlock id="link-button-variants" title="Variants and sizes">
+          <PreviewFrame>
+            <LinkButton asChild suffixIcon={<ArrowRight />}><a href="#link-button">View all</a></LinkButton>
+            <LinkButton variant="secondary">Forgot your password?</LinkButton>
+            <LinkButton variant="danger">Remove card</LinkButton>
+            <LinkButton variant="success" prefixIcon={<Plus />}>Add address</LinkButton>
+            <LinkButton size="large">View invoice</LinkButton>
+            <LinkButton disabled>Resend code</LinkButton>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Split Button ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="split-button"
+        eyebrow="Actions / 04"
+        title="Split Button"
+        description="Figma Split Button: Variant × Style (filled · border) × Size. The main part runs the common action; the arrow opens a menu of related alternatives."
+      >
+        <SubBlock id="split-button-variants" title="Styles and sizes">
+          <PreviewFrame>
+            <SplitButton menuLabel="More save options" menu={<><DropdownMenuItem>Save as draft</DropdownMenuItem><DropdownMenuItem>Save and duplicate</DropdownMenuItem></>}>Save</SplitButton>
+            <SplitButton variant="secondary" appearance="border" size="small" prefixIcon={<Download />} menuLabel="More export options" menu={<><DropdownMenuItem>Export as PDF</DropdownMenuItem><DropdownMenuItem>Export as CSV</DropdownMenuItem></>}>Export</SplitButton>
+            <SplitButton variant="secondary" size="large" menuLabel="More send options" menu={<DropdownMenuItem>Schedule send</DropdownMenuItem>}>Send</SplitButton>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
@@ -637,119 +675,79 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── Avatar ─────────────────────────────────────────────────────────── */}
+      {/* ─── System Alert ───────────────────────────────────────────────────── */}
       <ComponentSection
-        id="avatar"
-        eyebrow="Data display / 01"
-        title="Avatar"
-        description="Figma Avatar: Variant (image · initials · icon) × Type (rounded for people, square for organisations) × Size × Selected × Status. Leave variant unset: photo, then initials, then icon."
+        id="system-alert"
+        eyebrow="Feedback / 02"
+        title="System Alert"
+        description="Figma System Alert: a full-width banner about the whole app or account, above the page header. Use Alert for messages about one part of the page."
       >
-        <SubBlock id="avatar-variants" title="Variants and type">
-          <PreviewFrame>
-            <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
-            <Avatar name="Ada Lovelace" />
-            <Avatar alt="Unknown member" />
-            <Avatar type="square" src="/avatars/sample-team.svg" name="Northwind" />
-            <Avatar type="square" name="Northwind Traders" />
-            <Avatar type="square" alt="Workspace" />
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="avatar-sizes" title="Sizes, status and selected">
-          <PreviewFrame>
-            {(["xsmall", "small", "medium", "large", "xlarge", "xxlarge"] as const).map((size) => (
-              <Avatar key={size} size={size} name="Grace Hopper" status />
-            ))}
-            <Avatar size="large" src="/avatars/sample-person.svg" name="Ada Lovelace" selected />
-          </PreviewFrame>
+        <SubBlock id="system-alert-statuses" title="Status × Emphasis">
+          <div className="flex flex-col gap-gap-5 overflow-hidden rounded-container-md">
+            {(["high", "low"] as const).flatMap((emphasis) =>
+              (["danger", "warning", "success", "info", "neutral"] as SystemAlertStatus[]).map((status) => (
+                <SystemAlert
+                  key={emphasis + status}
+                  status={status}
+                  emphasis={emphasis}
+                  message={status === "danger" ? "Payment failed. Update your card to keep your projects." : status === "warning" ? "Your trial ends in 3 days." : status === "success" ? "Your workspace is back online." : status === "info" ? "Maintenance on Sunday 02:00–04:00 UTC." : "You're viewing a shared workspace."}
+                  actionLabel={status === "danger" ? "Update card" : "Learn more"}
+                  dismissible={status !== "danger"}
+                />
+              ))
+            )}
+          </div>
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── Badge ──────────────────────────────────────────────────────────── */}
+      {/* ─── Toast ──────────────────────────────────────────────────────────── */}
       <ComponentSection
-        id="badge"
-        eyebrow="Data display / 02"
-        title="Badge"
-        description="Figma Status Badge: Status × Emphasis (low · high) × Shape × Size. For categories, use Tag."
+        id="toast"
+        eyebrow="Feedback / 03"
+        title="Toast"
+        description="Figma Toast: a short message after an action, with one action at most. Wrap the app in ToastProvider and call useToast().show()."
       >
-        <SubBlock id="badge-variants" title="Status × Emphasis">
-          <PreviewFrame align="start">
-            <div className="grid gap-gap-7">
-              {(["low", "high"] as const).map((emphasis) => (
-                <div key={emphasis} className="flex flex-wrap gap-gap-5">
-                  {badgeStatuses.map((status) => (
-                    <Badge key={status} status={status} emphasis={emphasis}>{cap(status)}</Badge>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="badge-sizes" title="Sizes and shape">
-          <PreviewFrame>
-            <Badge size="small" status="info">Small</Badge>
-            <Badge size="medium" status="info">Medium</Badge>
-            <Badge size="large" status="info">Large</Badge>
-            <Badge size="medium" status="info" shape="square">Square</Badge>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ─── Tag ────────────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="tag"
-        eyebrow="Data display / 03"
-        title="Tag"
-        description="Figma Tag: 13 category colours × Emphasis (filled · border) × Size × Rounded. Colours mean categories, never status."
-      >
-        <SubBlock id="tag-types" title="Colours">
-          <PreviewFrame align="start">
-            <div className="grid gap-gap-7">
-              {(["filled", "border"] as const).map((emphasis) => (
-                <div key={emphasis} className="flex flex-wrap gap-gap-5">
-                  {tagColors.map((color) => (
-                    <Tag key={color} color={color} emphasis={emphasis}>{cap(color)}</Tag>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="tag-sizes" title="Sizes">
-          <PreviewFrame>
-            <Tag size="small">Small</Tag>
-            <Tag size="medium">Medium</Tag>
-            <Tag size="large">Large</Tag>
-            <Tag size="medium" rounded>Rounded</Tag>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="tag-dark" title="Dark mode">
-          <PreviewFrame dark align="start">
-            <div className="flex flex-wrap gap-gap-5">
-              {tagColors.map((color) => (
-                <Tag key={color} color={color}>{cap(color)}</Tag>
-              ))}
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ─── Typography ─────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="typography"
-        eyebrow="Data display / 04"
-        title="Typography"
-        description="The Figma text styles, generated from the Typography variables. variant = style name in kebab case."
-      >
-        <SubBlock id="type-scale" title="Text styles">
+        <SubBlock id="toast-variants" title="Emphasis and status">
           <PreviewFrame align="start">
             <div className="grid w-full gap-gap-7">
-              {typeSamples.map((v) => (
-                <div key={v} className="grid grid-cols-[180px_1fr] items-baseline gap-gap-9">
-                  <Typography variant="caption-medium" tone="subtle">{v}</Typography>
-                  <Typography variant={v}>Design systems at scale</Typography>
-                </div>
-              ))}
+              <Toast status="positive" title="Changes saved" actionLabel="Undo" />
+              <Toast status="neutral" title="Message archived" />
+              <Toast status="error" title="Couldn't upload report.pdf" actionLabel="Retry" />
+              <Toast emphasis="low" status="info" title="New version available" description="Reload to get the latest changes." actionLabel="Reload" />
             </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="toast-live" title="Live">
+          <PreviewFrame>
+            <ToastProvider>
+              <ToastDemo />
+            </ToastProvider>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Progress Bar ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-bar"
+        eyebrow="Feedback / 04"
+        title="Progress Bar"
+        description="Figma Progress Bar: Type (line · circle) × Progress, plus Success and Error end states. The value is always shown as text too."
+      >
+        <SubBlock id="progress-bar-line" title="Line">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-11">
+              <ProgressBar label="Uploading report.pdf" value={60} description="2 of 5 files" />
+              <ProgressBar label="Uploading report.pdf" status="success" description="All 5 files uploaded" />
+              <ProgressBar label="Uploading report.pdf" value={50} status="danger" description="Upload stopped. Check your connection, then try again." />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-bar-circle" title="Circle">
+          <PreviewFrame>
+            <ProgressBar type="circle" label="Profile setup" value={30} />
+            <ProgressBar type="circle" label="Profile setup" value={80} />
+            <ProgressBar type="circle" label="Profile setup" status="success" />
+            <ProgressBar type="circle" label="Profile setup" status="danger" />
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
@@ -780,6 +778,115 @@ export default function ComponentsPage() {
             </div>
           </PreviewFrame>
         </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Breadcrumbs ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="breadcrumbs"
+        eyebrow="Navigation / 02"
+        title="Breadcrumbs"
+        description="Figma Breadcrumbs and Breadcrumb Item: the trail from the top level to the current page. The last item is the current page (not a link); long trails collapse the middle into a … button."
+      >
+        <SubBlock id="breadcrumbs-separators" title="Separator">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {(["arrow", "slash"] as const).map((separator) => (
+                <Breadcrumbs key={separator} separator={separator}>
+                  <BreadcrumbItem href="#breadcrumbs" icon={<Folder />}>Projects</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Website redesign</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Assets</BreadcrumbItem>
+                  <BreadcrumbItem>Logo files</BreadcrumbItem>
+                </Breadcrumbs>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="breadcrumbs-collapsed" title="Long trail">
+          <PreviewFrame align="start">
+            <Breadcrumbs>
+              {["Workspace", "Projects", "Website redesign", "Assets", "Brand", "Logo files"].map((label, i, all) => (
+                <BreadcrumbItem key={label} href={i < all.length - 1 ? "#breadcrumbs" : undefined} icon={i === 0 ? <Home /> : undefined}>
+                  {label}
+                </BreadcrumbItem>
+              ))}
+            </Breadcrumbs>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Pagination ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="pagination"
+        eyebrow="Navigation / 03"
+        title="Pagination"
+        description="Figma Pagination: Less numbers (5 slots), More numbers (9 slots) or Overflow (a page picker), with an optional Rows per page control. Page buttons are named “Page 3”; the current one has aria-current."
+      >
+        <SubBlock id="pagination-types" title="Type">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <PaginationDemo type="less-numbers" pageCount={5} />
+              <PaginationDemo type="more-numbers" pageCount={99} />
+              <PaginationDemo type="overflow" pageCount={45} />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Progress Stepper ───────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-stepper"
+        eyebrow="Navigation / 04"
+        title="Progress Stepper"
+        description="Figma Progress Stepper: the steps of a flow as an ordered list. The current step has aria-current=“step”; each step says its state in text. Completed steps can link back."
+      >
+        <SubBlock id="progress-stepper-horizontal" title="Horizontal">
+          <PreviewFrame align="start">
+            <ProgressStepper className="max-w-full">
+              <ProgressStep type="completed" label="Account" href="#progress-stepper" />
+              <ProgressStep type="active" label="Plan" />
+              <ProgressStep label="Billing" />
+              <ProgressStep label="Team" />
+              <ProgressStep label="Review" />
+            </ProgressStepper>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-stepper-vertical" title="Vertical, with a step to fix">
+          <PreviewFrame align="start">
+            <ProgressStepper position="vertical" className="w-full max-w-sm">
+              <ProgressStep type="completed" label="Account" description="ada@example.com" href="#progress-stepper" />
+              <ProgressStep type="danger" label="Billing" description="Add a payment method to continue" href="#progress-stepper" />
+              <ProgressStep type="active" label="Team" />
+              <ProgressStep label="Review" disabled />
+            </ProgressStepper>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Accordion ──────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="accordion"
+        eyebrow="Navigation / 05"
+        title="Accordion"
+        description="Figma Accordion and Accordion Group: headings that expand a section. Each heading is a button with aria-expanded; Enter and Space toggle, arrow keys move between headings."
+      >
+        {[true, false].map((contained) => (
+          <SubBlock key={String(contained)} id={contained ? "accordion-contained" : "accordion-dividers"} title={contained ? "Contained" : "Dividers"}>
+            <PreviewFrame align="start">
+              <AccordionGroup contained={contained} className="w-full max-w-md" defaultValue={contained ? ["breathe"] : []}>
+                <Accordion value="breathe" title="Quick way to de-stress in 2 minutes?" icon={<BarChart3 />}>
+                  Breathe in for 4 seconds, hold for 4, breathe out for 4, hold for 4. Do it 4 times.
+                  <Button variant="secondary" size="small">Start a timer</Button>
+                </Accordion>
+                <Accordion value="plan" title="Can I change my plan later?" icon={<BarChart3 />}>
+                  Yes. Plan changes apply from your next billing date.
+                </Accordion>
+                <Accordion value="advanced" title="Advanced settings" icon={<BarChart3 />} disabled>
+                  Not available on your plan.
+                </Accordion>
+              </AccordionGroup>
+            </PreviewFrame>
+          </SubBlock>
+        ))}
       </ComponentSection>
 
       {/* ─── Modal ──────────────────────────────────────────────────────────── */}
@@ -996,31 +1103,6 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── System Alert ───────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="system-alert"
-        eyebrow="Feedback / 03"
-        title="System Alert"
-        description="Figma System Alert: a full-width banner about the whole app or account, above the page header. Use Alert for messages about one part of the page."
-      >
-        <SubBlock id="system-alert-statuses" title="Status × Emphasis">
-          <div className="flex flex-col gap-gap-5 overflow-hidden rounded-container-md">
-            {(["high", "low"] as const).flatMap((emphasis) =>
-              (["danger", "warning", "success", "info", "neutral"] as SystemAlertStatus[]).map((status) => (
-                <SystemAlert
-                  key={emphasis + status}
-                  status={status}
-                  emphasis={emphasis}
-                  message={status === "danger" ? "Payment failed. Update your card to keep your projects." : status === "warning" ? "Your trial ends in 3 days." : status === "success" ? "Your workspace is back online." : status === "info" ? "Maintenance on Sunday 02:00–04:00 UTC." : "You're viewing a shared workspace."}
-                  actionLabel={status === "danger" ? "Update card" : "Learn more"}
-                  dismissible={status !== "danger"}
-                />
-              ))
-            )}
-          </div>
-        </SubBlock>
-      </ComponentSection>
-
       {/* ─── Notifications ──────────────────────────────────────────────────── */}
       <ComponentSection
         id="notifications"
@@ -1071,28 +1153,119 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── Toast ──────────────────────────────────────────────────────────── */}
+      {/* ─── Avatar ─────────────────────────────────────────────────────────── */}
       <ComponentSection
-        id="toast"
-        eyebrow="Feedback / 02"
-        title="Toast"
-        description="Figma Toast: a short message after an action, with one action at most. Wrap the app in ToastProvider and call useToast().show()."
+        id="avatar"
+        eyebrow="Data display / 01"
+        title="Avatar"
+        description="Figma Avatar: Variant (image · initials · icon) × Type (rounded for people, square for organisations) × Size × Selected × Status. Leave variant unset: photo, then initials, then icon."
       >
-        <SubBlock id="toast-variants" title="Emphasis and status">
+        <SubBlock id="avatar-variants" title="Variants and type">
+          <PreviewFrame>
+            <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+            <Avatar name="Ada Lovelace" />
+            <Avatar alt="Unknown member" />
+            <Avatar type="square" src="/avatars/sample-team.svg" name="Northwind" />
+            <Avatar type="square" name="Northwind Traders" />
+            <Avatar type="square" alt="Workspace" />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="avatar-sizes" title="Sizes, status and selected">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large", "xlarge", "xxlarge"] as const).map((size) => (
+              <Avatar key={size} size={size} name="Grace Hopper" status />
+            ))}
+            <Avatar size="large" src="/avatars/sample-person.svg" name="Ada Lovelace" selected />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Badge ──────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="badge"
+        eyebrow="Data display / 02"
+        title="Badge"
+        description="Figma Status Badge: Status × Emphasis (low · high) × Shape × Size. For categories, use Tag."
+      >
+        <SubBlock id="badge-variants" title="Status × Emphasis">
           <PreviewFrame align="start">
-            <div className="grid w-full gap-gap-7">
-              <Toast status="positive" title="Changes saved" actionLabel="Undo" />
-              <Toast status="neutral" title="Message archived" />
-              <Toast status="error" title="Couldn't upload report.pdf" actionLabel="Retry" />
-              <Toast emphasis="low" status="info" title="New version available" description="Reload to get the latest changes." actionLabel="Reload" />
+            <div className="grid gap-gap-7">
+              {(["low", "high"] as const).map((emphasis) => (
+                <div key={emphasis} className="flex flex-wrap gap-gap-5">
+                  {badgeStatuses.map((status) => (
+                    <Badge key={status} status={status} emphasis={emphasis}>{cap(status)}</Badge>
+                  ))}
+                </div>
+              ))}
             </div>
           </PreviewFrame>
         </SubBlock>
-        <SubBlock id="toast-live" title="Live">
+        <SubBlock id="badge-sizes" title="Sizes and shape">
           <PreviewFrame>
-            <ToastProvider>
-              <ToastDemo />
-            </ToastProvider>
+            <Badge size="small" status="info">Small</Badge>
+            <Badge size="medium" status="info">Medium</Badge>
+            <Badge size="large" status="info">Large</Badge>
+            <Badge size="medium" status="info" shape="square">Square</Badge>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Tag ────────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="tag"
+        eyebrow="Data display / 03"
+        title="Tag"
+        description="Figma Tag: 13 category colours × Emphasis (filled · border) × Size × Rounded. Colours mean categories, never status."
+      >
+        <SubBlock id="tag-types" title="Colours">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {(["filled", "border"] as const).map((emphasis) => (
+                <div key={emphasis} className="flex flex-wrap gap-gap-5">
+                  {tagColors.map((color) => (
+                    <Tag key={color} color={color} emphasis={emphasis}>{cap(color)}</Tag>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="tag-sizes" title="Sizes">
+          <PreviewFrame>
+            <Tag size="small">Small</Tag>
+            <Tag size="medium">Medium</Tag>
+            <Tag size="large">Large</Tag>
+            <Tag size="medium" rounded>Rounded</Tag>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="tag-dark" title="Dark mode">
+          <PreviewFrame dark align="start">
+            <div className="flex flex-wrap gap-gap-5">
+              {tagColors.map((color) => (
+                <Tag key={color} color={color}>{cap(color)}</Tag>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Typography ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="typography"
+        eyebrow="Data display / 04"
+        title="Typography"
+        description="The Figma text styles, generated from the Typography variables. variant = style name in kebab case."
+      >
+        <SubBlock id="type-scale" title="Text styles">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-7">
+              {typeSamples.map((v) => (
+                <div key={v} className="grid grid-cols-[180px_1fr] items-baseline gap-gap-9">
+                  <Typography variant="caption-medium" tone="subtle">{v}</Typography>
+                  <Typography variant={v}>Design systems at scale</Typography>
+                </div>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
@@ -1136,157 +1309,6 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── Card ───────────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="card"
-        eyebrow="Layout / 01"
-        title="Card"
-        description="Figma Default Card. container={false} groups content without a box."
-      >
-        <SubBlock id="card-variants" title="With and without container">
-          <PreviewFrame align="start">
-            <div className="grid w-full grid-cols-1 gap-gap-12 md:grid-cols-2">
-              {[true, false].map((container) => (
-                <Card key={String(container)} container={container}>
-                  <CardHeader>
-                    <div>
-                      <CardTitle>Sign in</CardTitle>
-                      <CardDescription>Use your work email.</CardDescription>
-                    </div>
-                    <Badge status="info">Beta</Badge>
-                  </CardHeader>
-                  <CardContent className="grid gap-gap-11">
-                    <Input label="Email address" placeholder="e.g. hello@example.com" />
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="secondary" appearance="border">Cancel</Button>
-                    <Button>Sign in</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-      {/* ─── Divider ─────────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="divider"
-        eyebrow="Layout / 02"
-        title="Divider"
-        description="Figma Divider: Style (solid · dashed) × Weight (thin · default · bold) × Emphasis (base · strong · subtle), with an optional label. Use spacing first."
-      >
-        <SubBlock id="divider-variants" title="Weights, emphasis and labels">
-          <PreviewFrame align="start">
-            <div className="grid w-full gap-gap-9">
-              <Divider />
-              <Divider weight="default" emphasis="strong" />
-              <Divider appearance="dashed" weight="bold" emphasis="subtle" />
-              <Divider label="March" emphasis="subtle" />
-              <Divider label="March" labelPosition="left" />
-      {/* ─── Breadcrumbs ────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="breadcrumbs"
-        eyebrow="Navigation / 02"
-        title="Breadcrumbs"
-        description="Figma Breadcrumbs and Breadcrumb Item: the trail from the top level to the current page. The last item is the current page (not a link); long trails collapse the middle into a … button."
-      >
-        <SubBlock id="breadcrumbs-separators" title="Separator">
-          <PreviewFrame align="start">
-            <div className="grid gap-gap-7">
-              {(["arrow", "slash"] as const).map((separator) => (
-                <Breadcrumbs key={separator} separator={separator}>
-                  <BreadcrumbItem href="#breadcrumbs" icon={<Folder />}>Projects</BreadcrumbItem>
-                  <BreadcrumbItem href="#breadcrumbs">Website redesign</BreadcrumbItem>
-                  <BreadcrumbItem href="#breadcrumbs">Assets</BreadcrumbItem>
-                  <BreadcrumbItem>Logo files</BreadcrumbItem>
-                </Breadcrumbs>
-              ))}
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="breadcrumbs-collapsed" title="Long trail">
-          <PreviewFrame align="start">
-            <Breadcrumbs>
-              {["Workspace", "Projects", "Website redesign", "Assets", "Brand", "Logo files"].map((label, i, all) => (
-                <BreadcrumbItem key={label} href={i < all.length - 1 ? "#breadcrumbs" : undefined} icon={i === 0 ? <Home /> : undefined}>
-                  {label}
-                </BreadcrumbItem>
-              ))}
-            </Breadcrumbs>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ─── Pagination ─────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="pagination"
-        eyebrow="Navigation / 03"
-        title="Pagination"
-        description="Figma Pagination: Less numbers (5 slots), More numbers (9 slots) or Overflow (a page picker), with an optional Rows per page control. Page buttons are named “Page 3”; the current one has aria-current."
-      >
-        <SubBlock id="pagination-types" title="Type">
-          <PreviewFrame align="start">
-            <div className="grid w-full gap-gap-9">
-              <PaginationDemo type="less-numbers" pageCount={5} />
-              <PaginationDemo type="more-numbers" pageCount={99} />
-              <PaginationDemo type="overflow" pageCount={45} />
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ─── Progress Bar ──────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="progress-bar"
-        eyebrow="Feedback / 03"
-        title="Progress Bar"
-        description="Figma Progress Bar: Type (line · circle) × Progress, plus Success and Error end states. The value is always shown as text too."
-      >
-        <SubBlock id="progress-bar-line" title="Line">
-          <PreviewFrame align="start">
-            <div className="grid w-full gap-gap-11">
-              <ProgressBar label="Uploading report.pdf" value={60} description="2 of 5 files" />
-              <ProgressBar label="Uploading report.pdf" status="success" description="All 5 files uploaded" />
-              <ProgressBar label="Uploading report.pdf" value={50} status="danger" description="Upload stopped. Check your connection, then try again." />
-            </div>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="progress-bar-circle" title="Circle">
-          <PreviewFrame>
-            <ProgressBar type="circle" label="Profile setup" value={30} />
-            <ProgressBar type="circle" label="Profile setup" value={80} />
-            <ProgressBar type="circle" label="Profile setup" status="success" />
-            <ProgressBar type="circle" label="Profile setup" status="danger" />
-      {/* ─── Progress Stepper ───────────────────────────────────────────────── */}
-      <ComponentSection
-        id="progress-stepper"
-        eyebrow="Navigation / 04"
-        title="Progress Stepper"
-        description="Figma Progress Stepper: the steps of a flow as an ordered list. The current step has aria-current=“step”; each step says its state in text. Completed steps can link back."
-      >
-        <SubBlock id="progress-stepper-horizontal" title="Horizontal">
-          <PreviewFrame align="start">
-            <ProgressStepper className="max-w-full">
-              <ProgressStep type="completed" label="Account" href="#progress-stepper" />
-              <ProgressStep type="active" label="Plan" />
-              <ProgressStep label="Billing" />
-              <ProgressStep label="Team" />
-              <ProgressStep label="Review" />
-            </ProgressStepper>
-          </PreviewFrame>
-        </SubBlock>
-        <SubBlock id="progress-stepper-vertical" title="Vertical, with a step to fix">
-          <PreviewFrame align="start">
-            <ProgressStepper position="vertical" className="w-full max-w-sm">
-              <ProgressStep type="completed" label="Account" description="ada@example.com" href="#progress-stepper" />
-              <ProgressStep type="danger" label="Billing" description="Add a payment method to continue" href="#progress-stepper" />
-              <ProgressStep type="active" label="Team" />
-              <ProgressStep label="Review" disabled />
-            </ProgressStepper>
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
       {/* ─── Thumbnail ───────────────────────────────────────────────────────── */}
       <ComponentSection
         id="thumbnail"
@@ -1312,25 +1334,6 @@ export default function ComponentsPage() {
             {(["xsmall", "small", "medium", "large", "xlarge"] as const).map((size) => (
               <Thumbnail key={size} size={size} src="/avatars/sample-team.svg" alt={`Team photo, ${size}`} />
             ))}
-          </PreviewFrame>
-        </SubBlock>
-      </ComponentSection>
-
-      {/* ─── Link Button ─────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="link-button"
-        eyebrow="Actions / 03"
-        title="Link Button"
-        description="Figma Link Button: Variant × Size (small · large). Its own component, not a Button style. Navigation renders a link with asChild; in-page actions render a button."
-      >
-        <SubBlock id="link-button-variants" title="Variants and sizes">
-          <PreviewFrame>
-            <LinkButton asChild suffixIcon={<ArrowRight />}><a href="#link-button">View all</a></LinkButton>
-            <LinkButton variant="secondary">Forgot your password?</LinkButton>
-            <LinkButton variant="danger">Remove card</LinkButton>
-            <LinkButton variant="success" prefixIcon={<Plus />}>Add address</LinkButton>
-            <LinkButton size="large">View invoice</LinkButton>
-            <LinkButton disabled>Resend code</LinkButton>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
@@ -1384,47 +1387,58 @@ export default function ComponentsPage() {
         </SubBlock>
       </ComponentSection>
 
-      {/* ─── Split Button ────────────────────────────────────────────────────── */}
+      {/* ─── Card ───────────────────────────────────────────────────────────── */}
       <ComponentSection
-        id="split-button"
-        eyebrow="Actions / 04"
-        title="Split Button"
-        description="Figma Split Button: Variant × Style (filled · border) × Size. The main part runs the common action; the arrow opens a menu of related alternatives."
+        id="card"
+        eyebrow="Layout / 01"
+        title="Card"
+        description="Figma Default Card. container={false} groups content without a box."
       >
-        <SubBlock id="split-button-variants" title="Styles and sizes">
-          <PreviewFrame>
-            <SplitButton menuLabel="More save options" menu={<><DropdownMenuItem>Save as draft</DropdownMenuItem><DropdownMenuItem>Save and duplicate</DropdownMenuItem></>}>Save</SplitButton>
-            <SplitButton variant="secondary" appearance="border" size="small" prefixIcon={<Download />} menuLabel="More export options" menu={<><DropdownMenuItem>Export as PDF</DropdownMenuItem><DropdownMenuItem>Export as CSV</DropdownMenuItem></>}>Export</SplitButton>
-            <SplitButton variant="secondary" size="large" menuLabel="More send options" menu={<DropdownMenuItem>Schedule send</DropdownMenuItem>}>Send</SplitButton>
+        <SubBlock id="card-variants" title="With and without container">
+          <PreviewFrame align="start">
+            <div className="grid w-full grid-cols-1 gap-gap-12 md:grid-cols-2">
+              {[true, false].map((container) => (
+                <Card key={String(container)} container={container}>
+                  <CardHeader>
+                    <div>
+                      <CardTitle>Sign in</CardTitle>
+                      <CardDescription>Use your work email.</CardDescription>
+                    </div>
+                    <Badge status="info">Beta</Badge>
+                  </CardHeader>
+                  <CardContent className="grid gap-gap-11">
+                    <Input label="Email address" placeholder="e.g. hello@example.com" />
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="secondary" appearance="border">Cancel</Button>
+                    <Button>Sign in</Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </PreviewFrame>
         </SubBlock>
-      {/* ─── Accordion ──────────────────────────────────────────────────────── */}
-      <ComponentSection
-        id="accordion"
-        eyebrow="Navigation / 05"
-        title="Accordion"
-        description="Figma Accordion and Accordion Group: headings that expand a section. Each heading is a button with aria-expanded; Enter and Space toggle, arrow keys move between headings."
-      >
-        {[true, false].map((contained) => (
-          <SubBlock key={String(contained)} id={contained ? "accordion-contained" : "accordion-dividers"} title={contained ? "Contained" : "Dividers"}>
-            <PreviewFrame align="start">
-              <AccordionGroup contained={contained} className="w-full max-w-md" defaultValue={contained ? ["breathe"] : []}>
-                <Accordion value="breathe" title="Quick way to de-stress in 2 minutes?" icon={<BarChart3 />}>
-                  Breathe in for 4 seconds, hold for 4, breathe out for 4, hold for 4. Do it 4 times.
-                  <Button variant="secondary" size="small">Start a timer</Button>
-                </Accordion>
-                <Accordion value="plan" title="Can I change my plan later?" icon={<BarChart3 />}>
-                  Yes. Plan changes apply from your next billing date.
-                </Accordion>
-                <Accordion value="advanced" title="Advanced settings" icon={<BarChart3 />} disabled>
-                  Not available on your plan.
-                </Accordion>
-              </AccordionGroup>
-            </PreviewFrame>
-          </SubBlock>
-        ))}
       </ComponentSection>
 
+      {/* ─── Divider ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="divider"
+        eyebrow="Layout / 02"
+        title="Divider"
+        description="Figma Divider: Style (solid · dashed) × Weight (thin · default · bold) × Emphasis (base · strong · subtle), with an optional label. Use spacing first."
+      >
+        <SubBlock id="divider-variants" title="Weights, emphasis and labels">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <Divider />
+              <Divider weight="default" emphasis="strong" />
+              <Divider appearance="dashed" weight="bold" emphasis="subtle" />
+              <Divider label="March" emphasis="subtle" />
+              <Divider label="March" labelPosition="left" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
     </>
   );
 }
