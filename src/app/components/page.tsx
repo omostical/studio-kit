@@ -35,6 +35,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
 import { LinkButton } from "@/components/LinkButton";
 import { Chip } from "@/components/Chip";
+import { AvatarGroup } from "@/components/AvatarGroup";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -879,6 +880,32 @@ export default function ComponentsPage() {
             <Chip size="large" prefix={<Search />}>Large</Chip>
             <Chip variant="primary" appearance="border">Border</Chip>
             <Chip disabled>Disabled</Chip>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Avatar Group ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="avatar-group"
+        eyebrow="Data display / 08"
+        title="Avatar Group"
+        description="Figma Avatar Group: Layout (row · grid) × Size, with a +N counter when there are more people. Name the group with its total."
+      >
+        <SubBlock id="avatar-group-row" title="Row and grid">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large"] as const).map((size) => (
+              <AvatarGroup key={size} size={size} aria-label="12 members" total={12}>
+                <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+                <Avatar name="Grace Hopper" />
+                <Avatar name="Alan Turing" />
+                <Avatar name="Katherine Johnson" />
+              </AvatarGroup>
+            ))}
+            <AvatarGroup layout="grid" aria-label="8 members" total={8} onMoreClick={() => {}} moreLabel="Show all 8 members">
+              <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+              <Avatar name="Grace Hopper" />
+              <Avatar name="Alan Turing" />
+            </AvatarGroup>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

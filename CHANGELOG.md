@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(AvatarGroup): overlapping row or 2 × 2 grid of Avatars in four sizes with a "+N" counter that can open the full list — batch 2 of the StudioKIT 2.0 catalog
+
 - create(Chip): toggle (aria-pressed, check when pressed) and removable ("Remove <value>" button) chips in Primary/Secondary, filled/border, three sizes, with icon/logo/avatar prefix — batch 2 of the StudioKIT 2.0 catalog
 
 - create(LinkButton): text-only link-style action in five variants and two sizes with prefix/suffix icons; `asChild` renders a real link — its own component because Figma gives it no fill, height or Style; batch 2 of the StudioKIT 2.0 catalog

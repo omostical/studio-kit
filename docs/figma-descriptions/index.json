@@ -47,7 +47,8 @@
   {
     "id": "7807:149985",
     "name": "Avatar Group",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/AvatarGroup",
     "file": "avatar-group.md"
   },
   {

@@ -23,3 +23,4 @@ export * from "./ProgressBar";
 export * from "./Thumbnail";
 export * from "./LinkButton";
 export * from "./Chip";
+export * from "./AvatarGroup";

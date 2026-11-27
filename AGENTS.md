@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Divider, ProgressBar, Thumbnail, LinkButton, Chip; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Divider, ProgressBar, Thumbnail, LinkButton, Chip, AvatarGroup; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -77,6 +77,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Divid
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
+| `AvatarGroup` | A set of people (members, assignees) with a "+N" counter | `Avatar` children · required `aria-label` ("12 members") · `layout` row·grid · `size` xsmall·small·medium·large · `max` `total` · `onMoreClick` `moreLabel` |
 | `Chip` | Filter toggles and removable entered values (not read-only labels: Tag) | `pressed` + `onPressedChange` (toggle, aria-pressed) · `onRemove` `removeLabel` (removable) · `variant` secondary·primary · `appearance` filled·border · `size` small·medium·large · `prefix` |
 | `LinkButton` | Text-only link or low-emphasis action ("View all", "Forgot your password?") | `variant` primary·secondary·danger·success·inverse · `size` small·large · `prefixIcon` `suffixIcon` · `asChild` around `next/link` / `<a>` for navigation |
 | `Thumbnail` | Small preview of a file or image (order lines, attachments) | `type` image·pdf·spreadsheet·document·video·picture·icon·logo·text · `size` xsmall 16…xlarge 40 · `src` `icon` `text` · `alt` (leave out next to a visible file name) |

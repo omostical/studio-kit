@@ -50,6 +50,7 @@ export const componentGroups: DocGroup[] = [
       { slug: "table", title: "Table" },
       { slug: "thumbnail", title: "Thumbnail" },
       { slug: "chip", title: "Chip" },
+      { slug: "avatar-group", title: "Avatar Group" },
     ],
   },
   {
