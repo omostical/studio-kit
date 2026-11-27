@@ -18,6 +18,7 @@ line to `CHANGELOG.md`.
 - Text Area character count: a live count against a limit, announced near the limit (catalog usage) — needed by `src/components/TextArea/TextArea.tsx`; not in the Figma component yet
 - Select clear option: reset a filter Select back to "All" without picking a value — needed by the Phase 3 re-test filters
 - Toast warning status: a warning-level confirmation (e.g. "Saved, but 2 rows were skipped") — needed by the Phase 3 re-test
+- Pagination links: page numbers as real links (an `href` per page) for server-rendered lists; code has buttons with `onPageChange` only — needed by `src/components/Pagination/Pagination.tsx`
 
 ## Tokens
 

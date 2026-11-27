@@ -38,7 +38,13 @@ export const componentGroups: DocGroup[] = [
   },
   {
     name: "Navigation",
-    items: [{ slug: "tabs", title: "Tabs" }],
+    items: [
+      { slug: "tabs", title: "Tabs"},
+      { slug: "breadcrumbs", title: "Breadcrumbs"},
+      { slug: "pagination", title: "Pagination"},
+      { slug: "progress-stepper", title: "Progress Stepper"},
+      { slug: "accordion", title: "Accordion" },
+    ],
   },
   {
     name: "Overlays",

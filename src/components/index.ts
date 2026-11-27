@@ -32,3 +32,7 @@ export * from "./LinkButton";
 export * from "./Chip";
 export * from "./AvatarGroup";
 export * from "./SplitButton";
+export * from "./Breadcrumbs";
+export * from "./Pagination";
+export * from "./ProgressStepper";
+export * from "./Accordion";

@@ -36,7 +36,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
+import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home, BarChart3 } from "lucide-react";
 import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
@@ -44,6 +44,10 @@ import { LinkButton } from "@/components/LinkButton";
 import { Chip } from "@/components/Chip";
 import { AvatarGroup } from "@/components/AvatarGroup";
 import { SplitButton } from "@/components/SplitButton";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
+import { Pagination, type PaginationType } from "@/components/Pagination";
+import { ProgressStepper, ProgressStep } from "@/components/ProgressStepper";
+import { Accordion, AccordionGroup } from "@/components/Accordion";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -106,6 +110,22 @@ function ChipDemo() {
         ))}
       </div>
     </div>
+function PaginationDemo({ type, pageCount }: { type: PaginationType; pageCount: number }) {
+  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState(10);
+  return (
+    <Pagination
+      className="w-full"
+      type={type}
+      page={page}
+      pageCount={pageCount}
+      onPageChange={setPage}
+      rowsPerPage={rows}
+      onRowsPerPageChange={(n) => {
+        setRows(n);
+        setPage(1);
+      }}
+    />
   );
 }
 
@@ -952,6 +972,53 @@ export default function ComponentsPage() {
               <Divider appearance="dashed" weight="bold" emphasis="subtle" />
               <Divider label="March" emphasis="subtle" />
               <Divider label="March" labelPosition="left" />
+      {/* ─── Breadcrumbs ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="breadcrumbs"
+        eyebrow="Navigation / 02"
+        title="Breadcrumbs"
+        description="Figma Breadcrumbs and Breadcrumb Item: the trail from the top level to the current page. The last item is the current page (not a link); long trails collapse the middle into a … button."
+      >
+        <SubBlock id="breadcrumbs-separators" title="Separator">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {(["arrow", "slash"] as const).map((separator) => (
+                <Breadcrumbs key={separator} separator={separator}>
+                  <BreadcrumbItem href="#breadcrumbs" icon={<Folder />}>Projects</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Website redesign</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Assets</BreadcrumbItem>
+                  <BreadcrumbItem>Logo files</BreadcrumbItem>
+                </Breadcrumbs>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="breadcrumbs-collapsed" title="Long trail">
+          <PreviewFrame align="start">
+            <Breadcrumbs>
+              {["Workspace", "Projects", "Website redesign", "Assets", "Brand", "Logo files"].map((label, i, all) => (
+                <BreadcrumbItem key={label} href={i < all.length - 1 ? "#breadcrumbs" : undefined} icon={i === 0 ? <Home /> : undefined}>
+                  {label}
+                </BreadcrumbItem>
+              ))}
+            </Breadcrumbs>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Pagination ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="pagination"
+        eyebrow="Navigation / 03"
+        title="Pagination"
+        description="Figma Pagination: Less numbers (5 slots), More numbers (9 slots) or Overflow (a page picker), with an optional Rows per page control. Page buttons are named “Page 3”; the current one has aria-current."
+      >
+        <SubBlock id="pagination-types" title="Type">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <PaginationDemo type="less-numbers" pageCount={5} />
+              <PaginationDemo type="more-numbers" pageCount={99} />
+              <PaginationDemo type="overflow" pageCount={45} />
             </div>
           </PreviewFrame>
         </SubBlock>
@@ -979,6 +1046,32 @@ export default function ComponentsPage() {
             <ProgressBar type="circle" label="Profile setup" value={80} />
             <ProgressBar type="circle" label="Profile setup" status="success" />
             <ProgressBar type="circle" label="Profile setup" status="danger" />
+      {/* ─── Progress Stepper ───────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-stepper"
+        eyebrow="Navigation / 04"
+        title="Progress Stepper"
+        description="Figma Progress Stepper: the steps of a flow as an ordered list. The current step has aria-current=“step”; each step says its state in text. Completed steps can link back."
+      >
+        <SubBlock id="progress-stepper-horizontal" title="Horizontal">
+          <PreviewFrame align="start">
+            <ProgressStepper className="max-w-full">
+              <ProgressStep type="completed" label="Account" href="#progress-stepper" />
+              <ProgressStep type="active" label="Plan" />
+              <ProgressStep label="Billing" />
+              <ProgressStep label="Team" />
+              <ProgressStep label="Review" />
+            </ProgressStepper>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-stepper-vertical" title="Vertical, with a step to fix">
+          <PreviewFrame align="start">
+            <ProgressStepper position="vertical" className="w-full max-w-sm">
+              <ProgressStep type="completed" label="Account" description="ada@example.com" href="#progress-stepper" />
+              <ProgressStep type="danger" label="Billing" description="Add a payment method to continue" href="#progress-stepper" />
+              <ProgressStep type="active" label="Team" />
+              <ProgressStep label="Review" disabled />
+            </ProgressStepper>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
@@ -1094,6 +1187,31 @@ export default function ComponentsPage() {
             <SplitButton variant="secondary" size="large" menuLabel="More send options" menu={<DropdownMenuItem>Schedule send</DropdownMenuItem>}>Send</SplitButton>
           </PreviewFrame>
         </SubBlock>
+      {/* ─── Accordion ──────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="accordion"
+        eyebrow="Navigation / 05"
+        title="Accordion"
+        description="Figma Accordion and Accordion Group: headings that expand a section. Each heading is a button with aria-expanded; Enter and Space toggle, arrow keys move between headings."
+      >
+        {[true, false].map((contained) => (
+          <SubBlock key={String(contained)} id={contained ? "accordion-contained" : "accordion-dividers"} title={contained ? "Contained" : "Dividers"}>
+            <PreviewFrame align="start">
+              <AccordionGroup contained={contained} className="w-full max-w-md" defaultValue={contained ? ["breathe"] : []}>
+                <Accordion value="breathe" title="Quick way to de-stress in 2 minutes?" icon={<BarChart3 />}>
+                  Breathe in for 4 seconds, hold for 4, breathe out for 4, hold for 4. Do it 4 times.
+                  <Button variant="secondary" size="small">Start a timer</Button>
+                </Accordion>
+                <Accordion value="plan" title="Can I change my plan later?" icon={<BarChart3 />}>
+                  Yes. Plan changes apply from your next billing date.
+                </Accordion>
+                <Accordion value="advanced" title="Advanced settings" icon={<BarChart3 />} disabled>
+                  Not available on your plan.
+                </Accordion>
+              </AccordionGroup>
+            </PreviewFrame>
+          </SubBlock>
+        ))}
       </ComponentSection>
 
     </>

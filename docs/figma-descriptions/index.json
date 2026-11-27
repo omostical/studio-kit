@@ -23,13 +23,15 @@
   {
     "id": "557:9948",
     "name": "Accordion",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Accordion",
     "file": "accordion.md"
   },
   {
     "id": "2746:2110",
     "name": "Accordion Group",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Accordion",
     "file": "accordion-group.md"
   },
   {
@@ -55,13 +57,15 @@
   {
     "id": "9728:22669",
     "name": "Breadcrumbs",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Breadcrumbs",
     "file": "breadcrumbs.md"
   },
   {
     "id": "9728:18794",
     "name": "Breadcrumb Item",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Breadcrumbs",
     "file": "breadcrumb-item.md"
   },
   {
@@ -234,7 +238,8 @@
   {
     "id": "2646:12655",
     "name": "Pagination",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Pagination",
     "file": "pagination.md"
   },
   {
@@ -253,7 +258,8 @@
   {
     "id": "10034:31374",
     "name": "Progress Stepper",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/ProgressStepper",
     "file": "progress-stepper.md"
   },
   {

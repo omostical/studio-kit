@@ -38,6 +38,14 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 - create(Divider): solid or dashed line in three weights and emphases, with an optional centred or left label — batch 2 of the StudioKIT 2.0 catalog
 
+- create(Accordion): expandable sections on Radix Accordion, alone or stacked in `AccordionGroup` — contained boxes or dividers, optional icon, disabled items, several open at once by default — batch 3 (navigation) of the Figma components
+
+- create(ProgressStepper): steps of a multi-step flow as an ordered list — horizontal or vertical, completed / active / incomplete / danger steps with optional description, `aria-current="step"` and the state in text, steps can link back — batch 3 (navigation) of the Figma components
+
+- create(Pagination): page controls for long lists and tables, in `<nav aria-label="Pagination">` — less-numbers (5 slots), more-numbers (9 slots, "…" for gaps) and overflow (Prev / page Select / Next) types, optional Rows per page Select — batch 3 (navigation) of the Figma components
+
+- create(Breadcrumbs): trail from the top level to the current page, on `<nav aria-label="Breadcrumb">` and an ordered list — arrow or slash separators, icon root item, current page with `aria-current`, middle levels collapse into a "…" button — batch 3 (navigation) of the Figma components
+
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions
 
 - create(Avatar): photo, initials or icon in 6 sizes, rounded or square, with selected ring and presence dot; falls back from photo to initials to icon — first component built from GAPS.md (team-members prototype needed it)
