@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Popup): non-modal panel anchored to a trigger, on Radix Popover, Action and Information types with header, body and footer — Pop-up was planned in the catalog (batch 4 overlays)
+
 - create(SidePanel): drawer on Radix Dialog in 3 widths, with header (avatar, actions, tabs), Details/Form/Task body and footer — Side Panel was planned in the catalog (batch 4 overlays)
 
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions

@@ -19,3 +19,4 @@ export * from "./Tabs";
 export * from "./Toast";
 export * from "./Table";
 export * from "./SidePanel";
+export * from "./Popup";

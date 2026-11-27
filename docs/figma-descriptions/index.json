@@ -234,7 +234,8 @@
   {
     "id": "10852:61592",
     "name": "Pop-up",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Popup",
     "file": "pop-up.md"
   },
   {

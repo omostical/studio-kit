@@ -30,6 +30,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelFooter } from "@/components/SidePanel";
+import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, PopupFooter } from "@/components/Popup";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -697,6 +698,44 @@ export default function ComponentsPage() {
                 </SidePanelFooter>
               </SidePanelContent>
             </SidePanel>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Pop-up ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="popup"
+        eyebrow="Overlays / 05"
+        title="Pop-up"
+        description="Figma Pop-up, on Radix Popover: a small non-modal panel anchored to its trigger. Focus moves in on open, Escape or a click outside closes it, focus returns to the trigger."
+      >
+        <SubBlock id="popup-types" title="Action and Information types">
+          <PreviewFrame>
+            <Popup>
+              <PopupTrigger asChild><Button>New shift</Button></PopupTrigger>
+              <PopupContent>
+                <PopupHeader title="New shift" />
+                <PopupBody>
+                  <Input label="Shift name" placeholder="e.g. Afternoon shift" />
+                  <Input label="Date" placeholder="DD/MM/YYYY" />
+                </PopupBody>
+                <PopupFooter start={<Switch label="Repeat weekly" />}>
+                  <PopupClose asChild><Button size="small" variant="secondary" appearance="border">Cancel</Button></PopupClose>
+                  <Button size="small">Create shift</Button>
+                </PopupFooter>
+              </PopupContent>
+            </Popup>
+            <Popup>
+              <PopupTrigger asChild><Button variant="secondary" appearance="border">Cookie settings</Button></PopupTrigger>
+              <PopupContent type="information">
+                <PopupHeader title="Accept cookies" />
+                <PopupBody>We use cookies to remember your settings and to measure how the app is used.</PopupBody>
+                <PopupFooter>
+                  <PopupClose asChild><Button size="small" variant="secondary" appearance="border">Only necessary</Button></PopupClose>
+                  <PopupClose asChild><Button size="small">Accept all</Button></PopupClose>
+                </PopupFooter>
+              </PopupContent>
+            </Popup>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

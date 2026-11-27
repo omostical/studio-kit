@@ -22,5 +22,5 @@ line to `CHANGELOG.md`.
 
 ## Tokens
 
-- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460), Dropdown Menu (320) and Side Panel (560, 704, 960) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx`, `src/components/SidePanel/SidePanel.tsx` (recorded as `token-lint-ignore` exceptions)
+- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460), Dropdown Menu (320), Side Panel (560, 704, 960) and Pop-up (492) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx`, `src/components/SidePanel/SidePanel.tsx`, `src/components/Popup/Popup.tsx` (recorded as `token-lint-ignore` exceptions)
 - Layer order: a z-index scale so toasts sit above modals — needed by `src/components/Toast/Toast.tsx` (`z-[60]` exception)
