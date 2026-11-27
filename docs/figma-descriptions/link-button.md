@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `LinkButton`.
 
 A text-only action styled as a link, for navigation or low-emphasis actions inside text, cards and forms ("Forgot your password?", "View all"). Use **Button** for actions that change data.
 
@@ -15,6 +15,7 @@ A text-only action styled as a link, for navigation or low-emphasis actions insi
 ---
 
 **Usage guidelines**
+- In code: `LinkButton` is its own component (not a Button appearance). Wrap `next/link` or `<a href>` with `asChild` for navigation; without it, it renders a `<button>` for in-page actions.
 - Use it to go somewhere; use a Button to do something.
 - Write the destination or result as the label ("View invoice"), never "Click here".
 - Don't use it as the main action of a form or dialog.

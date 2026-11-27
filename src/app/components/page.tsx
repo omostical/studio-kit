@@ -37,6 +37,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
+import { Divider } from "@/components/Divider";
+import { ProgressBar } from "@/components/ProgressBar";
+import { Thumbnail } from "@/components/Thumbnail";
+import { LinkButton } from "@/components/LinkButton";
+import { Chip } from "@/components/Chip";
+import { AvatarGroup } from "@/components/AvatarGroup";
+import { SplitButton } from "@/components/SplitButton";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -83,6 +90,25 @@ function ToastDemo() {
 
 
 // ─── Reusable doc section header ──────────────────────────────────────────────
+function ChipDemo() {
+  const [filters, setFilters] = useState<Record<string, boolean>>({ Paid: true, Pending: false, Failed: false });
+  const [tags, setTags] = useState(["Design", "Research", "Billing"]);
+  return (
+    <div className="grid gap-gap-9">
+      <div className="flex flex-wrap gap-gap-5" role="group" aria-label="Filter by status">
+        {Object.keys(filters).map((k) => (
+          <Chip key={k} pressed={filters[k]} onPressedChange={(p) => setFilters({ ...filters, [k]: p })}>{k}</Chip>
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-gap-5">
+        {tags.map((t) => (
+          <Chip key={t} appearance="border" onRemove={() => setTags(tags.filter((x) => x !== t))}>{t}</Chip>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ComponentSection({
   id,
   eyebrow,
@@ -911,6 +937,165 @@ export default function ComponentsPage() {
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
+      {/* ─── Divider ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="divider"
+        eyebrow="Layout / 02"
+        title="Divider"
+        description="Figma Divider: Style (solid · dashed) × Weight (thin · default · bold) × Emphasis (base · strong · subtle), with an optional label. Use spacing first."
+      >
+        <SubBlock id="divider-variants" title="Weights, emphasis and labels">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <Divider />
+              <Divider weight="default" emphasis="strong" />
+              <Divider appearance="dashed" weight="bold" emphasis="subtle" />
+              <Divider label="March" emphasis="subtle" />
+              <Divider label="March" labelPosition="left" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Progress Bar ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-bar"
+        eyebrow="Feedback / 03"
+        title="Progress Bar"
+        description="Figma Progress Bar: Type (line · circle) × Progress, plus Success and Error end states. The value is always shown as text too."
+      >
+        <SubBlock id="progress-bar-line" title="Line">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-11">
+              <ProgressBar label="Uploading report.pdf" value={60} description="2 of 5 files" />
+              <ProgressBar label="Uploading report.pdf" status="success" description="All 5 files uploaded" />
+              <ProgressBar label="Uploading report.pdf" value={50} status="danger" description="Upload stopped. Check your connection, then try again." />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-bar-circle" title="Circle">
+          <PreviewFrame>
+            <ProgressBar type="circle" label="Profile setup" value={30} />
+            <ProgressBar type="circle" label="Profile setup" value={80} />
+            <ProgressBar type="circle" label="Profile setup" status="success" />
+            <ProgressBar type="circle" label="Profile setup" status="danger" />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Thumbnail ───────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="thumbnail"
+        eyebrow="Data display / 06"
+        title="Thumbnail"
+        description="Figma Thumbnail: Type × Size (16 · 20 · 24 · 32 · 40px). Radius follows the size: Control/sm, then md, then lg. Decorative next to a file name."
+      >
+        <SubBlock id="thumbnail-types" title="Types">
+          <PreviewFrame>
+            <Thumbnail src="/avatars/sample-team.svg" alt="Team photo" />
+            <Thumbnail type="pdf" alt="PDF file" />
+            <Thumbnail type="spreadsheet" alt="Spreadsheet" />
+            <Thumbnail type="document" alt="Document" />
+            <Thumbnail type="video" alt="Video" />
+            <Thumbnail type="picture" alt="Picture" />
+            <Thumbnail type="icon" alt="Report" />
+            <Thumbnail type="text" text="W" alt="Word document" />
+            <Thumbnail type="logo" icon={<Mail />} alt="Mail app" />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="thumbnail-sizes" title="Sizes">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large", "xlarge"] as const).map((size) => (
+              <Thumbnail key={size} size={size} src="/avatars/sample-team.svg" alt={`Team photo, ${size}`} />
+            ))}
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Link Button ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="link-button"
+        eyebrow="Actions / 03"
+        title="Link Button"
+        description="Figma Link Button: Variant × Size (small · large). Its own component, not a Button style. Navigation renders a link with asChild; in-page actions render a button."
+      >
+        <SubBlock id="link-button-variants" title="Variants and sizes">
+          <PreviewFrame>
+            <LinkButton asChild suffixIcon={<ArrowRight />}><a href="#link-button">View all</a></LinkButton>
+            <LinkButton variant="secondary">Forgot your password?</LinkButton>
+            <LinkButton variant="danger">Remove card</LinkButton>
+            <LinkButton variant="success" prefixIcon={<Plus />}>Add address</LinkButton>
+            <LinkButton size="large">View invoice</LinkButton>
+            <LinkButton disabled>Resend code</LinkButton>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Chip ────────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="chip"
+        eyebrow="Data display / 07"
+        title="Chip"
+        description="Figma Chip: Variant × Style × Size, with a prefix and a remove ×. Filter chips toggle (aria-pressed); input chips have a Remove button. Use Tag for read-only labels."
+      >
+        <SubBlock id="chip-kinds" title="Filter and removable">
+          <PreviewFrame>
+            <ChipDemo />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="chip-sizes" title="Sizes and styles">
+          <PreviewFrame>
+            <Chip size="small">Small</Chip>
+            <Chip>Medium</Chip>
+            <Chip size="large" prefix={<Search />}>Large</Chip>
+            <Chip variant="primary" appearance="border">Border</Chip>
+            <Chip disabled>Disabled</Chip>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Avatar Group ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="avatar-group"
+        eyebrow="Data display / 08"
+        title="Avatar Group"
+        description="Figma Avatar Group: Layout (row · grid) × Size, with a +N counter when there are more people. Name the group with its total."
+      >
+        <SubBlock id="avatar-group-row" title="Row and grid">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large"] as const).map((size) => (
+              <AvatarGroup key={size} size={size} aria-label="12 members" total={12}>
+                <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+                <Avatar name="Grace Hopper" />
+                <Avatar name="Alan Turing" />
+                <Avatar name="Katherine Johnson" />
+              </AvatarGroup>
+            ))}
+            <AvatarGroup layout="grid" aria-label="8 members" total={8} onMoreClick={() => {}} moreLabel="Show all 8 members">
+              <Avatar src="/avatars/sample-person.svg" name="Ada Lovelace" />
+              <Avatar name="Grace Hopper" />
+              <Avatar name="Alan Turing" />
+            </AvatarGroup>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Split Button ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="split-button"
+        eyebrow="Actions / 04"
+        title="Split Button"
+        description="Figma Split Button: Variant × Style (filled · border) × Size. The main part runs the common action; the arrow opens a menu of related alternatives."
+      >
+        <SubBlock id="split-button-variants" title="Styles and sizes">
+          <PreviewFrame>
+            <SplitButton menuLabel="More save options" menu={<><DropdownMenuItem>Save as draft</DropdownMenuItem><DropdownMenuItem>Save and duplicate</DropdownMenuItem></>}>Save</SplitButton>
+            <SplitButton variant="secondary" appearance="border" size="small" prefixIcon={<Download />} menuLabel="More export options" menu={<><DropdownMenuItem>Export as PDF</DropdownMenuItem><DropdownMenuItem>Export as CSV</DropdownMenuItem></>}>Export</SplitButton>
+            <SplitButton variant="secondary" size="large" menuLabel="More send options" menu={<DropdownMenuItem>Schedule send</DropdownMenuItem>}>Send</SplitButton>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
     </>
   );
 }

@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider, Search; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider, Search, Divider, ProgressBar, Thumbnail, LinkButton, Chip, AvatarGroup, SplitButton; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -84,10 +84,18 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
+| `SplitButton` | A main action plus a short menu of related alternatives ("Save" + "Save as draft") | Button props for the main part (`variant` `size` `prefixIcon` `loading` `onClick`) · `appearance` filled·border · `menu` (DropdownMenuItems) · required `menuLabel` for the arrow |
+| `AvatarGroup` | A set of people (members, assignees) with a "+N" counter | `Avatar` children · required `aria-label` ("12 members") · `layout` row·grid · `size` xsmall·small·medium·large · `max` `total` · `onMoreClick` `moreLabel` |
+| `Chip` | Filter toggles and removable entered values (not read-only labels: Tag) | `pressed` + `onPressedChange` (toggle, aria-pressed) · `onRemove` `removeLabel` (removable) · `variant` secondary·primary · `appearance` filled·border · `size` small·medium·large · `prefix` |
+| `LinkButton` | Text-only link or low-emphasis action ("View all", "Forgot your password?") | `variant` primary·secondary·danger·success·inverse · `size` small·large · `prefixIcon` `suffixIcon` · `asChild` around `next/link` / `<a>` for navigation |
+| `Thumbnail` | Small preview of a file or image (order lines, attachments) | `type` image·pdf·spreadsheet·document·video·picture·icon·logo·text · `size` xsmall 16…xlarge 40 · `src` `icon` `text` · `alt` (leave out next to a visible file name) |
+| `ProgressBar` | How far a measurable task has got (upload, setup, quota) | `label` (required) `value` 0–100 `valueText` `description` · `status` success·danger · `type` line·circle · `hideLabel` |
+| `Divider` | A line between groups when spacing isn't enough | `appearance` solid·dashed · `weight` thin·default·bold · `emphasis` base·strong·subtle · `label` `labelPosition` center·left · `semantic` (role=separator) |
 
-Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
-row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
-`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
+Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; one main action plus related
+alternatives → SplitButton; three or more actions on one
+row or object → DropdownMenu behind a "More" IconButton; navigation link → `LinkButton asChild` around `next/link`
+(a link that must look like a button → `Button asChild`); status → Badge; category → Tag; filter toggle or removable value → Chip; message in page → Alert; message after an
 action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components

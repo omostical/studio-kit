@@ -8,6 +8,8 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "button", title: "Button" },
       { slug: "icon-button", title: "Icon Button" },
+      { slug: "link-button", title: "Link Button" },
+      { slug: "split-button", title: "Split Button" },
     ],
   },
   {
@@ -31,6 +33,7 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "alert", title: "Alert" },
       { slug: "toast", title: "Toast" },
+      { slug: "progress-bar", title: "Progress Bar" },
     ],
   },
   {
@@ -53,11 +56,17 @@ export const componentGroups: DocGroup[] = [
       { slug: "tag", title: "Tag" },
       { slug: "typography", title: "Typography" },
       { slug: "table", title: "Table" },
+      { slug: "thumbnail", title: "Thumbnail" },
+      { slug: "chip", title: "Chip" },
+      { slug: "avatar-group", title: "Avatar Group" },
     ],
   },
   {
     name: "Layout",
-    items: [{ slug: "card", title: "Card" }],
+    items: [
+      { slug: "card", title: "Card" },
+      { slug: "divider", title: "Divider" },
+    ],
   },
 ];
 

@@ -9,13 +9,15 @@
   {
     "id": "4402:90631",
     "name": "Split Button",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SplitButton",
     "file": "split-button.md"
   },
   {
     "id": "557:15154",
     "name": "Link Button",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/LinkButton",
     "file": "link-button.md"
   },
   {
@@ -46,7 +48,8 @@
   {
     "id": "7807:149985",
     "name": "Avatar Group",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/AvatarGroup",
     "file": "avatar-group.md"
   },
   {
@@ -109,7 +112,8 @@
   {
     "id": "557:80335",
     "name": "Chip",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Chip",
     "file": "chip.md"
   },
   {
@@ -133,7 +137,8 @@
   {
     "id": "13101:22726",
     "name": "Divider",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Divider",
     "file": "divider.md"
   },
   {
@@ -241,7 +246,8 @@
   {
     "id": "4716:92306",
     "name": "Progress Bar",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/ProgressBar",
     "file": "progress-bar.md"
   },
   {
@@ -456,7 +462,8 @@
   {
     "id": "938:36926",
     "name": "Thumbnail",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Thumbnail",
     "file": "thumbnail.md"
   },
   {

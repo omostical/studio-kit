@@ -24,6 +24,20 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 - create(RadioButton): one pick-one option on Radix Radio Group — label, description, large and small, danger, disabled — batch 1 of the StudioKIT 2.0 form components
 
+- create(SplitButton): main Button joined to an arrow IconButton that opens a DropdownMenu, in all Button variants and sizes, filled or border — batch 2 of the StudioKIT 2.0 catalog
+
+- create(AvatarGroup): overlapping row or 2 × 2 grid of Avatars in four sizes with a "+N" counter that can open the full list — batch 2 of the StudioKIT 2.0 catalog
+
+- create(Chip): toggle (aria-pressed, check when pressed) and removable ("Remove <value>" button) chips in Primary/Secondary, filled/border, three sizes, with icon/logo/avatar prefix — batch 2 of the StudioKIT 2.0 catalog
+
+- create(LinkButton): text-only link-style action in five variants and two sizes with prefix/suffix icons; `asChild` renders a real link — its own component because Figma gives it no fill, height or Style; batch 2 of the StudioKIT 2.0 catalog
+
+- create(Thumbnail): file-type, image, logo, icon and text previews in five sizes with the Figma radius steps (Control/sm, md, lg) — answers the thumbnail-radius question (audit question 14); batch 2 of the StudioKIT 2.0 catalog
+
+- create(ProgressBar): line and circle progress with label, value text, helper text and success/danger end states, as role=progressbar — batch 2 of the StudioKIT 2.0 catalog
+
+- create(Divider): solid or dashed line in three weights and emphases, with an optional centred or left label — batch 2 of the StudioKIT 2.0 catalog
+
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions
 
 - create(Avatar): photo, initials or icon in 6 sizes, rounded or square, with selected ring and presence dot; falls back from photo to initials to icon — first component built from GAPS.md (team-members prototype needed it)
