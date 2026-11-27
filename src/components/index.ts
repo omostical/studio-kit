@@ -18,3 +18,4 @@ export * from "./Tooltip";
 export * from "./Tabs";
 export * from "./Toast";
 export * from "./Table";
+export * from "./SidePanel";

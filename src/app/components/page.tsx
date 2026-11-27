@@ -29,6 +29,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
+import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelFooter } from "@/components/SidePanel";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -641,6 +642,61 @@ export default function ComponentsPage() {
         <SubBlock id="dropdown-menu-options" title="Options">
           <PreviewFrame>
             <MenuOptionsDemo />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Side Panel ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="side-panel"
+        eyebrow="Overlays / 04"
+        title="Side Panel"
+        description="Figma Side Panel, on Radix Dialog: a drawer on the right for details or side editing. Focus is trapped inside, Escape closes, focus returns to the trigger."
+      >
+        <SubBlock id="side-panel-types" title="Details and Form types">
+          <PreviewFrame>
+            <SidePanel>
+              <SidePanelTrigger asChild><Button variant="secondary" appearance="border">View member</Button></SidePanelTrigger>
+              <SidePanelContent>
+                <SidePanelHeader
+                  title="Adam Smith"
+                  description="adam.smith@example.com"
+                  avatar={<Avatar name="Adam Smith" size="xlarge" alt="" />}
+                >
+                  <div className="flex flex-wrap gap-gap-5">
+                    <Button size="small" variant="secondary" appearance="border">Message</Button>
+                    <Button size="small" variant="secondary" appearance="border">Email</Button>
+                  </div>
+                </SidePanelHeader>
+                <SidePanelBody type="details">
+                  <Card>
+                    <CardContent className="grid grid-cols-2 gap-gap-9">
+                      {[["First name", "Adam"], ["Last name", "Smith"], ["Job title", "UI Designer"], ["Country", "Poland"]].map(([k, v]) => (
+                        <div key={k} className="flex flex-col gap-gap-3">
+                          <Typography variant="label-small" tone="subtle">{k}</Typography>
+                          <Typography variant="label-strong-small" tone="strong">{v}</Typography>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </SidePanelBody>
+              </SidePanelContent>
+            </SidePanel>
+            <SidePanel>
+              <SidePanelTrigger asChild><Button>Add employee</Button></SidePanelTrigger>
+              <SidePanelContent size="medium">
+                <SidePanelHeader title="Add employee" description="Step 1 of 4" />
+                <SidePanelBody type="form" className="gap-gap-11">
+                  <Input label="First name" />
+                  <Input label="Last name" />
+                  <Input label="Work email" />
+                </SidePanelBody>
+                <SidePanelFooter>
+                  <Button>Save</Button>
+                  <SidePanelClose asChild><Button variant="secondary" appearance="border">Cancel</Button></SidePanelClose>
+                </SidePanelFooter>
+              </SidePanelContent>
+            </SidePanel>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

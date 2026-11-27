@@ -301,7 +301,8 @@
   {
     "id": "557:76753",
     "name": "Side Panel",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SidePanel",
     "file": "side-panel.md"
   },
   {

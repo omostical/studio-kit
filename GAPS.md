@@ -17,8 +17,10 @@ line to `CHANGELOG.md`.
 - Textarea: multi-line text field with label, helper text and error — needed by any form with a message or note field. Catalog: `planned`
 - Select clear option: reset a filter Select back to "All" without picking a value — needed by the Phase 3 re-test filters
 - Toast warning status: a warning-level confirmation (e.g. "Saved, but 2 rows were skipped") — needed by the Phase 3 re-test
+- Side Panel keyboard footer: the Details/Task footer of keyboard hints ("Navigate", "Return to parent", "Close") — needed by `src/components/SidePanel/SidePanel.tsx`; the panel has no keyboard navigation between items to hint at yet
+- Side Panel task header: the Task type's 64px action bar above the title and its progress tracker (Form type) — needed by `src/components/SidePanel/SidePanel.tsx`; compose with Button/IconButton in the header children until then
 
 ## Tokens
 
-- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460) and Dropdown Menu (320) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx` (recorded as `token-lint-ignore` exceptions)
+- Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460), Dropdown Menu (320) and Side Panel (560, 704, 960) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx`, `src/components/SidePanel/SidePanel.tsx` (recorded as `token-lint-ignore` exceptions)
 - Layer order: a z-index scale so toasts sit above modals — needed by `src/components/Toast/Toast.tsx` (`z-[60]` exception)

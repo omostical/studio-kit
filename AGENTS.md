@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, SidePanel; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -74,6 +74,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every
 | `Card` + `CardHeader/Title/Description/Content/Footer` | Group content and its actions | `container` (false = no box, for grey backgrounds) · `CardTitle as` (h2 by default; h3 inside a titled section) |
 | `Tabs` + `TabsList/Trigger/Content` | Switch sections on one page | `variant` regular·pill · `size` small·large · `fullWidth` |
 | `Modal` + `ModalTrigger/Content/Header/Body/Footer/Close` | Focused task that blocks the page | `Modal open onOpenChange` · `ModalContent size` small·medium·large · `ModalHeader title description` · see `.agents/rules/screens.md` |
+| `SidePanel` + `SidePanelTrigger/Content/Header/Body/Footer/Close` | Details, filters or secondary editing in a drawer on the right | `SidePanelContent size` small·medium·large · `SidePanelHeader title description avatar actions tabs` · `SidePanelBody type` details·form·task · same focus rules as Modal |
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
@@ -81,7 +82,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every
 Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
 row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
 `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
-action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
+action → Toast; blocking task → Modal; item details or side editing → SidePanel; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
 still use older values until they are renamed in Figma: `Alert` `status="error"`, `Toast` `status="error"` /
