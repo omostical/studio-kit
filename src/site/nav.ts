@@ -32,6 +32,7 @@ export const componentGroups: DocGroup[] = [
     name: "Feedback",
     items: [
       { slug: "alert", title: "Alert" },
+      { slug: "system-alert", title: "System Alert" },
       { slug: "toast", title: "Toast" },
       { slug: "progress-bar", title: "Progress Bar" },
     ],
@@ -52,6 +53,10 @@ export const componentGroups: DocGroup[] = [
       { slug: "modal", title: "Modal" },
       { slug: "tooltip", title: "Tooltip" },
       { slug: "dropdown-menu", title: "Dropdown Menu" },
+      { slug: "side-panel", title: "Side Panel" },
+      { slug: "popup", title: "Pop-up" },
+      { slug: "status-modal", title: "Status Modal" },
+      { slug: "notifications", title: "Notifications" },
     ],
   },
   {

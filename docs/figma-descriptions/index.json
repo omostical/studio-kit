@@ -208,7 +208,8 @@
   {
     "id": "9987:42531",
     "name": "Status Modal",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/StatusModal",
     "file": "status-modal.md"
   },
   {
@@ -232,7 +233,8 @@
   {
     "id": "10785:99185",
     "name": "Notifications",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Notifications",
     "file": "notifications.md"
   },
   {
@@ -245,7 +247,8 @@
   {
     "id": "10852:61592",
     "name": "Pop-up",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Popup",
     "file": "pop-up.md"
   },
   {
@@ -318,7 +321,8 @@
   {
     "id": "557:76753",
     "name": "Side Panel",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SidePanel",
     "file": "side-panel.md"
   },
   {
@@ -357,7 +361,8 @@
   {
     "id": "557:55446",
     "name": "System Alert",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SystemAlert",
     "file": "system-alert.md"
   },
   {

@@ -36,7 +36,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home, BarChart3 } from "lucide-react";
+import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home, BarChart3, Bell, Settings } from "lucide-react";
 import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Thumbnail } from "@/components/Thumbnail";
@@ -48,6 +48,11 @@ import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
 import { Pagination, type PaginationType } from "@/components/Pagination";
 import { ProgressStepper, ProgressStep } from "@/components/ProgressStepper";
 import { Accordion, AccordionGroup } from "@/components/Accordion";
+import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelFooter } from "@/components/SidePanel";
+import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, PopupFooter } from "@/components/Popup";
+import { StatusModal, StatusModalTrigger, StatusModalClose, StatusModalContent } from "@/components/StatusModal";
+import { SystemAlert, type SystemAlertStatus } from "@/components/SystemAlert";
+import { Notifications, NotificationsTrigger, NotificationsContent, NotificationsHeader, NotificationsToolbar, NotificationList, NotificationItem, NotificationGroupLabel, NotificationsFooter } from "@/components/Notifications";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -856,6 +861,212 @@ export default function ComponentsPage() {
         <SubBlock id="dropdown-menu-options" title="Options">
           <PreviewFrame>
             <MenuOptionsDemo />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Side Panel ─────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="side-panel"
+        eyebrow="Overlays / 04"
+        title="Side Panel"
+        description="Figma Side Panel, on Radix Dialog: a drawer on the right for details or side editing. Focus is trapped inside, Escape closes, focus returns to the trigger."
+      >
+        <SubBlock id="side-panel-types" title="Details and Form types">
+          <PreviewFrame>
+            <SidePanel>
+              <SidePanelTrigger asChild><Button variant="secondary" appearance="border">View member</Button></SidePanelTrigger>
+              <SidePanelContent>
+                <SidePanelHeader
+                  title="Adam Smith"
+                  description="adam.smith@example.com"
+                  avatar={<Avatar name="Adam Smith" size="xlarge" alt="" />}
+                >
+                  <div className="flex flex-wrap gap-gap-5">
+                    <Button size="small" variant="secondary" appearance="border">Message</Button>
+                    <Button size="small" variant="secondary" appearance="border">Email</Button>
+                  </div>
+                </SidePanelHeader>
+                <SidePanelBody type="details">
+                  <Card>
+                    <CardContent className="grid grid-cols-2 gap-gap-9">
+                      {[["First name", "Adam"], ["Last name", "Smith"], ["Job title", "UI Designer"], ["Country", "Poland"]].map(([k, v]) => (
+                        <div key={k} className="flex flex-col gap-gap-3">
+                          <Typography variant="label-small" tone="subtle">{k}</Typography>
+                          <Typography variant="label-strong-small" tone="strong">{v}</Typography>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </SidePanelBody>
+              </SidePanelContent>
+            </SidePanel>
+            <SidePanel>
+              <SidePanelTrigger asChild><Button>Add employee</Button></SidePanelTrigger>
+              <SidePanelContent size="medium">
+                <SidePanelHeader title="Add employee" description="Step 1 of 4" />
+                <SidePanelBody type="form" className="gap-gap-11">
+                  <Input label="First name" />
+                  <Input label="Last name" />
+                  <Input label="Work email" />
+                </SidePanelBody>
+                <SidePanelFooter>
+                  <Button>Save</Button>
+                  <SidePanelClose asChild><Button variant="secondary" appearance="border">Cancel</Button></SidePanelClose>
+                </SidePanelFooter>
+              </SidePanelContent>
+            </SidePanel>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Pop-up ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="popup"
+        eyebrow="Overlays / 05"
+        title="Pop-up"
+        description="Figma Pop-up, on Radix Popover: a small non-modal panel anchored to its trigger. Focus moves in on open, Escape or a click outside closes it, focus returns to the trigger."
+      >
+        <SubBlock id="popup-types" title="Action and Information types">
+          <PreviewFrame>
+            <Popup>
+              <PopupTrigger asChild><Button>New shift</Button></PopupTrigger>
+              <PopupContent>
+                <PopupHeader title="New shift" />
+                <PopupBody>
+                  <Input label="Shift name" placeholder="e.g. Afternoon shift" />
+                  <Input label="Date" placeholder="DD/MM/YYYY" />
+                </PopupBody>
+                <PopupFooter start={<Switch label="Repeat weekly" />}>
+                  <PopupClose asChild><Button size="small" variant="secondary" appearance="border">Cancel</Button></PopupClose>
+                  <Button size="small">Create shift</Button>
+                </PopupFooter>
+              </PopupContent>
+            </Popup>
+            <Popup>
+              <PopupTrigger asChild><Button variant="secondary" appearance="border">Cookie settings</Button></PopupTrigger>
+              <PopupContent type="information">
+                <PopupHeader title="Accept cookies" />
+                <PopupBody>We use cookies to remember your settings and to measure how the app is used.</PopupBody>
+                <PopupFooter>
+                  <PopupClose asChild><Button size="small" variant="secondary" appearance="border">Only necessary</Button></PopupClose>
+                  <PopupClose asChild><Button size="small">Accept all</Button></PopupClose>
+                </PopupFooter>
+              </PopupContent>
+            </Popup>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Status Modal ───────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="status-modal"
+        eyebrow="Overlays / 06"
+        title="Status Modal"
+        description="Figma Status Modal, built on Modal: one result or confirmation with a status icon. A danger confirmation is an alertdialog."
+      >
+        <SubBlock id="status-modal-orientation" title="Vertical and horizontal">
+          <PreviewFrame>
+            <StatusModal>
+              <StatusModalTrigger asChild><Button variant="danger" appearance="border">Delete project</Button></StatusModalTrigger>
+              <StatusModalContent
+                type="danger"
+                title="Delete this project?"
+                description="This can't be undone. The project and its 24 files are deleted for everyone."
+                actions={
+                  <>
+                    <StatusModalClose asChild><Button size="small" variant="secondary" appearance="border">Cancel</Button></StatusModalClose>
+                    <Button size="small" variant="danger">Delete project</Button>
+                  </>
+                }
+              />
+            </StatusModal>
+            <StatusModal>
+              <StatusModalTrigger asChild><Button variant="secondary" appearance="border">Finish payment</Button></StatusModalTrigger>
+              <StatusModalContent
+                type="success"
+                orientation="horizontal"
+                title="Payment received"
+                description="We emailed the receipt to the billing contact."
+                footerStart={<Button size="small" variant="secondary" appearance="ghost">Contact support</Button>}
+                actions={<StatusModalClose asChild><Button size="small">Done</Button></StatusModalClose>}
+              />
+            </StatusModal>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── System Alert ───────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="system-alert"
+        eyebrow="Feedback / 03"
+        title="System Alert"
+        description="Figma System Alert: a full-width banner about the whole app or account, above the page header. Use Alert for messages about one part of the page."
+      >
+        <SubBlock id="system-alert-statuses" title="Status × Emphasis">
+          <div className="flex flex-col gap-gap-5 overflow-hidden rounded-container-md">
+            {(["high", "low"] as const).flatMap((emphasis) =>
+              (["danger", "warning", "success", "info", "neutral"] as SystemAlertStatus[]).map((status) => (
+                <SystemAlert
+                  key={emphasis + status}
+                  status={status}
+                  emphasis={emphasis}
+                  message={status === "danger" ? "Payment failed. Update your card to keep your projects." : status === "warning" ? "Your trial ends in 3 days." : status === "success" ? "Your workspace is back online." : status === "info" ? "Maintenance on Sunday 02:00–04:00 UTC." : "You're viewing a shared workspace."}
+                  actionLabel={status === "danger" ? "Update card" : "Learn more"}
+                  dismissible={status !== "danger"}
+                />
+              ))
+            )}
+          </div>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Notifications ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="notifications"
+        eyebrow="Overlays / 07"
+        title="Notifications"
+        description="Figma Notifications: an activity panel opened from a bell button, composed from Popover, Avatar, Tabs and Button. The bell's name carries the unread count; unread rows say so in text as well as colour."
+      >
+        <SubBlock id="notifications-panel" title="Panel with tabs, groups and unread rows">
+          <PreviewFrame>
+            <Notifications>
+              <NotificationsTrigger asChild>
+                <IconButton appearance="border" icon={<Bell />} aria-label="Notifications, 1 unread" />
+              </NotificationsTrigger>
+              <NotificationsContent>
+                <Tabs size="small" defaultValue="all" className="min-h-0 gap-gap-0">
+                  <NotificationsHeader action={<Button size="small" variant="secondary" appearance="ghost">Mark all as read</Button>} />
+                  <NotificationsToolbar>
+                    <TabsList divider={false}>
+                      <TabsTrigger value="all">All</TabsTrigger>
+                      <TabsTrigger value="unread">Unread</TabsTrigger>
+                    </TabsList>
+                    <IconButton size="small" icon={<Settings />} aria-label="Notification settings" />
+                  </NotificationsToolbar>
+                  <TabsContent value="all" className="min-h-0 overflow-y-auto">
+                    <NotificationList>
+                      <NotificationItem unread href="#notifications" avatar={<Avatar size="small" name="Studio Kit" alt="" />} title={<><strong>Studio Kit</strong> launched a new feature in Projects</>} time="Just now" />
+                      <NotificationItem href="#notifications" avatar={<Avatar size="small" name="Darya Lee" alt="" />} title={<><strong>Darya Lee</strong> sent a message</>} time="13 min ago" content="Hi all, sharing the diagram we talked about yesterday." />
+                      <NotificationGroupLabel>March</NotificationGroupLabel>
+                      <NotificationItem
+                        href="#notifications"
+                        avatar={<Avatar size="small" name="Ralph Ito" alt="" />}
+                        title={<><strong>Ralph Ito</strong> asked to swap the Friday shift</>}
+                        time="Mar 4"
+                        actions={<><Button size="xsmall">Accept</Button><Button size="xsmall" variant="secondary" appearance="border">Decline</Button></>}
+                      />
+                    </NotificationList>
+                  </TabsContent>
+                  <TabsContent value="unread" className="min-h-0 overflow-y-auto">
+                    <NotificationList>
+                      <NotificationItem unread href="#notifications" avatar={<Avatar size="small" name="Studio Kit" alt="" />} title={<><strong>Studio Kit</strong> launched a new feature in Projects</>} time="Just now" />
+                    </NotificationList>
+                  </TabsContent>
+                  <NotificationsFooter><Button size="small" variant="secondary" appearance="ghost">Show more</Button></NotificationsFooter>
+                </Tabs>
+              </NotificationsContent>
+            </Notifications>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

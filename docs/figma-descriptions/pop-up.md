@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Popup`.
 
 A small floating panel anchored to a trigger, for extra details or quick actions that don't need a full Modal.
 
@@ -13,6 +13,7 @@ A small floating panel anchored to a trigger, for extra details or quick actions
 **Usage guidelines**
 - Close it when people click outside or press Escape.
 - Use **Tooltip** for a short hint and **Dropdown Menu** for a list of actions.
+- In code: `Popup` + `PopupTrigger asChild`, `PopupContent type` (action · information), `PopupHeader title`, `PopupBody` and `PopupFooter start`; it is non-modal (Radix Popover).
 
 ---
 

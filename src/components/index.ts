@@ -36,3 +36,8 @@ export * from "./Breadcrumbs";
 export * from "./Pagination";
 export * from "./ProgressStepper";
 export * from "./Accordion";
+export * from "./SidePanel";
+export * from "./Popup";
+export * from "./StatusModal";
+export * from "./SystemAlert";
+export * from "./Notifications";

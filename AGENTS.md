@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider, Search, Divider, ProgressBar, Thumbnail, LinkButton, Chip, AvatarGroup, SplitButton, Breadcrumbs, Pagination, ProgressStepper, Accordion; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider, Search, Divider, ProgressBar, Thumbnail, LinkButton, Chip, AvatarGroup, SplitButton, Breadcrumbs, Pagination, ProgressStepper, Accordion, SidePanel, Popup, StatusModal, SystemAlert, Notifications; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -73,6 +73,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
 | `Slider` | Pick a value or range by dragging (volume, price range) | `label` `value`/`defaultValue` (number[]; two = range) `min` `max` `step` · `labelPosition` side·bottom·inputs · `minLabel` `maxLabel` `showLabels` |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
+| `SystemAlert` | Full-width banner about the whole app or account (maintenance, billing, outage) | `status` danger·warning·success·info·neutral · `emphasis` high·low · `message` `actionLabel` `onAction` `dismissible` · `role="status"` by default, `"alert"` only if urgent |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |
 | `Avatar` | A person (rounded) or organisation (square) | `name` `src` `alt` (`""` next to a visible name) · `type` rounded·square · `size` xsmall…xxlarge · `status` `statusLabel` `selected`; leave `variant` unset (photo → initials → icon) |
 | `Badge` | Status of an item (Active, Pending, Failed) | `status` negative·notice·positive·info·neutral · `emphasis` low·high · `size` |
@@ -81,6 +82,10 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `Tabs` + `TabsList/Trigger/Content` | Switch sections on one page | `variant` regular·pill · `size` small·large · `fullWidth` |
 | `SegmentedControl` + `SegmentedControlItem` | Switch the view or mode of the same content right away (List / Grid, Day / Week) | `aria-label` `value`/`onValueChange` · `variant` regular·full-width · `size` small·medium·large · item `icon` (icon-only items need `aria-label`) |
 | `Modal` + `ModalTrigger/Content/Header/Body/Footer/Close` | Focused task that blocks the page | `Modal open onOpenChange` · `ModalContent size` small·medium·large · `ModalHeader title description` · see `.agents/rules/screens.md` |
+| `SidePanel` + `SidePanelTrigger/Content/Header/Body/Footer/Close` | Details, filters or secondary editing in a drawer on the right | `SidePanelContent size` small·medium·large · `SidePanelHeader title description avatar actions tabs` · `SidePanelBody type` details·form·task · same focus rules as Modal |
+| `Popup` + `PopupTrigger/Content/Header/Body/Footer/Close` | Small non-modal panel anchored to a trigger: a quick form or extra details | `PopupContent type` action·information · `PopupHeader title closeButton` · `PopupFooter start` (Switch or link) + actions · Escape / click outside closes |
+| `StatusModal` + `StatusModalTrigger/Content/Close` | One result or confirmation with a status icon (delete?, payment received) | `StatusModalContent type` danger·success·info·warning·neutral · `orientation` vertical·horizontal · `title description actions footerStart` · danger defaults to `role="alertdialog"` |
+| `Notifications` + `NotificationsTrigger/Content/Header/Toolbar/Footer`, `NotificationList/Item/GroupLabel` | Activity panel opened from a bell button, read and unread | `NotificationItem avatar title time unread href content actions` · TabsList in `NotificationsToolbar` · bell `aria-label` includes the unread count |
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
@@ -105,6 +110,9 @@ Choosing (nothing fits? see "When the answer doesn't exist" below): action → B
 row or object → DropdownMenu behind a "More" IconButton; site hierarchy → Breadcrumbs; pages of a list → Pagination; steps of a flow → ProgressStepper; collapsible sections → Accordion (Tabs when sections are peers); navigation link → `Button asChild` around `next/link` with
 `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
 action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
+row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
+`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message about the whole app or account → SystemAlert; message after an
+action → Toast; blocking task → Modal; single result or confirmation → StatusModal; item details or side editing → SidePanel; quick form or details anchored to a button → Popup; activity feed behind a bell → Notifications; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
 still use older values until they are renamed in Figma: `Alert` `status="error"`, `Toast` `status="error"` /
