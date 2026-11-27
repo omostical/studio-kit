@@ -265,7 +265,8 @@
   {
     "id": "1584:59135",
     "name": "Radio Group",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/RadioGroup",
     "file": "radio-group.md"
   },
   {

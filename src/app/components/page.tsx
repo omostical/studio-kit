@@ -10,6 +10,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { RadioButton } from "@/components/RadioButton";
+import { RadioGroup } from "@/components/RadioGroup";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -394,6 +396,51 @@ export default function ComponentsPage() {
           <PreviewFrame>
             <Switch size="small" aria-label="Small switch" defaultChecked />
             <Switch size="large" aria-label="Large switch" defaultChecked />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Radio Button ───────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="radio-button"
+        eyebrow="Form / 05"
+        title="Radio Button"
+        description="One option of a set where exactly one can be chosen. Always inside a Radio Group, which holds the value and the label."
+      >
+        <SubBlock id="radio-button-states" title="Types, sizes and states">
+          <PreviewFrame align="start">
+            <RadioGroup aria-label="Radio button states" defaultValue="selected" className="grid grid-cols-1 gap-gap-9 sm:grid-cols-3">
+              <RadioButton value="unselected" label="Unselected" description="Helper description" />
+              <RadioButton value="selected" label="Selected" />
+              <RadioButton value="small" size="small" label="Small" />
+              <RadioButton value="disabled" label="Disabled" disabled />
+              <RadioButton value="danger" variant="danger" label="Danger" />
+            </RadioGroup>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Radio Group ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="radio-group"
+        eyebrow="Form / 06"
+        title="Radio Group"
+        description="A labelled set of 2–5 options where exactly one can be chosen. Arrow keys move the selection; use Select for longer lists."
+      >
+        <SubBlock id="radio-group-orientation" title="Orientation">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-12 sm:grid-cols-2">
+              <RadioGroup label="Billing period" helperText="You can change this later." defaultValue="monthly">
+                <RadioButton value="monthly" label="Monthly" />
+                <RadioButton value="yearly" label="Yearly" description="Two months free." />
+                <RadioButton value="custom" label="Custom" />
+              </RadioGroup>
+              <RadioGroup label="Team size" orientation="horizontal" error="Choose a team size to continue.">
+                <RadioButton value="1" label="Just me" />
+                <RadioButton value="10" label="2–10" />
+                <RadioButton value="50" label="11–50" />
+              </RadioGroup>
+            </div>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

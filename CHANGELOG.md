@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(RadioGroup): labelled set of RadioButtons on Radix Radio Group — vertical/horizontal, label, optional, helper text, error that turns options Danger; adds the shared FieldGroupShell — batch 1 of the StudioKIT 2.0 form components
+
 - create(RadioButton): one pick-one option on Radix Radio Group — label, description, large and small, danger, disabled — batch 1 of the StudioKIT 2.0 form components
 
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions

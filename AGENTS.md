@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -66,6 +66,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `Select` + `SelectItem` | Pick one value in a form | same field props as Input; `value`/`onValueChange` |
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
 | `RadioButton` | One option of a pick-one set (always inside `RadioGroup`) | `value` `label` `description` · `size` small·large · `variant` primary·danger · `disabled` |
+| `RadioGroup` + `RadioButton` | Pick exactly one of 2–5 visible options in a form | `label` `helperText` `error` `optional` · `value`/`onValueChange` · `orientation` vertical·horizontal · `size` |
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |

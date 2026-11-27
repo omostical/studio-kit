@@ -97,3 +97,43 @@ export const fieldAriaProps = (id: string, { error, helperText }: { error?: Reac
   "aria-invalid": error != null ? true : undefined,
   "aria-describedby": error != null || helperText != null ? `${id}-message` : undefined,
 });
+
+export interface FieldGroupShellProps extends Omit<FieldShellProps, "children" | "id"> {
+  id: string;
+  /** `fieldset` (with a legend) for native groups such as checkboxes; `div` when the control sets its own role (Radix radiogroup). */
+  as?: "fieldset" | "div";
+  children: (ids: { labelId: string; messageId?: string }) => React.ReactNode;
+}
+
+/**
+ * Group version of FieldShell (Form Field around Radio Group / Checkbox Group): the label names the group instead
+ * of one control. `as="fieldset"` renders a `<fieldset>` + `<legend>`; `as="div"` renders a label span the control
+ * points at with aria-labelledby.
+ */
+export function FieldGroupShell({ id, as = "fieldset", label, optional, optionalLabel = "Optional", helperText, error, disabled, className, children }: FieldGroupShellProps) {
+  const message = error ?? helperText;
+  const labelId = `${id}-label`;
+  const messageId = message != null ? `${id}-message` : undefined;
+  const LabelTag = as === "fieldset" ? "legend" : "span";
+  const Root = as;
+  return (
+    <Root
+      className={cn("m-0 flex min-w-0 flex-col gap-gap-4 border-0 p-0", className)}
+      aria-describedby={as === "fieldset" ? messageId : undefined}
+      disabled={as === "fieldset" ? disabled : undefined}
+    >
+      {label != null && (
+        <LabelTag id={labelId} className="flex items-baseline gap-gap-3 p-0">
+          <span className={cn("type-label-strong-small", disabled ? "text-dynamic-text-secondary-disabled" : "text-static-text-strong")}>{label}</span>
+          {optional && <span className="type-label-small text-static-text-subtle">{optionalLabel}</span>}
+        </LabelTag>
+      )}
+      {children({ labelId, messageId })}
+      {message != null && (
+        <p id={messageId} className={cn("type-body-small", error != null ? "text-semantic-text-negative" : "text-static-text-subtle")}>
+          {message}
+        </p>
+      )}
+    </Root>
+  );
+}
