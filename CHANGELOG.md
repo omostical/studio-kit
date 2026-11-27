@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Thumbnail): file-type, image, logo, icon and text previews in five sizes with the Figma radius steps (Control/sm, md, lg) — answers the thumbnail-radius question (audit question 14); batch 2 of the StudioKIT 2.0 catalog
+
 - create(ProgressBar): line and circle progress with label, value text, helper text and success/danger end states, as role=progressbar — batch 2 of the StudioKIT 2.0 catalog
 
 - create(Divider): solid or dashed line in three weights and emphases, with an optional centred or left label — batch 2 of the StudioKIT 2.0 catalog

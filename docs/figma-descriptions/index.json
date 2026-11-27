@@ -451,7 +451,8 @@
   {
     "id": "938:36926",
     "name": "Thumbnail",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Thumbnail",
     "file": "thumbnail.md"
   },
   {

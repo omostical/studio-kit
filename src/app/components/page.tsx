@@ -32,6 +32,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { Divider } from "@/components/Divider";
 import { ProgressBar } from "@/components/ProgressBar";
+import { Thumbnail } from "@/components/Thumbnail";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -786,6 +787,35 @@ export default function ComponentsPage() {
             <ProgressBar type="circle" label="Profile setup" value={80} />
             <ProgressBar type="circle" label="Profile setup" status="success" />
             <ProgressBar type="circle" label="Profile setup" status="danger" />
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Thumbnail ───────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="thumbnail"
+        eyebrow="Data display / 06"
+        title="Thumbnail"
+        description="Figma Thumbnail: Type × Size (16 · 20 · 24 · 32 · 40px). Radius follows the size: Control/sm, then md, then lg. Decorative next to a file name."
+      >
+        <SubBlock id="thumbnail-types" title="Types">
+          <PreviewFrame>
+            <Thumbnail src="/avatars/sample-team.svg" alt="Team photo" />
+            <Thumbnail type="pdf" alt="PDF file" />
+            <Thumbnail type="spreadsheet" alt="Spreadsheet" />
+            <Thumbnail type="document" alt="Document" />
+            <Thumbnail type="video" alt="Video" />
+            <Thumbnail type="picture" alt="Picture" />
+            <Thumbnail type="icon" alt="Report" />
+            <Thumbnail type="text" text="W" alt="Word document" />
+            <Thumbnail type="logo" icon={<Mail />} alt="Mail app" />
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="thumbnail-sizes" title="Sizes">
+          <PreviewFrame>
+            {(["xsmall", "small", "medium", "large", "xlarge"] as const).map((size) => (
+              <Thumbnail key={size} size={size} src="/avatars/sample-team.svg" alt={`Team photo, ${size}`} />
+            ))}
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
