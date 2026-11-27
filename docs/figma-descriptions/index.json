@@ -249,7 +249,8 @@
   {
     "id": "10034:31374",
     "name": "Progress Stepper",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/ProgressStepper",
     "file": "progress-stepper.md"
   },
   {

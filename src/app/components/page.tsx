@@ -31,6 +31,7 @@ import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
 import { Pagination, type PaginationType } from "@/components/Pagination";
+import { ProgressStepper, ProgressStep } from "@/components/ProgressStepper";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -811,6 +812,36 @@ export default function ComponentsPage() {
               <PaginationDemo type="more-numbers" pageCount={99} />
               <PaginationDemo type="overflow" pageCount={45} />
             </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Progress Stepper ───────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-stepper"
+        eyebrow="Navigation / 04"
+        title="Progress Stepper"
+        description="Figma Progress Stepper: the steps of a flow as an ordered list. The current step has aria-current=“step”; each step says its state in text. Completed steps can link back."
+      >
+        <SubBlock id="progress-stepper-horizontal" title="Horizontal">
+          <PreviewFrame align="start">
+            <ProgressStepper className="max-w-full">
+              <ProgressStep type="completed" label="Account" href="#progress-stepper" />
+              <ProgressStep type="active" label="Plan" />
+              <ProgressStep label="Billing" />
+              <ProgressStep label="Team" />
+              <ProgressStep label="Review" />
+            </ProgressStepper>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-stepper-vertical" title="Vertical, with a step to fix">
+          <PreviewFrame align="start">
+            <ProgressStepper position="vertical" className="w-full max-w-sm">
+              <ProgressStep type="completed" label="Account" description="ada@example.com" href="#progress-stepper" />
+              <ProgressStep type="danger" label="Billing" description="Add a payment method to continue" href="#progress-stepper" />
+              <ProgressStep type="active" label="Team" />
+              <ProgressStep label="Review" disabled />
+            </ProgressStepper>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

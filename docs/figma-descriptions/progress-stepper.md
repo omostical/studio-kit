@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `ProgressStepper`.
 
 Shows the steps of a multi-step flow (checkout, onboarding) and where people are. Use **Breadcrumbs** for site hierarchy.
 
@@ -13,6 +13,7 @@ Shows the steps of a multi-step flow (checkout, onboarding) and where people are
 **Usage guidelines**
 - Keep to 3–7 steps with short labels.
 - Show completed, current and upcoming states; let people go back to completed steps.
+- In code: `ProgressStepper` with one `ProgressStep` per step (`type` completed, active, incomplete or danger); give completed steps `onClick` or `href` so people can go back.
 
 ---
 

@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(ProgressStepper): steps of a multi-step flow as an ordered list — horizontal or vertical, completed / active / incomplete / danger steps with optional description, `aria-current="step"` and the state in text, steps can link back — batch 3 (navigation) of the Figma components
+
 - create(Pagination): page controls for long lists and tables, in `<nav aria-label="Pagination">` — less-numbers (5 slots), more-numbers (9 slots, "…" for gaps) and overflow (Prev / page Select / Next) types, optional Rows per page Select — batch 3 (navigation) of the Figma components
 
 - create(Breadcrumbs): trail from the top level to the current page, on `<nav aria-label="Breadcrumb">` and an ordered list — arrow or slash separators, icon root item, current page with `aria-current`, middle levels collapse into a "…" button — batch 3 (navigation) of the Figma components
