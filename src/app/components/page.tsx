@@ -36,6 +36,7 @@ import { Thumbnail } from "@/components/Thumbnail";
 import { LinkButton } from "@/components/LinkButton";
 import { Chip } from "@/components/Chip";
 import { AvatarGroup } from "@/components/AvatarGroup";
+import { SplitButton } from "@/components/SplitButton";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -906,6 +907,22 @@ export default function ComponentsPage() {
               <Avatar name="Grace Hopper" />
               <Avatar name="Alan Turing" />
             </AvatarGroup>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Split Button ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="split-button"
+        eyebrow="Actions / 04"
+        title="Split Button"
+        description="Figma Split Button: Variant × Style (filled · border) × Size. The main part runs the common action; the arrow opens a menu of related alternatives."
+      >
+        <SubBlock id="split-button-variants" title="Styles and sizes">
+          <PreviewFrame>
+            <SplitButton menuLabel="More save options" menu={<><DropdownMenuItem>Save as draft</DropdownMenuItem><DropdownMenuItem>Save and duplicate</DropdownMenuItem></>}>Save</SplitButton>
+            <SplitButton variant="secondary" appearance="border" size="small" prefixIcon={<Download />} menuLabel="More export options" menu={<><DropdownMenuItem>Export as PDF</DropdownMenuItem><DropdownMenuItem>Export as CSV</DropdownMenuItem></>}>Export</SplitButton>
+            <SplitButton variant="secondary" size="large" menuLabel="More send options" menu={<DropdownMenuItem>Schedule send</DropdownMenuItem>}>Send</SplitButton>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

@@ -24,3 +24,4 @@ export * from "./Thumbnail";
 export * from "./LinkButton";
 export * from "./Chip";
 export * from "./AvatarGroup";
+export * from "./SplitButton";

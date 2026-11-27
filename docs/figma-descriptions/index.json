@@ -9,7 +9,8 @@
   {
     "id": "4402:90631",
     "name": "Split Button",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SplitButton",
     "file": "split-button.md"
   },
   {
