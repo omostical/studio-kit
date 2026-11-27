@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(ProgressBar): line and circle progress with label, value text, helper text and success/danger end states, as role=progressbar — batch 2 of the StudioKIT 2.0 catalog
+
 - create(Divider): solid or dashed line in three weights and emphases, with an optional centred or left label — batch 2 of the StudioKIT 2.0 catalog
 
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions

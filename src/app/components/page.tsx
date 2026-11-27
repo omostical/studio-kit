@@ -31,6 +31,7 @@ import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { Divider } from "@/components/Divider";
+import { ProgressBar } from "@/components/ProgressBar";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -759,6 +760,32 @@ export default function ComponentsPage() {
               <Divider label="March" emphasis="subtle" />
               <Divider label="March" labelPosition="left" />
             </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Progress Bar ──────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="progress-bar"
+        eyebrow="Feedback / 03"
+        title="Progress Bar"
+        description="Figma Progress Bar: Type (line · circle) × Progress, plus Success and Error end states. The value is always shown as text too."
+      >
+        <SubBlock id="progress-bar-line" title="Line">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-11">
+              <ProgressBar label="Uploading report.pdf" value={60} description="2 of 5 files" />
+              <ProgressBar label="Uploading report.pdf" status="success" description="All 5 files uploaded" />
+              <ProgressBar label="Uploading report.pdf" value={50} status="danger" description="Upload stopped. Check your connection, then try again." />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="progress-bar-circle" title="Circle">
+          <PreviewFrame>
+            <ProgressBar type="circle" label="Profile setup" value={30} />
+            <ProgressBar type="circle" label="Profile setup" value={80} />
+            <ProgressBar type="circle" label="Profile setup" status="success" />
+            <ProgressBar type="circle" label="Profile setup" status="danger" />
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>

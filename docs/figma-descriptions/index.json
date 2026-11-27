@@ -241,7 +241,8 @@
   {
     "id": "4716:92306",
     "name": "Progress Bar",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/ProgressBar",
     "file": "progress-bar.md"
   },
   {
