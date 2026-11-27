@@ -10,6 +10,7 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- refine(Pagination): fits a 375px screen — More numbers shows 5 slots below `sm`, Overflow shows only the Prev/Next arrows below `sm`, and the control no longer widens its container — 9 slots and the Overflow labels were cut off on phones (#7)
 - create(Search): Input with the search icon, clear button, Escape to clear and a shortcut hint, in a search landmark — batch 1 of the StudioKIT 2.0 form components
 - create(Slider): single and range slider on Radix Slider — side, bottom or input labels, min/max labels, disabled, 48px touch area — batch 1 of the StudioKIT 2.0 form components
 - create(SegmentedControl): 2–5 options that switch a view, on Radix Radio Group — regular and full-width, three sizes, label and icon items with tooltips, disabled items — batch 1 of the StudioKIT 2.0 form components

@@ -19,11 +19,17 @@ import { Select, SelectItem } from "@/components/Select";
  * Rows per page: Label/Small in Static/Text/Base + Single Select (small, 72px = Size/21), gap Gap/7.
  * Numbers: previous/next are Icon Button secondary ghost small, gap Gap/7 to the pages; pages are Button secondary
  * small, min width Size/14, gap Gap/5 — Filled for the current page, Ghost for the others. Less numbers shows at most
- * 5 slots, More numbers 9 (first, last, current and its neighbours, "…" for the gaps).
- * Overflow: Prev / Next are Button secondary ghost small with arrow icons; the page is a Single Select (small, 72px)
- * followed by "of N" (Label/Small); gap Gap/9 between the three, Gap/7 inside.
+ * 5 slots, More numbers 9 (first, last, current and its neighbours, "…" for the gaps); below the `sm` breakpoint More
+ * numbers shows 5 slots, because 9 don't fit a 375px screen.
+ * Overflow: Prev / Next are Button secondary ghost small with arrow icons (only the arrow below `sm`, so it fits
+ * 375px); the page is a Single Select (small, 72px) followed by "of N" (Label/Small); gap Gap/9 between the three,
+ * Gap/7 inside.
  */
 export type PaginationType = "less-numbers" | "more-numbers" | "overflow";
+
+/** Page-number lists to render, each with the classes that show it: [slots, visibility]. */
+const LESS_SLOTS = [[5, ""]] as const;
+const MORE_SLOTS = [[5, "sm:hidden"], [9, "hidden sm:block"]] as const;
 
 /** The page numbers to show, with `"ellipsis"` for skipped ranges. `slots` is the most items to return (5 or more). */
 export function pageItems(page: number, pageCount: number, slots: number): (number | "ellipsis")[] {
@@ -37,8 +43,8 @@ export function pageItems(page: number, pageCount: number, slots: number): (numb
 
 export interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   /**
-   * Figma "Type": `less-numbers` (up to 5 page buttons, default; fits a 375px screen), `more-numbers` (up to 9; about
-   * 440px wide, scrolls sideways when narrower) or
+   * Figma "Type": `less-numbers` (up to 5 page buttons, default; fits a 375px screen), `more-numbers` (up to 9 from the
+   * `sm` breakpoint, 5 on phones, where 9 don't fit) or
    * `overflow` (Prev / page picker / Next, for very many pages).
    */
   type?: PaginationType;
@@ -86,7 +92,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       <div
         ref={ref}
         className={cn(
-          "flex flex-wrap items-center gap-gap-7",
+          "flex min-w-0 flex-wrap items-center gap-gap-7",
           rowsPerPage != null ? "justify-between" : "justify-end",
           className
         )}
@@ -113,8 +119,13 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           </div>
         )}
 
-        {/* Scrolls sideways when the numbers don't fit (More numbers needs about 440px); the padding keeps focus rings visible. */}
-        <nav aria-label={navLabel} className="-m-gap-3 max-w-full overflow-x-auto p-gap-3">
+        {/* min-w-0 lets it shrink inside flex and grid parents; it scrolls sideways only if the numbers still don't fit.
+            The padding keeps focus rings visible; the negative margin and the wider max width keep it out of the layout. */}
+        <nav
+          aria-label={navLabel}
+          // token-lint-ignore: max width is the parent plus the Gap/3 focus padding on both sides, no token for that sum
+          className="-m-gap-3 min-w-0 max-w-[calc(100%+2*var(--spacing-gap-3))] overflow-x-auto p-gap-3"
+        >
           {type === "overflow" ? (
             <div className="flex items-center gap-gap-9">
               <Button
@@ -126,7 +137,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
                 disabled={current <= 1}
                 onClick={() => go(current - 1)}
               >
-                Prev
+                <span className="hidden sm:inline">Prev</span>
               </Button>
               <div className="flex items-center gap-gap-7">
                 <label htmlFor={`${id}-page`} className="sr-only">
@@ -150,7 +161,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
                 disabled={current >= total}
                 onClick={() => go(current + 1)}
               >
-                Next
+                <span className="hidden sm:inline">Next</span>
               </Button>
             </div>
           ) : (
@@ -158,9 +169,11 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               <li>
                 <IconButton size="small" icon={<ChevronLeft />} aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)} />
               </li>
-              <li>
+              {/* More numbers: 5 slots on phones, 9 from sm (9 slots are about 460px). */}
+              {(type === "more-numbers" ? MORE_SLOTS : LESS_SLOTS).map(([slots, visibility]) => (
+              <li key={slots} className={visibility}>
                 <ul className="flex items-center gap-gap-5">
-                  {pageItems(current, total, type === "more-numbers" ? 9 : 5).map((item, i) =>
+                  {pageItems(current, total, slots).map((item, i) =>
                     item === "ellipsis" ? (
                       <li key={`e${i}`} aria-hidden="true" className="flex min-w-size-14 justify-center type-label-strong-small text-dynamic-text-secondary-default">
                         …
@@ -183,6 +196,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
                   )}
                 </ul>
               </li>
+              ))}
               <li>
                 <IconButton size="small" icon={<ChevronRight />} aria-label="Next page" disabled={current >= total} onClick={() => go(current + 1)} />
               </li>

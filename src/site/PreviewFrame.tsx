@@ -20,7 +20,7 @@ export function PreviewFrame({
       }}
     >
       <div
-        className={`p-8 flex flex-wrap gap-4 items-${align === "center" ? "center" : "start"} ${
+        className={`p-4 sm:p-8 flex flex-wrap gap-4 items-${align === "center" ? "center" : "start"} ${
           align === "center" ? "justify-center" : "justify-start"
         }`}
         style={{
