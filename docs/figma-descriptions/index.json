@@ -258,7 +258,8 @@
   {
     "id": "557:58107",
     "name": "Radio Button",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/RadioButton",
     "file": "radio-button.md"
   },
   {
