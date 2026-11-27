@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Breadcrumbs, Pagination, ProgressStepper; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Breadcrumbs, Pagination, ProgressStepper, Accordion; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -80,9 +80,10 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Bread
 | `Breadcrumbs` + `BreadcrumbItem` | Where a page sits in the site hierarchy (pages two or more levels deep) | `separator` arrow·slash · `maxItems` (collapses the middle into …) · `BreadcrumbItem href icon currentPage asChild` (last item is the current page) |
 | `Pagination` | Pages of a long list or table | `type` less-numbers·more-numbers·overflow · `page` `pageCount` `onPageChange` · `rowsPerPage` `rowsPerPageOptions` `onRowsPerPageChange` (shows the page-size Select) |
 | `ProgressStepper` + `ProgressStep` | Steps of a multi-step flow (checkout, onboarding) and where people are | `position` horizontal·vertical · `ProgressStep type` completed·active·incomplete·danger · `label` `description` `disabled` · `onClick`/`href` to go back to a step |
+| `Accordion` + `AccordionGroup` | Sections people expand when they need them (FAQs, settings groups, filters) | `AccordionGroup contained type` (multiple by default) · `Accordion title icon value disabled headingLevel` · standalone `contained defaultExpanded` |
 
 Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
-row or object → DropdownMenu behind a "More" IconButton; site hierarchy → Breadcrumbs; pages of a list → Pagination; steps of a flow → ProgressStepper; navigation link → `Button asChild` around `next/link` with
+row or object → DropdownMenu behind a "More" IconButton; site hierarchy → Breadcrumbs; pages of a list → Pagination; steps of a flow → ProgressStepper; collapsible sections → Accordion (Tabs when sections are peers); navigation link → `Button asChild` around `next/link` with
 `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
 action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
 

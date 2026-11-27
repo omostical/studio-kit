@@ -21,3 +21,4 @@ export * from "./Table";
 export * from "./Breadcrumbs";
 export * from "./Pagination";
 export * from "./ProgressStepper";
+export * from "./Accordion";

@@ -32,7 +32,8 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@
 import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
 import { Pagination, type PaginationType } from "@/components/Pagination";
 import { ProgressStepper, ProgressStep } from "@/components/ProgressStepper";
-import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home } from "lucide-react";
+import { Accordion, AccordionGroup } from "@/components/Accordion";
+import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home, BarChart3 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -844,6 +845,33 @@ export default function ComponentsPage() {
             </ProgressStepper>
           </PreviewFrame>
         </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Accordion ──────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="accordion"
+        eyebrow="Navigation / 05"
+        title="Accordion"
+        description="Figma Accordion and Accordion Group: headings that expand a section. Each heading is a button with aria-expanded; Enter and Space toggle, arrow keys move between headings."
+      >
+        {[true, false].map((contained) => (
+          <SubBlock key={String(contained)} id={contained ? "accordion-contained" : "accordion-dividers"} title={contained ? "Contained" : "Dividers"}>
+            <PreviewFrame align="start">
+              <AccordionGroup contained={contained} className="w-full max-w-md" defaultValue={contained ? ["breathe"] : []}>
+                <Accordion value="breathe" title="Quick way to de-stress in 2 minutes?" icon={<BarChart3 />}>
+                  Breathe in for 4 seconds, hold for 4, breathe out for 4, hold for 4. Do it 4 times.
+                  <Button variant="secondary" size="small">Start a timer</Button>
+                </Accordion>
+                <Accordion value="plan" title="Can I change my plan later?" icon={<BarChart3 />}>
+                  Yes. Plan changes apply from your next billing date.
+                </Accordion>
+                <Accordion value="advanced" title="Advanced settings" icon={<BarChart3 />} disabled>
+                  Not available on your plan.
+                </Accordion>
+              </AccordionGroup>
+            </PreviewFrame>
+          </SubBlock>
+        ))}
       </ComponentSection>
 
     </>

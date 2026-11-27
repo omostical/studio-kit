@@ -21,13 +21,15 @@
   {
     "id": "557:9948",
     "name": "Accordion",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Accordion",
     "file": "accordion.md"
   },
   {
     "id": "2746:2110",
     "name": "Accordion Group",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Accordion",
     "file": "accordion-group.md"
   },
   {

@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Accordion`.
 
 A heading that expands and collapses a section of content, for long pages where people only need some sections (FAQs, settings groups, filters). Use **Accordion Group** to stack several, and **Tabs** when sections are peers people switch between.
 
@@ -16,6 +16,7 @@ A heading that expands and collapses a section of content, for long pages where 
 - Write headings that tell people what's inside so they can choose without opening everything.
 - Don't hide content everyone needs to see, such as errors or required fields.
 - Start collapsed unless one section is the obvious starting point.
+- In code: `Accordion` with `title` and the panel as children; stack several in `AccordionGroup`.
 
 ---
 
