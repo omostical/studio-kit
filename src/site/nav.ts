@@ -8,6 +8,8 @@ export const componentGroups: DocGroup[] = [
     items: [
       { slug: "button", title: "Button" },
       { slug: "icon-button", title: "Icon Button" },
+      { slug: "link-button", title: "Link Button" },
+      { slug: "split-button", title: "Split Button" },
     ],
   },
   {
@@ -17,18 +19,33 @@ export const componentGroups: DocGroup[] = [
       { slug: "select", title: "Select" },
       { slug: "checkbox", title: "Checkbox" },
       { slug: "switch", title: "Switch" },
+      { slug: "radio-button", title: "Radio Button" },
+      { slug: "radio-group", title: "Radio Group" },
+      { slug: "text-area", title: "Text Area" },
+      { slug: "checkbox-group", title: "Checkbox Group" },
+      { slug: "segmented-control", title: "Segmented Control" },
+      { slug: "slider", title: "Slider" },
+      { slug: "search", title: "Search" },
     ],
   },
   {
     name: "Feedback",
     items: [
       { slug: "alert", title: "Alert" },
+      { slug: "system-alert", title: "System Alert" },
       { slug: "toast", title: "Toast" },
+      { slug: "progress-bar", title: "Progress Bar" },
     ],
   },
   {
     name: "Navigation",
-    items: [{ slug: "tabs", title: "Tabs" }],
+    items: [
+      { slug: "tabs", title: "Tabs"},
+      { slug: "breadcrumbs", title: "Breadcrumbs"},
+      { slug: "pagination", title: "Pagination"},
+      { slug: "progress-stepper", title: "Progress Stepper"},
+      { slug: "accordion", title: "Accordion" },
+    ],
   },
   {
     name: "Overlays",
@@ -36,6 +53,10 @@ export const componentGroups: DocGroup[] = [
       { slug: "modal", title: "Modal" },
       { slug: "tooltip", title: "Tooltip" },
       { slug: "dropdown-menu", title: "Dropdown Menu" },
+      { slug: "side-panel", title: "Side Panel" },
+      { slug: "popup", title: "Pop-up" },
+      { slug: "status-modal", title: "Status Modal" },
+      { slug: "notifications", title: "Notifications" },
     ],
   },
   {
@@ -46,11 +67,17 @@ export const componentGroups: DocGroup[] = [
       { slug: "tag", title: "Tag" },
       { slug: "typography", title: "Typography" },
       { slug: "table", title: "Table" },
+      { slug: "thumbnail", title: "Thumbnail" },
+      { slug: "chip", title: "Chip" },
+      { slug: "avatar-group", title: "Avatar Group" },
     ],
   },
   {
     name: "Layout",
-    items: [{ slug: "card", title: "Card" }],
+    items: [
+      { slug: "card", title: "Card" },
+      { slug: "divider", title: "Divider" },
+    ],
   },
 ];
 

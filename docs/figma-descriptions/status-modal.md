@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `StatusModal`.
 
 A small dialog for a result or confirmation (success, warning, danger) with an icon, message and one or two actions.
 
@@ -13,6 +13,7 @@ A small dialog for a result or confirmation (success, warning, danger) with an i
 
 **Usage guidelines**
 - For destructive confirmations, name the action in the button ("Delete project"), not "OK".
+- In code: `StatusModal` + `StatusModalTrigger asChild` and `StatusModalContent type` (danger · success · info · warning · neutral) `orientation title description actions footerStart`; built on Modal.
 
 ---
 

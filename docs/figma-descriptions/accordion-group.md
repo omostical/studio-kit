@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Accordion`.
 
 A stack of **Accordion** items with shared spacing and dividers.
 

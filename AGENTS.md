@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider, Search, Divider, ProgressBar, Thumbnail, LinkButton, Chip, AvatarGroup, SplitButton, Breadcrumbs, Pagination, ProgressStepper, Accordion, SidePanel, Popup, StatusModal, SystemAlert, Notifications; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -63,25 +63,56 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table; every
 | `IconButton` | Compact well-known actions (close, edit, more) | same as Button + `icon`, required `aria-label`; defaults secondary + ghost |
 | `DropdownMenu` + `DropdownMenuTrigger/Content/Item/CheckboxItem/RadioGroup/RadioItem/Label/Separator/Sub*` | Several actions behind one button (row "More", user menu) | `DropdownMenuTrigger asChild` around an `IconButton`/`Button` · `DropdownMenuItem icon description shortcut variant` default·danger (danger last) · radio/checkbox items for options |
 | `Input` | Single-line text field | `label` `helperText` `error` `optional` `prefix` `suffix` (icons or text) · `size` small·medium·large · `appearance` border·ghost · `wrapperClassName` (sizes the whole field; `className` styles the input) |
+| `Search` | Search or filter field (with search icon and clear button) | Input props + `label` (hidden by default) `hideLabel` `onClear` `shortcut` · `size` · `appearance` border·ghost |
+| `TextArea` | Multi-line text field (message, note, description) | same field props as Input · `rows` (default 3) `resizable` · `size` small·medium·large |
 | `Select` + `SelectItem` | Pick one value in a form | same field props as Input; `value`/`onValueChange` |
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
+| `CheckboxGroup` + `Checkbox` | A labelled list of options where any number can be picked | `label` `helperText` `error` `optional` `disabled` · `orientation` vertical·horizontal |
+| `RadioButton` | One option of a pick-one set (always inside `RadioGroup`) | `value` `label` `description` · `size` small·large · `variant` primary·danger · `disabled` |
+| `RadioGroup` + `RadioButton` | Pick exactly one of 2–5 visible options in a form | `label` `helperText` `error` `optional` · `value`/`onValueChange` · `orientation` vertical·horizontal · `size` |
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
+| `Slider` | Pick a value or range by dragging (volume, price range) | `label` `value`/`defaultValue` (number[]; two = range) `min` `max` `step` · `labelPosition` side·bottom·inputs · `minLabel` `maxLabel` `showLabels` |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
+| `SystemAlert` | Full-width banner about the whole app or account (maintenance, billing, outage) | `status` danger·warning·success·info·neutral · `emphasis` high·low · `message` `actionLabel` `onAction` `dismissible` · `role="status"` by default, `"alert"` only if urgent |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |
 | `Avatar` | A person (rounded) or organisation (square) | `name` `src` `alt` (`""` next to a visible name) · `type` rounded·square · `size` xsmall…xxlarge · `status` `statusLabel` `selected`; leave `variant` unset (photo → initials → icon) |
 | `Badge` | Status of an item (Active, Pending, Failed) | `status` negative·notice·positive·info·neutral · `emphasis` low·high · `size` |
 | `Tag` | Category / metadata label (not status) | `color` (13 categories) · `emphasis` filled·border · `size` · `rounded` |
 | `Card` + `CardHeader/Title/Description/Content/Footer` | Group content and its actions | `container` (false = no box, for grey backgrounds) · `CardTitle as` (h2 by default; h3 inside a titled section) |
 | `Tabs` + `TabsList/Trigger/Content` | Switch sections on one page | `variant` regular·pill · `size` small·large · `fullWidth` |
+| `SegmentedControl` + `SegmentedControlItem` | Switch the view or mode of the same content right away (List / Grid, Day / Week) | `aria-label` `value`/`onValueChange` · `variant` regular·full-width · `size` small·medium·large · item `icon` (icon-only items need `aria-label`) |
 | `Modal` + `ModalTrigger/Content/Header/Body/Footer/Close` | Focused task that blocks the page | `Modal open onOpenChange` · `ModalContent size` small·medium·large · `ModalHeader title description` · see `.agents/rules/screens.md` |
+| `SidePanel` + `SidePanelTrigger/Content/Header/Body/Footer/Close` | Details, filters or secondary editing in a drawer on the right | `SidePanelContent size` small·medium·large · `SidePanelHeader title description avatar actions tabs` · `SidePanelBody type` details·form·task · same focus rules as Modal |
+| `Popup` + `PopupTrigger/Content/Header/Body/Footer/Close` | Small non-modal panel anchored to a trigger: a quick form or extra details | `PopupContent type` action·information · `PopupHeader title closeButton` · `PopupFooter start` (Switch or link) + actions · Escape / click outside closes |
+| `StatusModal` + `StatusModalTrigger/Content/Close` | One result or confirmation with a status icon (delete?, payment received) | `StatusModalContent type` danger·success·info·warning·neutral · `orientation` vertical·horizontal · `title description actions footerStart` · danger defaults to `role="alertdialog"` |
+| `Notifications` + `NotificationsTrigger/Content/Header/Toolbar/Footer`, `NotificationList/Item/GroupLabel` | Activity panel opened from a bell button, read and unread | `NotificationItem avatar title time unread href content actions` · TabsList in `NotificationsToolbar` · bell `aria-label` includes the unread count |
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |
 | `Typography` | Text in a Figma text style | `variant` e.g. title-small·subtitle-small·label-strong-small·body-medium·caption-medium · `tone` strong·base·subtle · `as` — the tag follows the variant (title → h1/h2, subtitle → h3/h4, body → p, rest → span), so set `as="p"` when a title/subtitle style isn't a heading |
+| `SplitButton` | A main action plus a short menu of related alternatives ("Save" + "Save as draft") | Button props for the main part (`variant` `size` `prefixIcon` `loading` `onClick`) · `appearance` filled·border · `menu` (DropdownMenuItems) · required `menuLabel` for the arrow |
+| `AvatarGroup` | A set of people (members, assignees) with a "+N" counter | `Avatar` children · required `aria-label` ("12 members") · `layout` row·grid · `size` xsmall·small·medium·large · `max` `total` · `onMoreClick` `moreLabel` |
+| `Chip` | Filter toggles and removable entered values (not read-only labels: Tag) | `pressed` + `onPressedChange` (toggle, aria-pressed) · `onRemove` `removeLabel` (removable) · `variant` secondary·primary · `appearance` filled·border · `size` small·medium·large · `prefix` |
+| `LinkButton` | Text-only link or low-emphasis action ("View all", "Forgot your password?") | `variant` primary·secondary·danger·success·inverse · `size` small·large · `prefixIcon` `suffixIcon` · `asChild` around `next/link` / `<a>` for navigation |
+| `Thumbnail` | Small preview of a file or image (order lines, attachments) | `type` image·pdf·spreadsheet·document·video·picture·icon·logo·text · `size` xsmall 16…xlarge 40 · `src` `icon` `text` · `alt` (leave out next to a visible file name) |
+| `ProgressBar` | How far a measurable task has got (upload, setup, quota) | `label` (required) `value` 0–100 `valueText` `description` · `status` success·danger · `type` line·circle · `hideLabel` |
+| `Divider` | A line between groups when spacing isn't enough | `appearance` solid·dashed · `weight` thin·default·bold · `emphasis` base·strong·subtle · `label` `labelPosition` center·left · `semantic` (role=separator) |
+
+Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; one main action plus related
+alternatives → SplitButton; three or more actions on one
+row or object → DropdownMenu behind a "More" IconButton; navigation link → `LinkButton asChild` around `next/link`
+(a link that must look like a button → `Button asChild`); status → Badge; category → Tag; filter toggle or removable value → Chip; message in page → Alert; message after an
+| `Breadcrumbs` + `BreadcrumbItem` | Where a page sits in the site hierarchy (pages two or more levels deep) | `separator` arrow·slash · `maxItems` (collapses the middle into …) · `BreadcrumbItem href icon currentPage asChild` (last item is the current page) |
+| `Pagination` | Pages of a long list or table | `type` less-numbers·more-numbers·overflow · `page` `pageCount` `onPageChange` · `rowsPerPage` `rowsPerPageOptions` `onRowsPerPageChange` (shows the page-size Select) |
+| `ProgressStepper` + `ProgressStep` | Steps of a multi-step flow (checkout, onboarding) and where people are | `position` horizontal·vertical · `ProgressStep type` completed·active·incomplete·danger · `label` `description` `disabled` · `onClick`/`href` to go back to a step |
+| `Accordion` + `AccordionGroup` | Sections people expand when they need them (FAQs, settings groups, filters) | `AccordionGroup contained type` (multiple by default) · `Accordion title icon value disabled headingLevel` · standalone `contained defaultExpanded` |
 
 Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
-row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
+row or object → DropdownMenu behind a "More" IconButton; site hierarchy → Breadcrumbs; pages of a list → Pagination; steps of a flow → ProgressStepper; collapsible sections → Accordion (Tabs when sections are peers); navigation link → `Button asChild` around `next/link` with
 `appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
 action → Toast; blocking task → Modal; settings toggle → Switch; form choice → Checkbox / Select.
+row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
+`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message about the whole app or account → SystemAlert; message after an
+action → Toast; blocking task → Modal; single result or confirmation → StatusModal; item details or side editing → SidePanel; quick form or details anchored to a button → Popup; activity feed behind a bell → Notifications; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
 still use older values until they are renamed in Figma: `Alert` `status="error"`, `Toast` `status="error"` /

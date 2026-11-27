@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Pagination`.
 
 Moves through pages of a long list or table. Consider "Load more" or infinite scroll for feeds.
 
@@ -13,6 +13,7 @@ Moves through pages of a long list or table. Consider "Load more" or infinite sc
 **Usage guidelines**
 - Show the current page and total, plus previous and next.
 - Keep the page size control near the pagination.
+- In code: `Pagination` with `page`, `pageCount` and `onPageChange`; set `rowsPerPage` to show the page-size control, and use `type="overflow"` for very many pages.
 
 ---
 

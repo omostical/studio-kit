@@ -68,7 +68,7 @@ Fresh agents, repository files only, instruction: "Flag missing context. Do not 
 11. Which agents besides Claude Code work here (Cursor, Codex…)? The answer decides whether rules go in `.agents/` with symlinks.
 12. `dynamic-fill-tertiary-default` is `#0A0A0A` in Dark, the same value as `static-fill-background` (the dark page canvas), so a tertiary fill is invisible on the page in dark mode. Is that intended, or should the Figma Dark value change? No component uses tertiary today (found during the 2026-11-24 usage review).
 13. Every `semantic-*-info` token aliases the blue scale except two: `semantic-fill-inverse-info` (`var(--colors-dark-indigo-400)`) and `semantic-text-info` (`var(--colors-light-indigo-400)`) in `src/styles/generated/tokens.css:1235,1249` (Dark block). Should they move to blue in Figma, or is indigo intended there? (found during setup week2, 2026-11-26)
-14. Image guidance: may screens use a plain `<img>` or `next/image` (the prototype skill allows imports only from `@/components/*`, `lucide-react`, `react`), and which radius token frames an image thumbnail? (found by the week-3 readiness test)
+14. Image guidance: may screens use a plain `<img>` or `next/image` (the prototype skill allows imports only from `@/components/*`, `lucide-react`, `react`), and which radius token frames an image thumbnail? (found by the week-3 readiness test) Radius answered by Figma Thumbnail (938:36926): `rounded-control-sm` at 16px, `rounded-control-md` at 20–24px, `rounded-control-lg` at 32–40px; use the `Thumbnail` component. The `<img>` question stays open for screens.
 
 ## Team decisions (2026-11-21)
 

@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `RadioGroup`.
 
 A labelled set of **Radio Button** options where exactly one can be chosen.
 
@@ -11,6 +11,7 @@ A labelled set of **Radio Button** options where exactly one can be chosen.
 
 **Usage guidelines**
 - Give the group a visible label and order options logically.
+- In code: `RadioGroup label orientation value onValueChange` around `RadioButton`s; `error` turns every option Danger and links the message.
 
 ---
 

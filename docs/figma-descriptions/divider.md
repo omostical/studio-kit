@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `Divider`.
 
 A thin line that separates groups of content, optionally with a label. Use spacing first; add a divider only when spacing isn't enough.
 
@@ -13,6 +13,7 @@ A thin line that separates groups of content, optionally with a label. Use spaci
 ---
 
 **Usage guidelines**
+- In code: `<Divider />` (decorative, hidden from screen readers); `label` adds text on the line; `semantic` gives a real thematic break `role="separator"`.
 - Don't use dividers between every item in a list or between a heading and its content.
 
 ---

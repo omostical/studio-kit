@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `ProgressBar`.
 
 Shows how far a task has got (upload, setup, quota). Use a spinner when progress can't be measured.
 
@@ -12,6 +12,7 @@ Shows how far a task has got (upload, setup, quota). Use a spinner when progress
 ---
 
 **Usage guidelines**
+- In code: `<ProgressBar label="Uploading report.pdf" value={60} />`; `status` success·danger for finished or failed, `type="circle"` for a compact ring; `valueText` for "3 of 5 steps".
 - Show the value as text too ("60%", "3 of 5 steps").
 
 ---
