@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(SegmentedControl): 2–5 options that switch a view, on Radix Radio Group — regular and full-width, three sizes, label and icon items with tooltips, disabled items — batch 1 of the StudioKIT 2.0 form components
+
 - create(CheckboxGroup): fieldset + legend around Checkboxes — vertical/horizontal, label, optional, helper text, error, disabled — batch 1 of the StudioKIT 2.0 form components
 
 - create(TextArea): multi-line field on the Input field shell — label, optional, helper text, error, three sizes, resizable — closes the Textarea gap; batch 1 of the StudioKIT 2.0 form components

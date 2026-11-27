@@ -279,7 +279,8 @@
   {
     "id": "557:61066",
     "name": "Segmented Control",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SegmentedControl",
     "file": "segmented-control.md"
   },
   {

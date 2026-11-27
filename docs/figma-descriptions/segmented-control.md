@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `SegmentedControl`.
 
 A row of 2–5 mutually exclusive options for switching views or modes (List / Grid, Day / Week / Month). Use **Tabs** for switching between sections of content and **Radio Group** in forms.
 
@@ -14,6 +14,7 @@ A row of 2–5 mutually exclusive options for switching views or modes (List / G
 **Usage guidelines**
 - Keep labels short and similar in length; icons need tooltips.
 - The change should apply immediately.
+- In code: `SegmentedControl aria-label value onValueChange variant size` around `SegmentedControlItem value` (label as children, or `icon` + `aria-label` for an Icon item, which also gets a tooltip).
 
 ---
 

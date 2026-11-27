@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -77,6 +77,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `Tag` | Category / metadata label (not status) | `color` (13 categories) · `emphasis` filled·border · `size` · `rounded` |
 | `Card` + `CardHeader/Title/Description/Content/Footer` | Group content and its actions | `container` (false = no box, for grey backgrounds) · `CardTitle as` (h2 by default; h3 inside a titled section) |
 | `Tabs` + `TabsList/Trigger/Content` | Switch sections on one page | `variant` regular·pill · `size` small·large · `fullWidth` |
+| `SegmentedControl` + `SegmentedControlItem` | Switch the view or mode of the same content right away (List / Grid, Day / Week) | `aria-label` `value`/`onValueChange` · `variant` regular·full-width · `size` small·medium·large · item `icon` (icon-only items need `aria-label`) |
 | `Modal` + `ModalTrigger/Content/Header/Body/Footer/Close` | Focused task that blocks the page | `Modal open onOpenChange` · `ModalContent size` small·medium·large · `ModalHeader title description` · see `.agents/rules/screens.md` |
 | `Tooltip` | Hint for icon buttons / truncated text | `content` `description` `variant` default·inverse `side` |
 | `Table` + `TableHeader/Body/Row/Head/Cell` | Structured data | `Table size` · `TableRow selected` · `TableHead sort onSort numeric` · `TableCell numeric description` |

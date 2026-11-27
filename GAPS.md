@@ -22,4 +22,5 @@ line to `CHANGELOG.md`.
 ## Tokens
 
 - Container widths: fixed widths for Modal (400, 600, 800), Toast (400, 460) and Dropdown Menu (320) — needed by `src/components/Modal/Modal.tsx`, `src/components/Toast/Toast.tsx`, `src/components/DropdownMenu/DropdownMenu.tsx` (recorded as `token-lint-ignore` exceptions)
+- Inset shadow: the 1px inner shadow on the Segmented Control track (0 1px 1px, 2% black; no effect style) — needed by `src/components/SegmentedControl/SegmentedControl.tsx`; left out until it is a style
 - Layer order: a z-index scale so toasts sit above modals — needed by `src/components/Toast/Toast.tsx` (`z-[60]` exception)

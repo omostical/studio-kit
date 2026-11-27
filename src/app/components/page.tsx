@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { SegmentedControl, SegmentedControlItem } from "@/components/SegmentedControl";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { TextArea } from "@/components/TextArea";
 import { RadioButton } from "@/components/RadioButton";
@@ -33,7 +34,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
+import { Search, Mail, List, LayoutGrid, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -486,6 +487,41 @@ export default function ComponentsPage() {
                 <Checkbox label="iOS" />
                 <Checkbox label="Android" />
               </CheckboxGroup>
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Segmented Control ──────────────────────────────────────────────── */}
+      <ComponentSection
+        id="segmented-control"
+        eyebrow="Form / 09"
+        title="Segmented Control"
+        description="2–5 options that switch the view or mode of the same content right away. Use Tabs for sections and Radio Group in forms."
+      >
+        <SubBlock id="segmented-control-sizes" title="Sizes, full width and icons">
+          <PreviewFrame align="start">
+            <div className="flex w-full flex-col items-start gap-gap-9">
+              <SegmentedControl aria-label="Period, small" size="small" defaultValue="week">
+                <SegmentedControlItem value="day">Day</SegmentedControlItem>
+                <SegmentedControlItem value="week">Week</SegmentedControlItem>
+                <SegmentedControlItem value="month">Month</SegmentedControlItem>
+              </SegmentedControl>
+              <SegmentedControl aria-label="Period" defaultValue="week">
+                <SegmentedControlItem value="day">Day</SegmentedControlItem>
+                <SegmentedControlItem value="week">Week</SegmentedControlItem>
+                <SegmentedControlItem value="month">Month</SegmentedControlItem>
+                <SegmentedControlItem value="year" disabled>Year</SegmentedControlItem>
+              </SegmentedControl>
+              <SegmentedControl aria-label="Period, large" size="large" variant="full-width" defaultValue="month">
+                <SegmentedControlItem value="day">Day</SegmentedControlItem>
+                <SegmentedControlItem value="week">Week</SegmentedControlItem>
+                <SegmentedControlItem value="month">Month</SegmentedControlItem>
+              </SegmentedControl>
+              <SegmentedControl aria-label="Layout" defaultValue="list">
+                <SegmentedControlItem value="list" icon={<List />} aria-label="List view" />
+                <SegmentedControlItem value="grid" icon={<LayoutGrid />} aria-label="Grid view" />
+              </SegmentedControl>
             </div>
           </PreviewFrame>
         </SubBlock>
