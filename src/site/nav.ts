@@ -50,7 +50,10 @@ export const componentGroups: DocGroup[] = [
   },
   {
     name: "Layout",
-    items: [{ slug: "card", title: "Card" }],
+    items: [
+      { slug: "card", title: "Card" },
+      { slug: "divider", title: "Divider" },
+    ],
   },
 ];
 

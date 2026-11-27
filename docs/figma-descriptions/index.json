@@ -132,7 +132,8 @@
   {
     "id": "13101:22726",
     "name": "Divider",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Divider",
     "file": "divider.md"
   },
   {

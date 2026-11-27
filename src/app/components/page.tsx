@@ -30,6 +30,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
+import { Divider } from "@/components/Divider";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -742,6 +743,26 @@ export default function ComponentsPage() {
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
+      {/* ─── Divider ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="divider"
+        eyebrow="Layout / 02"
+        title="Divider"
+        description="Figma Divider: Style (solid · dashed) × Weight (thin · default · bold) × Emphasis (base · strong · subtle), with an optional label. Use spacing first."
+      >
+        <SubBlock id="divider-variants" title="Weights, emphasis and labels">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9">
+              <Divider />
+              <Divider weight="default" emphasis="strong" />
+              <Divider appearance="dashed" weight="bold" emphasis="subtle" />
+              <Divider label="March" emphasis="subtle" />
+              <Divider label="March" labelPosition="left" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
     </>
   );
 }
