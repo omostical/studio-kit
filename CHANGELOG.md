@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(Breadcrumbs): trail from the top level to the current page, on `<nav aria-label="Breadcrumb">` and an ordered list — arrow or slash separators, icon root item, current page with `aria-current`, middle levels collapse into a "…" button — batch 3 (navigation) of the Figma components
+
 - create(DropdownMenu): actions and options behind a button, on Radix Dropdown Menu — items with icon, description and shortcut, danger items, radio and checkbox options, group labels, dividers, one-level submenus — the team-members prototype needed it for row actions
 
 - create(Avatar): photo, initials or icon in 6 sizes, rounded or square, with selected ring and presence dot; falls back from photo to initials to icon — first component built from GAPS.md (team-members prototype needed it)

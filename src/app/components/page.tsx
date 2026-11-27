@@ -29,7 +29,8 @@ import { Tooltip } from "@/components/Tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Tabs";
 import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
-import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/Breadcrumbs";
+import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2, Folder, Home } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
 const controlVariants = ["primary", "secondary", "danger", "success", "inverse"] as const;
@@ -742,6 +743,40 @@ export default function ComponentsPage() {
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
+      {/* ─── Breadcrumbs ────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="breadcrumbs"
+        eyebrow="Navigation / 02"
+        title="Breadcrumbs"
+        description="Figma Breadcrumbs and Breadcrumb Item: the trail from the top level to the current page. The last item is the current page (not a link); long trails collapse the middle into a … button."
+      >
+        <SubBlock id="breadcrumbs-separators" title="Separator">
+          <PreviewFrame align="start">
+            <div className="grid gap-gap-7">
+              {(["arrow", "slash"] as const).map((separator) => (
+                <Breadcrumbs key={separator} separator={separator}>
+                  <BreadcrumbItem href="#breadcrumbs" icon={<Folder />}>Projects</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Website redesign</BreadcrumbItem>
+                  <BreadcrumbItem href="#breadcrumbs">Assets</BreadcrumbItem>
+                  <BreadcrumbItem>Logo files</BreadcrumbItem>
+                </Breadcrumbs>
+              ))}
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+        <SubBlock id="breadcrumbs-collapsed" title="Long trail">
+          <PreviewFrame align="start">
+            <Breadcrumbs>
+              {["Workspace", "Projects", "Website redesign", "Assets", "Brand", "Logo files"].map((label, i, all) => (
+                <BreadcrumbItem key={label} href={i < all.length - 1 ? "#breadcrumbs" : undefined} icon={i === 0 ? <Home /> : undefined}>
+                  {label}
+                </BreadcrumbItem>
+              ))}
+            </Breadcrumbs>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
     </>
   );
 }

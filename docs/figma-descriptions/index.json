@@ -52,13 +52,15 @@
   {
     "id": "9728:22669",
     "name": "Breadcrumbs",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Breadcrumbs",
     "file": "breadcrumbs.md"
   },
   {
     "id": "9728:18794",
     "name": "Breadcrumb Item",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Breadcrumbs",
     "file": "breadcrumb-item.md"
   },
   {
