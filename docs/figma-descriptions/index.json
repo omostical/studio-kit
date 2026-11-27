@@ -273,7 +273,8 @@
   {
     "id": "9986:109308",
     "name": "Search",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Search",
     "file": "search.md"
   },
   {

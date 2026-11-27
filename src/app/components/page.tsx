@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { Search as SearchField } from "@/components/Search";
 import { Slider } from "@/components/Slider";
 import { SegmentedControl, SegmentedControlItem } from "@/components/SegmentedControl";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
@@ -542,6 +543,25 @@ export default function ComponentsPage() {
               <Slider label="Price" defaultValue={[20, 80]} minLabel="$0" maxLabel="$100" labelPosition="bottom" />
               <Slider label="Budget" defaultValue={[25, 75]} labelPosition="inputs" />
               <Slider label="Disabled" defaultValue={[60]} disabled />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Search ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="search"
+        eyebrow="Form / 11"
+        title="Search"
+        description="Input with a search icon, a clear button and an optional shortcut hint, in a search landmark. Say what's searchable in the label."
+      >
+        <SubBlock id="search-states" title="States and styles">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-9 sm:grid-cols-2">
+              <SearchField label="Search projects" shortcut="⌘K" />
+              <SearchField label="Search members" defaultValue="Ada" />
+              <SearchField label="Filter rows" appearance="ghost" size="small" />
+              <SearchField label="Search invoices" hideLabel={false} size="large" disabled />
             </div>
           </PreviewFrame>
         </SubBlock>

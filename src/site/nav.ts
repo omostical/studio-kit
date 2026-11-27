@@ -23,6 +23,7 @@ export const componentGroups: DocGroup[] = [
       { slug: "checkbox-group", title: "Checkbox Group" },
       { slug: "segmented-control", title: "Segmented Control" },
       { slug: "slider", title: "Slider" },
+      { slug: "search", title: "Search" },
     ],
   },
   {
