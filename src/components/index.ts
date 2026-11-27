@@ -23,3 +23,4 @@ export * from "./RadioGroup";
 export * from "./TextArea";
 export * from "./CheckboxGroup";
 export * from "./SegmentedControl";
+export * from "./Slider";

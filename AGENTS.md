@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup, SegmentedControl, Slider; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -70,6 +70,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `RadioButton` | One option of a pick-one set (always inside `RadioGroup`) | `value` `label` `description` · `size` small·large · `variant` primary·danger · `disabled` |
 | `RadioGroup` + `RadioButton` | Pick exactly one of 2–5 visible options in a form | `label` `helperText` `error` `optional` · `value`/`onValueChange` · `orientation` vertical·horizontal · `size` |
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
+| `Slider` | Pick a value or range by dragging (volume, price range) | `label` `value`/`defaultValue` (number[]; two = range) `min` `max` `step` · `labelPosition` side·bottom·inputs · `minLabel` `maxLabel` `showLabels` |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |
 | `Avatar` | A person (rounded) or organisation (square) | `name` `src` `alt` (`""` next to a visible name) · `type` rounded·square · `size` xsmall…xxlarge · `status` `statusLabel` `selected`; leave `variant` unset (photo → initials → icon) |

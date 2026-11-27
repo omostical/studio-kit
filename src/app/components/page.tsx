@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { Slider } from "@/components/Slider";
 import { SegmentedControl, SegmentedControlItem } from "@/components/SegmentedControl";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { TextArea } from "@/components/TextArea";
@@ -522,6 +523,25 @@ export default function ComponentsPage() {
                 <SegmentedControlItem value="list" icon={<List />} aria-label="List view" />
                 <SegmentedControlItem value="grid" icon={<LayoutGrid />} aria-label="Grid view" />
               </SegmentedControl>
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Slider ─────────────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="slider"
+        eyebrow="Form / 10"
+        title="Slider"
+        description="Picks a value or a range by dragging. Arrow keys step; add inputs when people need an exact value."
+      >
+        <SubBlock id="slider-labels" title="Labels, range and inputs">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-12 sm:grid-cols-2">
+              <Slider label="Volume" defaultValue={[40]} />
+              <Slider label="Price" defaultValue={[20, 80]} minLabel="$0" maxLabel="$100" labelPosition="bottom" />
+              <Slider label="Budget" defaultValue={[25, 75]} labelPosition="inputs" />
+              <Slider label="Disabled" defaultValue={[60]} disabled />
             </div>
           </PreviewFrame>
         </SubBlock>

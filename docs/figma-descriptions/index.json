@@ -311,7 +311,8 @@
   {
     "id": "557:71428",
     "name": "Slider",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/Slider",
     "file": "slider.md"
   },
   {
