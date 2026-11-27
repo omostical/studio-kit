@@ -10,6 +10,8 @@ CI warns on a pull request that changes `src/components/` without a line here.
 
 ## Unreleased
 
+- create(StatusModal): result or confirmation dialog on Modal with a status icon and tinted wash, 5 types, vertical and horizontal — Status Modal was planned in the catalog (batch 4 overlays)
+
 - create(Popup): non-modal panel anchored to a trigger, on Radix Popover, Action and Information types with header, body and footer — Pop-up was planned in the catalog (batch 4 overlays)
 
 - create(SidePanel): drawer on Radix Dialog in 3 widths, with header (avatar, actions, tabs), Details/Form/Task body and footer — Side Panel was planned in the catalog (batch 4 overlays)

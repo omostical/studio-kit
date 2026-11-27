@@ -198,7 +198,8 @@
   {
     "id": "9987:42531",
     "name": "Status Modal",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/StatusModal",
     "file": "status-modal.md"
   },
   {

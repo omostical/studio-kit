@@ -31,6 +31,7 @@ import { Toast, ToastProvider, useToast } from "@/components/Toast";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/Table";
 import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelFooter } from "@/components/SidePanel";
 import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, PopupFooter } from "@/components/Popup";
+import { StatusModal, StatusModalTrigger, StatusModalClose, StatusModalContent } from "@/components/StatusModal";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -736,6 +737,44 @@ export default function ComponentsPage() {
                 </PopupFooter>
               </PopupContent>
             </Popup>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Status Modal ───────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="status-modal"
+        eyebrow="Overlays / 06"
+        title="Status Modal"
+        description="Figma Status Modal, built on Modal: one result or confirmation with a status icon. A danger confirmation is an alertdialog."
+      >
+        <SubBlock id="status-modal-orientation" title="Vertical and horizontal">
+          <PreviewFrame>
+            <StatusModal>
+              <StatusModalTrigger asChild><Button variant="danger" appearance="border">Delete project</Button></StatusModalTrigger>
+              <StatusModalContent
+                type="danger"
+                title="Delete this project?"
+                description="This can't be undone. The project and its 24 files are deleted for everyone."
+                actions={
+                  <>
+                    <StatusModalClose asChild><Button size="small" variant="secondary" appearance="border">Cancel</Button></StatusModalClose>
+                    <Button size="small" variant="danger">Delete project</Button>
+                  </>
+                }
+              />
+            </StatusModal>
+            <StatusModal>
+              <StatusModalTrigger asChild><Button variant="secondary" appearance="border">Finish payment</Button></StatusModalTrigger>
+              <StatusModalContent
+                type="success"
+                orientation="horizontal"
+                title="Payment received"
+                description="We emailed the receipt to the billing contact."
+                footerStart={<Button size="small" variant="secondary" appearance="ghost">Contact support</Button>}
+                actions={<StatusModalClose asChild><Button size="small">Done</Button></StatusModalClose>}
+              />
+            </StatusModal>
           </PreviewFrame>
         </SubBlock>
       </ComponentSection>
