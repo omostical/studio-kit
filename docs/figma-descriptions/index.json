@@ -342,7 +342,8 @@
   {
     "id": "557:55446",
     "name": "System Alert",
-    "status": "planned",
+    "status": "beta",
+    "code": "src/components/SystemAlert",
     "file": "system-alert.md"
   },
   {

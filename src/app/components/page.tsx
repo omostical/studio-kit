@@ -32,6 +32,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@
 import { SidePanel, SidePanelTrigger, SidePanelClose, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelFooter } from "@/components/SidePanel";
 import { Popup, PopupTrigger, PopupClose, PopupContent, PopupHeader, PopupBody, PopupFooter } from "@/components/Popup";
 import { StatusModal, StatusModalTrigger, StatusModalClose, StatusModalContent } from "@/components/StatusModal";
+import { SystemAlert, type SystemAlertStatus } from "@/components/SystemAlert";
 import { Search, Mail, ArrowRight, Plus, Eye, Pencil, X, MoreHorizontal, RotateCcw, Download, Copy, Trash2 } from "lucide-react";
 import { PreviewFrame } from "@/site/PreviewFrame";
 
@@ -776,6 +777,31 @@ export default function ComponentsPage() {
               />
             </StatusModal>
           </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── System Alert ───────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="system-alert"
+        eyebrow="Feedback / 03"
+        title="System Alert"
+        description="Figma System Alert: a full-width banner about the whole app or account, above the page header. Use Alert for messages about one part of the page."
+      >
+        <SubBlock id="system-alert-statuses" title="Status × Emphasis">
+          <div className="flex flex-col gap-gap-5 overflow-hidden rounded-container-md">
+            {(["high", "low"] as const).flatMap((emphasis) =>
+              (["danger", "warning", "success", "info", "neutral"] as SystemAlertStatus[]).map((status) => (
+                <SystemAlert
+                  key={emphasis + status}
+                  status={status}
+                  emphasis={emphasis}
+                  message={status === "danger" ? "Payment failed. Update your card to keep your projects." : status === "warning" ? "Your trial ends in 3 days." : status === "success" ? "Your workspace is back online." : status === "info" ? "Maintenance on Sunday 02:00–04:00 UTC." : "You're viewing a shared workspace."}
+                  actionLabel={status === "danger" ? "Update card" : "Learn more"}
+                  dismissible={status !== "danger"}
+                />
+              ))
+            )}
+          </div>
         </SubBlock>
       </ComponentSection>
 

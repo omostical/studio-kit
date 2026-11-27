@@ -23,6 +23,7 @@ export const componentGroups: DocGroup[] = [
     name: "Feedback",
     items: [
       { slug: "alert", title: "Alert" },
+      { slug: "system-alert", title: "System Alert" },
       { slug: "toast", title: "Toast" },
     ],
   },

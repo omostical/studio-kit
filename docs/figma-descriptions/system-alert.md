@@ -1,4 +1,4 @@
-**Status: planned** — Figma only; there is no code component yet.
+**Status: beta** — in code as `SystemAlert`.
 
 A full-width banner for messages about the whole app or account (maintenance, billing, outage). Use **Inline Alert** for messages about one part of the page.
 
@@ -15,6 +15,7 @@ A full-width banner for messages about the whole app or account (maintenance, bi
 **Usage guidelines**
 - Show only one at a time and let people dismiss it unless it's critical.
 - Say what happened and what to do.
+- In code: `<SystemAlert status emphasis message actionLabel onAction dismissible onDismiss />` with `status` danger · warning · success · info · neutral, above the page header.
 
 ---
 

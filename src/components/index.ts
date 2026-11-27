@@ -21,3 +21,4 @@ export * from "./Table";
 export * from "./SidePanel";
 export * from "./Popup";
 export * from "./StatusModal";
+export * from "./SystemAlert";

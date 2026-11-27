@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, SidePanel, Popup, StatusModal; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, SidePanel, Popup, StatusModal, SystemAlert; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -67,6 +67,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, SideP
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |
 | `Alert` | In-page message about nearby content | `status` error·warning·success·info · `title` `description` `actionLabel` `onAction` `dismissible` · `position` horizontal·vertical (use vertical for page-wide alerts with an action, or the text squeezes at 375px) · `titleAs` (heading level, default h3) |
+| `SystemAlert` | Full-width banner about the whole app or account (maintenance, billing, outage) | `status` danger·warning·success·info·neutral · `emphasis` high·low · `message` `actionLabel` `onAction` `dismissible` · `role="status"` by default, `"alert"` only if urgent |
 | `Toast` via `ToastProvider` + `useToast().show()` | Short confirmation after an action | `status` neutral·info·positive·error · `emphasis` high·low · `title` `actionLabel` |
 | `Avatar` | A person (rounded) or organisation (square) | `name` `src` `alt` (`""` next to a visible name) · `type` rounded·square · `size` xsmall…xxlarge · `status` `statusLabel` `selected`; leave `variant` unset (photo → initials → icon) |
 | `Badge` | Status of an item (Active, Pending, Failed) | `status` negative·notice·positive·info·neutral · `emphasis` low·high · `size` |
@@ -83,7 +84,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, SideP
 
 Choosing (nothing fits? see "When the answer doesn't exist" below): action → Button; three or more actions on one
 row or object → DropdownMenu behind a "More" IconButton; navigation link → `Button asChild` around `next/link` with
-`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message after an
+`appearance="ghost"`, or a plain link; status → Badge; category → Tag; message in page → Alert; message about the whole app or account → SystemAlert; message after an
 action → Toast; blocking task → Modal; single result or confirmation → StatusModal; item details or side editing → SidePanel; quick form or details anchored to a button → Popup; settings toggle → Switch; form choice → Checkbox / Select.
 
 **Intent words.** The team's canonical words are `danger` (failure, destructive) and `success`. Three components
