@@ -55,7 +55,7 @@ you to everything else; you shouldn't have to read the component source to use t
 
 ## Components
 
-Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea; every other component in this table is `stable`.
+Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, RadioButton, RadioGroup, TextArea, CheckboxGroup; every other component in this table is `stable`.
 
 | Component | Use it for | Key props |
 |---|---|---|
@@ -66,6 +66,7 @@ Status: `beta` = Avatar, DropdownMenu, Modal, Tooltip, Tabs, Toast, Table, Radio
 | `TextArea` | Multi-line text field (message, note, description) | same field props as Input · `rows` (default 3) `resizable` · `size` small·medium·large |
 | `Select` + `SelectItem` | Pick one value in a form | same field props as Input; `value`/`onValueChange` |
 | `Checkbox` | On/off option, multi-select, row selection | `checked` (true·false·"indeterminate") `label` `description` · `size` small·large |
+| `CheckboxGroup` + `Checkbox` | A labelled list of options where any number can be picked | `label` `helperText` `error` `optional` `disabled` · `orientation` vertical·horizontal |
 | `RadioButton` | One option of a pick-one set (always inside `RadioGroup`) | `value` `label` `description` · `size` small·large · `variant` primary·danger · `disabled` |
 | `RadioGroup` + `RadioButton` | Pick exactly one of 2–5 visible options in a form | `label` `helperText` `error` `optional` · `value`/`onValueChange` · `orientation` vertical·horizontal · `size` |
 | `Switch` | Setting that applies immediately | `label` `description` `labelPosition` · `size` small·large |

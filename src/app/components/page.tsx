@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Typography, type TypographyVariant } from "@/components/Typography";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { TextArea } from "@/components/TextArea";
 import { RadioButton } from "@/components/RadioButton";
 import { RadioGroup } from "@/components/RadioGroup";
@@ -460,6 +461,31 @@ export default function ComponentsPage() {
               <TextArea label="Note" optional defaultValue="Delivered to the side door." size="small" />
               <TextArea label="Description" error="Describe the problem so we can reproduce it." />
               <TextArea label="Disabled" disabled defaultValue="Read-only note" size="large" />
+            </div>
+          </PreviewFrame>
+        </SubBlock>
+      </ComponentSection>
+
+      {/* ─── Checkbox Group ─────────────────────────────────────────────────── */}
+      <ComponentSection
+        id="checkbox-group"
+        eyebrow="Form / 08"
+        title="Checkbox Group"
+        description="A labelled list of checkboxes where people pick any number. Renders a fieldset with a legend; use Multi Select for long lists."
+      >
+        <SubBlock id="checkbox-group-orientation" title="Orientation">
+          <PreviewFrame align="start">
+            <div className="grid w-full gap-gap-12 sm:grid-cols-2">
+              <CheckboxGroup label="Notify me by" helperText="Pick all that apply.">
+                <Checkbox label="Email" defaultChecked />
+                <Checkbox label="SMS" />
+                <Checkbox label="Push notification" />
+              </CheckboxGroup>
+              <CheckboxGroup label="Channels" orientation="horizontal" error="Choose at least one channel.">
+                <Checkbox label="Web" />
+                <Checkbox label="iOS" />
+                <Checkbox label="Android" />
+              </CheckboxGroup>
             </div>
           </PreviewFrame>
         </SubBlock>

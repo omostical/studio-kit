@@ -21,3 +21,4 @@ export * from "./Table";
 export * from "./RadioButton";
 export * from "./RadioGroup";
 export * from "./TextArea";
+export * from "./CheckboxGroup";
