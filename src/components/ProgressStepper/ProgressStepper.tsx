@@ -112,14 +112,14 @@ const ProgressStep = React.forwardRef<HTMLLIElement, ProgressStepProps>(
 
     const row = vertical
       ? cn(
-          "flex w-full items-center gap-gap-7 rounded-control-lg px-gap-7 py-gap-5 text-left outline-none transition-[background-color,box-shadow] duration-150",
+          "flex w-full items-center gap-gap-7 rounded-control-lg px-gap-7 py-gap-5 text-left no-underline outline-none transition-[background-color,box-shadow] duration-150",
           type === "active" && "bg-dynamic-fill-tertiary-alpha-strong-default",
           type === "active" && interactive && "hover:bg-dynamic-fill-tertiary-alpha-strong-hover active:bg-dynamic-fill-tertiary-alpha-strong-pressed",
           type === "incomplete" && "bg-dynamic-fill-secondary-alpha-default",
           type === "incomplete" && interactive && "hover:bg-dynamic-fill-secondary-alpha-hover active:bg-dynamic-fill-secondary-alpha-pressed",
           isDanger ? "focus-visible:bg-dynamic-fill-danger-alpha-default focus-visible:shadow-focus-danger" : "focus-visible:shadow-focus-base"
         )
-      : "flex items-center gap-gap-7 rounded-control-full text-left outline-none";
+      : "flex items-center gap-gap-7 rounded-control-full text-left no-underline outline-none";
 
     const inner = (
       <>
@@ -179,7 +179,7 @@ const ProgressStepper = React.forwardRef<HTMLOListElement, ProgressStepperProps>
         ref={ref}
         aria-label={ariaLabel}
         className={cn(
-          position === "vertical" ? "flex flex-col gap-gap-3" : "flex items-center gap-gap-9 overflow-x-auto p-gap-3",
+          position === "vertical" ? "flex flex-col gap-gap-3" : "relative flex items-center gap-gap-9 overflow-x-auto p-gap-3",
           className
         )}
         {...props}

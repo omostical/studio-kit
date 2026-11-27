@@ -128,8 +128,8 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /** Figma "Separator": `arrow` (chevron, default) or `slash`. */
   separator?: BreadcrumbsSeparator;
   /**
-   * Show at most this many levels. Longer trails keep the first and the last `maxItems - 1` levels and collapse the
-   * middle into a "…" button that shows them all. Default 4 (Figma's deepest Level). Must be 2 or more.
+   * Show at most this many entries. A longer trail keeps the first and the last `maxItems - 2` levels and collapses
+   * the middle into a "…" button that shows them all. Default 4 (Figma's deepest Level). 3 or more.
    */
   maxItems?: number;
   /** Accessible name of the navigation landmark. Default "Breadcrumb". */
@@ -143,10 +143,10 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
   ({ separator = "arrow", maxItems = 4, className, children, "aria-label": ariaLabel = "Breadcrumb", ...props }, ref) => {
     const [expanded, setExpanded] = React.useState(false);
     const items = React.Children.toArray(children).filter(React.isValidElement);
-    const max = Math.max(2, maxItems);
+    const max = Math.max(3, maxItems);
     const collapse = !expanded && items.length > max;
-    const hiddenCount = collapse ? items.length - max : 0;
-    const shown = collapse ? [items[0], null, ...items.slice(items.length - (max - 1))] : items;
+    const hiddenCount = collapse ? items.length - (max - 1) : 0;
+    const shown = collapse ? [items[0], null, ...items.slice(items.length - (max - 2))] : items;
 
     return (
       <nav ref={ref} aria-label={ariaLabel} className={className} {...props}>

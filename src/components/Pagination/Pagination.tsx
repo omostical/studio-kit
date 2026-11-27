@@ -37,7 +37,8 @@ export function pageItems(page: number, pageCount: number, slots: number): (numb
 
 export interface PaginationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   /**
-   * Figma "Type": `less-numbers` (up to 5 page buttons, default; fits small screens), `more-numbers` (up to 9) or
+   * Figma "Type": `less-numbers` (up to 5 page buttons, default; fits a 375px screen), `more-numbers` (up to 9; about
+   * 440px wide, scrolls sideways when narrower) or
    * `overflow` (Prev / page picker / Next, for very many pages).
    */
   type?: PaginationType;
@@ -112,7 +113,8 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           </div>
         )}
 
-        <nav aria-label={navLabel}>
+        {/* Scrolls sideways when the numbers don't fit (More numbers needs about 440px); the padding keeps focus rings visible. */}
+        <nav aria-label={navLabel} className="-m-gap-3 max-w-full overflow-x-auto p-gap-3">
           {type === "overflow" ? (
             <div className="flex items-center gap-gap-9">
               <Button

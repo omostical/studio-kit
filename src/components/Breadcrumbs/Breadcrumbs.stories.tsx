@@ -9,7 +9,7 @@ const meta: Meta<typeof Breadcrumbs> = {
   args: { separator: "arrow", maxItems: 4 },
   argTypes: {
     separator: { control: "inline-radio", options: ["arrow", "slash"], description: "Figma: Separator" },
-    maxItems: { control: { type: "number", min: 2 }, description: "Collapse the middle into … above this many levels" },
+    maxItems: { control: { type: "number", min: 3 }, description: "Collapse the middle into … above this many levels" },
   },
 };
 export default meta;
